@@ -1,0 +1,20 @@
+# Visual Studio 임시/설정 파일
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# 빌드 출력 디렉터리
+x64/
+build/
+Debug*/
+Release*/
+
+# 링커 출력물
+*.ilk
+*.lib
+*.exp
+*.dll
+*.exe
