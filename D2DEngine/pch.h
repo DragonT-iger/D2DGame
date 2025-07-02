@@ -22,6 +22,7 @@
 #include <windows.h>
 #include <iostream>
 #include <cassert>
+#include <math.h>
 
 #include "MonoBehaviour.h"
 #include "Behaviour.h"

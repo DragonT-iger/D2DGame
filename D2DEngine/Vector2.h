@@ -15,11 +15,11 @@ public:
 
 	// 연산자 오버로드
 
-	Vector2 operator+(const Vector2& rhs); // R-value 지원
-	Vector2 operator-(const Vector2& rhs);
-	Vector2 operator*(float rhs);
+	Vector2 operator+(const Vector2& rhs) const; // R-value 지원
+	Vector2 operator-(const Vector2& rhs) const;
+	Vector2 operator*(float rhs) const;
 	friend Vector2 operator*(float lhs, const Vector2& rhs); //  (float) * (Vector2) 일때 처리
-	Vector2 operator/(float rhs); // 나누기는 순서 반대로 나누는건 굳이 지원 안해줌
+	Vector2 operator/(float rhs) const; // 나누기는 순서 반대로 나누는건 굳이 지원 안해줌
 
 
 	Vector2& operator+=(const Vector2& rhs);
@@ -30,21 +30,31 @@ public:
 	bool operator==(const Vector2& rhs) const;
 	bool operator!=(const Vector2& rhs) const;
 
-
 	Vector2& Scale(float scale);
 
-
+	/// <summary>
+	/// 본인을 단위벡터로 만듬
+	/// </summary>
 	Vector2& Normalize();
+
+
+	/// <summary>
+	/// 단위벡터를 리턴함
+	/// </summary>
 	Vector2 Normalized() const; // 유니티는 n으로 시작하지만 일단 컨벤션을 위해 대문자로
+
+
 	float Magnitude() const;
 	float SqrMagnitude() const;
+
+
+	//static 이 붙은 함수는 인스턴스로 쓰지 말고 Vector2::Dot 이런식으로 쓰셈 막을 방법이 없네
 
 	static float Dot(const Vector2& lhs, const Vector2& rhs);
 	static float Distance(const Vector2& a, const Vector2& b);
 	static Vector2 Lerp(const Vector2& a, const Vector2& b, float t);
 	//static Vector2 Reflect(const Vector2& inDirection, const Vector2& inNormal); // 필요할떄 구현
-
-
+	// 
 	// SqrMagnitude 
 
 	static const Vector2 zero;
@@ -59,4 +69,3 @@ private:
 	float m_y;
 };
 
-Vector2 operator*(float lhs, Vector2 rhs);
