@@ -13,27 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ComponentBase">
+      <UniqueIdentifier>{deb41658-1c2a-40fd-8e95-14c89b58bd83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{d4f6320b-8a10-4472-bb67-92daa1fbab99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{267b3685-e607-47c1-ad71-a625046cecaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameTimer">
+      <UniqueIdentifier>{2a040e68-a23b-48ed-ad59-dc15baa9365d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTimer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Behaviour.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MonoBehaviour.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
@@ -42,18 +36,27 @@
     <ClInclude Include="NzWndBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>ComponentBase</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBehaviour.h">
+      <Filter>ComponentBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour.h">
+      <Filter>ComponentBase</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.h">
+      <Filter>GameTimer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTimer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
@@ -61,6 +64,15 @@
     </ClCompile>
     <ClCompile Include="NzWndBase.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>GameTimer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
