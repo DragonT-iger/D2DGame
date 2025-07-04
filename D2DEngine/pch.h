@@ -28,6 +28,7 @@
 #include "Behaviour.h"
 #include "GameTimer.h"
 #include "Vector2.h"
+#include "NzWndBase.h"
 
 
 using namespace std;

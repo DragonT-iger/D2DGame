@@ -1,7 +1,12 @@
 ﻿#pragma once
 
 class MonoBehaviour;
+/// 날짜 / 이름 / 수정내용
+/// 2025-07-04 권용범 최초버전 작성
 
+/// <summary>
+/// Unity Like GameObject Class
+/// </summary>
 class GameObject
 {
 public:
@@ -21,15 +26,6 @@ public:
     // ─────────────────────────────────────────────
     void SetActive(bool active);
     bool IsActive() const;
-
-    // ─────────────────────────────────────────────
-    // Lifecycle dispatch
-    // ─────────────────────────────────────────────
-    void Awake();
-    void Start();
-    void FixedUpdate(float deltaTime); 
-    void Update(float deltaTime);    
-    void LateUpdate(float deltaTime);
 
 private:
     wstring                           m_name;

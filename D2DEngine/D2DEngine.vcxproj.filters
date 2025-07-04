@@ -25,15 +25,18 @@
     <Filter Include="GameTimer">
       <UniqueIdentifier>{2a040e68-a23b-48ed-ad59-dc15baa9365d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{2936dd5c-56ca-487c-a1da-0da701c4e114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Vector2">
+      <UniqueIdentifier>{8c2609c8-41cb-491c-b7ee-3373c8b24bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D2DRenderer">
+      <UniqueIdentifier>{e8714221-fb91-4687-b9bf-e24cad6b8c58}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="D2DRenderer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="NzWndBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
@@ -54,15 +57,21 @@
     <ClInclude Include="GameTimer.h">
       <Filter>GameTimer</Filter>
     </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math\Vector2</Filter>
+    </ClInclude>
+    <ClInclude Include="D2DRenderer.h">
+      <Filter>D2DRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="NzWndBase.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="D2DRenderer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="NzWndBase.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -73,6 +82,18 @@
     </ClCompile>
     <ClCompile Include="GameTimer.cpp">
       <Filter>GameTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Math\Vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DRenderer.cpp">
+      <Filter>D2DRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="NzWndBase.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

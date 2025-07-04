@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Behaviour.h"
 /// 날짜 / 이름 / 수정내용
 /// 2025-07-02 권용범 최초버전 작성
 
@@ -9,9 +10,9 @@ class MonoBehaviour : public Behaviour {
 public:
     virtual ~MonoBehaviour() = default;
 
-    virtual void Awake() {}                            
-    virtual void Start() {}                             
-	virtual void Update(float deltaTime) = 0;
-	virtual void FixedUpdate(float fixedDelta) = 0;
-	virtual void LateUpdate(float deltaTime) = 0;
+    virtual void Awake() {}
+    virtual void Start() {}
+	virtual void Update(float deltaTime) {};
+	virtual void FixedUpdate(float fixedDelta) {};
+	virtual void LateUpdate(float deltaTime) {};
 };
