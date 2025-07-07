@@ -24,6 +24,19 @@
 #include <cassert>
 #include <math.h>
 
+#include <d2d1.h>
+#include <d2d1_1.h>
+#include <d2d1_2.h>
+#include <d2d1_3.h>
+#include <d3d11.h>
+#include <d3d11_1.h>
+#include <dxgi1_2.h>
+#include <d2d1helper.h>
+#include <wrl/client.h>
+#include <wincodec.h>
+#include <dwrite.h>
+
+
 #include "MonoBehaviour.h"
 #include "Behaviour.h"
 #include "GameTimer.h"
@@ -31,4 +44,35 @@
 #include "NzWndBase.h"
 
 
+namespace DX
+{
+    // Helper class for COM exceptions
+    class com_exception : public std::exception
+    {
+    public:
+        com_exception(HRESULT hr) : result(hr) {}
+
+        const char* what() const noexcept override
+        {
+            static char s_str[64] = {};
+            sprintf_s(s_str, "Failure with HRESULT of %08X",
+                static_cast<unsigned int>(result));
+            return s_str;
+        }
+
+    private:
+        HRESULT result;
+    };
+
+    // Helper utility converts D3D API failures into exceptions.
+    inline void ThrowIfFailed(HRESULT hr)
+    {
+        if (FAILED(hr))
+        {
+            throw com_exception(hr);
+        }
+    }
+}
+
+using namespace Microsoft::WRL;
 using namespace std;

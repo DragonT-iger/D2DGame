@@ -12,18 +12,12 @@ class GameObject
 public:
     explicit GameObject(const wstring& name = L"GameObject");
 
-    // ─────────────────────────────────────────────
-    // MonoBehaviour
-    // ─────────────────────────────────────────────
     template<typename T>
     T* AddComponent();
 
     template<typename T>
     T* GetComponent() const;
 
-    // ─────────────────────────────────────────────
-    // Activation
-    // ─────────────────────────────────────────────
     void SetActive(bool active);
     bool IsActive() const;
 
@@ -37,13 +31,8 @@ private:
 template<typename T>
 T* GameObject::AddComponent()
 {
-    // 런타임 타입 체크
-    if (!is_base_of_v<MonoBehaviour, T>)
-    {
-        cout << "Error: T must derive from MonoBehaviour" << endl;
-        assert(false && "T must derive from MonoBehaviour");
-        return nullptr;
-    }
+    static_assert(std::is_base_of_v<MonoBehaviour, T>, "T must derive from MonoBehaviour");
+    // 컴파일 타임 타입 체크
 
     auto comp = make_unique<T>();
     T* raw = comp.get();
@@ -54,12 +43,8 @@ T* GameObject::AddComponent()
 template<typename T>
 T* GameObject::GetComponent() const
 {
-    if (!is_base_of_v<MonoBehaviour, T>)
-    {
-        cout << "Error: T must derive from MonoBehaviour" << endl;
-        assert(false && "T must derive from MonoBehaviour");
-        return nullptr;
-    }
+    static_assert(std::is_base_of_v<MonoBehaviour, T>, "T must derive from MonoBehaviour");
+    // 컴파일 타임 타입 체크
 
     for (auto& c : m_components)
         if (auto casted = dynamic_cast<T*>(c.get()))
