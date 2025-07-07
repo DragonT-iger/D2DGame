@@ -11,7 +11,7 @@ class Vector2
 public:
 
 	Vector2() : m_x(0.f), m_y(0.f) {}
-	explicit Vector2(float x, float y) : m_x(x), m_y(y) {}
+	Vector2(float x, float y) : m_x(x), m_y(y) {}
 
 	// 연산자 오버로드
 

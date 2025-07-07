@@ -2,10 +2,11 @@
 
 #include "GameObject.h"
 #include "MonoBehaviour.h"
+#include "Transform.h"
 
 GameObject::GameObject(const std::wstring& name)
-    : m_name{ name }, m_active{ true }
-{
+    : m_name{ name }, m_active{ true } {
+    this->AddComponent<Transform>();
 }
 
 /* Activation -------------------------------------------------- */

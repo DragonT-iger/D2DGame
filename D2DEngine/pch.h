@@ -37,6 +37,7 @@
 #include <dwrite.h>
 
 
+
 #include "MonoBehaviour.h"
 #include "Behaviour.h"
 #include "GameTimer.h"
@@ -76,3 +77,5 @@ namespace DX
 
 using namespace Microsoft::WRL;
 using namespace std;
+inline std::wostream& cwout = std::wcout;
+
