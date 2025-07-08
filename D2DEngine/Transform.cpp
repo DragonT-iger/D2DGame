@@ -1,22 +1,12 @@
 #include "pch.h"
 #include "Transform.h"
 
-Transform::Transform()
+void Transform::SetPivot(const Vector2& pivot)
 {
-	m_position = { 0.f, 0.f };
-	m_rotation = 0.f;
-	m_scale = { 1.f, 1.f };
-	m_parent = nullptr;
-	m_dirty = false;
-	m_matrixLocal = D2D1::Matrix3x2F::Identity();
-	m_matrixWorld = D2D1::Matrix3x2F::Identity();
-}
-
-Transform::Transform(Vector2 position, float rotation, Vector2 scale, Transform* parent)
-{
-	m_position = position;
-	m_rotation = rotation;
-	m_scale = scale;
-	m_parent = parent;
+	if(pivot.GetX() < 0.f || pivot.GetX() > 1.f || pivot.GetY() < 0.f || pivot.GetY() > 1.f){
+		cwout << L"Pivot must be between 0 and 1." << std::endl;
+		return;
+	}
+	m_pivot = pivot;
 	m_dirty = true;
 }

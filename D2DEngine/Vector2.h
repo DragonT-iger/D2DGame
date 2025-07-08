@@ -1,7 +1,8 @@
 #pragma once
 
 /// 날짜 / 이름 / 수정내용
-/// 2025-07-02 권용범 최초버전 작성
+/// 2025-07-02 권용범 최초버전 작성'
+/// 2025-07-08 권용범 Get, Set 함수 추가
 
 /// <summary>
 /// Unity Like 벡터 클래스
@@ -63,6 +64,13 @@ public:
 	static const Vector2 down;
 	static const Vector2 left;
 	static const Vector2 right;
+
+	// get, set 함수
+	float GetX() const { return m_x; }
+	float GetY() const { return m_y; }
+
+	void SetX(float x) { m_x = x; }
+	void SetY(float y) { m_y = y; }
 	
 private:
 	float m_x;
