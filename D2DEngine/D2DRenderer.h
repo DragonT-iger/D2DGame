@@ -22,7 +22,7 @@ public:
 
     void DrawLine(float x1, float y1, float x2, float y2, const D2D1::ColorF& color);
 
-    void DrawCircle(float x, float y, float radius, const D2D1::ColorF& color);
+	void DrawCircle(float x, float y, float radius, const D2D1::ColorF& color);
 
     void DrawRectangle(float left, float top, float right, float bottom, const D2D1::ColorF& color);
 
