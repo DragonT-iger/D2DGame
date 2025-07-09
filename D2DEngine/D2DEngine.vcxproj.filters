@@ -40,6 +40,9 @@
     <Filter Include="Component\Transform">
       <UniqueIdentifier>{d0b230c3-7920-418c-843a-c3ea65399c0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\SimpleMathHelper">
+      <UniqueIdentifier>{3d389550-e130-47df-ae70-b5b8e7bb3775}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMathHelper.h">
+      <Filter>Math\SimpleMathHelper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

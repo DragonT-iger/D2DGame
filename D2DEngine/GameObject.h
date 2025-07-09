@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-class MonoBehaviour;
-class Transform;
 /// 날짜 / 이름 / 수정내용
 /// 2025-07-04 권용범 최초버전 작성
 /// 2025-07-07 권용범 Transform 특수화
@@ -70,4 +68,9 @@ T* GameObject::GetComponent() const
         if (auto casted = dynamic_cast<T*>(c.get()))
             return casted;
     return nullptr;
+}
+template<>
+Transform* GameObject::GetComponent<Transform>() const
+{
+    return m_transform.get();
 }

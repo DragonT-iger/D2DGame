@@ -43,6 +43,7 @@
 #include "GameTimer.h"
 #include "Vector2.h"
 #include "NzWndBase.h"
+#include "Transform.h"
 
 
 namespace DX
@@ -78,4 +79,3 @@ namespace DX
 using namespace Microsoft::WRL;
 using namespace std;
 inline std::wostream& cwout = std::wcout;
-

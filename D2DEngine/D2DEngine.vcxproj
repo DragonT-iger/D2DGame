@@ -146,6 +146,7 @@
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="NzWndBase.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SimpleMathHelper.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
