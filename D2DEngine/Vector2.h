@@ -11,9 +11,8 @@ class Vector2
 {
 public:
 
-	Vector2() : m_x(0.f), m_y(0.f) {}
-	Vector2(float x, float y) : m_x(x), m_y(y) {}
-
+	Vector2() : x(0.f), y(0.f) {}
+	Vector2(float x, float y) : x(x), y(y) {}
 	// 연산자 오버로드
 
 	Vector2 operator+(const Vector2& rhs) const; // R-value 지원
@@ -66,14 +65,13 @@ public:
 	static const Vector2 right;
 
 	// get, set 함수
-	float GetX() const { return m_x; }
-	float GetY() const { return m_y; }
+	float GetX() const { return x; }
+	float GetY() const { return y; }
 
-	void SetX(float x) { m_x = x; }
-	void SetY(float y) { m_y = y; }
+	void SetX(float x) { this->x = x; }
+	void SetY(float y) { this->y = y; }
 	
-private:
-	float m_x;
-	float m_y;
+	float x;
+	float y;
 };
 

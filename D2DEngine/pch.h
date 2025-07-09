@@ -19,6 +19,8 @@
 #include <memory>
 #include <type_traits>
 #include <string>
+
+#define NOMINMAX
 #include <windows.h>
 #include <iostream>
 #include <cassert>
@@ -37,13 +39,13 @@
 #include <dwrite.h>
 
 
-
 #include "MonoBehaviour.h"
 #include "Behaviour.h"
 #include "GameTimer.h"
 #include "Vector2.h"
 #include "NzWndBase.h"
 #include "Transform.h"
+
 
 
 namespace DX

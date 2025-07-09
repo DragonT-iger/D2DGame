@@ -42,6 +42,9 @@ T* GameObject::AddComponent()
 
     auto comp = make_unique<T>();
     T* raw = comp.get();
+
+    raw->SetOwner(this);
+
     m_components.emplace_back(move(comp));
     return raw;
 }

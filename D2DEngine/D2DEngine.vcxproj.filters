@@ -81,6 +81,9 @@
     <ClInclude Include="SimpleMathHelper.h">
       <Filter>Math\SimpleMathHelper</Filter>
     </ClInclude>
+    <ClInclude Include="TMHelper.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -106,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="TMHelper.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMathHelper.cpp">
+      <Filter>Math\SimpleMathHelper</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
