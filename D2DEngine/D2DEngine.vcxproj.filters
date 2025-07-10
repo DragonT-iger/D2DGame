@@ -45,6 +45,18 @@
     <Filter Include="Component\Coillder">
       <UniqueIdentifier>{300a870e-67ae-4a40-9e14-a3603b42445c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{b990526c-58fb-464e-9146-0f9ae8a7620f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{cf552819-8ca0-4705-a0e2-d73ad558ee67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\SpriteRenderer">
+      <UniqueIdentifier>{75d7fac1-31be-48e3-80de-f76e3cad8c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{48be0eb7-e30b-4faa-8558-c0c6220e1133}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -86,6 +98,33 @@
     <ClInclude Include="TMHelper.h">
       <Filter>Component\Transform</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="InputManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcsManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyCode.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationClip.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonParser.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+>>>>>>> origin/main
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -118,5 +157,23 @@
     <ClCompile Include="SimpleMathHelper.cpp">
       <Filter>Math\SimpleMathHelper</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="InputManager.cpp">
+      <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationClip.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourcsManager.cpp">
+      <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonParser.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClCompile>
+>>>>>>> origin/main
   </ItemGroup>
 </Project>

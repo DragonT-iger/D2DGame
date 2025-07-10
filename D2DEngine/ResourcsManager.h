@@ -28,13 +28,13 @@ public:
 		return instance;
 	}
 
-	void AddTexture(D2DRenderer* renderer, std::wstring& key, const std::filesystem::path& filepath);
-	void AddAnimationClip(D2DRenderer* renderer, std::wstring& key, const std::filesystem::path& filepath);
+	void AddTexture(D2DRenderer* renderer, std::string& key, const std::filesystem::path& filepath);
+	void AddAnimationClip(D2DRenderer* renderer, std::string& key, const std::filesystem::path& filepath);
 
-	Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetTexture(const std::wstring& key) const;
-	std::shared_ptr<AnimationClip> GetAnimationClip(const std::wstring& key) const;
+	Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetTexture(const std::string& key) const;
+	std::shared_ptr<AnimationClip> GetAnimationClip(const std::string& key) const;
 
-	std::unordered_map<std::wstring, Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_textures;
-	std::unordered_map<std::wstring, std::shared_ptr<AnimationClip>> m_aniClips;
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_textures;
+	std::unordered_map<std::string, std::shared_ptr<AnimationClip>> m_aniClips;
 	//std::unordered_map<std::wstring, 사운드 클래스> m_sounds;	//사운드 용
 };
