@@ -26,6 +26,7 @@ class AnimationClip
 {
 public:
 	AnimationClip() = default;
+	AnimationClip(const std::string& name) : m_name(name) {}
 	~AnimationClip() = default;
 
 	void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sheet) { m_sheet = std::move(sheet); }
@@ -39,9 +40,12 @@ public:
 	void SetLooping(bool looping) { isLoop = looping; }
 	bool IsLooping() const { return isLoop; }	
 
+	std::string GetName() const { return m_name; }	
+
 private:
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_sheet; // 애니메이션 시트 비트맵
 	std::vector<FrameData>									m_frames; // 프레임 데이터
+	std::string															m_name; // 애니메이션 이름
 	float											m_totalDuration = 0.0f; // 전체 애니메이션 지속 시간 (초 단위)
 	bool															isLoop = false;	//루프 여부
 };

@@ -44,7 +44,7 @@ AnimationClips JsonParser::Load(const std::filesystem::path& jsonPath)
 
 	for (const auto& info : frameinfos)
 	{
-		AnimationClip clip;
+		AnimationClip clip(info.tag);
 
 		for (int i = info.from; i <= info.to; i++)
 		{
@@ -59,7 +59,6 @@ AnimationClips JsonParser::Load(const std::filesystem::path& jsonPath)
 
 			clip.AddFrame(src);
 		}
-		
 		clips.emplace_back(clip);
 	}
 }
