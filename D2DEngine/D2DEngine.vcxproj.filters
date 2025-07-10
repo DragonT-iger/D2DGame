@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="ComponentBase">
       <UniqueIdentifier>{deb41658-1c2a-40fd-8e95-14c89b58bd83}</UniqueIdentifier>
     </Filter>
@@ -43,13 +39,11 @@
     <Filter Include="Math\SimpleMathHelper">
       <UniqueIdentifier>{3d389550-e130-47df-ae70-b5b8e7bb3775}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
     <Filter Include="Physics">
       <UniqueIdentifier>{cf7e8740-5fca-4630-b503-26e9f8e2eb55}</UniqueIdentifier>
-=======
-    <Filter Include="SystemManager">
-      <UniqueIdentifier>{4b1cfc50-57ce-42f7-a477-a00a4dcf4915}</UniqueIdentifier>
->>>>>>> origin/main
+    </Filter>
+    <Filter Include="Component\Coillder">
+      <UniqueIdentifier>{300a870e-67ae-4a40-9e14-a3603b42445c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,15 +86,6 @@
     <ClInclude Include="TMHelper.h">
       <Filter>Component\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>SystemManager</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourcsManager.h">
-      <Filter>SystemManager</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyCode.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -132,12 +117,6 @@
     </ClCompile>
     <ClCompile Include="SimpleMathHelper.cpp">
       <Filter>Math\SimpleMathHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>SystemManager</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourcsManager.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
