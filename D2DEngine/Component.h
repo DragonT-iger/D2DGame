@@ -11,6 +11,7 @@ class GameObject;
 
 class Component {
 public:
+	Component() = default;
     virtual ~Component() = default;
 
     GameObject* GetOwner() const { return m_owner; }

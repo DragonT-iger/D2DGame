@@ -137,6 +137,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationClip.h" />
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D2DRenderer.h" />
@@ -144,22 +146,27 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="JsonParser.h" />
     <ClInclude Include="KeyCode.h" />
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="NzWndBase.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ResourcsManager.h" />
     <ClInclude Include="SimpleMathHelper.h" />
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TMHelper.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="D2DEngine.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="JsonParser.cpp" />
     <ClCompile Include="NzWndBase.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -169,6 +176,7 @@
     </ClCompile>
     <ClCompile Include="ResourcsManager.cpp" />
     <ClCompile Include="SimpleMathHelper.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TMHelper.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2.cpp" />
