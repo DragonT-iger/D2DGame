@@ -22,14 +22,14 @@ public:
 	~Transform(); // 혹시 모를 댕글링을 위해
 
 	// 로컬
-	const Vector2& GetPosition()		const { return m_position; }
-		  float	   GetRotation()		const { return m_rotation; }
-	const Vector2& GetScale()			const { return m_scale; }
-	const Vector2& GetPivot()				const { return m_pivot; }
+	const Vector2& GetPosition()					const { return m_position; }
+		  float	   GetRotation()					const { return m_rotation; }
+	const Vector2& GetScale()						const { return m_scale; }
+	const Vector2& GetPivot()						const { return m_pivot; }
 
-	void SetPosition(const Vector2& position) { m_position = position; m_dirty = true; }
-	void SetRotation(float rotation)		   { m_rotation = rotation; m_dirty = true; }
-	void SetScale(const Vector2& scale)	   { m_scale = scale	   ; m_dirty = true; }
+	void SetPosition(const Vector2& position)		{ m_position = position; m_dirty = true; }
+	void SetRotation(float rotation)				{ m_rotation = rotation; m_dirty = true; }
+	void SetScale(const Vector2& scale)				{ m_scale = scale	   ; m_dirty = true; }
 	
 	// 편의 메서드들
 	void Translate(const Vector2& delta)			{ m_position.x += delta.x; m_position.y += delta.y; SetDirty(); }

@@ -43,8 +43,13 @@
     <Filter Include="Math\SimpleMathHelper">
       <UniqueIdentifier>{3d389550-e130-47df-ae70-b5b8e7bb3775}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
+    <Filter Include="Physics">
+      <UniqueIdentifier>{cf7e8740-5fca-4630-b503-26e9f8e2eb55}</UniqueIdentifier>
+=======
     <Filter Include="SystemManager">
       <UniqueIdentifier>{4b1cfc50-57ce-42f7-a477-a00a4dcf4915}</UniqueIdentifier>
+>>>>>>> origin/main
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{b990526c-58fb-464e-9146-0f9ae8a7620f}</UniqueIdentifier>

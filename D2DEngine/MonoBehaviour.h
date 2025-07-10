@@ -15,4 +15,8 @@ public:
 	virtual void Update(float deltaTime) {};
 	virtual void FixedUpdate(float fixedDelta) {};
 	virtual void LateUpdate(float deltaTime) {};
+
+    //virtual void OnTriggerEnter(Collider* other) {} 
+    //virtual void OnTriggerStay(Collider* other) {}
+    //virtual void OnTriggerExit(Collider* other) {}
 };

@@ -12,3 +12,47 @@ GameObject::GameObject(const std::wstring& name)
 /* Activation -------------------------------------------------- */
 void GameObject::SetActive(bool active) { m_active = active; }
 bool GameObject::IsActive() const { return m_active; }
+
+
+
+/* Lifecycle Methods -------------------------------------------- */
+
+void GameObject::Awake() {
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->Awake();
+        }
+    }
+}
+
+void GameObject::Start() {
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->Start();
+        }
+    }
+}
+
+void GameObject::Update(float deltaTime) {
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->Update(deltaTime);
+        }
+    }
+}
+
+void GameObject::FixedUpdate(float fixedDeltaTime) {
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->FixedUpdate(fixedDeltaTime);
+        }
+    }
+}
+
+void GameObject::LateUpdate(float deltaTime) {
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->LateUpdate(deltaTime);
+        }
+    }
+}
