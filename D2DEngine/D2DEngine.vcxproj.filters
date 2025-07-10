@@ -43,6 +43,9 @@
     <Filter Include="Math\SimpleMathHelper">
       <UniqueIdentifier>{3d389550-e130-47df-ae70-b5b8e7bb3775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SystemManager">
+      <UniqueIdentifier>{4b1cfc50-57ce-42f7-a477-a00a4dcf4915}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -84,6 +87,15 @@
     <ClInclude Include="TMHelper.h">
       <Filter>Component\Transform</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcsManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyCode.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -115,6 +127,12 @@
     </ClCompile>
     <ClCompile Include="SimpleMathHelper.cpp">
       <Filter>Math\SimpleMathHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourcsManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
