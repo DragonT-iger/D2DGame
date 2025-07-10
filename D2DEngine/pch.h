@@ -45,6 +45,7 @@
 #include "Vector2.h"
 #include "NzWndBase.h"
 #include "Transform.h"
+#include "KeyCode.h"
 
 
 

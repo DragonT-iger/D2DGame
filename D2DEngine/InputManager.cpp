@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "InputManager.h"
+#include <array>
 
 
 
@@ -42,16 +43,16 @@ bool InputManager::OnHandleMessage(const MSG& msg)
 	return true;
 }
 
-bool InputManager::GetKeyPressed(UINT vk)
+bool InputManager::GetKeyPressed(Keycode vk)
 {
-	bool p = m_keyEdge[vk].pressed;
+	bool p = m_keyEdge[static_cast<UINT>(vk)].pressed;
 
     return p;
 }
 
-bool InputManager::GetKeyDown(UINT vk)
+bool InputManager::GetKeyDown(Keycode vk)
 {
-    return m_keyDown[vk];
+    return m_keyDown[static_cast<UINT>(vk)];
 }
 
 void InputManager::HandleMsgKeyDown(WPARAM wParam, LPARAM lParam)
@@ -87,22 +88,22 @@ void InputManager::HandleMsgMouse(const MSG& msg)
 
 	if (msg.message == WM_LBUTTONDOWN)
 	{
-		m_CurMouse.LButtionPressed = true;
+		m_CurMouse.LButtonPressed = true;
 		SetCapture(msg.hwnd);
 	}
 	else if (msg.message == WM_RBUTTONDOWN)
 	{
-		m_CurMouse.RButtionPressed = true;
+		m_CurMouse.RButtonPressed = true;
 		SetCapture(msg.hwnd);
 	}
 	else if (msg.message == WM_LBUTTONUP)
 	{
-		m_CurMouse.LButtionPressed = false;
+		m_CurMouse.LButtonPressed = false;
 		ReleaseCapture();
 	}
 	else if (msg.message == WM_RBUTTONUP)
 	{
-		m_CurMouse.RButtionPressed = false;
+		m_CurMouse.RButtonPressed = false;
 		ReleaseCapture();
 	}
 }
