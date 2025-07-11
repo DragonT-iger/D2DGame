@@ -9,6 +9,10 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
     <Filter Include="ComponentBase">
       <UniqueIdentifier>{deb41658-1c2a-40fd-8e95-14c89b58bd83}</UniqueIdentifier>
     </Filter>
@@ -39,23 +43,11 @@
     <Filter Include="Math\SimpleMathHelper">
       <UniqueIdentifier>{3d389550-e130-47df-ae70-b5b8e7bb3775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SystemManager">
+      <UniqueIdentifier>{4b1cfc50-57ce-42f7-a477-a00a4dcf4915}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{cf7e8740-5fca-4630-b503-26e9f8e2eb55}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Coillder">
-      <UniqueIdentifier>{300a870e-67ae-4a40-9e14-a3603b42445c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{b990526c-58fb-464e-9146-0f9ae8a7620f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Json">
-      <UniqueIdentifier>{cf552819-8ca0-4705-a0e2-d73ad558ee67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\SpriteRenderer">
-      <UniqueIdentifier>{75d7fac1-31be-48e3-80de-f76e3cad8c49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Animator">
-      <UniqueIdentifier>{48be0eb7-e30b-4faa-8558-c0c6220e1133}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -98,8 +90,6 @@
     <ClInclude Include="TMHelper.h">
       <Filter>Component\Transform</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="InputManager.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
@@ -109,22 +99,6 @@
     <ClInclude Include="KeyCode.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationClip.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="json.hpp">
-      <Filter>Json</Filter>
-    </ClInclude>
-    <ClInclude Include="JsonParser.h">
-      <Filter>Json</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Component\SpriteRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Component\Animator</Filter>
-    </ClInclude>
->>>>>>> origin/main
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -157,23 +131,11 @@
     <ClCompile Include="SimpleMathHelper.cpp">
       <Filter>Math\SimpleMathHelper</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
     <ClCompile Include="InputManager.cpp">
       <Filter>SystemManager</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationClip.cpp">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="ResourcsManager.cpp">
-      <Filter>SystemManager</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="JsonParser.cpp">
-      <Filter>Json</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Component\SpriteRenderer</Filter>
-    </ClCompile>
->>>>>>> origin/main
   </ItemGroup>
 </Project>
