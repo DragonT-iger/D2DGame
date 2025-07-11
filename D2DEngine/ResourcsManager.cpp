@@ -17,7 +17,11 @@ void ResourceManager::AddTexture(D2DRenderer* renderer, std::string& key, const 
 		return;
 	}
 
-	if (m_textures.find(key) == m_textures.end());
+	if (m_textures.find(key) == m_textures.end())
+	{
+		//이미 등록 된 키가 있으면, 리턴
+		return;
+	}
 	m_textures.emplace(key, sheet);
 }
 
@@ -34,12 +38,17 @@ void ResourceManager::AddAnimationClip(D2DRenderer* renderer, std::string& key, 
 
 	m_textures.emplace(key, sheet);
 
+	
+
 	AnimationClips clips = JsonParser::Load(filepath);
 
 	for(auto& clip : clips)
 	{
-		clip.SetBitmap(sheet);
-		m_aniClips.emplace(key + "_" + clip.GetName(), clip);
+		std::shared_ptr<AnimationClip> pclip = std::make_shared<AnimationClip>();
+		*pclip = clip;
+		pclip->SetBitmap(sheet);
+		std::string newkey = key + "_" + clip.GetName();
+		m_aniClips[newkey] = pclip;
 	}
 }
 
@@ -55,10 +64,11 @@ Microsoft::WRL::ComPtr<ID2D1Bitmap1> ResourceManager::GetTexture(const std::stri
 
 std::shared_ptr<AnimationClip> ResourceManager::GetAnimationClip(const std::string& key) const
 {
-	if(m_aniClips.find(key) == m_aniClips.end())
+	auto it = m_aniClips.find(key);
+	if(it == m_aniClips.end())
 	{
 		std::cerr << "애니메이션 클립을 찾을 수 없습니다: " << key << std::endl;
 		return nullptr;
 	}
-	return m_aniClips.find(key)->second;
+	return it->second;
 }

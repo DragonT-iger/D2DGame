@@ -49,6 +49,18 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{cf7e8740-5fca-4630-b503-26e9f8e2eb55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\SpriteRenderer">
+      <UniqueIdentifier>{0b1e6673-797c-4538-8b5a-6abe5799f19d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{cda213f2-76a3-4b4c-aedf-b1d3fee723ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{196d6706-1f4f-401d-a90e-7c0654a9a85e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{84aa60e0-bee8-495b-9dea-cca05c57faae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -93,11 +105,26 @@
     <ClInclude Include="InputManager.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
+    <ClInclude Include="KeyCode.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="ResourcsManager.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
-    <ClInclude Include="KeyCode.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonParser.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationClip.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Component\Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +162,16 @@
       <Filter>SystemManager</Filter>
     </ClCompile>
     <ClCompile Include="ResourcsManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonParser.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationClip.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

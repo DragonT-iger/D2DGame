@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 
 /// 날짜 / 이름 / 수정내용
 /// 2025-07-09 최초버전 작성중
