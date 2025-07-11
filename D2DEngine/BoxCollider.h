@@ -1,6 +1,7 @@
 #pragma once
 class BoxCollider : public Collider
 {
+public:
 	Vector2 GetSize() const { return size; }
 	void SetSize(const Vector2& newSize) { size = newSize; }
 

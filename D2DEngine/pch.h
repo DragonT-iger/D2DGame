@@ -50,7 +50,6 @@ inline std::wostream& cwout = std::wcout;
 #include "Transform.h"
 #include "KeyCode.h"
 #include "Collider.h"
-#include "GameObject.h"
 #include "CircleCollider.h"
 #include "BoxCollider.h"
 

@@ -133,6 +133,11 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\D2DEngine\D2DEngine.vcxproj">
+      <Project>{981f08ae-13e9-4b6d-9fcd-4d0e20096df4}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

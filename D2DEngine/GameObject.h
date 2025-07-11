@@ -66,7 +66,7 @@ T* GameObject::AddComponent(Args&&... args)
     return raw;
 }
 template<>
-inline Transform* GameObject::AddComponent<Transform>() {
+Transform* GameObject::AddComponent<Transform>() {
     if (m_transform)
     {
         cwout << L"[GameObject] Transform already exists\n";
@@ -94,7 +94,7 @@ T* GameObject::GetComponent() const
     return nullptr;
 }
 template<>
-inline Transform* GameObject::GetComponent<Transform>() const
+Transform* GameObject::GetComponent<Transform>() const
 {
     return m_transform.get();
 }
