@@ -12,7 +12,7 @@
 class GameObject
 {
 public:
-    GameObject(const wstring& name = L"GameObject");
+    GameObject(const std::wstring& name = L"GameObject");
 
     template<typename T, typename... Args>
     T* AddComponent(Args&&... args);
@@ -23,7 +23,7 @@ public:
     void SetActive(bool active);
     bool IsActive() const;
 
-    // 씬에 마지막에 넣고 돌릴꺼임 그냥 호출하지 말기 일단
+    // 씬에 마지막에 넣고 돌릴꺼임 그냥 호출하지 말기 일단 나중에 씬이랑 friend 걸거나 해야지 Mono에서는 못쓰게
 
     void Awake();
     void Start();
@@ -32,10 +32,10 @@ public:
     void LateUpdate(float deltaTime);
 
 private:
-    wstring                           m_name;
-    bool                              m_active = true;
-    vector<unique_ptr<Component>>     m_components;
-    unique_ptr<Transform>             m_transform;
+    std::wstring                                  m_name;
+    bool                                          m_active = true;
+    std::vector<std::unique_ptr<Component>>       m_components;
+    std::unique_ptr<Transform>                    m_transform;
 };
 
 //템플릿은 cpp로 못옮겨
@@ -57,23 +57,27 @@ T* GameObject::AddComponent(Args&&... args)
         return existing; 
     }
 
-    auto comp = make_unique<T>(forward<Args>(args)...);
+    auto comp = std::make_unique<T>(std::forward<Args>(args)...);
     T* raw = comp.get();
 
     raw->SetOwner(this);
 
-    m_components.emplace_back(move(comp));
+    m_components.emplace_back(std::move(comp));
     return raw;
 }
 template<>
-Transform* GameObject::AddComponent<Transform>() {
+inline Transform* GameObject::AddComponent<Transform>() {
     if (m_transform)
     {
         cwout << L"[GameObject] Transform already exists\n";
         assert(false && "Duplicate Transform on GameObject");
         return m_transform.get();
     }
-    m_transform = make_unique<Transform>();
+    m_transform = std::make_unique<Transform>();
+	Transform* raw = m_transform.get();
+
+	raw->SetOwner(this);
+
     return m_transform.get();
 }
 
@@ -90,7 +94,7 @@ T* GameObject::GetComponent() const
     return nullptr;
 }
 template<>
-Transform* GameObject::GetComponent<Transform>() const
+inline Transform* GameObject::GetComponent<Transform>() const
 {
     return m_transform.get();
 }

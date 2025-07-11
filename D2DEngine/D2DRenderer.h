@@ -61,19 +61,19 @@ private:
 private:
     HWND m_hwnd = nullptr;
 
-    ComPtr<ID3D11Device>           m_d3dDevice;
-    ComPtr<IDXGISwapChain1>        m_swapChain;
+    WRL::ComPtr<ID3D11Device>           m_d3dDevice;
+    WRL::ComPtr<IDXGISwapChain1>        m_swapChain;
 
-    ComPtr<ID3D11DeviceContext>    m_d3dContext;
-    ComPtr<ID3D11RenderTargetView> m_d3dRenderTV; // D3D render target view
+    WRL::ComPtr<ID3D11DeviceContext>    m_d3dContext;
+    WRL::ComPtr<ID3D11RenderTargetView> m_d3dRenderTV; // D3D render target view
 
-    ComPtr<ID2D1Bitmap1>           m_targetBitmap; // D2D render target bitmap
-    ComPtr<ID2D1SolidColorBrush>   m_brush;
-    ComPtr<ID2D1SolidColorBrush>   m_textBrush;
-    ComPtr <IDWriteTextFormat>     m_textFormat;
+    WRL::ComPtr<ID2D1Bitmap1>           m_targetBitmap; // D2D render target bitmap
+    WRL::ComPtr<ID2D1SolidColorBrush>   m_brush;
+    WRL::ComPtr<ID2D1SolidColorBrush>   m_textBrush;
+    WRL::ComPtr <IDWriteTextFormat>     m_textFormat;
 
-    ComPtr<ID2D1Device7>           m_d2dDevice;
-    ComPtr<ID2D1DeviceContext7>    m_d2dContext;
+    WRL::ComPtr<ID2D1Device7>           m_d2dDevice;
+    WRL::ComPtr<ID2D1DeviceContext7>    m_d2dContext;
 
-    ComPtr<IWICImagingFactory>     m_wicFactory;
+    WRL::ComPtr<IWICImagingFactory>     m_wicFactory;
 };

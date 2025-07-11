@@ -20,6 +20,7 @@
 #include <type_traits>
 #include <string>
 
+
 #define NOMINMAX
 #include <windows.h>
 #include <iostream>
@@ -38,6 +39,8 @@
 #include <wincodec.h>
 #include <dwrite.h>
 
+namespace WRL = Microsoft::WRL;
+inline std::wostream& cwout = std::wcout;
 
 #include "MonoBehaviour.h"
 #include "Behaviour.h"
@@ -46,6 +49,10 @@
 #include "NzWndBase.h"
 #include "Transform.h"
 #include "KeyCode.h"
+#include "Collider.h"
+#include "GameObject.h"
+#include "CircleCollider.h"
+#include "BoxCollider.h"
 
 
 
@@ -79,6 +86,3 @@ namespace DX
     }
 }
 
-using namespace Microsoft::WRL;
-using namespace std;
-inline std::wostream& cwout = std::wcout;

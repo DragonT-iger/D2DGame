@@ -8,7 +8,7 @@ void D2DRenderer::Initialize(HWND hwnd)
     CreateRenderTargets();
     CreateWriteResource();
 
-    ComPtr<IWICImagingFactory> wicFactory;
+    WRL::ComPtr<IWICImagingFactory> wicFactory;
 
     HRESULT hr = CoCreateInstance(CLSID_WICImagingFactory,
         nullptr,
@@ -143,8 +143,8 @@ void D2DRenderer::CreateDeviceAndSwapChain(HWND hwnd)
 {
     //1. D3D11 디바이스 생성
     D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_0 };
-    ComPtr<ID3D11Device> d3dDevice;
-    ComPtr<ID3D11DeviceContext> d3dContext;
+    WRL::ComPtr<ID3D11Device> d3dDevice;
+    WRL::ComPtr<ID3D11DeviceContext> d3dContext;
 
     HRESULT hr = D3D11CreateDevice(
         nullptr,                            //[in, optional]  IDXGIAdapter* pAdapter
@@ -161,17 +161,17 @@ void D2DRenderer::CreateDeviceAndSwapChain(HWND hwnd)
     DX::ThrowIfFailed(hr);
 
     // 2. DXGI 스왑체인 생성
-    ComPtr<IDXGIDevice> dxgiDevice;
+    WRL::ComPtr<IDXGIDevice> dxgiDevice;
     hr = d3dDevice.As(&dxgiDevice);
 
     DX::ThrowIfFailed(hr);
 
-    ComPtr<IDXGIAdapter> dxgiAdapter;
+    WRL::ComPtr<IDXGIAdapter> dxgiAdapter;
     hr = dxgiDevice->GetAdapter(&dxgiAdapter);
 
     DX::ThrowIfFailed(hr);
 
-    ComPtr<IDXGIFactory2> dxgiFactory;
+    WRL::ComPtr<IDXGIFactory2> dxgiFactory;
     hr = dxgiAdapter->GetParent(IID_PPV_ARGS(&dxgiFactory));
 
     DX::ThrowIfFailed(hr);
@@ -184,7 +184,7 @@ void D2DRenderer::CreateDeviceAndSwapChain(HWND hwnd)
     scDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
     scDesc.Scaling = DXGI_SCALING_STRETCH;
 
-    ComPtr<IDXGISwapChain1> swapChain;
+    WRL::ComPtr<IDXGISwapChain1> swapChain;
     hr = dxgiFactory->CreateSwapChainForHwnd(
         d3dDevice.Get(), hwnd, &scDesc, nullptr, nullptr, &swapChain);
 
@@ -192,7 +192,7 @@ void D2DRenderer::CreateDeviceAndSwapChain(HWND hwnd)
 
     // 3. ID2D1Factory4 생성
     D2D1_FACTORY_OPTIONS opts = {};
-    ComPtr<ID2D1Factory8> d2dFactory;
+    WRL::ComPtr<ID2D1Factory8> d2dFactory;
 
 #if defined(_DEBUG)
     opts.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
@@ -207,18 +207,18 @@ void D2DRenderer::CreateDeviceAndSwapChain(HWND hwnd)
     DX::ThrowIfFailed(hr);
 
     // 4. ID2D1Device4 생성
-    ComPtr<ID2D1Device> baseDevice;
+    WRL::ComPtr<ID2D1Device> baseDevice;
     hr = d2dFactory->CreateDevice(dxgiDevice.Get(), &baseDevice);
 
     DX::ThrowIfFailed(hr);
 
-    ComPtr<ID2D1Device7> d2dDevice;
+    WRL::ComPtr<ID2D1Device7> d2dDevice;
     hr = baseDevice.As(&d2dDevice);
 
     DX::ThrowIfFailed(hr);
 
     // 5. ID2D1DeviceContext7 생성
-    ComPtr<ID2D1DeviceContext7> d2dContext;//
+    WRL::ComPtr<ID2D1DeviceContext7> d2dContext;//
     hr = d2dDevice->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE, &d2dContext);
 
     DX::ThrowIfFailed(hr);
@@ -235,7 +235,7 @@ void D2DRenderer::CreateRenderTargets()
 {
     // 6. SwapChain 백버퍼 -> D2D Bitmap1 을 생성하여 렌더 타겟으로 설정
 
-    ComPtr<IDXGISurface> dxgiSurface;
+    WRL::ComPtr<IDXGISurface> dxgiSurface;
     HRESULT hr = m_swapChain->GetBuffer(0, IID_PPV_ARGS(&dxgiSurface));
 
     DX::ThrowIfFailed(hr);
@@ -246,7 +246,7 @@ void D2DRenderer::CreateRenderTargets()
     bitmapProps.pixelFormat.alphaMode = D2D1_ALPHA_MODE_PREMULTIPLIED;
     bitmapProps.dpiX = bitmapProps.dpiY = 96.0f;
 
-    ComPtr<ID2D1Bitmap1> targetBitmap;
+    WRL::ComPtr<ID2D1Bitmap1> targetBitmap;
     hr = m_d2dContext->CreateBitmapFromDxgiSurface(dxgiSurface.Get(), &bitmapProps, targetBitmap.GetAddressOf());
 
     DX::ThrowIfFailed(hr);
@@ -263,11 +263,11 @@ void D2DRenderer::CreateRenderTargets()
     DX::ThrowIfFailed(hr);
 
     // ImGUI 은 D3D11 렌더 타겟 뷰가 필요!!! 
-    ComPtr<ID3D11Texture2D> backBuffer;
+    WRL::ComPtr<ID3D11Texture2D> backBuffer;
     hr = m_swapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
 
     // RenderTargetView 생성
-    ComPtr<ID3D11RenderTargetView> mainRTV;
+    WRL::ComPtr<ID3D11RenderTargetView> mainRTV;
     hr = m_d3dDevice->CreateRenderTargetView(
         backBuffer.Get(),      // 텍스처
         nullptr,               // 기본 뷰 설명
@@ -281,7 +281,7 @@ void D2DRenderer::CreateRenderTargets()
 
 void D2DRenderer::CreateWriteResource()
 {
-    ComPtr<IDWriteFactory> writeFactory = nullptr;
+    WRL::ComPtr<IDWriteFactory> writeFactory = nullptr;
     HRESULT hr = DWriteCreateFactory(
         DWRITE_FACTORY_TYPE_SHARED,
         __uuidof(IDWriteFactory),
@@ -322,9 +322,9 @@ void D2DRenderer::ReleaseRenderTargets()
 
 void D2DRenderer::CreateBitmapFromFile(const wchar_t* path, ID2D1Bitmap1*& outBitmap)
 {
-    ComPtr<IWICBitmapDecoder>     decoder;
-    ComPtr<IWICBitmapFrameDecode> frame;
-    ComPtr<IWICFormatConverter>   converter;
+    WRL::ComPtr<IWICBitmapDecoder>     decoder;
+    WRL::ComPtr<IWICBitmapFrameDecode> frame;
+    WRL::ComPtr<IWICFormatConverter>   converter;
 
 
     HRESULT hr = m_wicFactory->CreateDecoderFromFilename(

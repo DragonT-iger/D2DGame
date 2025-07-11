@@ -15,7 +15,7 @@ using Matrix3x2 = D2D1::Matrix3x2F;
 /// <summary>
 /// Transform 계층구조
 /// </summary>
-class Transform 
+class Transform : public Component
 {
 public:
 	Transform() = default; // 0 0 1 0 0 초기화
