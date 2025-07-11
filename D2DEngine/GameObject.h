@@ -47,7 +47,7 @@ T* GameObject::AddComponent(Args&&... args)
     static_assert(std::is_base_of_v<Component, T>, "T must derive from Component");
     // 컴파일 타임 타입 체크
 
-    if (T* existing = GetComponent<T>()) 
+    if (T* existing = this->GetComponent<T>()) 
     {
         // 유니티에서는 이게 되긴 하는데 실수할 여지가 너무 많아서 처리했음
         cwout << L"[경고] " << typeid(T).name()
