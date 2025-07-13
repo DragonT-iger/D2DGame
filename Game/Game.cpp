@@ -14,8 +14,14 @@ bool Game::Initialize()
 	{
 		return false;
 	}
+    
 
 
+
+    // 맨 처음 씬 만들고 로드하는법
+	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<Scene>());
+
+	SceneManager::Instance().LoadScene(L"MainScene"); // 이러면 awake랑 start 까지 초기화가 됨
 
 	return true;
 }
@@ -37,9 +43,32 @@ void Game::Run()
         else
         {
             m_timer->Tick();
-            //Update(m_timer->DeltaTimeMS());
+            Update(m_timer->DeltaTimeMS());
         }
     }
+}
+
+void Game::Update(float deltaTime)
+{
+
+	static float elapsedTime = 0.0f;
+    static float fixedDeltaTime = 0.02f;
+    
+	elapsedTime += deltaTime;
+
+    Scene* scene = SceneManager::Instance().GetActiveScene();
+    if (scene && scene->IsActive())
+    {
+        while(elapsedTime >= fixedDeltaTime)
+        {
+            scene->FixedUpdate(fixedDeltaTime);
+            elapsedTime -= fixedDeltaTime;
+		}
+
+        scene->Update(deltaTime);
+
+		scene->LateUpdate(deltaTime);
+	}
 }
 
 void Game::Release()

@@ -10,7 +10,7 @@
 GameObject* Scene::CreateGameObject(const std::wstring& name)
 {
     auto go = std::make_unique<GameObject>(name);
-    GameObject* raw = go.get();           
+    GameObject* raw = go.get();
 
     m_gameObjects.emplace_back(std::move(go));
     return raw;

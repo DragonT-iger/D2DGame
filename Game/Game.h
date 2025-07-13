@@ -10,7 +10,7 @@ public:
 	void Release();
 
 private:
-
+	void Update(float deltaTime);
 	void UpdateTime();
 
 	// 윈도우 프로시저 재정의

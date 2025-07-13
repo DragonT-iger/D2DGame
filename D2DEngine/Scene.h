@@ -15,21 +15,26 @@ public:
 
     GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 
-	//void Destroy(GameObject* object); 필요하면 나중에 구현 웬만하면 삭제 안해도 되긴 함 그냥 SetActive(false)로 처리하셈 
+	//void Destroy(GameObject* object); 필요하면 나중에 구현 웬만하면 삭제 안해도 되긴 함 웬만하면 그냥 SetActive(false)로 처리하셈 
     //왜냐면 엔진단에서 처리해야 하는게 좀 생김
 
     // ---------- Lifecycle ----------
-    virtual void Awake();
-    virtual void Start();
-    virtual void Update(float deltaTime);
-    virtual void FixedUpdate(float fixedDelta);
-    virtual void LateUpdate(float deltaTime);
+    void Awake();
+    void Start();
+    void Update(float deltaTime);
+    void FixedUpdate(float fixedDelta);
+    void LateUpdate(float deltaTime);
 
     // ---------- Misc ----------
     void SetActive(bool active) { m_active = active; }
     bool IsActive() const { return m_active; }
 
-    virtual void OnResize(int width, int height) = 0; 
+
+	// ---------- Event ----------
+	virtual void OnEnable() { Awake(); Start(); } // 오버라이딩 할때 지금은 Scene::OnEnable()을 호출해야 하는 구조
+    virtual	void OnDisable() {}
+
+    //virtual void OnResize(int width, int height) = 0; // 나중에 구현
 
     const std::wstring& GetName() const { return m_name; }
 

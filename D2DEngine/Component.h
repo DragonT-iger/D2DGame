@@ -37,7 +37,7 @@ T* Component::AddComponent(Args&&... args) {
 		assert(false && "Component must have an owner GameObject before adding a component. 아마 생성자에서 초기화 해서 그럴거임 생성자 쓰지말고 awake 초기화");
         return nullptr; 
     }
-    return m_owner->template GameObject::AddComponent<T>; // 이거 template , GameObject:: 안해주면 컴파일러가 못찾네 개빡치내
+    return m_owner->GameObject::AddComponent<T>; // 이거 GameObject:: 안해주면 컴파일러가 못찾네 개빡치내
 }
 
 template<typename T> inline
@@ -46,5 +46,5 @@ T* Component::GetComponent() const {
 		assert(false && "Component must have an owner GameObject before getting a component. 아마 생성자에서 초기화 해서 그럴거임 생성자 쓰지말고 awake 초기화");
         return nullptr; 
     }
-    return m_owner->template GameObject::GetComponent<T>(); 
+    return m_owner->GameObject::GetComponent<T>(); 
 }

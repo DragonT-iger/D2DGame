@@ -16,6 +16,7 @@
 
 
 #include <vector>
+#include <unordered_map>
 #include <memory>
 #include <type_traits>
 #include <string>
@@ -26,7 +27,7 @@
 #include <iostream>
 #include <cassert>
 #include <math.h>
-
+#pragma comment(lib, "d2d1.lib")
 #include <d2d1.h>
 #include <d2d1_1.h>
 #include <d2d1_2.h>

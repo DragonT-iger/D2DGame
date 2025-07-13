@@ -8,9 +8,9 @@ class SpriteRenderer : public MonoBehaviour
 {  
 public:  
     SpriteRenderer() = default;
-    virtual ~SpriteRenderer() = default;  
+    virtual ~SpriteRenderer() = default;
 
-    virtual void Awake() override { m_transform = GetOwner()->GetComponent<Transform>(); }
+    virtual void Awake() override { m_transform = GetComponent<Transform>(); } // this 참조로 바꿨음
 
     void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap) { m_bitmap = bitmap; }  //기본 스프라이트 설정
 	void SetDestRect(const D2D1_RECT_F& rect) { m_destRect = rect; }    //애니메이션이면 출력할 부분 설정
