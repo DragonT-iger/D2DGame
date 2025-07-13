@@ -43,9 +43,6 @@
     <Filter Include="Math\SimpleMathHelper">
       <UniqueIdentifier>{3d389550-e130-47df-ae70-b5b8e7bb3775}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemManager">
-      <UniqueIdentifier>{4b1cfc50-57ce-42f7-a477-a00a4dcf4915}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{cf7e8740-5fca-4630-b503-26e9f8e2eb55}</UniqueIdentifier>
     </Filter>
@@ -72,6 +69,9 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{cc560074-fb4a-4fec-946a-9d7de2a69a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\SystemManager">
+      <UniqueIdentifier>{4b1cfc50-57ce-42f7-a477-a00a4dcf4915}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,13 +115,13 @@
       <Filter>Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>SystemManager</Filter>
+      <Filter>Math\SystemManager</Filter>
     </ClInclude>
     <ClInclude Include="KeyCode.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="ResourcsManager.h">
-      <Filter>SystemManager</Filter>
+      <Filter>Math\SystemManager</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Component\SpriteRenderer</Filter>
@@ -148,6 +148,9 @@
       <Filter>Component\Collider\CircleCollider</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
@@ -183,10 +186,10 @@
       <Filter>Math\SimpleMathHelper</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>SystemManager</Filter>
+      <Filter>Math\SystemManager</Filter>
     </ClCompile>
     <ClCompile Include="ResourcsManager.cpp">
-      <Filter>SystemManager</Filter>
+      <Filter>Math\SystemManager</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Component\SpriteRenderer</Filter>
@@ -206,11 +209,14 @@
     <ClCompile Include="CircleCollider.cpp">
       <Filter>Component\Collider\CircleCollider</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>ComponentBase</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>ComponentBase</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

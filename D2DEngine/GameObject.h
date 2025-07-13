@@ -41,7 +41,7 @@ private:
 //템플릿은 cpp로 못옮겨
 
 // 리턴 raw로 주니까 delete 절대하지마셈 나중에 shared_ptr 로 해도 되겠네 이거
-template<typename T, typename... Args>
+template<typename T, typename... Args> inline // inline은 ODR 방지용
 T* GameObject::AddComponent(Args&&... args)
 {
     static_assert(std::is_base_of_v<Component, T>, "T must derive from Component");
@@ -65,7 +65,7 @@ T* GameObject::AddComponent(Args&&... args)
     m_components.emplace_back(std::move(comp));
     return raw;
 }
-template<>
+template<> inline
 Transform* GameObject::AddComponent<Transform>() {
     if (m_transform)
     {
@@ -82,7 +82,7 @@ Transform* GameObject::AddComponent<Transform>() {
 }
 
 // 리턴 raw로 주니까 delete 절대하지마셈
-template<typename T>
+template<typename T> inline
 T* GameObject::GetComponent() const
 {
     static_assert(std::is_base_of_v<Component, T>, "T must derive from Component");
@@ -93,7 +93,7 @@ T* GameObject::GetComponent() const
             return casted;
     return nullptr;
 }
-template<>
+template<> inline
 Transform* GameObject::GetComponent<Transform>() const
 {
     return m_transform.get();
