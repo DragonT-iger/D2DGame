@@ -4,6 +4,8 @@
 
 #include "GameObject.h"
 
+class Camera;
+
 /// <summary>
 /// 라이프 사이클을 지원하는 씬
 /// </summary>
@@ -30,11 +32,18 @@ public:
     bool IsActive() const { return m_active; }
 
 
+    // ---------- Camera ---------
+
+    Camera* GetCamera() const { return m_Camera; }
+    void    RegisterCamera(Camera* cam);
+    void    UnregisterCamera(Camera* cam) { if (m_Camera == cam) m_Camera = nullptr; }
+
+
 	// ---------- Event ----------
-	virtual void OnEnable() { Awake(); Start(); } // 오버라이딩 할때 지금은 Scene::OnEnable()을 호출해야 하는 구조
+	virtual void OnEnable() {} // 오버라이딩 할때 지금은 Scene::OnEnable()을 호출해야 하는 구조
     virtual	void OnDisable() {}
 
-    //virtual void OnResize(int width, int height) = 0; // 나중에 구현
+    virtual void OnResize(int width, int height) {}; // (필요한가?? 왜적었더라)
 
     const std::wstring& GetName() const { return m_name; }
 
@@ -42,4 +51,5 @@ private:
     std::wstring                             m_name;
     bool                                     m_active = true;
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
+    Camera*                                  m_Camera = nullptr;
 };

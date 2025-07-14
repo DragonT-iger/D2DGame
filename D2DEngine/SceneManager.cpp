@@ -22,7 +22,13 @@ void SceneManager::LoadScene(const std::wstring& name)
 	}
 
 	Scene* next = it->second.get();
+	
 
+	if (!m_active) {
+		m_active->Awake();
+		m_active->Start();
+	}
+	
 
 #ifdef _DEBUG
 

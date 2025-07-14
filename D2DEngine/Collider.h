@@ -8,7 +8,7 @@ public:
 	void SetOffset(const Vector2& newOffset) { offset = newOffset; }
 
 
-	virtual bool IsCollide(const Collider* other) const = 0;
+	virtual bool IsCollide(const Collider* other) const = 0; // 이걸로 씬에서 LateUpdate에서 충돌 났는지 확인하면 됨
 
 protected:
 	Vector2 offset = { 0 , 0 };

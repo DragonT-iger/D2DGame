@@ -55,6 +55,7 @@ inline std::wostream& cwout = std::wcout;
 #include "CircleCollider.h"
 #include "BoxCollider.h"
 #include "SceneManager.h"
+#include "Camera.h"
 
 
 

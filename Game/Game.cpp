@@ -14,6 +14,8 @@ bool Game::Initialize()
 	{
 		return false;
 	}
+
+    // 렌더러 초기화
     
 
 
@@ -21,7 +23,16 @@ bool Game::Initialize()
     // 맨 처음 씬 만들고 로드하는법
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<Scene>());
 
-	SceneManager::Instance().LoadScene(L"MainScene"); // 이러면 awake랑 start 까지 초기화가 됨
+	
+
+
+    // 카메라 만드는법
+    GameObject* camera = Instantiate(L"MainCamera");
+    camera->AddComponent<Camera>();
+
+    // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
+
+    SceneManager::Instance().LoadScene(L"MainScene");
 
 	return true;
 }
@@ -43,12 +54,12 @@ void Game::Run()
         else
         {
             m_timer->Tick();
-            Update(m_timer->DeltaTimeMS());
+            LifeCycle(m_timer->DeltaTimeMS());
         }
     }
 }
 
-void Game::Update(float deltaTime)
+void Game::LifeCycle(float deltaTime)
 {
 
 	static float elapsedTime = 0.0f;
@@ -87,6 +98,8 @@ void Game::UpdateTime()
 void Game::OnResize(int width, int height)
 {
     __super::OnResize(width, height);
+    /*Scene* scene = SceneManager::Instance().GetActiveScene();
+    scene->OnResize(width , height);*/
 }
 
 void Game::OnClose()
