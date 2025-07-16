@@ -28,6 +28,10 @@
 #include <cassert>
 #include <math.h>
 #pragma comment(lib, "d2d1.lib")
+#pragma comment(lib, "d3d11.lib")   
+#pragma comment(lib, "dwrite.lib")   
+#pragma comment(lib, "d2d1.lib")     
+#pragma comment(lib, "dxgi.lib") 
 #include <d2d1.h>
 #include <d2d1_1.h>
 #include <d2d1_2.h>
@@ -56,6 +60,7 @@ inline std::wostream& cwout = std::wcout;
 #include "BoxCollider.h"
 #include "SceneManager.h"
 #include "Camera.h"
+#include "SpriteRenderer.h"
 
 
 

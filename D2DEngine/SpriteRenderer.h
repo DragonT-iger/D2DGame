@@ -16,7 +16,7 @@ public:
 	void SetDestRect(const D2D1_RECT_F& rect) { m_destRect = rect; }    //애니메이션이면 출력할 부분 설정
 
 
-    void Render(D2DRenderer* renderer, const D2D1::Matrix3x2F& viewTM);
+    void Render(const D2D1::Matrix3x2F& viewTM);
 
 private:  
     

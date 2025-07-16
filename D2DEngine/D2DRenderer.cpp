@@ -67,6 +67,8 @@ void D2DRenderer::DrawRectangle(float left, float top, float right, float bottom
 
 void D2DRenderer::DrawBitmap(ID2D1Bitmap1* bitmap, D2D1_RECT_F dest)
 {
+    assert(bitmap != nullptr && "ºñÆ®¸Ê ÇÒ´çÇÏ¼À");
+
     m_d2dContext->DrawBitmap(bitmap, dest);
 }
 

@@ -21,7 +21,7 @@ public:
     //왜냐면 엔진단에서 처리해야 하는게 좀 생김
 
     // ---------- Lifecycle ----------
-    void Awake();
+    virtual void Awake();
     void Start();
     void Update(float deltaTime);
     void FixedUpdate(float fixedDelta);
@@ -40,7 +40,7 @@ public:
 
 
 	// ---------- Event ----------
-	virtual void OnEnable() {} // 오버라이딩 할때 지금은 Scene::OnEnable()을 호출해야 하는 구조
+	virtual void OnEnable() {} 
     virtual	void OnDisable() {}
 
     virtual void OnResize(int width, int height) {}; // (필요한가?? 왜적었더라)

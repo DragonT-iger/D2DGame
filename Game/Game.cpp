@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Game.h"
+#include "MainScene.h"
 
 bool Game::Initialize()
 {
@@ -21,14 +22,13 @@ bool Game::Initialize()
 
 
     // 맨 처음 씬 만들고 로드하는법
-	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<Scene>());
+	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 
 	
 
 
     // 카메라 만드는법
-    GameObject* camera = Instantiate(L"MainCamera");
-    camera->AddComponent<Camera>();
+    
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
 

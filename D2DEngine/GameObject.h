@@ -31,8 +31,17 @@ public:
     void FixedUpdate(float fixedDeltaTime);
     void LateUpdate(float deltaTime);
 
+    //getname
+
+	const std::wstring& GetName() const { return m_name; }
+    void SetName(const std::wstring& name) { m_name = name; }
+
+	const std::wstring& GetTag() const { return m_tag; }
+    void SetTag(const std::wstring& tag) { m_tag = tag; }
+
 private:
     std::wstring                                  m_name;
+	std::wstring                                  m_tag = L"Untagged";
     bool                                          m_active = true;
     std::vector<std::unique_ptr<Component>>       m_components;
     std::unique_ptr<Transform>                    m_transform;

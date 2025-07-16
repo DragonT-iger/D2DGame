@@ -10,6 +10,17 @@
 
 class D2DRenderer : public MonoBehaviour {
 public:
+
+    static D2DRenderer& Instance() {
+		static D2DRenderer instance;
+		return instance;
+    }
+
+    D2DRenderer(const D2DRenderer&) = delete;
+    D2DRenderer& operator=(const D2DRenderer&) = delete;
+	D2DRenderer(D2DRenderer&&) = delete;
+	D2DRenderer& operator=(D2DRenderer&&) = delete;
+
     D2DRenderer() = default;
 
     ~D2DRenderer() { Uninitialize(); }

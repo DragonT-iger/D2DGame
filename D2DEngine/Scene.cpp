@@ -28,6 +28,12 @@ GameObject* Scene::CreateGameObject(const std::wstring& name)
 void Scene::Awake()
 {
     if (!m_active) return;
+
+    GameObject* camera = CreateGameObject(L"Camera");
+    camera->AddComponent<Camera>();
+
+	// 카메라는 기본적으로 씬에 등록
+
     for (auto& obj : m_gameObjects)
         obj->Awake();
 }
@@ -62,7 +68,22 @@ void Scene::LateUpdate(float deltaTime)
         obj->LateUpdate(deltaTime);
 
     auto* cam = GetCamera();
-    assert(cam && "카메라 없음");
+
+    D2D1::Matrix3x2F viewTM = cam->GetViewTM();
+
+    for (auto& gameObject : m_gameObjects)
+    {
+		SpriteRenderer* sr = gameObject->GetComponent<SpriteRenderer>();
+        if (sr && gameObject->IsActive()) {
+            sr->Render(viewTM);
+        }
+
+    }
+
+	/*if (!cam) std::cout << "카메라가 없음" << std::endl;
+	else std::cout << "카메라가 있음" << std::endl;*/
+
+    //assert(cam && "카메라 없음"); 카메라는 일단 없어도 되잖아?
 
 
     // 렌더링 로직은 여기에
@@ -82,9 +103,9 @@ void Scene::LateUpdate(float deltaTime)
 
 void Scene::RegisterCamera(Camera* cam)
 {
-    if (!m_Camera) {
+    if (m_Camera) {
         assert(false && "씬에 카메라가 두대일수 없슴");
     }
 
-    m_Camera = cam; 
+    m_Camera = cam;
 }

@@ -22,17 +22,12 @@ void SceneManager::LoadScene(const std::wstring& name)
 	}
 
 	Scene* next = it->second.get();
-	
 
-	if (!m_active) {
-		m_active->Awake();
-		m_active->Start();
-	}
 	
 
 #ifdef _DEBUG
 
-	if(prev) cwout << "LoadScene: " << prev->GetName() << "->" << it->second.get()->GetName();
+	if (prev) cwout << "LoadScene: " << prev->GetName() << "->" << it->second.get()->GetName() << std::endl;
 	else  cwout << "LoadScene: " << "Nothing" << "->" << it->second.get()->GetName();
 	
 #endif // !_DEBUG
@@ -40,5 +35,7 @@ void SceneManager::LoadScene(const std::wstring& name)
 
 	if(prev) prev->OnDisable();
 	m_active = next;
+	m_active->Awake();
+	m_active->Start();
 	m_active->OnEnable();
 }
