@@ -5,7 +5,7 @@ public:
 	Game() = default;
 	virtual ~Game() = default;
 
-	bool Initialize();// NzWndBase ÃÊ±âÈ­ , Renderer ÃÊ±âÈ­
+	void OnClose() override; // release resources and exit
 	void Run();
 	void Release();
 
@@ -13,7 +13,7 @@ private:
 	void LifeCycle(float deltaTime);
 	void UpdateTime();
 
-	// À©µµ¿ì ÇÁ·Î½ÃÀú ÀçÁ¤ÀÇ
+	// ìœˆë„ìš° í”„ë¡œì‹œì € ì¬ì •ì˜
 
 	void OnResize(int width, int height) override;
 	void OnClose() override;
