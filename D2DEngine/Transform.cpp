@@ -123,24 +123,27 @@ Vector2 Transform::GetPivotPoint() const
 	return m_pivot;
 }
 
-void Transform::SetPivotPreset(PivotPreset preset, const D2D1_SIZE_F& size)
+void Transform::SetPivotPreset(PivotPreset preset)
 {
+
 	switch (preset)
 	{
 	case PivotPreset::TopLeft:
 		m_pivot = { 0.0f, 0.0f };
 		break;
 	case PivotPreset::TopRight:
-		m_pivot = { size.width, 0.0f };
+		m_pivot = { m_spriteSize.width, 0.0f };
 		break;
 	case PivotPreset::BottomLeft:
-		m_pivot = { 0.0f, -size.height };
+		m_pivot = { 0.0f, -m_spriteSize.height };
 		break;
 	case PivotPreset::BottomRight:
-		m_pivot = { size.width, -size.height };
+		m_pivot = { m_spriteSize.width, -m_spriteSize.height };
 		break;
 	case PivotPreset::Center:
-		m_pivot = { size.width * 0.5f, -(size.height * 0.5f) };
+		m_pivot = { m_spriteSize.width * 0.5f, -(m_spriteSize.height * 0.5f) };
 		break;
 	}
+
+	
 }

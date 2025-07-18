@@ -17,6 +17,8 @@ bool Game::Initialize()
 	}
 
     // 렌더러 초기화
+
+	D2DRenderer::Instance().Initialize(static_cast<HWND>(GetHandle()));
     
 
 
@@ -25,9 +27,6 @@ bool Game::Initialize()
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 
 	
-
-
-    // 카메라 만드는법
     
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
@@ -68,6 +67,9 @@ void Game::LifeCycle(float deltaTime)
 	elapsedTime += deltaTime;
 
     Scene* scene = SceneManager::Instance().GetActiveScene();
+
+	D2DRenderer::Instance().RenderBegin();
+
     if (scene && scene->IsActive())
     {
         while(elapsedTime >= fixedDeltaTime)
@@ -80,6 +82,8 @@ void Game::LifeCycle(float deltaTime)
 
 		scene->LateUpdate(deltaTime);
 	}
+
+    D2DRenderer::Instance().RenderEnd();
 }
 
 void Game::Release()

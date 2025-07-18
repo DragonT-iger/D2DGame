@@ -22,10 +22,10 @@ public:
 
     // ---------- Lifecycle ----------
     virtual void Awake();
-    void Start();
-    void Update(float deltaTime);
-    void FixedUpdate(float fixedDelta);
-    void LateUpdate(float deltaTime);
+    virtual void Start();
+    virtual void Update(float deltaTime);
+    virtual void FixedUpdate(float fixedDelta);
+    virtual void LateUpdate(float deltaTime);
 
     // ---------- Misc ----------
     void SetActive(bool active) { m_active = active; }

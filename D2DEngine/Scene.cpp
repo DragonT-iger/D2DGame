@@ -27,7 +27,7 @@ GameObject* Scene::CreateGameObject(const std::wstring& name)
 
 void Scene::Awake()
 {
-    if (!m_active) return;
+    //if (!m_active) return;
 
     GameObject* camera = CreateGameObject(L"Camera");
     camera->AddComponent<Camera>();
@@ -40,30 +40,34 @@ void Scene::Awake()
 
 void Scene::Start()
 {
-    if (!m_active) return;
+    //if (!m_active) return;
     for (auto& obj : m_gameObjects)
         obj->Start();
 }
 
 void Scene::Update(float deltaTime)
 {
-    if (!m_active) return;
+    //if (!m_active) return;
     for (auto& obj : m_gameObjects)
         obj->Update(deltaTime);
 }
 
 void Scene::FixedUpdate(float fixedDelta)
 {
-    if (!m_active) return;
+    //if (!m_active) return;
+
+    // 물리 업데이트는 여기서 (aabb obb)
+
+
     for (auto& obj : m_gameObjects)
         obj->FixedUpdate(fixedDelta);
 
-    // 물리 업데이트는 여기서 (aabb obb)
+    
 }
 
 void Scene::LateUpdate(float deltaTime)
 {
-    if (!m_active) return;
+    //if (!m_active) return;
     for (auto& obj : m_gameObjects)
         obj->LateUpdate(deltaTime);
 

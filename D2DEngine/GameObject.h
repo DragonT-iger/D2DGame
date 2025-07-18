@@ -98,8 +98,7 @@ T* GameObject::GetComponent() const
     // 컴파일 타임 타입 체크
 
     for (auto& c : m_components)
-        if (auto casted = dynamic_cast<T*>(c.get()))
-            return casted;
+        if (auto casted = dynamic_cast<T*>(c.get()))            return casted;
     return nullptr;
 }
 template<> inline

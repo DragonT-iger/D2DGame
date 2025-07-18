@@ -10,6 +10,11 @@ int main() {
 	//_CrtSetBreakAlloc(5504);
 
 
+	HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+	if (FAILED(hr)) {
+		assert(false && "CoInitializeEx failed");
+	}
+
 	Game game;
 
 	if (!game.Initialize()) {

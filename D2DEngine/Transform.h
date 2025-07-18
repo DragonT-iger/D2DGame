@@ -18,6 +18,8 @@ using Matrix3x2 = D2D1::Matrix3x2F;
 class Transform : public Component
 {
 public:
+	friend class SpriteRenderer;
+
 	Transform() = default; // 0 0 1 0 0 초기화
 	~Transform(); // 혹시 모를 댕글링을 위해
 
@@ -48,7 +50,7 @@ public:
 	Matrix3x2 GetInverseWorldMatrix();
 
 	Vector2 GetPivotPoint() const;
-	void SetPivotPreset(PivotPreset preset, const D2D1_SIZE_F& size);
+	void SetPivotPreset(PivotPreset preset);
 
 	void AddChild(Transform* child);
 	void RemoveChild(Transform* child);
@@ -56,6 +58,7 @@ public:
 private:
 	void SetDirty();
 	void UpdateMatrices();
+	void SetSpriteSize(const D2D1_SIZE_F& size) { m_spriteSize = size; SetDirty(); }
 
 	bool m_dirty = false;
 
@@ -70,5 +73,8 @@ private:
 	Matrix3x2 m_matrixWorld = D2D1::Matrix3x2F::Identity();
 
 	Vector2 m_pivot = { 0.f , 0.f };
+	D2D1_SIZE_F m_spriteSize = { 0.f , 0.f };
+
+	
 };
 
