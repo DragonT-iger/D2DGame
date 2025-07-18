@@ -9,27 +9,27 @@ bool Game::Initialize()
 
     m_timer->Reset();
 
-	// À©µµ¿ì ÃÊ±âÈ­
+	// ìœˆë„ìš° ì´ˆê¸°í™”
 
 	if (false == __super::Create(L"D2DEngineMK1", L"D2DEngineMK1", 1920, 1080))
 	{
 		return false;
 	}
 
-    // ·»´õ·¯ ÃÊ±âÈ­
+    // ë Œë”ëŸ¬ ì´ˆê¸°í™”
 
 	D2DRenderer::Instance().Initialize(static_cast<HWND>(GetHandle()));
     
 
 
 
-    // ¸Ç Ã³À½ ¾À ¸¸µé°í ·ÎµåÇÏ´Â¹ı
+    // ë§¨ ì²˜ìŒ ì”¬ ë§Œë“¤ê³  ë¡œë“œí•˜ëŠ”ë²•
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 
 	
     
 
-    // ¾ÆÁ÷ ¾À Æ÷ÀÎÅÍ°¡ »ı¼ºµÇ±â ÀüÀÌ¶ó Instantiate ¸ø¾¸
+    // ì•„ì§ ì”¬ í¬ì¸í„°ê°€ ìƒì„±ë˜ê¸° ì „ì´ë¼ Instantiate ëª»ì”€
 
     SceneManager::Instance().LoadScene(L"MainScene");
 
@@ -94,7 +94,12 @@ void Game::Release()
 
 void Game::UpdateTime()
 {
-    assert(m_timer != nullptr && "Å¸ÀÌ¸Ó°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!" );
+    // Triggered when the window receives WM_CLOSE.
+    // Release graphics resources and post WM_QUIT to end the loop.
+    D2DRenderer::Instance().Uninitialize();
+    PostQuitMessage(0);
+
+    assert(m_timer != nullptr && "íƒ€ì´ë¨¸ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!" );
 
     m_timer->Tick();
 }
