@@ -15,8 +15,7 @@ public:
 
     const D2D1::Matrix3x2F& GetViewTM() const { return m_viewTM; }
 
-    // MonoBehaviour 오버라이드 ─────────
-    void LateUpdate(float deltaTime) override;  
+    void LateUpdate(float deltaTime) override;
 
 protected:
     void Awake() override;                      

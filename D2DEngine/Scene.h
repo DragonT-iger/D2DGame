@@ -21,11 +21,11 @@ public:
     //왜냐면 엔진단에서 처리해야 하는게 좀 생김
 
     // ---------- Lifecycle ----------
-    virtual void Awake();
-    virtual void Start();
-    virtual void Update(float deltaTime);
-    virtual void FixedUpdate(float fixedDelta);
-    virtual void LateUpdate(float deltaTime);
+	virtual void Awake(); // 일단은 Awake 중간에서 GameObject를 생성하고 초기화할거기 떄문에 Awake만 virtual로 선언 장기적으로 봤을때 virtual이 없는게 맞음
+    void Start();
+    void Update(float deltaTime);
+    void FixedUpdate(float fixedDelta);
+    void LateUpdate(float deltaTime);
 
     // ---------- Misc ----------
     void SetActive(bool active) { m_active = active; }

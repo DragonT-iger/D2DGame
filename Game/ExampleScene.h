@@ -1,9 +1,7 @@
 #pragma once
-class MainScene : public Scene
+class ExampleScene : public Scene
 {
 	void Awake() override;
-	void Start() override;
-	void Update(float deltaTime) override;
 
 
 
