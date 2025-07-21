@@ -15,8 +15,11 @@ bool CircleCollider::IsCollide(const Collider* other) const
 	}
 	else if (const BoxCollider* circle = dynamic_cast<const BoxCollider*>(other)) {
 		//CircletoBox();
+
 	}
 
+
+	return true;
 
 
 	//정의되지 않은 나머지는 충돌하지 않음

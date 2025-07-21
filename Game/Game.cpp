@@ -11,7 +11,7 @@ bool Game::Initialize()
 
 	// 윈도우 초기화
 
-	if (false == __super::Create(L"D2DEngineMK1", L"D2DEngineMK1", 1920, 1080))
+	if (false == __super::Create(L"D2DEngine", L"D2DEngine", 1920, 1080))
 	{
 		return false;
 	}

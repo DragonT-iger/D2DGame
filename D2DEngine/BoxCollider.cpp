@@ -10,6 +10,6 @@ bool BoxCollider::IsCollide(const Collider* other) const
 	else if (const BoxCollider* circle = dynamic_cast<const BoxCollider*>(other)) {
 		//CircletoBox();
 	}
-
+	return true;
 	return false;
 }

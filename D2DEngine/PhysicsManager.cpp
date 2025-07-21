@@ -26,8 +26,8 @@ void PhysicsManager::Step(float fixedDelta)
 
             if (a->IsCollide(b))
             {
-				a->GetComponent<MonoBehaviour>()->OnTriggerEnter(b);
-				b->GetComponent<MonoBehaviour>()->OnTriggerEnter(a);
+				a->OnTriggerEnter(b);
+                b->OnTriggerEnter(a);
                 // TODO : OnTriggerEnter / Stay / Exit ±¸Çö
             }
         }

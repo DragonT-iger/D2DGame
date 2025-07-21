@@ -56,8 +56,6 @@ void Scene::FixedUpdate(float fixedDelta)
 {
     //if (!m_active) return;
 
-    // 물리 업데이트는 여기서 (aabb obb)
-
 
     for (auto& obj : m_gameObjects)
         obj->FixedUpdate(fixedDelta);

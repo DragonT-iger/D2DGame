@@ -50,7 +50,7 @@ public:
 
 private:
     std::wstring                             m_name;
-    bool                                     m_active = true;
+    bool                                     m_active = true; // 아직 작동 안함
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
     Camera*                                  m_Camera = nullptr;
 };
