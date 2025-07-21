@@ -4,6 +4,9 @@
 
 void ExampleScene::Awake()
 {
+	if(!IsActive())
+		return;
+
 	/* ********주의********
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
@@ -17,6 +20,25 @@ void ExampleScene::Awake()
 	// 할당 안돼서 assert 걸림
 	
 	m_player->AddComponent<PlayerController>();
+
+	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
+
+	m_player->AddComponent<CircleCollider>();
+
+
+	m_player2 = Instantiate(L"Player2");
+	m_player2->SetTag(L"Player2");
+
+	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
+
+	PlayerController* pc = m_player2->AddComponent<PlayerController>();
+
+	m_player2->AddComponent<CircleCollider>();
+
+	pc->m_xSpeed = 0.2f;
+	pc->m_ySpeed = 0.2f;
+
+
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로

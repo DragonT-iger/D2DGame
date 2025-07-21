@@ -16,6 +16,11 @@ void PlayerController::Awake()
 
 void PlayerController::Update(float deltatime)
 {
-    m_transform->Translate(0.01f * deltatime, 0.01f * deltatime);
+    m_transform->Translate(m_xSpeed * deltatime, m_ySpeed * deltatime);
     m_transform->Rotate(0.10f * deltatime);
+}
+
+void PlayerController::OnTriggerEnter(Collider* other)
+{
+    std::cout << "PlayerController::OnTriggerEnter: " << std::endl;
 }

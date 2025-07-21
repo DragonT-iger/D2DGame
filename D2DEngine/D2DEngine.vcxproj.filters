@@ -159,6 +159,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Component\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -226,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

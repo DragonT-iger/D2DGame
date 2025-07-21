@@ -3,6 +3,8 @@
 /// 날짜 / 이름 / 수정내용
 /// 2025-07-02 권용범 최초버전 작성
 
+class Collider;
+
 /// <summary>
 /// 라이프 사이클을 관리하는 MonoBehaviour 클래스
 /// </summary>
@@ -16,7 +18,7 @@ public:
 	virtual void FixedUpdate(float fixedDelta) {};
 	virtual void LateUpdate(float deltaTime) {};
 
-    //virtual void OnTriggerEnter(Collider* other) {} 
-    //virtual void OnTriggerStay(Collider* other) {}
-    //virtual void OnTriggerExit(Collider* other) {}
+    virtual void OnTriggerEnter(Collider* other) {} 
+    virtual void OnTriggerStay(Collider* other) {}
+    virtual void OnTriggerExit(Collider* other) {}
 };

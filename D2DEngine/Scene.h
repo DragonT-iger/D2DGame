@@ -16,6 +16,7 @@ public:
     virtual ~Scene() = default;
 
     GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
+	const std::vector<std::unique_ptr<GameObject>>& GetGameObjects() const { return m_gameObjects; }
 
 	//void Destroy(GameObject* object); 필요하면 나중에 구현 웬만하면 삭제 안해도 되긴 함 웬만하면 그냥 SetActive(false)로 처리하셈 
     //왜냐면 엔진단에서 처리해야 하는게 좀 생김
