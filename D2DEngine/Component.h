@@ -1,7 +1,7 @@
 /// 날짜 / 이름 / 수정내용
 /// 2025-07-02 권용범 최초버전 작성
 /// 2025-07-09 권용범 MonoBehaviour 에서 바로 접근할수 있도록 GetOwner() 함수 추가 this로 접근하게 해보려고도 했는데 헤더 순환 참조 발생했음
-/// 2025-07-13 권용범 템플릿 순환 참조 문제 해결 (inline , 네임스페이스 명시로 ODR 문제 해결) 즉 MonoBehaviour에서 GetComponent<T>()를 바로 호출할수 있게 됨
+/// 2025-07-13 권용범 템플릿 중복 참조 , 모호한 문제 해결 (inline , 네임스페이스 명시로 ODR 문제 해결) 즉 MonoBehaviour에서 GetComponent<T>()를 바로 호출할수 있게 됨
 
 #pragma once
 
