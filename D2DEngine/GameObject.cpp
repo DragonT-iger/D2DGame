@@ -56,3 +56,30 @@ void GameObject::LateUpdate(float deltaTime) {
         }
     }
 }
+
+void GameObject::BroadcastTriggerEnter(Collider* other)
+{
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->OnTriggerEnter(other);
+        }
+	}
+}
+
+void GameObject::BroadcastTriggerStay(Collider* other)
+{
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->OnTriggerStay(other);
+        }
+	}
+}
+
+void GameObject::BroadcastTriggerExit(Collider* other)
+{
+    for (auto& comp : m_components) {
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+            mb->OnTriggerExit(other);
+        }
+	}
+}

@@ -31,6 +31,11 @@ public:
     void FixedUpdate(float fixedDeltaTime);
     void LateUpdate(float deltaTime);
 
+
+	void BroadcastTriggerEnter(Collider* other);
+	void BroadcastTriggerStay(Collider* other);
+	void BroadcastTriggerExit(Collider* other);
+
     //getname
 
 	const std::wstring& GetName() const { return m_name; }

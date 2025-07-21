@@ -22,5 +22,18 @@ void PlayerController::Update(float deltatime)
 
 void PlayerController::OnTriggerEnter(Collider* other)
 {
-    std::cout << "PlayerController::OnTriggerEnter: " << std::endl;
+    //std::cout << "PlayerController::OnTriggerEnter: " << std::endl;
+
+    static bool flag = false;
+
+    if (!flag)
+    {
+        flag = true;
+
+#ifdef _DEBUG
+        cwout << "PlayerController::OnTriggerEnter: " << other->GetOwner()->GetName() << std::endl;
+#endif // !__DEBUG
+        
+	}
+
 }

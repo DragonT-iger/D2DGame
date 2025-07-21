@@ -12,11 +12,6 @@ public:
 	void	 SetOffset(const Vector2& newOffset) { m_offset = newOffset; }
 	Vector2  GetCenter() const { return m_transform->GetPosition() + m_offset; }
 
-
-	virtual void OnTriggerEnter(Collider* other) = 0;   // ¡Ú Ãß°¡
-	virtual void OnTriggerStay(Collider* other) = 0;
-	virtual void OnTriggerExit(Collider* other) = 0;
-
 protected:
 	Transform* m_transform = nullptr;
 	Vector2    m_offset = { 0,0 };

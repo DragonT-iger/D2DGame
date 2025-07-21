@@ -26,8 +26,8 @@ void PhysicsManager::Step(float fixedDelta)
 
             if (a->IsCollide(b))
             {
-				a->OnTriggerEnter(b);
-                b->OnTriggerEnter(a);
+				a->GetOwner()->BroadcastTriggerEnter(b);
+				b->GetOwner()->BroadcastTriggerEnter(a);
                 // TODO : OnTriggerEnter / Stay / Exit ±¸Çö
             }
         }
