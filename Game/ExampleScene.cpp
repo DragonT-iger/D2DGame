@@ -17,6 +17,7 @@ void ExampleScene::Awake()
 	m_player->SetTag(L"Player");
 
 	m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
+	m_player->AddComponent<Animator>();
 	// 할당 안돼서 assert 걸림
 	
 	m_player->AddComponent<PlayerController>();
@@ -30,13 +31,14 @@ void ExampleScene::Awake()
 	m_player2->SetTag(L"Player2");
 
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
+	m_player2->AddComponent<Animator>();
 
 	PlayerController* pc = m_player2->AddComponent<PlayerController>();
 
 	m_player2->AddComponent<CircleCollider>();
 
-	pc->m_xSpeed = 0.2f;
-	pc->m_ySpeed = 0.2f;
+	pc->m_xSpeed = 25.f;
+	pc->m_ySpeed = 25.f;
 
 
 

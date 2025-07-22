@@ -16,6 +16,7 @@ public:
     void    SetActiveScene(Scene* scene) { m_active = scene; }
     Scene*  GetActiveScene() const { return m_active; }
 	void    LoadScene(const std::wstring& name);
+    void    UnInitialize();
 
 private:
     SceneManager() = default;

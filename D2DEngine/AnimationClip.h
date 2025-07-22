@@ -27,9 +27,16 @@ class AnimationClip
 public:
 	AnimationClip() = default;
 	AnimationClip(const std::string& name) : m_name(name) {}
-	~AnimationClip() = default;
+	~AnimationClip() {
+		if (m_sheet)
+		{
+			ULONG refCount = m_sheet->AddRef();
+			refCount = m_sheet->Release();
+			std::cout << "refCount : " << refCount << std::endl;
+		}
+	}
 
-	void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sheet) { m_sheet = std::move(sheet); }
+	void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1>& sheet) { m_sheet = sheet; }
 
 	void AddFrame(const FrameData& frame)
 	{
@@ -41,6 +48,8 @@ public:
 	bool IsLooping() const { return isLoop; }	
 
 	std::string GetName() const { return m_name; }	
+	Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetBitmap() const { return m_sheet; }
+	std::vector<FrameData>& GetFrames() { return m_frames; }
 
 private:
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_sheet; // 애니메이션 시트 비트맵

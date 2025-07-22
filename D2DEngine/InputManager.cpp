@@ -6,8 +6,8 @@
 
 bool InputManager::Init(HWND hwnd)
 {
-    //RAWINPUT 안쓸거면 딱히 할 거 없는듯
-    return true;
+	//RAWINPUT 안쓸거면 딱히 할 거 없는듯
+	return true;
 }
 
 bool InputManager::OnHandleMessage(const MSG& msg)
@@ -47,12 +47,12 @@ bool InputManager::GetKeyPressed(Keycode vk)
 {
 	bool p = m_keyEdge[static_cast<UINT>(vk)].pressed;
 
-    return p;
+	return p;
 }
 
 bool InputManager::GetKeyDown(Keycode vk)
 {
-    return m_keyDown[static_cast<UINT>(vk)];
+	return m_keyDown[static_cast<UINT>(vk)];
 }
 
 void InputManager::HandleMsgKeyDown(WPARAM wParam, LPARAM lParam)
