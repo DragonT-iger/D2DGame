@@ -2,6 +2,7 @@
 #include "Behaviour.h"
 /// 날짜 / 이름 / 수정내용
 /// 2025-07-02 권용범 최초버전 작성
+/// 2025-07-22 물리 Trigger 이벤트 추가
 
 class Collider;
 
