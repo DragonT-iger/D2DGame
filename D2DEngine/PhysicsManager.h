@@ -1,4 +1,5 @@
 #pragma once
+
 #include <box2d/box2d.h>
 
 class PhysicsManager
@@ -6,8 +7,8 @@ class PhysicsManager
 public:
     static PhysicsManager& Instance()
     {
-        static PhysicsManager inst;
-        return inst;
+        static PhysicsManager Instance;
+        return Instance;
     }
 
     void Initialize(const b2Vec2& gravity = { 0.0f, 9.8f }) { m_world = std::make_unique<b2World>(gravity); }

@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Scene.h"
-#include "PhysicsWorld.h"
+#include "PhysicsManager.h"
 
 
 
@@ -61,7 +61,7 @@ void Scene::FixedUpdate(float fixedDelta)
     for (auto& obj : m_gameObjects)
         obj->FixedUpdate(fixedDelta);
 
-    PhysicsWorld::Instance().Step(fixedDelta);
+    PhysicsManager::Instance().Step(fixedDelta);
 
     
 }
