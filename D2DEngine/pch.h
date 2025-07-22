@@ -61,7 +61,6 @@ inline std::wostream& cwout = std::wcout;
 #include "Camera.h"
 #include "SpriteRenderer.h"
 #include "D2DRenderer.h"
-#include "PhysicsManager.h"
 
 
 

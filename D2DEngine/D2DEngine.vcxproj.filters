@@ -230,7 +230,7 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Component\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsManager.cpp">
+    <ClCompile Include="PhysicsWorld.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>

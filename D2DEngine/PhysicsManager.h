@@ -1,48 +1,20 @@
 #pragma once
-#include <unordered_set>
-
-class Collider;
-
-struct CollisionPair
-{
-    Collider* a;
-    Collider* b;
-
-    bool operator==(const CollisionPair& other) const noexcept
-    {
-        return a == other.a && b == other.b;
-    }
-};
-
-struct CollisionPairHash
-{
-    size_t operator()(const CollisionPair& p) const noexcept
-    {
-        auto low = std::min(p.a, p.b);
-        auto high = std::max(p.a, p.b);
-        return std::hash<Collider*>()(low) ^ (std::hash<Collider*>()(high) << 1);
-    }
-};
+#include <box2d/box2d.h>
 
 class PhysicsManager
 {
 public:
     static PhysicsManager& Instance()
     {
-        static PhysicsManager Instance;
-        return Instance;
+        static PhysicsManager inst;
+        return inst;
     }
 
-    void Step(float fixedDelta);
+    void Initialize(const b2Vec2& gravity = { 0.0f, 9.8f }) { m_world = std::make_unique<b2World>(gravity); }
+    void Step(float fixedDelta) { m_world->Step(fixedDelta, 8, 3); }
+    b2World* Get() const { return m_world.get(); }
 
 private:
     PhysicsManager() = default;
-    ~PhysicsManager() = default;
-
-    PhysicsManager(const PhysicsManager&) = delete;
-    PhysicsManager& operator=(const PhysicsManager&) = delete;
-    PhysicsManager(PhysicsManager&&) = delete;
-    PhysicsManager& operator=(PhysicsManager&&) = delete;
-
-    std::unordered_set<CollisionPair, CollisionPairHash> m_prevCollisions;
+    std::unique_ptr<b2World> m_world;
 };
