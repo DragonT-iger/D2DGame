@@ -12,7 +12,6 @@
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 
-#endif //PCH_H
 
 
 #include <vector>
@@ -43,11 +42,13 @@
 #include <wincodec.h>
 #include <dwrite.h>
 
+
+#include <box2d/box2d.h>
+
 namespace WRL = Microsoft::WRL;
 inline std::wostream& cwout = std::wcout;
 
 #include "MonoBehaviour.h"
-#include "Behaviour.h"
 #include "GameTimer.h"
 #include "Vector2.h"
 #include "NzWndBase.h"
@@ -61,6 +62,8 @@ inline std::wostream& cwout = std::wcout;
 #include "Camera.h"
 #include "SpriteRenderer.h"
 #include "D2DRenderer.h"
+#include "PhysicsManager.h"
+#include "Rigidbody2D.h"
 
 
 
@@ -94,3 +97,5 @@ namespace DX
     }
 }
 
+
+#endif //PCH_H

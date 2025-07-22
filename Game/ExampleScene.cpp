@@ -21,9 +21,11 @@ void ExampleScene::Awake()
 	
 	m_player->AddComponent<PlayerController>();
 
-	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
+	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 00.f });
 
+	m_player->AddComponent<Rigidbody2D>();
 	m_player->AddComponent<CircleCollider>();
+
 
 
 	m_player2 = Instantiate(L"Player2");
@@ -34,6 +36,8 @@ void ExampleScene::Awake()
 	PlayerController* pc = m_player2->AddComponent<PlayerController>();
 
 	m_player2->AddComponent<CircleCollider>();
+
+
 
 	pc->m_xSpeed = 0.2f;
 	pc->m_ySpeed = 0.2f;

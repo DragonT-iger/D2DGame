@@ -21,6 +21,11 @@ bool Game::Initialize()
 	D2DRenderer::Instance().Initialize(static_cast<HWND>(GetHandle()));
     
 
+    // 물리 초기화
+
+    PhysicsManager::Instance().Initialize({ 0.0f, -9.8f }); // 중력 설정
+
+
 
 
     // 맨 처음 씬 만들고 로드하는법

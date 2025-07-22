@@ -1,21 +1,35 @@
 #pragma once
 
-#include <box2d/box2d.h>
+class b2World;
+class b2Vec2;
+class ContactListener;
+class b2BodyDef;
+class b2Body;
 
-class PhysicsManager
-{
+class PhysicsManager {
 public:
-    static PhysicsManager& Instance()
-    {
-        static PhysicsManager Instance;
-        return Instance;
-    }
+    static      PhysicsManager& Instance();
 
-    void Initialize(const b2Vec2& gravity = { 0.0f, 9.8f }) { m_world = std::make_unique<b2World>(gravity); }
-    void Step(float fixedDelta) { m_world->Step(fixedDelta, 8, 3); }
-    b2World* Get() const { return m_world.get(); }
+
+    void        Initialize(const b2Vec2& gravity = b2Vec2{ 0.0f, -9.8f });
+
+    void        SetGravity(const b2Vec2& gravity);
+    b2Vec2      GetGravity() const;
+
+    void        Step(float fixedDelta);
+
+    b2Body*     CreateBody(const b2BodyDef& def);
+
+    b2World*    Get() const;
 
 private:
     PhysicsManager() = default;
-    std::unique_ptr<b2World> m_world;
+    ~PhysicsManager();
+    PhysicsManager(const PhysicsManager&) = delete;
+    PhysicsManager& operator=(const PhysicsManager&) = delete;
+    PhysicsManager(PhysicsManager&&) = delete;
+    PhysicsManager& operator=(PhysicsManager&&) = delete;
+
+    std::unique_ptr<ContactListener> m_contactListener;
+    std::unique_ptr<b2World>         m_world;
 };

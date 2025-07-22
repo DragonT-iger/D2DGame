@@ -162,6 +162,12 @@
     <ClInclude Include="PhysicsManager.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Rigidbody2D.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactListener.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -231,6 +237,12 @@
       <Filter>Component\Camera</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody2D.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactListener.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
