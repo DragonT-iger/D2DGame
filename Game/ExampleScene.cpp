@@ -21,7 +21,7 @@ void ExampleScene::Awake()
 	
 	m_player->AddComponent<PlayerController>();
 
-	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 00.f });
+	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
 	m_player->AddComponent<Rigidbody2D>();
 	m_player->AddComponent<CircleCollider>();

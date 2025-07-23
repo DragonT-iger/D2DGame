@@ -76,6 +76,9 @@
     <Filter Include="Component\Camera">
       <UniqueIdentifier>{cc839ce7-0823-4682-9f81-f94d6f86e7a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{7e1faac4-306e-4923-b992-11e94ad09017}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -168,6 +171,9 @@
     <ClInclude Include="ContactListener.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="B2DebugDraw.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -244,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="ContactListener.cpp">
       <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="B2DebugDraw.cpp">
+      <Filter>Debug</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

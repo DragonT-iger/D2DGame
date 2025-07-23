@@ -5,6 +5,7 @@ class b2Vec2;
 class ContactListener;
 class b2BodyDef;
 class b2Body;
+class B2DebugDraw;
 
 class PhysicsManager {
 public:
@@ -32,4 +33,5 @@ private:
 
     std::unique_ptr<ContactListener> m_contactListener;
     std::unique_ptr<b2World>         m_world;
+	std::unique_ptr<B2DebugDraw>     m_debugDraw;
 };

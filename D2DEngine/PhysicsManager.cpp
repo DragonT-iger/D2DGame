@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "PhysicsManager.h"
 #include "ContactListener.h"
+#include "B2DebugDraw.h"
 
 PhysicsManager& PhysicsManager::Instance() {
     static PhysicsManager Instance;
@@ -11,6 +12,9 @@ void PhysicsManager::Initialize(const b2Vec2& gravity) {
 	m_contactListener = std::make_unique<ContactListener>();
     m_world = std::make_unique<b2World>(gravity);
     m_world->SetContactListener(m_contactListener.get());
+
+    m_debugDraw = std::make_unique<B2DebugDraw>(dc, ppm= 100.f);
+    m_debugDraw->SetFlags(b2Draw::e_shapeBit);
 }
 
 void PhysicsManager::SetGravity(const b2Vec2& gravity) {
