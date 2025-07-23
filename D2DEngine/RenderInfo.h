@@ -10,3 +10,29 @@ struct RenderInfo {
 	D2D1_RECT_F m_srcRect;
 	D2D1::Matrix3x2F worldTM;
 };
+
+enum ColliderType
+{
+	Rect = 1,
+	Circle = 2,
+
+};
+
+struct RectInfo
+{
+	ColliderType type = ColliderType::Rect;
+	
+	float left;
+	float top;
+	float right;
+	float bottom;
+	D2D1::Matrix3x2F worldTM;
+};
+
+struct CircleInfo
+{
+	ColliderType type = ColliderType::Circle;
+
+	float radius;
+	D2D1::Matrix3x2F worldTM;
+};
