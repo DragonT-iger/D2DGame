@@ -1,4 +1,7 @@
 #pragma once
+
+class CircleInfo;
+
 class CircleCollider : public Collider
 {
 public:
