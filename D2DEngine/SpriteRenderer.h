@@ -20,8 +20,7 @@ public:
 
 	void SetSrcRect(const D2D1_RECT_F& rect) {
 		m_renderInfo.m_srcRect = rect;
-		m_renderInfo.m_destRect = { 0, 0, rect.right - rect.left, rect.bottom - rect.top };
-		m_renderInfo.radius = 200.f;
+		m_renderInfo.m_destRect = { -(rect.right - rect.left) / 2, -(rect.bottom - rect.top) / 2, (rect.right - rect.left) / 2 , (rect.bottom - rect.top) / 2 };
 	}
 
 	RenderInfo& GetRenderInfo();

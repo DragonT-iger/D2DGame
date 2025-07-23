@@ -17,6 +17,7 @@ void Camera::Awake()
     Scene* s = SceneManager::Instance().GetActiveScene();
     assert(s && "Camera::Awake - Active Scene is null!");
     s->RegisterCamera(this);
+    SetScreenSize();
 }
 
 void Camera::LateUpdate(float deltaTime)
@@ -25,10 +26,19 @@ void Camera::LateUpdate(float deltaTime)
     D2D1::Matrix3x2F invWorld = tr->GetWorldMatrix();
     invWorld.Invert();
 
+    float w = static_cast<float>(m_screensize.right - m_screensize.left);
+    float h = static_cast<float>(m_screensize.bottom - m_screensize.top);
+
+    D2D1::Matrix3x2F moveCenterTM = D2D1::Matrix3x2F::Translation((w/2), (h/2));
     // 줌(Scale) 적용
     D2D1::Matrix3x2F zoomTM = D2D1::Matrix3x2F::Scale(m_zoom, m_zoom);
-    m_viewTM = invWorld * zoomTM;
+    m_viewTM = invWorld * moveCenterTM * zoomTM;
     // 교수님꺼가 어떻게 되어있더라 이거 더티플레그 어찌 넣어야될지 모르겠네
     // 일단 성능 이슈 생기면 그때 하자 그리 연산 부하가 커보이진 않음
     // 계속 카메라 움직이는 게임일수도 있고
+}
+
+void Camera::SetScreenSize()
+{
+    ::GetClientRect(D2DRenderer::Instance().GetHandle(), &m_screensize);
 }

@@ -11,7 +11,6 @@ void ExampleScene::Awake()
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
 
-
 	m_player = Instantiate(L"Player");
 
 	m_player->SetTag(L"Player");

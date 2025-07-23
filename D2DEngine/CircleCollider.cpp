@@ -8,8 +8,8 @@ bool CircleCollider::IsCollide(const Collider* other) const
 	{
 		//circle->GetCenter() + circle->GetRadius();
 
-		constexpr float PPM = 100.0f;
-		std::cout << circle->GetCenter().x << " " << circle->GetCenter().y << " " << circle->m_radius * PPM << " " << GetCenter().x << " " << GetCenter().y << " " << m_radius * PPM << std::endl;
+		constexpr float PPM = 50.0f;
+		//std::cout << circle->GetCenter().x << " " << circle->GetCenter().y << " " << circle->m_radius * PPM << " " << GetCenter().x << " " << GetCenter().y << " " << m_radius * PPM << std::endl;
 
 
 		
@@ -19,7 +19,7 @@ bool CircleCollider::IsCollide(const Collider* other) const
 
 
 
-		std::cout << circle->GetRadius() + m_radius << " " << length << std::endl;
+		//std::cout << circle->GetRadius() + m_radius << " " << length << std::endl;
 		if((circle->GetRadius() + m_radius) * PPM >= length) // 임의 반지름 값 일단
 		{
 			return true;
