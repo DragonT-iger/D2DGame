@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "RenderInfo.h"
 
 class Camera;
 
@@ -27,6 +28,12 @@ public:
     void Update(float deltaTime);
     void FixedUpdate(float fixedDelta);
     void LateUpdate(float deltaTime);
+    void Render();
+
+    void UnInitialize();
+
+	// ---------- Render Queue ----------
+    void SetRenderQ();
 
     // ---------- Misc ----------
     void SetActive(bool active) { m_active = active; }
@@ -49,8 +56,9 @@ public:
     const std::wstring& GetName() const { return m_name; }
 
 private:
-    std::wstring                             m_name;
-    bool                                     m_active = true; // 아직 작동 안함
+    std::wstring                                                                        m_name;
+    bool                                                                         m_active = true; // 아직 작동 안함
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
-    Camera*                                  m_Camera = nullptr;
+    std::vector<RenderInfo>		                                        m_renderQ;
+    Camera*                                                         m_Camera = nullptr;
 };

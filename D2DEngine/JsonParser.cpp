@@ -61,4 +61,6 @@ AnimationClips JsonParser::Load(const std::filesystem::path& jsonPath)
 		}
 		clips.emplace_back(clip);
 	}
+
+	return clips;
 }

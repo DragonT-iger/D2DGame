@@ -70,11 +70,11 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{cc560074-fb4a-4fec-946a-9d7de2a69a88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Math\SystemManager">
-      <UniqueIdentifier>{4b1cfc50-57ce-42f7-a477-a00a4dcf4915}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Camera">
       <UniqueIdentifier>{cc839ce7-0823-4682-9f81-f94d6f86e7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemManager">
+      <UniqueIdentifier>{4f7cb675-f673-4b95-bed1-f1c183eef2a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,14 +117,8 @@
     <ClInclude Include="TMHelper.h">
       <Filter>Component\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Math\SystemManager</Filter>
-    </ClInclude>
     <ClInclude Include="KeyCode.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourcsManager.h">
-      <Filter>Math\SystemManager</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Component\SpriteRenderer</Filter>
@@ -162,6 +156,15 @@
     <ClInclude Include="PhysicsManager.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderInfo.h">
+      <Filter>D2DRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -193,12 +196,6 @@
     </ClCompile>
     <ClCompile Include="SimpleMathHelper.cpp">
       <Filter>Math\SimpleMathHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Math\SystemManager</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourcsManager.cpp">
-      <Filter>Math\SystemManager</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Component\SpriteRenderer</Filter>
@@ -232,6 +229,15 @@
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
       <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Component\Animator</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

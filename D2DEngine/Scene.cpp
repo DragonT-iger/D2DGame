@@ -71,18 +71,7 @@ void Scene::LateUpdate(float deltaTime)
     for (auto& obj : m_gameObjects)
         obj->LateUpdate(deltaTime);
 
-    auto* cam = GetCamera();
-
-    D2D1::Matrix3x2F viewTM = cam->GetViewTM();
-
-    for (auto& gameObject : m_gameObjects)
-    {
-		SpriteRenderer* sr = gameObject->GetComponent<SpriteRenderer>();
-        if (sr && gameObject->IsActive()) {
-            sr->Render(viewTM);
-        }
-
-    }
+    
 
 	/*if (!cam) std::cout << "카메라가 없음" << std::endl;
 	else std::cout << "카메라가 있음" << std::endl;*/
@@ -103,6 +92,41 @@ void Scene::LateUpdate(float deltaTime)
     
     
     */
+}
+
+void Scene::Render()
+{
+    SetRenderQ();
+
+	auto* cam = GetCamera();
+
+	D2D1::Matrix3x2F viewTM = cam->GetViewTM();
+
+    for(auto& info : m_renderQ)
+    {
+        D2D1::Matrix3x2F mWV = info.worldTM * viewTM;
+        D2DRenderer::Instance().SetTransform(mWV);
+        D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
+	}
+
+	m_renderQ.clear();
+}
+
+void Scene::UnInitialize()
+{
+    m_gameObjects.clear();
+}
+
+void Scene::SetRenderQ()
+{
+    for (auto& obj : m_gameObjects)
+    {
+        const auto& spRender = obj->GetComponent<SpriteRenderer>();
+        if (spRender)
+        {
+            m_renderQ.push_back(spRender->GetRenderInfo());
+        }
+    }
 }
 
 void Scene::RegisterCamera(Camera* cam)

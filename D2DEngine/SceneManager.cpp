@@ -39,3 +39,9 @@ void SceneManager::LoadScene(const std::wstring& name)
 	m_active->Start();
 	m_active->OnEnable();
 }
+
+void SceneManager::UnInitialize()
+{
+	if (m_active)
+		m_active->UnInitialize();
+}

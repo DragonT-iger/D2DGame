@@ -64,7 +64,7 @@ private:
 	std::array<KeyEdge, 256> m_keyEdge;	// 이번 프레임 Edge 결과
 };
 
-int GetXFromLParam(LPARAM lp) { return (int)(short)(LOWORD(lp)); }
-int GetYFromLParam(LPARAM lp) { return (int)(short)(HIWORD(lp)); }
+inline int GetXFromLParam(LPARAM lp) { return (int)(short)(LOWORD(lp)); }
+inline int GetYFromLParam(LPARAM lp) { return (int)(short)(HIWORD(lp)); }
 
 inline InputManager& Input = InputManager::Instance();
