@@ -37,8 +37,8 @@ void ExampleScene::Awake()
 
 	m_player2->AddComponent<CircleCollider>();
 
-	pc->m_xSpeed = 25.f;
-	pc->m_ySpeed = 25.f;
+	pc->m_xSpeed = 75.f;
+	pc->m_ySpeed = 75.f;
 
 
 

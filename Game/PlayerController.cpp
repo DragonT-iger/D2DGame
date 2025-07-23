@@ -72,3 +72,17 @@ void PlayerController::OnTriggerEnter(Collider* other)
 #endif // !__DEBUG
 
 }
+
+void PlayerController::OnTriggerStay(Collider* other)
+{
+	#ifdef _DEBUG
+	cwout << "PlayerController::OnTriggerStay: " << other->GetOwner()->GetName() << std::endl;
+#endif // !__DEBUG
+}
+
+void PlayerController::OnTriggerExit(Collider* other)
+{
+	#ifdef _DEBUG
+	cwout << "PlayerController::OnTriggerExit: " << other->GetOwner()->GetName() << std::endl;
+#endif // !__DEBUG
+}
