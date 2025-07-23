@@ -8,11 +8,7 @@ class SpriteRenderer : public MonoBehaviour
 {
 public:
 	SpriteRenderer() = default;
-	virtual ~SpriteRenderer() {
-		ULONG refCount = m_renderInfo.m_bitmap->AddRef();
-		refCount = m_renderInfo.m_bitmap->Release();
-		std::cout << "refCount : " << refCount << std::endl;
-	}
+	virtual ~SpriteRenderer() = default;
 
 	void Awake() override;
 
@@ -25,6 +21,7 @@ public:
 	void SetSrcRect(const D2D1_RECT_F& rect) {
 		m_renderInfo.m_srcRect = rect;
 		m_renderInfo.m_destRect = { 0, 0, rect.right - rect.left, rect.bottom - rect.top };
+		m_renderInfo.radius = 200.f;
 	}
 
 	RenderInfo& GetRenderInfo();
