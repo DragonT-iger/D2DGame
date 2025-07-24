@@ -11,6 +11,9 @@ void PlayerController::Awake()
     WRL::ComPtr<ID2D1Bitmap1> bitmap;
     //D2DRenderer::Instance().CreateBitmapFromFile(L"Assets/Player.png", *bitmap.GetAddressOf());
 
+	GameObject* a = Instantiate(L"aa");
+
+
     //m_spriteRenderer->SetBitmap(bitmap);
     //m_spriteRenderer->SetSize(64.f, 64.f);
 }
@@ -19,6 +22,7 @@ void  PlayerController::Start()
 {
 	auto pandaEat = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagEat");
 	auto pandaWave = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagWave");
+
 
     m_animator->AddClip("eat", pandaEat);
     m_animator->AddClip("wave", pandaWave);

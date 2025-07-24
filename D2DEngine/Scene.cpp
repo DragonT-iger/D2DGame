@@ -12,14 +12,18 @@ GameObject* Scene::CreateGameObject(const std::wstring& name)
     auto go = std::make_unique<GameObject>(name);
     GameObject* raw = go.get();
 
-    m_gameObjects.emplace_back(std::move(go));
+    if (m_isIterating)
+        m_pendingAdd.emplace_back(std::move(go));
+    else
+        m_gameObjects.emplace_back(std::move(go));
     return raw;
 }
 
-//void Scene::Destroy(GameObject* object)
-//{
-//
-//}
+void Scene::Destroy(GameObject* object)
+{
+    if (object)
+        m_pendingDestroy.push_back(object);
+}
 
 // -----------------------------------------------------------------------------
 // Lifecycle dispatch
@@ -36,22 +40,28 @@ void Scene::Awake()
 
 	// 카메라는 기본적으로 씬에 등록
 
-    for (auto& obj : m_gameObjects)
-        obj->Awake();
+    m_isIterating = true;
+    for (auto& obj : m_gameObjects) obj->Awake();
+    m_isIterating = false;
+    FlushPending();
 }
 
 void Scene::Start()
 {
     //if (!m_active) return;
-    for (auto& obj : m_gameObjects)
-        obj->Start();
+    m_isIterating = true;
+    for (auto& obj : m_gameObjects) obj->Start();
+    m_isIterating = false;
+    FlushPending();
 }
 
 void Scene::Update(float deltaTime)
 {
     //if (!m_active) return;
-    for (auto& obj : m_gameObjects)
-        obj->Update(deltaTime);
+    m_isIterating = true;
+    for (auto& obj : m_gameObjects) obj->Update(deltaTime);
+    m_isIterating = false;
+    FlushPending();
 }
 
 void Scene::FixedUpdate(float fixedDelta)
@@ -59,8 +69,10 @@ void Scene::FixedUpdate(float fixedDelta)
     //if (!m_active) return;
 
 
-    for (auto& obj : m_gameObjects)
-        obj->FixedUpdate(fixedDelta);
+    m_isIterating = true;
+    for (auto& obj : m_gameObjects) obj->FixedUpdate(fixedDelta);
+    m_isIterating = false;
+    FlushPending();
 
     PhysicsManager::Instance().Step(fixedDelta);
 
@@ -70,8 +82,10 @@ void Scene::FixedUpdate(float fixedDelta)
 void Scene::LateUpdate(float deltaTime)
 {
     //if (!m_active) return;
-    for (auto& obj : m_gameObjects)
-        obj->LateUpdate(deltaTime);
+    m_isIterating = true;
+    for (auto& obj : m_gameObjects) obj->LateUpdate(deltaTime);
+    m_isIterating = false;
+    FlushPending();
 
     
 
@@ -150,4 +164,19 @@ D2D1::Matrix3x2F Scene::GetRenderTM(bool isFlip, float offsetX, float offsetY)
     offsetY = -offsetY;
 
     return D2D1::Matrix3x2F::Scale(scaleX, -1.0f) * D2D1::Matrix3x2F::Translation(offsetX, offsetY);
+}
+
+void Scene::FlushPending()
+{
+    for (auto& up : m_pendingAdd)
+        m_gameObjects.emplace_back(std::move(up));
+    m_pendingAdd.clear();
+
+    for (auto* dead : m_pendingDestroy)
+    {
+        auto it = std::remove_if(m_gameObjects.begin(), m_gameObjects.end(),
+            [dead](auto& up) { return up.get() == dead; });
+        m_gameObjects.erase(it, m_gameObjects.end());
+    }
+    m_pendingDestroy.clear();
 }

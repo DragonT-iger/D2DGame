@@ -9,6 +9,19 @@ GameObject::GameObject(const std::wstring& name)
     this->AddComponent<Transform>();
 }
 
+void GameObject::RemoveComponent(Component* component)
+{
+    if (!component) return;
+
+    if (m_isIterating)
+        m_pendingRemove.push_back(component);
+    else {
+        auto it = std::remove_if(m_components.begin(), m_components.end(),
+            [component](auto& up) { return up.get() == component; });
+        m_components.erase(it, m_components.end());
+    }
+}
+
 /* Activation -------------------------------------------------- */
 void GameObject::SetActive(bool active) { m_active = active; }
 bool GameObject::IsActive() const { return m_active; }
@@ -18,43 +31,48 @@ bool GameObject::IsActive() const { return m_active; }
 /* Lifecycle Methods -------------------------------------------- */
 
 void GameObject::Awake() {
-    for (auto& comp : m_components) {
-        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+    m_isIterating = true;
+    for (auto& comp : m_components)
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
             mb->Awake();
-        }
-    }
+    m_isIterating = false;
+    FlushPending();
 }
 
 void GameObject::Start() {
-    for (auto& comp : m_components) {
-        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+    m_isIterating = true;
+    for (auto& comp : m_components)
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
             mb->Start();
-        }
-    }
+    m_isIterating = false;
+    FlushPending();
 }
 
 void GameObject::Update(float deltaTime) {
-    for (auto& comp : m_components) {
-        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+    m_isIterating = true;
+    for (auto& comp : m_components)
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
             mb->Update(deltaTime);
-        }
-    }
+    m_isIterating = false;
+    FlushPending();
 }
 
 void GameObject::FixedUpdate(float fixedDeltaTime) {
-    for (auto& comp : m_components) {
-        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+    m_isIterating = true;
+    for (auto& comp : m_components)
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
             mb->FixedUpdate(fixedDeltaTime);
-        }
-    }
+    m_isIterating = false;
+    FlushPending();
 }
 
 void GameObject::LateUpdate(float deltaTime) {
-    for (auto& comp : m_components) {
-        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get())) {
+    m_isIterating = true;
+    for (auto& comp : m_components)
+        if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
             mb->LateUpdate(deltaTime);
-        }
-    }
+    m_isIterating = false;
+    FlushPending();
 }
 
 void GameObject::BroadcastTriggerEnter(Collider* other)
@@ -82,4 +100,20 @@ void GameObject::BroadcastTriggerExit(Collider* other)
             mb->OnTriggerExit(other);
         }
 	}
+}
+void GameObject::FlushPending()
+{
+    /* 1) Add */
+    for (auto& up : m_pendingAdd)
+        m_components.emplace_back(std::move(up));
+    m_pendingAdd.clear();
+
+    /* 2) Remove */
+    for (auto* dead : m_pendingRemove)
+    {
+        auto it = std::remove_if(m_components.begin(), m_components.end(),
+            [dead](auto& up) { return up.get() == dead; });
+        m_components.erase(it, m_components.end());
+    }
+    m_pendingRemove.clear();
 }

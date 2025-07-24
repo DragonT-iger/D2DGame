@@ -19,8 +19,7 @@ public:
     GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 	const std::vector<std::unique_ptr<GameObject>>& GetGameObjects() const { return m_gameObjects; }
 
-	//void Destroy(GameObject* object); 필요하면 나중에 구현 웬만하면 삭제 안해도 되긴 함 웬만하면 그냥 SetActive(false)로 처리하셈 
-    //왜냐면 엔진단에서 처리해야 하는게 좀 생김
+	void Destroy(GameObject* object);
 
     // ---------- Lifecycle ----------
 	virtual void Awake(); // 일단은 Awake 중간에서 GameObject를 생성하고 초기화할거기 떄문에 Awake만 virtual로 선언 장기적으로 봤을때 virtual이 없는게 맞음
@@ -56,10 +55,19 @@ public:
 
     const std::wstring& GetName() const { return m_name; }
 
+protected:
+    /* 지연 큐 적용 */
+    void FlushPending();
+
 private:
+    bool                                            m_isIterating = false;
+    std::vector<std::unique_ptr<GameObject>>        m_pendingAdd;
+    std::vector<GameObject*>                        m_pendingDestroy;
+
+
     std::wstring                                                                        m_name;
     bool                                                                         m_active = true; // 아직 작동 안함
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
     std::vector<RenderInfo>		                                        m_renderQ;
-    Camera*                                                         m_Camera = nullptr;
+    Camera* m_Camera = nullptr;
 };
