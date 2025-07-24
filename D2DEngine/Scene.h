@@ -13,6 +13,18 @@ class Camera;
 class Scene
 {
 public:
+
+    enum class ScenePhase
+    {
+        None,
+        Awake,
+        Start,
+        Update,
+        FixedUpdate,
+        LateUpdate,
+        Render
+    };
+
     explicit Scene(const std::wstring& name = L"NewScene") : m_name(name) {};
     virtual ~Scene() = default;
 
@@ -70,4 +82,5 @@ private:
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
     std::vector<RenderInfo>		                                        m_renderQ;
     Camera* m_Camera = nullptr;
+    ScenePhase                                      m_phase = ScenePhase::None;
 };

@@ -32,6 +32,7 @@ void Scene::Destroy(GameObject* object)
 void Scene::Awake()
 {
     //if (!m_active) return;
+    m_phase = ScenePhase::Awake;
 
     GameObject* camera = CreateGameObject(L"Camera");
     camera->AddComponent<Camera>();
@@ -49,6 +50,7 @@ void Scene::Awake()
 void Scene::Start()
 {
     //if (!m_active) return;
+	m_phase = ScenePhase::Start;
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->Start();
     m_isIterating = false;
@@ -58,6 +60,7 @@ void Scene::Start()
 void Scene::Update(float deltaTime)
 {
     //if (!m_active) return;
+	m_phase = ScenePhase::Update;
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->Update(deltaTime);
     m_isIterating = false;
@@ -68,6 +71,7 @@ void Scene::FixedUpdate(float fixedDelta)
 {
     //if (!m_active) return;
 
+	m_phase = ScenePhase::FixedUpdate;
 
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->FixedUpdate(fixedDelta);
@@ -82,6 +86,7 @@ void Scene::FixedUpdate(float fixedDelta)
 void Scene::LateUpdate(float deltaTime)
 {
     //if (!m_active) return;
+	m_phase = ScenePhase::LateUpdate;
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->LateUpdate(deltaTime);
     m_isIterating = false;
@@ -112,6 +117,10 @@ void Scene::LateUpdate(float deltaTime)
 
 void Scene::Render()
 {
+
+	//if (!m_active) return;
+	m_phase = ScenePhase::Render;
+
     SetRenderQ();
 
 	auto* cam = GetCamera();
@@ -168,9 +177,21 @@ D2D1::Matrix3x2F Scene::GetRenderTM(bool isFlip, float offsetX, float offsetY)
 
 void Scene::FlushPending()
 {
+    std::vector<GameObject*> added;
     for (auto& up : m_pendingAdd)
+    {
+        GameObject* raw = up.get();
         m_gameObjects.emplace_back(std::move(up));
+        added.push_back(raw);
+    }
     m_pendingAdd.clear();
+
+    if (m_phase == ScenePhase::Awake)
+        for (auto* obj : added)
+            obj->Awake();
+    else if (m_phase == ScenePhase::Start)
+        for (auto* obj : added)
+            obj->Start();
 
     for (auto* dead : m_pendingDestroy)
     {
