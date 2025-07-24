@@ -8,7 +8,7 @@ struct RenderInfo {
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_bitmap;
 	D2D1_RECT_F m_destRect;
 	D2D1_RECT_F m_srcRect;
-	float radius; //юс╫ц
+	bool isFlip;
 	D2D1::Matrix3x2F worldTM;
 };
 

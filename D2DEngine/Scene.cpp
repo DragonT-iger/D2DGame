@@ -106,7 +106,8 @@ void Scene::Render()
 
     for(auto& info : m_renderQ)
     {
-        D2D1::Matrix3x2F mWV = info.worldTM * viewTM;
+        D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
+        D2D1::Matrix3x2F mWV = renderTM * info.worldTM * viewTM;
         D2DRenderer::Instance().SetTransform(mWV);
         //D2DRenderer::Instance().DrawCircle(0, 0, info.radius, RGB(255, 0, 0));
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
@@ -139,4 +140,14 @@ void Scene::RegisterCamera(Camera* cam)
     }
 
     m_Camera = cam;
+}
+
+D2D1::Matrix3x2F Scene::GetRenderTM(bool isFlip, float offsetX, float offsetY)
+{
+    float scaleX = isFlip ? -1.0f : 1.0f;
+
+    offsetX = isFlip ? -offsetX : offsetX;
+    offsetY = -offsetY;
+
+    return D2D1::Matrix3x2F::Scale(scaleX, -1.0f) * D2D1::Matrix3x2F::Translation(offsetX, offsetY);
 }

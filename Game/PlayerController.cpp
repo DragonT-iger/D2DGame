@@ -45,10 +45,14 @@ void PlayerController::Update(float deltatime)
 	}
 	else if (Input.GetKeyDown(Keycode::RIGHT))
 	{
+		if (m_spriteRenderer->IsFlip())
+			m_spriteRenderer->SetFlip(false);
 		m_transform->Translate(m_xSpeed * deltatime, 0);
 	}
 	else if (Input.GetKeyDown(Keycode::LEFT))
 	{
+		if(!m_spriteRenderer->IsFlip())
+			m_spriteRenderer->SetFlip(true);
 		m_transform->Translate(-m_xSpeed * deltatime, 0);
 	}
 	else

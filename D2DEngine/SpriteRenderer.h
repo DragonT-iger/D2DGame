@@ -23,6 +23,9 @@ public:
 		m_renderInfo.m_destRect = { -(rect.right - rect.left) / 2, -(rect.bottom - rect.top) / 2, (rect.right - rect.left) / 2 , (rect.bottom - rect.top) / 2 };
 	}
 
+	void SetFlip(bool flip) { m_renderInfo.isFlip = flip; }
+	bool IsFlip() { return m_renderInfo.isFlip; }
+
 	RenderInfo& GetRenderInfo();
 
 private:

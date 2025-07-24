@@ -45,6 +45,7 @@ public:
     Camera* GetCamera() const { return m_Camera; }
     void    RegisterCamera(Camera* cam);
     void    UnregisterCamera(Camera* cam) { if (m_Camera == cam) m_Camera = nullptr; }
+    D2D1::Matrix3x2F GetRenderTM(bool isFlip = false, float offsetX = 0.0f, float offsetY = 0.0f);
 
 
 	// ---------- Event ----------
