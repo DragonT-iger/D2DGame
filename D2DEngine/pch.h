@@ -43,8 +43,13 @@
 #include <wincodec.h>
 #include <dwrite.h>
 
+
+
 namespace WRL = Microsoft::WRL;
 inline std::wostream& cwout = std::wcout;
+
+
+#include "../ThirdParty/fmod/api/studio/inc/fmod_studio.hpp"
 
 #include "MonoBehaviour.h"
 #include "Behaviour.h"
@@ -63,6 +68,7 @@ inline std::wostream& cwout = std::wcout;
 #include "D2DRenderer.h"
 #include "PhysicsManager.h"
 
+//-------------Sound-------------//
 
 
 namespace DX
