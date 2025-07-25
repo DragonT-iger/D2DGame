@@ -120,7 +120,6 @@ void Scene::Render()
 
 	//if (!m_active) return;
 	m_phase = ScenePhase::Render;
-
     SetRenderQ();
 
 	auto* cam = GetCamera();
@@ -135,7 +134,6 @@ void Scene::Render()
         //D2DRenderer::Instance().DrawCircle(0, 0, info.radius, RGB(255, 0, 0));
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
 	}
-
 	m_renderQ.clear();
 }
 
@@ -146,6 +144,7 @@ void Scene::UnInitialize()
 
 void Scene::SetRenderQ()
 {
+    m_isIterating = true;
     for (auto& obj : m_gameObjects)
     {
         const auto& spRender = obj->GetComponent<SpriteRenderer>();
@@ -154,6 +153,8 @@ void Scene::SetRenderQ()
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
     }
+    m_isIterating = false;
+    FlushPending();
 }
 
 void Scene::RegisterCamera(Camera* cam)

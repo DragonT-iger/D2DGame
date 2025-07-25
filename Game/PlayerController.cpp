@@ -11,10 +11,7 @@ void PlayerController::Awake()
     WRL::ComPtr<ID2D1Bitmap1> bitmap;
     //D2DRenderer::Instance().CreateBitmapFromFile(L"Assets/Player.png", *bitmap.GetAddressOf());
 
-	GameObject* a = Instantiate(L"aa");
-	SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
-
-	spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("Player.png"));
+	
 
 
     //m_spriteRenderer->SetBitmap(bitmap);

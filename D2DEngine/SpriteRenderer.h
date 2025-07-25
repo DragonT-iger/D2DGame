@@ -10,7 +10,6 @@ public:
 	SpriteRenderer() = default;
 	virtual ~SpriteRenderer() = default;
 
-	void Awake() override;
 
 	void SetBitmap(const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& bitmap) {
 		m_renderInfo.m_bitmap = bitmap;
@@ -29,6 +28,5 @@ public:
 	RenderInfo& GetRenderInfo();
 
 private:
-	Transform*									m_transform = nullptr;
 	RenderInfo                                                  m_renderInfo; //렌더링 정보, 애니메이션이면 애니메이션 정보가 들어감
 };

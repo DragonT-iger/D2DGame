@@ -25,6 +25,17 @@ void ExampleScene::Awake()
 
 	m_player->AddComponent<CircleCollider>();
 
+	GameObject* a = Instantiate(L"aa");
+
+	SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
+
+	ComPtr<ID2D1Bitmap1> bitmap;
+	bitmap = ResourceManager::Instance().LoadTexture("Player.png");
+	spriteRenderer->SetBitmap(bitmap);
+
+	spriteRenderer->SetSize(64.f, 64.f);
+	spriteRenderer->SetSrcRect(D2D1::RectF(0.f, 0.f, 64.f, 64.f));
+
 
 	m_player2 = Instantiate(L"Player2");
 	m_player2->SetTag(L"Player2");
