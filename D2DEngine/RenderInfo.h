@@ -5,13 +5,6 @@
 using Matrix3x2 = D2D1::Matrix3x2F;
 
 struct RenderInfo {
-	RenderInfo()
-		: m_destRect{ -50,-50,50, 50 }
-		, m_srcRect{ -50,-50,50, 50 }
-		, isFlip(false)
-		, worldTM(D2D1::Matrix3x2F::Identity())
-	{
-	}
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_bitmap;
 	D2D1_RECT_F m_destRect;
 	D2D1_RECT_F m_srcRect;

@@ -34,7 +34,6 @@ void ExampleScene::Awake()
 	spriteRenderer->SetBitmap(bitmap);
 
 	spriteRenderer->SetSize(64.f, 64.f);
-	spriteRenderer->SetSrcRect(D2D1::RectF(0.f, 0.f, 64.f, 64.f));
 
 
 	m_player2 = Instantiate(L"Player2");

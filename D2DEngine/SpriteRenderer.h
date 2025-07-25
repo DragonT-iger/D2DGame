@@ -13,7 +13,11 @@ public:
 
 	void SetBitmap(const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& bitmap) {
 		m_renderInfo.m_bitmap = bitmap;
-	}  //기본 스프라이트 설정
+		m_renderInfo.m_srcRect = { 0.f, 0.f, bitmap->GetSize().width, bitmap->GetSize().height };
+		float w = m_renderInfo.m_srcRect.right - m_renderInfo.m_srcRect.left;
+		float h = m_renderInfo.m_srcRect.bottom - m_renderInfo.m_srcRect.top;
+		m_renderInfo.m_destRect = { -(w / 2), -(h / 2), w / 2 , h / 2 };
+	}
 
 	void SetSize(float width, float height);
 
