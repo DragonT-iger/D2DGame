@@ -159,6 +159,8 @@ void Scene::SetRenderQ()
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
     }
+
+    std::sort(m_renderQ.begin(), m_renderQ.end());
     m_isIterating = false;
     FlushPending();
 }

@@ -42,6 +42,8 @@ void ExampleScene::Awake()
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();
 
+	m_spriteRenderer->SetOrderInLayer(2);
+
 	PlayerController* pc = m_player2->AddComponent<PlayerController>();
 
 	m_player2->AddComponent<BoxCollider>();
