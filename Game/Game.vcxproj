@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CinemachineCamera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
     <ClCompile Include="PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CinemachineCamera.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ExampleScene.h" />
     <ClInclude Include="PlayerController.h" />

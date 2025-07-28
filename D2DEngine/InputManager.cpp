@@ -6,8 +6,17 @@
 
 bool InputManager::Init(HWND hwnd)
 {
-	//RAWINPUT 안쓸거면 딱히 할 거 없는듯
 	return true;
+}
+
+void InputManager::BeginFrame()
+{
+	//std::fill(m_keyEdge.begin(), m_keyEdge.end(), KeyEdge{});
+
+	// 이번 프레임 휠 플래그/델타 초기화
+	/*m_CurMouse.wheelUp = false;
+	m_CurMouse.wheelDown = false;
+	m_CurMouse.wheelDelta = 0;*/
 }
 
 bool InputManager::OnHandleMessage(const MSG& msg)
@@ -31,10 +40,12 @@ bool InputManager::OnHandleMessage(const MSG& msg)
 	case WM_LBUTTONUP:
 	case WM_RBUTTONDOWN:
 	case WM_RBUTTONUP:
+	case WM_MOUSEWHEEL:
 	{
 		HandleMsgMouse(msg);
 	}
 	break;
+
 
 	default:
 		return false; // Unhandled message
@@ -105,5 +116,14 @@ void InputManager::HandleMsgMouse(const MSG& msg)
 	{
 		m_CurMouse.RButtonPressed = false;
 		ReleaseCapture();
+	}
+	else if(msg.message == WM_MOUSEWHEEL)
+	{
+		int delta = GET_WHEEL_DELTA_WPARAM(msg.wParam);
+		m_CurMouse.wheelDelta = delta;
+		m_CurMouse.wheelUp |= (delta > 0);
+		m_CurMouse.wheelDown |= (delta < 0);
+
+		//cwout << "Wheel Delta: " << m_CurMouse.wheelDelta << std::endl;
 	}
 }

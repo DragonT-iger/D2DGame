@@ -16,6 +16,9 @@ struct MouseState
 
 	bool LButtonPressed{ false };	// 마우스 왼쪽 버튼 눌림 상태
 	bool RButtonPressed{ false };	// 마우스 오른쪽 버튼 눌림 상태
+	int  wheelDelta{ 0 };
+	bool wheelUp{ false };			// 마우스 휠 위로 스크롤
+	bool wheelDown{ false };		// 마우스 휠 아래로 스크롤
 };
 
 struct KeyEdge
@@ -42,6 +45,8 @@ public:
 
 	bool Init(HWND hwnd);
 
+	void BeginFrame();
+
 	bool OnHandleMessage(const MSG& msg);
 
 	bool GetKeyPressed(Keycode vk);
@@ -49,6 +54,10 @@ public:
 	bool GetKeyDown(Keycode vk);
 
 	MouseState GetMouseState() const { return m_CurMouse; }
+
+	int  GetWheelDelta()      const { return m_CurMouse.wheelDelta; } 
+	bool GetWheelUp()         const { return m_CurMouse.wheelUp; }
+	bool GetWheelDown()       const { return m_CurMouse.wheelDown; }
 
 private:
 

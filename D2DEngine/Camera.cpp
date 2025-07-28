@@ -4,12 +4,14 @@
 
 
 
+
 Camera::~Camera()
 {
     // 씬이 살아 있다면 등록 해제
     if (Scene* s = SceneManager::Instance().GetActiveScene())
         s->UnregisterCamera(this);
 }
+
 
 void Camera::Awake()
 {

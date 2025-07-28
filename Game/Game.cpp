@@ -72,6 +72,8 @@ void Game::LifeCycle(float deltaTime)
 
 	D2DRenderer::Instance().RenderBegin();
 
+	InputManager::Instance().BeginFrame();
+
     if (scene && scene->IsActive())
     {
         while(elapsedTime >= fixedDeltaTime)

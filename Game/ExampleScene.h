@@ -7,7 +7,7 @@ class ExampleScene : public Scene
 
 	Transform* m_playerTransform = nullptr;
 	SpriteRenderer* m_spriteRenderer = nullptr;
-	GameObject* m_Camera = nullptr;
+	Camera* m_camera = nullptr;
 	GameObject* m_player = nullptr;
 	GameObject* m_player2 = nullptr;
 };

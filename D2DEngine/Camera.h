@@ -9,7 +9,7 @@ class D2DRenderer;
 class Camera : public MonoBehaviour
 {
 public:
-    Camera() = default;                                    
+	Camera() = default; 
     virtual ~Camera();
 
     void  SetZoom(float zoom) { m_zoom = zoom; }
