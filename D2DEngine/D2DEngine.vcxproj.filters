@@ -165,7 +165,7 @@
     <ClInclude Include="SoundManager.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
-    <ClInclude Include="FMod_Error.h">
+    <ClInclude Include="Fmod_Error.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
   </ItemGroup>
