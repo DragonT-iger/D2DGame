@@ -2,6 +2,7 @@
 class ExampleScene : public Scene
 {
 	void Awake() override;
+	void Start() override;
 
 
 

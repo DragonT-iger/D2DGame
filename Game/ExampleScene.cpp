@@ -46,16 +46,8 @@ void ExampleScene::Awake()
 
 	m_player2->AddComponent<CircleCollider>();
 
-	pc->m_xSpeed = 75.f;
-	pc->m_ySpeed = 75.f;
-
-
-
-	
-
-
-
-
+	pc->m_xSpeed = 175.f;
+	pc->m_ySpeed = 175.f;
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로
@@ -65,3 +57,29 @@ void ExampleScene::Awake()
 	Scene::Awake();
 }
 
+
+void ExampleScene::Start()
+{
+
+	
+	if (!IsActive())
+		return;
+
+	// 카메라는 awake에서 초기화돼서 그냥 여기서 적음
+
+	Camera* camera = GetCamera();
+	
+	camera->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(m_player2);
+
+
+
+
+
+
+
+
+
+
+
+	Scene::Start();
+}

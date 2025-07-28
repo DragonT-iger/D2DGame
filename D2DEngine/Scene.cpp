@@ -37,8 +37,6 @@ void Scene::Awake()
 
     GameObject* camera = CreateGameObject(L"Camera");
     camera->AddComponent<Camera>();
-
-    camera->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
     camera->AddComponent<CinemachineCamera>();
 
 	// 카메라는 기본적으로 씬에 등록

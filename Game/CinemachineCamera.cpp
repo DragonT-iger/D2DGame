@@ -20,13 +20,14 @@ void CinemachineCamera::Start()
 
 void CinemachineCamera::Update(float deltaTime)
 {
+#ifdef _DEBUG
+
     int wheelDelta = InputManager::Instance().GetWheelDelta();
     if (wheelDelta != 0)
     {
-        int ticks = wheelDelta / WHEEL_DELTA;     // ±1, ±2 …
+        int ticks = wheelDelta / WHEEL_DELTA;    
         float factorPerTick = (wheelDelta > 0) ? (1.f - m_zoomStep)
             : (1.f + m_zoomStep);
-        // 여러 틱 들어오면 누적 반영
         m_targetZoom *= std::pow(factorPerTick, std::abs(ticks));
         m_targetZoom = std::clamp(m_targetZoom, m_minZoom, m_maxZoom);
     }
@@ -37,4 +38,20 @@ void CinemachineCamera::Update(float deltaTime)
     // 둘 다 같은 비율이면 화면이 안 찌그러지므로 x,y 모두 적용
     Vector2 newScale{ m_currentZoom, m_currentZoom };
     m_transform->SetScale(newScale);
+
+
+
+    if (m_player)
+    {
+        Vector2 targetPos = m_player->GetComponent<Transform>()->GetPosition();
+        Vector2 currentPos = m_transform->GetPosition();
+
+        float   lerpFactor = 1.f - std::exp(-m_followDamping * deltaTime); // 감쇠
+        Vector2 newPos = currentPos + (targetPos - currentPos) * lerpFactor;
+
+        m_transform->SetPosition(newPos);
+    }
+
+
+#endif
 }

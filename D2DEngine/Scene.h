@@ -35,7 +35,7 @@ public:
 
     // ---------- Lifecycle ----------
 	virtual void Awake(); // 일단은 Awake 중간에서 GameObject를 생성하고 초기화할거기 떄문에 Awake만 virtual로 선언 장기적으로 봤을때 virtual이 없는게 맞음
-    void Start();
+    virtual void Start();
     void Update(float deltaTime);
     void FixedUpdate(float fixedDelta);
     void LateUpdate(float deltaTime);
@@ -77,10 +77,10 @@ private:
     std::vector<GameObject*>                        m_pendingDestroy;
 
 
-    std::wstring                                                                        m_name;
-    bool                                                                         m_active = true; // 아직 작동 안함
-    std::vector<std::unique_ptr<GameObject>> m_gameObjects;
-    std::vector<RenderInfo>		                                        m_renderQ;
-    Camera* m_Camera = nullptr;
+    std::wstring                                    m_name;
+    bool                                            m_active = true; // 아직 작동 안함
+    std::vector<std::unique_ptr<GameObject>>        m_gameObjects;
+    std::vector<RenderInfo>		                    m_renderQ;
+    Camera*                                         m_Camera = nullptr;
     ScenePhase                                      m_phase = ScenePhase::None;
 };
