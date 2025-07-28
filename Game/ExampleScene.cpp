@@ -12,6 +12,21 @@ void ExampleScene::Awake()
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
 
+	m_button = Instantiate(L"buttonTest");
+
+	m_button->AddComponent<Image>();
+	auto b = m_button->AddComponent<Button>();
+
+	auto b1 = ResourceManager::Instance().LoadTexture("button1_basic100.png");
+	auto b2 = ResourceManager::Instance().LoadTexture("button1_mouse_action.png");
+	auto b3 = ResourceManager::Instance().LoadTexture("button1_mouse_click.png");
+
+	b->AddEventSprite(b3, ButtonEvent::Idle);
+	b->AddEventSprite(b1, ButtonEvent::Highlight);
+	b->AddEventSprite(b3, ButtonEvent::Pressed);
+
+	m_button->GetComponent<Transform>()->Translate({ 100, 100 });
+
 	m_player = Instantiate(L"Player");
 
 	m_player->SetTag(L"Player");
@@ -41,6 +56,8 @@ void ExampleScene::Awake()
 
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();
+
+	m_player2->GetComponent<Transform>()->SetScale({ 2, 2 });
 
 	m_spriteRenderer->SetOrderInLayer(2);
 
