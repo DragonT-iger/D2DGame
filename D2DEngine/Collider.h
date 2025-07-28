@@ -11,6 +11,9 @@ public:
 	Vector2	 GetOffset() const { return m_offset; }
 	void	 SetOffset(const Vector2& newOffset) { m_offset = newOffset; }
 	Vector2  GetCenter() const { return m_transform->GetPosition() + m_offset; }
+	
+	//디버그 용
+	virtual void DrawCollider() = 0;
 
 protected:
 	Transform* m_transform = nullptr;

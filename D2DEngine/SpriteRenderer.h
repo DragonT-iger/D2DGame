@@ -19,6 +19,7 @@ public:
 		m_renderInfo.m_destRect = { -(w / 2), -(h / 2), w / 2 , h / 2 };
 	}
 
+	D2D1_SIZE_F GetSize();
 	void SetSize(float width, float height);
 
 	void SetSrcRect(const D2D1_RECT_F& rect) {

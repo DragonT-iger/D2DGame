@@ -23,7 +23,7 @@ void ExampleScene::Awake()
 
 	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
-	m_player->AddComponent<CircleCollider>();
+	m_player->AddComponent<BoxCollider>();
 
 	GameObject* a = Instantiate(L"aa");
 
@@ -44,7 +44,7 @@ void ExampleScene::Awake()
 
 	PlayerController* pc = m_player2->AddComponent<PlayerController>();
 
-	m_player2->AddComponent<CircleCollider>();
+	m_player2->AddComponent<BoxCollider>();
 
 	pc->m_xSpeed = 75.f;
 	pc->m_ySpeed = 75.f;
