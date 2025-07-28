@@ -46,6 +46,20 @@
 namespace WRL = Microsoft::WRL;
 inline std::wostream& cwout = std::wcout;
 
+
+//----Sound----
+#ifdef _DEBUG
+#pragma comment(lib, "fmodstudioL_vc.lib")
+#pragma comment(lib, "fmodL_vc.lib")
+#else
+#pragma comment(lib, "fmodstudio_vc.lib")
+#pragma comment(lib, "fmod_vc.lib")
+#endif
+
+#include <fmod_studio.hpp>
+//----Sound----end
+
+
 #include "MonoBehaviour.h"
 #include "Behaviour.h"
 #include "GameTimer.h"
@@ -66,7 +80,6 @@ inline std::wostream& cwout = std::wcout;
 #include "PhysicsManager.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
-
 
 
 namespace DX

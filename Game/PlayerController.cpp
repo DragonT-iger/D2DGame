@@ -27,6 +27,10 @@ void  PlayerController::Start()
     m_animator->AddClip("eat", pandaEat);
     m_animator->AddClip("wave", pandaWave);
     m_animator->SetEntryState("eat");
+
+	auto collider = GetComponent<BoxCollider>();
+
+	collider->SetSize({ m_spriteRenderer->GetSize().width, m_spriteRenderer->GetSize().height});
 }
 
 

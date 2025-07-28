@@ -77,10 +77,11 @@ private:
     std::vector<GameObject*>                        m_pendingDestroy;
 
 
-    std::wstring                                    m_name;
-    bool                                            m_active = true; // 아직 작동 안함
-    std::vector<std::unique_ptr<GameObject>>        m_gameObjects;
-    std::vector<RenderInfo>		                    m_renderQ;
-    Camera*                                         m_Camera = nullptr;
+    std::wstring                                                                        m_name;
+    bool                                                                         m_active = true; // 아직 작동 안함
+    std::vector<std::unique_ptr<GameObject>> m_gameObjects;
+    std::vector<RenderInfo>		                                        m_renderQ;
+    std::vector<Collider>		                                           m_colliderQ;
+    Camera*                                                         m_Camera = nullptr;
     ScenePhase                                      m_phase = ScenePhase::None;
 };

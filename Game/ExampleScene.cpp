@@ -24,7 +24,7 @@ void ExampleScene::Awake()
 
 	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
-	m_player->AddComponent<CircleCollider>();
+	m_player->AddComponent<BoxCollider>();
 
 	GameObject* a = Instantiate(L"aa");
 
@@ -42,9 +42,11 @@ void ExampleScene::Awake()
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();
 
+	m_spriteRenderer->SetOrderInLayer(2);
+
 	PlayerController* pc = m_player2->AddComponent<PlayerController>();
 
-	m_player2->AddComponent<CircleCollider>();
+	m_player2->AddComponent<BoxCollider>();
 
 	pc->m_xSpeed = 175.f;
 	pc->m_ySpeed = 175.f;
