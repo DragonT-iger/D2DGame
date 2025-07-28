@@ -13,8 +13,8 @@ public:
 
 
 
-    float m_xSpeed = 15.f; // x축 이동 속도
-    float m_ySpeed = 15.f; // y축 이동 속도
+    float m_xSpeed = 0.f; // x축 이동 속도
+    float m_ySpeed = 0.f; // y축 이동 속도
 
 private:
     std::string                 curAnim;

@@ -8,8 +8,24 @@ bool BoxCollider::IsCollide(const Collider* other) const
 	if (const CircleCollider* circle = dynamic_cast<const CircleCollider*>(other))
 	{
 	}
-	else if (const BoxCollider* circle = dynamic_cast<const BoxCollider*>(other)) {
-		//CircletoBox();
+	else if (const BoxCollider* box = dynamic_cast<const BoxCollider*>(other)) {
+
+		Vector2 thisCenter = GetCenter();
+		Vector2 leftdown = thisCenter - size / 2;
+		Vector2 rightup = thisCenter + size / 2;
+
+		Vector2 otherCenter = box->GetCenter();
+		Vector2 otherLeftdown = otherCenter - box->GetSize() / 2;
+		Vector2 otherRightup = otherCenter + box->GetSize() / 2;
+
+		// 충돌 검사
+		if (leftdown.x < otherRightup.x && rightup.x > otherLeftdown.x &&
+			leftdown.y < otherRightup.y && rightup.y > otherLeftdown.y)
+		{
+			return true; 
+		}
+
+		
 	}
 	//return true;
 	return false;

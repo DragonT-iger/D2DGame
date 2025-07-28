@@ -13,6 +13,6 @@ public:
 	void DrawCollider() override;
 
 private:
-	Vector2 size = { 1, 1 };
+	Vector2 size = { 1, 1 }; // 상대적 크기 아님
 };
 
