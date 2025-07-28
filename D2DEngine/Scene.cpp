@@ -19,6 +19,7 @@ GameObject* Scene::CreateGameObject(const std::wstring& name)
     return raw;
 }
 
+
 void Scene::Destroy(GameObject* object)
 {
     if (object)
@@ -126,6 +127,7 @@ void Scene::Render()
 
 	D2D1::Matrix3x2F viewTM = cam->GetViewTM();
 
+    //object render
     for(auto& info : m_renderQ)
     {
         D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
@@ -140,6 +142,14 @@ void Scene::Render()
         }
 #endif
 	}
+
+    //ui render
+    D2DRenderer::Instance().SetTransform(D2D1::Matrix3x2F::Identity());
+    for (auto& info : m_UIRenderQ)
+    {
+        D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect);
+    }
+
 	m_renderQ.clear();
 }
 
@@ -158,9 +168,18 @@ void Scene::SetRenderQ()
         {
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
+        else
+        {
+            const auto& img = obj->GetComponent<Image>();
+            if (img)
+            {
+                m_UIRenderQ.push_back(img->GetRenderInfo());
+            }
+        }
     }
 
     std::sort(m_renderQ.begin(), m_renderQ.end());
+    std::sort(m_UIRenderQ.begin(), m_UIRenderQ.end());
     m_isIterating = false;
     FlushPending();
 }

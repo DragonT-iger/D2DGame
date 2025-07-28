@@ -76,6 +76,18 @@
     <Filter Include="SystemManager">
       <UniqueIdentifier>{4f7cb675-f673-4b95-bed1-f1c183eef2a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UIObject">
+      <UniqueIdentifier>{2aa2b2cf-6905-4bde-b5f2-d0e34eebf54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\UIComponent">
+      <UniqueIdentifier>{fe43b0a4-8f3a-4bf8-84c9-8b0ab9cfc006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\UIComponent\Image">
+      <UniqueIdentifier>{0a9ee4d7-beb9-412e-a8c9-c62fb6937bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\UIComponent\Button">
+      <UniqueIdentifier>{06a14180-6cef-426a-a66f-929eb7a0ed41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -165,6 +177,15 @@
     <ClInclude Include="RenderInfo.h">
       <Filter>D2DRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>GameObject\UIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Component\UIComponent\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Component\UIComponent\Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -238,6 +259,15 @@
     </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>GameObject\UIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Component\UIComponent\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Component\UIComponent\Button</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
