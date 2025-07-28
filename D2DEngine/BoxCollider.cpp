@@ -10,13 +10,15 @@ bool BoxCollider::IsCollide(const Collider* other) const
 	}
 	else if (const BoxCollider* box = dynamic_cast<const BoxCollider*>(other)) {
 
+		Vector2 scale = GetComponent<Transform>()->GetScale();
 		Vector2 thisCenter = GetCenter();
-		Vector2 leftdown = thisCenter - size / 2;
-		Vector2 rightup = thisCenter + size / 2;
+		Vector2 leftdown = thisCenter - size / 2 * scale;
+		Vector2 rightup = thisCenter + size / 2 * scale;
 
+		Vector2 otherScale = box->GetComponent<Transform>()->GetScale();
 		Vector2 otherCenter = box->GetCenter();
-		Vector2 otherLeftdown = otherCenter - box->GetSize() / 2;
-		Vector2 otherRightup = otherCenter + box->GetSize() / 2;
+		Vector2 otherLeftdown = otherCenter - box->GetSize() / 2 * otherScale;
+		Vector2 otherRightup = otherCenter + box->GetSize() / 2 * otherScale;
 
 		// 충돌 검사
 		if (leftdown.x < otherRightup.x && rightup.x > otherLeftdown.x &&
