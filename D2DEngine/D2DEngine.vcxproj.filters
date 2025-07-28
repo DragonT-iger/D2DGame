@@ -177,11 +177,6 @@
     <ClInclude Include="RenderInfo.h">
       <Filter>D2DRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="Fmod_Error.h">
-      <Filter>SystemManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>SystemManager</Filter>
     <ClInclude Include="UIObject.h">
       <Filter>GameObject\UIObject</Filter>
     </ClInclude>
@@ -190,6 +185,12 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Component\UIComponent\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Fmod_Error.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>SystemManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -265,8 +266,6 @@
     <ClCompile Include="Animator.cpp">
       <Filter>Component\Animator</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>SystemManager</Filter>
     <ClCompile Include="UIObject.cpp">
       <Filter>GameObject\UIObject</Filter>
     </ClCompile>
@@ -275,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Component\UIComponent\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>SystemManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
