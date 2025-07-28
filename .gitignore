@@ -29,7 +29,19 @@ D2DEngine/D2DEngine.vcxproj_LOCAL_1088.filters
 D2DEngine/D2DEngine.vcxproj_REMOTE_1027.filters
 D2DEngine/D2DEngine.vcxproj_REMOTE_1088.filters
 
-# 써드파티
-ThirdParty/fmod
+# SVN 관리
+ThirdParty/
+Game/Assets/
 
 *.lnk
+
+
+
+
+# 머지 관련 백업 파일들
+
+*.orig
+*_BASE_*.h
+*_LOCAL_*.h
+*_REMOTE_*.h
+*_BACKUP_*.h
