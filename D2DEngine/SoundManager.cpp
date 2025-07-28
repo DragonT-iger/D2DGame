@@ -37,7 +37,7 @@ void SoundManager::Shutdown()
 
 void SoundManager::OneShot(const std::string& eventPath)
 {
-	L_BGM.find(eventPath)->second->
+	//L_BGM.find(eventPath)->second->
 }
 
 void SoundManager::SetVolume(float volume) // volume: 0 ~ 1

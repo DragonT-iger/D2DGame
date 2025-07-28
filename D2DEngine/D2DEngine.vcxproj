@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\User\Desktop\DT_Engin\ThirdParty\fmod\api\core\lib\x64;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc;$(SolutionDir)..\ThirdParty\fmod\api\studio\inc;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <!-- ===== 컴파일러/링커 공통 정의 ===== -->
