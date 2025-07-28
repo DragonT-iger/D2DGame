@@ -45,7 +45,7 @@ public:
 
 	bool Init(HWND hwnd);
 
-	void BeginFrame();
+	void EndFrame();
 
 	bool OnHandleMessage(const MSG& msg);
 

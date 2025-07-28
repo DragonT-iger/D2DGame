@@ -72,7 +72,6 @@ void Game::LifeCycle(float deltaTime)
 
 	D2DRenderer::Instance().RenderBegin();
 
-	InputManager::Instance().BeginFrame();
 
     if (scene && scene->IsActive())
     {
@@ -89,6 +88,7 @@ void Game::LifeCycle(float deltaTime)
         scene->Render();
 	}
 
+    InputManager::Instance().EndFrame();
     D2DRenderer::Instance().RenderEnd();
 }
 

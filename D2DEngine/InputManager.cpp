@@ -9,14 +9,14 @@ bool InputManager::Init(HWND hwnd)
 	return true;
 }
 
-void InputManager::BeginFrame()
+void InputManager::EndFrame()
 {
 	//std::fill(m_keyEdge.begin(), m_keyEdge.end(), KeyEdge{});
 
 	// 이번 프레임 휠 플래그/델타 초기화
-	/*m_CurMouse.wheelUp = false;
+	m_CurMouse.wheelUp = false;
 	m_CurMouse.wheelDown = false;
-	m_CurMouse.wheelDelta = 0;*/
+	m_CurMouse.wheelDelta = 0;
 }
 
 bool InputManager::OnHandleMessage(const MSG& msg)
