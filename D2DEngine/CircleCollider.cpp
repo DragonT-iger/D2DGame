@@ -6,11 +6,33 @@ bool CircleCollider::IsCollide(const Collider* other) const
 		// Circle vs Circle collision detection logic
 	if (const CircleCollider* circle = dynamic_cast<const CircleCollider*>(other))
 	{
+		//circle->GetCenter() + circle->GetRadius();
 
-		return true;
+		//constexpr float PPM = 50.0f;
+		//std::cout << circle->GetCenter().x << " " << circle->GetCenter().y << " " << circle->m_radius * PPM << " " << GetCenter().x << " " << GetCenter().y << " " << m_radius * PPM << std::endl;
+
+
+		
+		
+		
+		float length = abs(sqrt((pow(GetCenter().x - circle->GetCenter().x, 2) + pow(GetCenter().y - circle->GetCenter().y, 2))));
+
+
+
+		//std::cout << circle->GetRadius() + m_radius << " " << length << std::endl;
+		if((circle->GetRadius() + m_radius) >= length) // 임의 반지름 값 일단
+		{
+			return true;
+		}
+
+
+
+		//GetOwner()->
+
+		return false;
 		//other->GetOffset() + other->GetOwner()->GetComponent<Transform>() * other->GetOwner()->GetComponent<Transform>()->GetWorldMatrix();
 
-		//이거는 다음 수업시간에 알려주시니까 그걸로 하고 Physics Manager (씬에서 게임오브젝트로 돌리는거)는 그때 같이 구현
+	
 
 	}
 	else if (const BoxCollider* circle = dynamic_cast<const BoxCollider*>(other)) {
@@ -19,9 +41,11 @@ bool CircleCollider::IsCollide(const Collider* other) const
 	}
 
 
-	return true;
-
-
 	//정의되지 않은 나머지는 충돌하지 않음
 	return false;
+}
+
+void CircleCollider::DrawCollider()
+{
+	D2DRenderer::Instance().DrawCircle(0.f, 0.f, m_radius, D2D1::ColorF(1.f, 0.f, 0.f));
 }

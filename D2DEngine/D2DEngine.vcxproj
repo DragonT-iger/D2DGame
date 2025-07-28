@@ -165,7 +165,8 @@
     <ClInclude Include="NzWndBase.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsManager.h" />
-    <ClInclude Include="ResourcsManager.h" />
+    <ClInclude Include="RenderInfo.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SimpleMathHelper.h" />
@@ -178,6 +179,7 @@
   <!-- ===== 소스 파일 ===== -->
   <ItemGroup>
     <ClCompile Include="AnimationClip.cpp" />
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
@@ -199,7 +201,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp" />
-    <ClCompile Include="ResourcsManager.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SimpleMathHelper.cpp" />

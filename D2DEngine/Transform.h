@@ -1,6 +1,5 @@
 #pragma once
 /// 날짜 / 이름 / 수정내용
-/// 2025-07-08 권용범 최초버전 작성
 enum class PivotPreset
 {
 	TopLeft,

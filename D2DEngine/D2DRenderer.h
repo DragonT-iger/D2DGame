@@ -59,6 +59,8 @@ public:
 
     ID3D11RenderTargetView* GetD3DRenderTargetView() const { return m_d3dRenderTV.Get(); }
 
+    HWND GetHandle() const { return m_hwnd; }
+
 private:
 
     void CreateDeviceAndSwapChain(HWND hwnd);

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "RenderInfo.h"
 
 class Camera;
 
@@ -12,14 +13,25 @@ class Camera;
 class Scene
 {
 public:
+
+    enum class ScenePhase
+    {
+        None,
+        Awake,
+        Start,
+        Update,
+        FixedUpdate,
+        LateUpdate,
+        Render
+    };
+
     explicit Scene(const std::wstring& name = L"NewScene") : m_name(name) {};
     virtual ~Scene() = default;
 
     GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 	const std::vector<std::unique_ptr<GameObject>>& GetGameObjects() const { return m_gameObjects; }
 
-	//void Destroy(GameObject* object); 필요하면 나중에 구현 웬만하면 삭제 안해도 되긴 함 웬만하면 그냥 SetActive(false)로 처리하셈 
-    //왜냐면 엔진단에서 처리해야 하는게 좀 생김
+	void Destroy(GameObject* object);
 
     // ---------- Lifecycle ----------
 	virtual void Awake(); // 일단은 Awake 중간에서 GameObject를 생성하고 초기화할거기 떄문에 Awake만 virtual로 선언 장기적으로 봤을때 virtual이 없는게 맞음
@@ -27,6 +39,12 @@ public:
     void Update(float deltaTime);
     void FixedUpdate(float fixedDelta);
     void LateUpdate(float deltaTime);
+    void Render();
+
+    void UnInitialize();
+
+	// ---------- Render Queue ----------
+    void SetRenderQ();
 
     // ---------- Misc ----------
     void SetActive(bool active) { m_active = active; }
@@ -38,6 +56,7 @@ public:
     Camera* GetCamera() const { return m_Camera; }
     void    RegisterCamera(Camera* cam);
     void    UnregisterCamera(Camera* cam) { if (m_Camera == cam) m_Camera = nullptr; }
+    D2D1::Matrix3x2F GetRenderTM(bool isFlip = false, float offsetX = 0.0f, float offsetY = 0.0f);
 
 
 	// ---------- Event ----------
@@ -48,9 +67,21 @@ public:
 
     const std::wstring& GetName() const { return m_name; }
 
+protected:
+    /* 지연 큐 적용 */
+    void FlushPending();
+
 private:
-    std::wstring                             m_name;
-    bool                                     m_active = true; // 아직 작동 안함
+    bool                                            m_isIterating = false;
+    std::vector<std::unique_ptr<GameObject>>        m_pendingAdd;
+    std::vector<GameObject*>                        m_pendingDestroy;
+
+
+    std::wstring                                                                        m_name;
+    bool                                                                         m_active = true; // 아직 작동 안함
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
-    Camera*                                  m_Camera = nullptr;
+    std::vector<RenderInfo>		                                        m_renderQ;
+    std::vector<Collider>		                                           m_colliderQ;
+    Camera*                                                         m_Camera = nullptr;
+    ScenePhase                                      m_phase = ScenePhase::None;
 };

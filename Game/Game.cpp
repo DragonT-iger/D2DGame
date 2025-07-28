@@ -20,7 +20,9 @@ bool Game::Initialize()
 
 	D2DRenderer::Instance().Initialize(static_cast<HWND>(GetHandle()));
     
-
+    //리소스 매니저 세팅
+    ResourceManager::Instance().SetResourcePath(std::filesystem::current_path() / "Assets");
+    ResourceManager::Instance().LoadPath();
 
 
     // 맨 처음 씬 만들고 로드하는법
@@ -44,16 +46,16 @@ void Game::Run()
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            //if (false == InputManager::Instance().OnHandleMessage(msg))
-            //{
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-            //}
+            if (!InputManager::Instance().OnHandleMessage(msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
         else
         {
             m_timer->Tick();
-            LifeCycle(m_timer->DeltaTimeMS());
+            LifeCycle(m_timer->DeltaTime()); 
         }
     }
 }
@@ -81,6 +83,8 @@ void Game::LifeCycle(float deltaTime)
         scene->Update(deltaTime);
 
 		scene->LateUpdate(deltaTime);
+
+        scene->Render();
 	}
 
     D2DRenderer::Instance().RenderEnd();
@@ -108,5 +112,7 @@ void Game::OnResize(int width, int height)
 
 void Game::OnClose()
 {
+	SceneManager::Instance().UnInitialize();
+	ResourceManager::Instance().Uninitialize();
     D2DRenderer::Instance().Uninitialize();
 }

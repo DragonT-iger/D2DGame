@@ -19,6 +19,5 @@ private:
 	void OnClose() override;
 
 	std::unique_ptr<GameTimer> m_timer;
-
 };
 

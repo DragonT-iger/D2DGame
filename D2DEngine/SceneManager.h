@@ -16,6 +16,11 @@ public:
     void    SetActiveScene(Scene* scene) { m_active = scene; }
     Scene*  GetActiveScene() const { return m_active; }
 	void    LoadScene(const std::wstring& name);
+    void    UnInitialize();
+
+	// ---------- Debug -----------
+    bool GetDebugMode() { return m_debugMode; }
+	void SetDebugMode(bool active) { m_debugMode = active; }
 
 private:
     SceneManager() = default;
@@ -26,7 +31,8 @@ private:
 	SceneManager(SceneManager&&) = delete;
 	SceneManager& operator=(SceneManager&&) = delete;
 
-    Scene* m_active = nullptr;
+    bool                                                                              m_debugMode = true;
+    Scene*                                                                                m_active = nullptr;
     std::unordered_map<std::wstring, std::unique_ptr<Scene>> m_scenes;
 };
 

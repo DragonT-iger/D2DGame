@@ -20,6 +20,8 @@ public:
     template<typename T>
     T* GetComponent() const;
 
+    void RemoveComponent(Component* component);
+
     void SetActive(bool active);
     bool IsActive() const;
 
@@ -45,11 +47,17 @@ public:
     void SetTag(const std::wstring& tag) { m_tag = tag; }
 
 private:
+    void FlushPending();
+
     std::wstring                                  m_name;
 	std::wstring                                  m_tag = L"Untagged";
     bool                                          m_active = true;
     std::vector<std::unique_ptr<Component>>       m_components;
     std::unique_ptr<Transform>                    m_transform;
+
+    bool                                          m_isIterating = false;
+    std::vector<std::unique_ptr<Component>>       m_pendingAdd;
+    std::vector<Component*>                       m_pendingRemove;
 };
 
 //템플릿은 cpp로 못옮겨
@@ -76,7 +84,10 @@ T* GameObject::AddComponent(Args&&... args)
 
     raw->SetOwner(this);
 
-    m_components.emplace_back(std::move(comp));
+    if (m_isIterating)
+        m_pendingAdd.emplace_back(std::move(comp));
+    else
+        m_components.emplace_back(std::move(comp));
     return raw;
 }
 template<> inline
@@ -95,7 +106,6 @@ Transform* GameObject::AddComponent<Transform>() {
     return m_transform.get();
 }
 
-// 리턴 raw로 주니까 delete 절대하지마셈
 template<typename T> inline
 T* GameObject::GetComponent() const
 {

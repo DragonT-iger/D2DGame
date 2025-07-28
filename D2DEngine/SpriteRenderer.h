@@ -1,27 +1,39 @@
 #pragma once  
-#include "Component.h"  
-#include "GameObject.h"
-
-class D2DRenderer;
-
-class SpriteRenderer : public MonoBehaviour  
-{  
-public:  
-
-    SpriteRenderer() = default;
-    virtual ~SpriteRenderer() = default;
-
-    virtual void Awake() override { m_transform = GetComponent<Transform>(); } // this 참조로 바꿨음
-
-    void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap) { m_bitmap = bitmap; }  //기본 스프라이트 설정
-    void SetSize(float width, float height);
+#include "MonoBehaviour.h"
+#include "RenderInfo.h"
+#include "Transform.h"
 
 
-    void Render(const D2D1::Matrix3x2F& viewTM);
+class SpriteRenderer : public MonoBehaviour
+{
+public:
+	SpriteRenderer() = default;
+	virtual ~SpriteRenderer() = default;
 
-private:  
-    
-    Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_bitmap ;  
-    D2D1_RECT_F                                                m_destRect; //스프라이트 크기랑 똑같아야함
-	Transform*                                  m_transform = nullptr;
+
+	void SetBitmap(const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& bitmap) {
+		m_renderInfo.m_bitmap = bitmap;
+		m_renderInfo.m_srcRect = { 0.f, 0.f, bitmap->GetSize().width, bitmap->GetSize().height };
+		float w = m_renderInfo.m_srcRect.right - m_renderInfo.m_srcRect.left;
+		float h = m_renderInfo.m_srcRect.bottom - m_renderInfo.m_srcRect.top;
+		m_renderInfo.m_destRect = { -(w / 2), -(h / 2), w / 2 , h / 2 };
+	}
+
+	D2D1_SIZE_F GetSize();
+	void SetSize(float width, float height);
+
+	void SetSrcRect(const D2D1_RECT_F& rect) {
+		m_renderInfo.m_srcRect = rect;
+		m_renderInfo.m_destRect = { -(rect.right - rect.left) / 2, -(rect.bottom - rect.top) / 2, (rect.right - rect.left) / 2 , (rect.bottom - rect.top) / 2 };
+	}
+
+	void SetOrderInLayer(int ord) { m_renderInfo.orderLayer = ord; }
+
+	void SetFlip(bool flip) { m_renderInfo.isFlip = flip; }
+	bool IsFlip() { return m_renderInfo.isFlip; }
+
+	RenderInfo& GetRenderInfo();
+
+private:
+	RenderInfo                                                  m_renderInfo; //렌더링 정보, 애니메이션이면 애니메이션 정보가 들어감
 };

@@ -74,8 +74,12 @@ inline std::wostream& cwout = std::wcout;
 #include "SceneManager.h"
 #include "Camera.h"
 #include "SpriteRenderer.h"
+#include "Animator.h"
+#include "RenderInfo.h"
 #include "D2DRenderer.h"
 #include "PhysicsManager.h"
+#include "ResourceManager.h"
+#include "InputManager.h"
 
 
 namespace DX
