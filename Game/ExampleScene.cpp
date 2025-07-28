@@ -61,6 +61,7 @@ void ExampleScene::Awake()
 void ExampleScene::Start()
 {
 
+	// 정확한 이해없이 start 쓰지 마셈 가능하면 Awake에서 처리하세요
 	
 	if (!IsActive())
 		return;
