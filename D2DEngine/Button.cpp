@@ -11,7 +11,10 @@ void Button::Start()
 
 void Button::Pressed()
 {
-	
+	for (const auto& event : m_events)
+	{
+		event();
+	}
 }
 
 void Button::Update(float deltaTime)
@@ -22,27 +25,26 @@ void Button::Update(float deltaTime)
 	if ((m_pos.x - (m_size.width / 2) <= mouse.pos.x && m_pos.x + (m_size.width / 2) >= mouse.pos.x)
 		&& (m_pos.y - (m_size.height / 2) <= mouse.pos.y && m_pos.y + (m_size.height / 2) >= mouse.pos.y))
 	{
-		std::cout << "pos x : " << mouse.pos.x << ", pos y : " << mouse.pos.y << std::endl;
-		m_curEvent = ButtonEvent::Highlight;
-		if (mouse.LButtonPressed)
+		//std::cout << "pos x : " << mouse.pos.x << ", pos y : " << mouse.pos.y << std::endl;
+		if (mouse.LButtonPressed && m_curEvent != ButtonEvent::Pressed)
 		{
+			std::cout << "Button Pressed" << std::endl;
 			m_curEvent = ButtonEvent::Pressed;
 			SetBitmap(m_curEvent);
 			Pressed();
 		}
-		else if(m_curEvent != m_prevEvent)
+		else if(!mouse.LButtonPressed && m_curEvent != ButtonEvent::Highlight)
 		{
+			m_curEvent = ButtonEvent::Highlight;
 			SetBitmap(m_curEvent);
 		}
 	}
 	else
 	{
-		m_curEvent = ButtonEvent::Idle;
-		if (m_curEvent != m_prevEvent)
+		if (m_curEvent != ButtonEvent::Idle)
 		{
+			m_curEvent = ButtonEvent::Idle;
 			SetBitmap(m_curEvent);
 		}
 	}
-
-	m_prevEvent = m_curEvent;
 }

@@ -20,6 +20,7 @@
 #include <memory>
 #include <type_traits>
 #include <string>
+#include <functional>
 
 
 #define NOMINMAX

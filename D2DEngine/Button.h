@@ -24,6 +24,11 @@ public:
 		m_sprites[static_cast<int>(event)] = sprite;
 	}
 
+	void AddPressEvent(std::function<void()> event)
+	{
+		m_events.push_back(event);
+	}
+
 	void SetBitmap(ButtonEvent event) { 
 		if(m_sprites[static_cast<size_t>(event)])	
 			m_image->SetBitmap(m_sprites[static_cast<size_t>(event)], m_size); 
@@ -35,11 +40,11 @@ public:
 	void Update(float deltaTime);
 
 private:
-	Image*										m_image;
-	D2D1_SIZE_F		m_size = { 160.f, 40.f };
-	Vector2											m_pos;
-	ButtonEvent								m_curEvent = ButtonEvent::Idle;
-	ButtonEvent								m_prevEvent = ButtonEvent::MaxEvent;
+	Image*																				m_image;
+	D2D1_SIZE_F													m_size = { 160.f, 40.f };
+	Vector2																					m_pos;
+	ButtonEvent								m_curEvent = ButtonEvent::MaxEvent;
+	std::vector<std::function<void()>>									m_events;
 	std::array<Microsoft::WRL::ComPtr<ID2D1Bitmap1>, static_cast<size_t>(ButtonEvent::MaxEvent)> m_sprites;
 };
 

@@ -19,6 +19,15 @@ public:
 		m_renderInfo.m_destRect = { -(w / 2), -(h / 2), w / 2 , h / 2 };
 	}
 
+	void SetOpacity(float opacity) {
+		if (opacity > 1.0f)
+			opacity = 1.0f;
+		else if (opacity < 0.f)
+			opacity = 0.0f;
+
+		m_renderInfo.opacity = opacity;
+	}
+
 	D2D1_SIZE_F GetSize();
 	void SetSize(float width, float height);
 

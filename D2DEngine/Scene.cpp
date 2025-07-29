@@ -134,7 +134,7 @@ void Scene::Render()
         D2D1::Matrix3x2F mWV = renderTM * info.worldTM * viewTM;
         D2DRenderer::Instance().SetTransform(mWV);
         //D2DRenderer::Instance().DrawCircle(0, 0, info.radius, RGB(255, 0, 0));
-        D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
+        D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect, info.opacity);
 #ifdef _DEBUG
         if (SceneManager::Instance().GetDebugMode() && info.m_collider)
         {

@@ -11,6 +11,7 @@ struct RenderInfo {
 	D2D1_RECT_F													m_srcRect;
 	bool																			isFlip;
 	int																		orderLayer;
+	float																opacity = 1.0f;
 	D2D1::Matrix3x2F												worldTM;
 	Collider*															m_collider;	//디버그용
 
