@@ -81,6 +81,7 @@ private:
     bool                                                                         m_active = true; // 아직 작동 안함
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
     std::vector<RenderInfo>		                                        m_renderQ;
-    Camera* m_Camera = nullptr;
+    std::vector<Collider>		                                           m_colliderQ;
+    Camera*                                                         m_Camera = nullptr;
     ScenePhase                                      m_phase = ScenePhase::None;
 };

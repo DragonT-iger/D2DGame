@@ -135,6 +135,12 @@ void Scene::Render()
         D2DRenderer::Instance().SetTransform(mWV);
         //D2DRenderer::Instance().DrawCircle(0, 0, info.radius, RGB(255, 0, 0));
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
+#ifdef _DEBUG
+        if (SceneManager::Instance().GetDebugMode() && info.m_collider)
+        {
+            info.m_collider->DrawCollider();
+        }
+#endif
 	}
 	m_renderQ.clear();
 }
@@ -155,6 +161,8 @@ void Scene::SetRenderQ()
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
     }
+
+    std::sort(m_renderQ.begin(), m_renderQ.end());
     m_isIterating = false;
     FlushPending();
 }

@@ -37,6 +37,20 @@ void ResourceManager::LoadPath()
 	}
 }
 
+void ResourceManager::LoadSoundPath()
+{
+	//resourcePath
+
+	if (!filesys::exists(resourcePath) || !filesys::is_directory(resourcePath))
+	{
+		std::cerr << "유효하지 않은 디렉토리 경로입니다" << std::endl;
+		return;
+
+
+	}
+}
+
+
 const ComPtr<ID2D1Bitmap1>& ResourceManager::LoadTexture(const std::string& key)
 {
 	if (m_PngPaths.find(key) == m_PngPaths.end())

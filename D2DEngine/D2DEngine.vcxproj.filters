@@ -165,6 +165,12 @@
     <ClInclude Include="RenderInfo.h">
       <Filter>D2DRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="Fmod_Error.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -238,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>SystemManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

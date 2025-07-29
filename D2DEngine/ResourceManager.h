@@ -37,6 +37,7 @@ public:
 	}
 
 	void LoadPath();
+	void LoadSoundPath();
 
 	const ComPtr<ID2D1Bitmap1>& LoadTexture(const std::string& key);
 	std::shared_ptr<AnimationClip> LoadAnimationClip(const std::string& key, const std::string& cliptag);
@@ -53,5 +54,7 @@ private:
 	std::unordered_map<std::string, std::filesystem::path> m_PngPaths;
 	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_textures;
 	std::unordered_map<std::string, std::shared_ptr<AnimationClip>> m_aniClips;
-	//std::unordered_map<std::wstring, 사운드 클래스> m_sounds;	//사운드 용
+	std::unordered_map<std::string, std::filesystem::path> m_BGMPaths;
+	std::unordered_map<std::string, std::filesystem::path> m_SFXPaths;
+	std::unordered_map<std::string, std::filesystem::path> m_UIPaths;
 };
