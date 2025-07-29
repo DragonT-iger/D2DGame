@@ -75,6 +75,9 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PublicIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+  </PropertyGroup>
   <!-- ===== 컴파일러/링커 공통 정의 ===== -->
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -135,6 +138,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
