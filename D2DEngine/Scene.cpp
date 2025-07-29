@@ -165,7 +165,7 @@ void Scene::Render()
 #endif
 
 #ifdef _DEBUG
-	//�׸��� ���
+	//그리드 출력
 	if (SceneManager::Instance().GetDebugMode())
 	{
         float unit = 100.f;
@@ -194,12 +194,12 @@ void Scene::Render()
 		float endY = std::ceil(bottomRight.y / unit) * unit;
 
 		D2DRenderer::Instance().SetTransform(viewTM);
-		//y�� �׸���
+		//y축 그리드
 		for (float x = startX; x <= endX; x += unit)
 		{
 			D2DRenderer::Instance().DrawLine(x, startY, x, endY, D2D1::ColorF::Black);
 		}
-		//x�� �׸���
+		//x축 그리드
 		for (float y = startY; y >= endY; y -= unit)
 		{
 			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
