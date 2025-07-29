@@ -76,6 +76,9 @@ private:
     std::vector<std::unique_ptr<GameObject>>        m_pendingAdd;
     std::vector<GameObject*>                                m_pendingDestroy;
 
+    int                                                                                             m_fps;
+    int                                                                       m_frameCount = 0;
+    float                                                                   m_deltatime = 0.0f;
 
     std::wstring                                                                        m_name;
     bool                                                                         m_active = true; // 아직 작동 안함

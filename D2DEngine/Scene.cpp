@@ -6,7 +6,7 @@
 
 
 // -----------------------------------------------------------------------------
-// GameObject »ý¼º / ÆÄ±«
+// GameObject ï¿½ï¿½ï¿½ï¿½ / ï¿½Ä±ï¿½
 // -----------------------------------------------------------------------------
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
@@ -41,7 +41,7 @@ void Scene::Awake()
     camera->AddComponent<Camera>();
     camera->AddComponent<CinemachineCamera>();
 
-	// Ä«¸Þ¶ó´Â ±âº»ÀûÀ¸·Î ¾À¿¡ µî·Ï
+	// Ä«ï¿½Þ¶ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->Awake();
@@ -69,6 +69,17 @@ void Scene::Update(float deltaTime)
     FlushPending();
 
     SoundManager::Instance().Update();
+    if (m_deltatime >= 1000.f)
+    {
+        m_deltatime = 0.0f;
+        m_fps = m_frameCount;
+        m_frameCount = 0;
+    }
+    else
+    {
+        m_deltatime += deltaTime * 1000.0f;
+        m_frameCount++;
+    }
 }
 
 void Scene::FixedUpdate(float fixedDelta)
@@ -98,13 +109,13 @@ void Scene::LateUpdate(float deltaTime)
 
     
 
-	/*if (!cam) std::cout << "Ä«¸Þ¶ó°¡ ¾øÀ½" << std::endl;
-	else std::cout << "Ä«¸Þ¶ó°¡ ÀÖÀ½" << std::endl;*/
+	/*if (!cam) std::cout << "Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½" << std::endl;
+	else std::cout << "Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½" << std::endl;*/
 
-    //assert(cam && "Ä«¸Þ¶ó ¾øÀ½"); Ä«¸Þ¶ó´Â ÀÏ´Ü ¾ø¾îµµ µÇÀÝ¾Æ?
+    //assert(cam && "Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½"); Ä«ï¿½Þ¶ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½îµµ ï¿½ï¿½ï¿½Ý¾ï¿½?
 
 
-    // ·»´õ¸µ ·ÎÁ÷Àº ¿©±â¿¡
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡
 
 
     /* example
@@ -154,28 +165,44 @@ void Scene::Render()
 #endif
 
 #ifdef _DEBUG
-	//±×¸®µå Ãâ·Â
+	//ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	if (SceneManager::Instance().GetDebugMode())
 	{
+        float unit = 100.f;
+
 		RECT sr;
 		::GetClientRect(D2DRenderer::Instance().GetHandle(), &sr);
-		float w = 6528.f;
-		float h = 4320.f;
+        float w = static_cast<float>(sr.right - sr.left);
+		float h = static_cast<float>(sr.bottom - sr.top);
 
-		float halfW = w / 2;
-		float halfH = h / 2;
+        D2D1::Matrix3x2F invViewTM = viewTM;
+        invViewTM.Invert();
+
+        D2D1_POINT_2F topLeft = D2D1::Point2F(0, 0);
+        D2D1_POINT_2F topRight = D2D1::Point2F(w, 0);
+        D2D1_POINT_2F bottomLeft = D2D1::Point2F(0, h);
+        D2D1_POINT_2F bottomRight = D2D1::Point2F(w, h);
+
+        topLeft = invViewTM.TransformPoint(topLeft);
+        topRight = invViewTM.TransformPoint(topRight);
+        bottomLeft = invViewTM.TransformPoint(bottomLeft);
+        bottomRight = invViewTM.TransformPoint(bottomRight);
+
+		float startX = std::floor(topLeft.x / unit) * unit;
+		float endX = std::ceil(bottomRight.x / unit) * unit;
+		float startY = std::floor(topLeft.y / unit) * unit;
+		float endY = std::ceil(bottomRight.y / unit) * unit;
 
 		D2DRenderer::Instance().SetTransform(viewTM);
-		//xÃà ±×¸®µå
-		for (float y = -halfH; y <= halfH; y += 100.f)
+		//yï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
+		for (float x = startX; x <= endX; x += unit)
 		{
-			D2DRenderer::Instance().DrawLine(-halfW, y, halfW, y, D2D1::ColorF::Black);
+			D2DRenderer::Instance().DrawLine(x, startY, x, endY, D2D1::ColorF::Black);
 		}
-
-		//yÃà ±×¸®µå
-		for (float x = -halfW; x <= halfW; x += 100.f)
+		//xï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
+		for (float y = startY; y >= endY; y -= unit)
 		{
-			D2DRenderer::Instance().DrawLine(x, -halfH, x, halfH, D2D1::ColorF::Black);
+			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
 		}
 	}
 #endif
@@ -186,6 +213,9 @@ void Scene::Render()
     {
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect);
     }
+
+    std::wstring fps = L"fps : " + std::to_wstring(m_fps) + L" / " + std::to_wstring(static_cast<int>(m_deltatime));
+    D2DRenderer::Instance().DrawMessage(fps.c_str(), 0, 0, 150, 50, D2D1::ColorF::Blue);
 
 	m_renderQ.clear();
     m_UIRenderQ.clear();
@@ -225,7 +255,7 @@ void Scene::SetRenderQ()
 void Scene::RegisterCamera(Camera* cam)
 {
     if (m_Camera) {
-        assert(false && "¾À¿¡ Ä«¸Þ¶ó°¡ µÎ´ëÀÏ¼ö ¾ø½¿");
+        assert(false && "ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½Î´ï¿½ï¿½Ï¼ï¿½ ï¿½ï¿½ï¿½ï¿½");
     }
 
     m_Camera = cam;
