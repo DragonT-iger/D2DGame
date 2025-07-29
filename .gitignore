@@ -30,6 +30,7 @@ D2DEngine/D2DEngine.vcxproj_REMOTE_1027.filters
 D2DEngine/D2DEngine.vcxproj_REMOTE_1088.filters
 
 # 써드파티
-ThirdParty/fmod
+ThirdParty
 
 *.lnk
+*.svn

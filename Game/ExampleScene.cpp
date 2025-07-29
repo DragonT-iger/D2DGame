@@ -50,9 +50,6 @@ void ExampleScene::Awake()
 
 	pc->m_xSpeed = 75.f;
 	pc->m_ySpeed = 75.f;
-
-
-
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로
 	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)

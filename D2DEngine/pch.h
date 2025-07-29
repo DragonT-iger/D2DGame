@@ -56,7 +56,7 @@ inline std::wostream& cwout = std::wcout;
 #pragma comment(lib, "fmod_vc.lib")
 #endif
 
-#include <fmod_studio.hpp>
+#include <fmod.hpp>
 //----Sound----end
 
 
@@ -80,6 +80,7 @@ inline std::wostream& cwout = std::wcout;
 #include "PhysicsManager.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
+#include "SoundManager.h"
 
 
 namespace DX

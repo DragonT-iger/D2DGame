@@ -4,7 +4,6 @@
 
 bool Game::Initialize()
 {
-
 	m_timer = std::make_unique<GameTimer>();
 
     m_timer->Reset();
@@ -28,7 +27,6 @@ bool Game::Initialize()
     // 맨 처음 씬 만들고 로드하는법
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<ExampleScene>());
 
-	
     
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀

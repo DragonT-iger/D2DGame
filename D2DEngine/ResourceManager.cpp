@@ -16,40 +16,44 @@ void ResourceManager::LoadPath()
 
 	for (const auto& it : filesys::recursive_directory_iterator(resourcePath))
 	{
-		if (it.is_regular_file() && it.path().extension() == ".json")
-		{
-			auto path = it.path();
-			std::string key = path.filename().string();
+		if(!it.is_regular_file()) continue;
+		auto path = it.path();
+		std::string key = path.filename().string();
 
+		if (it.path().extension() == ".json")
+		{
 			std::cout << key << std::endl;
 
 			m_JsonPaths.emplace(std::move(key), std::move(path));
 		}
-		else if (it.is_regular_file() && it.path().extension() == ".png")
+		else if (it.path().extension() == ".png")
 		{
-			auto path = it.path();
-			std::string key = path.filename().string();
-
 			std::cout << key << std::endl;
 
 			m_PngPaths.emplace(std::move(key), std::move(path));
 		}
+		else if (it.path().extension() == ".wav")
+		{
+			std::string parent = path.parent_path().string();
+
+			if (parent.find("Sounds\\BGM") != std::string::npos)
+			{
+				std::cout << path << key << std::endl;
+				m_BGMPaths.emplace(std::move(key), std::move(path));
+			}
+			else if (parent.find("Sounds\\SFX") != std::string::npos)
+			{
+				std::cout << key << std::endl;
+				m_SFXPaths.emplace(std::move(key), std::move(path));
+			}
+			else if (parent.find("Sounds\\UI") != std::string::npos)
+			{
+				std::cout << key << std::endl;
+				m_UIPaths.emplace(std::move(key), std::move(path));
+			}
+		}
 	}
 }
-
-void ResourceManager::LoadSoundPath()
-{
-	//resourcePath
-
-	if (!filesys::exists(resourcePath) || !filesys::is_directory(resourcePath))
-	{
-		std::cerr << "유효하지 않은 디렉토리 경로입니다" << std::endl;
-		return;
-
-
-	}
-}
-
 
 const ComPtr<ID2D1Bitmap1>& ResourceManager::LoadTexture(const std::string& key)
 {
