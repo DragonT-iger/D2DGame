@@ -8,8 +8,8 @@ void ExampleScene::Awake()
 	if(!IsActive())
 		return;
 
-	/* ********����********
-		Awake���� Scene::Awake() ���� ���ӿ�����Ʈ���ٰ� ������Ʈ�� �ټ� ���� ��������
+	/* ********주의********
+		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
 
 	m_button = Instantiate(L"buttonTest");
@@ -43,7 +43,7 @@ void ExampleScene::Awake()
 
 	m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
 	m_player->AddComponent<Animator>();
-	// �Ҵ� �ȵż� assert �ɸ�
+	// 할당 안돼서 assert 걸림
 	
 	m_player->AddComponent<PlayerController>();
 
@@ -52,7 +52,7 @@ void ExampleScene::Awake()
 	m_player->AddComponent<BoxCollider>();
 
 	b->AddPressEvent([this]() {m_player->GetComponent<Transform>()->Translate({ 20.f, 20.f }); });
-	b->AddPressEvent([]() { std::cout << "��ư ������2" << std::endl; });
+	b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
 
 	GameObject* a = Instantiate(L"aa");
 
@@ -82,8 +82,8 @@ void ExampleScene::Awake()
 	pc->m_ySpeed = 175.f;
 
 	
-	// �ϴ��� Awake���� ���� �ʱ�ȭ�ϴ� �ɷ�
-	// ���� ���ӿ�����Ʈ �ʱ�ȭ�� �����	(�ν����� �����ϼ�)
+	// 일단은 Awake에서 씬을 초기화하는 걸로
+	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)
 
 
 	Scene::Awake();
@@ -93,12 +93,12 @@ void ExampleScene::Awake()
 void ExampleScene::Start()
 {
 
-	// ��Ȯ�� ���ؾ��� start ���� ���� �����ϸ� Awake���� ó���ϼ���
+	// 정확한 이해없이 start 쓰지 마셈 가능하면 Awake에서 처리하세요
 	
 	if (!IsActive())
 		return;
 
-	// ī�޶�� awake���� �ʱ�ȭ�ż� �׳� ���⼭ ����
+	// 카메라는 awake에서 초기화돼서 그냥 여기서 적음
 
 	Camera* camera = GetCamera();
 	
