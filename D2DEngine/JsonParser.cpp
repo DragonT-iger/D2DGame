@@ -9,58 +9,46 @@ struct FrameInfo {
 	int to;
 };
 
-AnimationClips JsonParser::Load(const std::filesystem::path& jsonPath)
+AnimationClips JsonParser::Load(const std::filesystem::path& jsonPath) // 두형식 둘다 호환됨
 {
-	std::ifstream ifs(jsonPath);
+    std::ifstream ifs(jsonPath);
+    if (!ifs) { std::cerr << "Json 파일을 열 수 없습니다.\n"; return {}; }
 
-	if (!ifs.is_open())
-	{
-		std::cerr << "Json 파일을 열 수 없습니다." << std::endl;
-		return {};
-	}
+    nlohmann::json js;  ifs >> js;
+    if (js.is_discarded()) { std::cerr << "JSON 파싱 실패\n"; return {}; }
 
-	nlohmann::json js;
-	ifs >> js;  //파일을 json타입으로 parse
+    struct Tag { std::string name; int from; int to; };
+    std::vector<Tag> tags;
+    for (auto& t : js["meta"]["frameTags"])
+        tags.push_back({ t["name"], t["from"], t["to"] });
 
-	if (js.is_discarded())
-	{
-		std::cerr << "JSON 파싱 실패: 유효하지 않은 문서입니다.\n";
-		return {};
-	}
+    std::vector<nlohmann::json> frames;
+    if (js["frames"].is_array()) {                    
+        frames.assign(js["frames"].begin(), js["frames"].end());
+    }
+    else {                                   
+        for (auto& kv : js["frames"].items())
+            frames.push_back(kv.value());          
+    }
 
-	std::vector<FrameInfo> frameinfos;
-
-	for (const auto& t : js["meta"]["frameTags"])
-	{
-		FrameInfo info;
-		info.tag = t["name"];
-		info.from = t["from"];
-		info.to = t["to"];
-
-		frameinfos.push_back(info);
-	}
-
-	AnimationClips clips;
-
-	for (const auto& info : frameinfos)
-	{
-		AnimationClip clip(info.tag);
-
-		for (int i = info.from; i <= info.to; i++)
-		{
-			auto& frame = js["frames"][i];
-			FrameData src;
-
-			src.rect.top = frame["frame"]["y"];
-			src.rect.bottom = src.rect.top + frame["frame"]["h"];
-			src.rect.left = frame["frame"]["x"];
-			src.rect.right = src.rect.left + frame["frame"]["w"];
-			src.duration = frame["duration"] / 1000.0f;
-
-			clip.AddFrame(src);
-		}
-		clips.emplace_back(clip);
-	}
+    AnimationClips clips;
+    for (auto& tag : tags)
+    {
+        AnimationClip clip(tag.name);
+        for (int i = tag.from; i <= tag.to; ++i)
+        {
+            auto& f = frames[i];
+            FrameData src;
+            src.rect.left = f["frame"]["x"];
+            src.rect.top = f["frame"]["y"];
+            src.rect.right = src.rect.left + f["frame"]["w"];
+            src.rect.bottom = src.rect.top + f["frame"]["h"];
+            src.duration = f["duration"].get<float>() / 1000.f;
+            clip.AddFrame(src);
+        }
+        clips.emplace_back(std::move(clip));
+    }
+    return clips;
 
 	return clips;
 }

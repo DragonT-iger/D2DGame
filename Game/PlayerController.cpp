@@ -11,9 +11,6 @@ void PlayerController::Awake()
     WRL::ComPtr<ID2D1Bitmap1> bitmap;
     //D2DRenderer::Instance().CreateBitmapFromFile(L"Assets/Player.png", *bitmap.GetAddressOf());
 
-	
-
-
     //m_spriteRenderer->SetBitmap(bitmap);
     //m_spriteRenderer->SetSize(64.f, 64.f);
 }
@@ -22,10 +19,12 @@ void  PlayerController::Start()
 {
 	auto pandaEat = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagEat");
 	auto pandaWave = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagWave");
+	auto molewalk = ResourceManager::Instance().LoadAnimationClip("sample_mole_1.json", "Walk");
 
 
     m_animator->AddClip("eat", pandaEat);
     m_animator->AddClip("wave", pandaWave);
+	m_animator->AddClip("Walk", molewalk);
     m_animator->SetEntryState("eat");
 
 	auto collider = GetComponent<BoxCollider>();
@@ -43,8 +42,8 @@ void PlayerController::Update(float deltatime)
 		m_transform->Translate(0, m_ySpeed * deltatime);
 		if (curAnim != "wave")
 		{
-			curAnim = "wave";
-			m_animator->ChangeState("wave");
+			curAnim = "Walk";
+			m_animator->ChangeState("Walk");
 		}
 	}
 	else if (Input.GetKeyDown(Keycode::DOWN))
@@ -67,8 +66,8 @@ void PlayerController::Update(float deltatime)
 	{
 		if (curAnim != "eat")
 		{
-			curAnim = "eat";
-			m_animator->ChangeState("eat");
+			curAnim = "Walk";
+			m_animator->ChangeState("Walk");
 		}
 	}
 

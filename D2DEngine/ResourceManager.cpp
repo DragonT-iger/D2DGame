@@ -24,6 +24,8 @@ void ResourceManager::LoadPath()
 			std::cout << key << std::endl;
 
 			m_JsonPaths.emplace(std::move(key), std::move(path));
+
+			//cwout << "Json Path : " << path.wstring() << std::endl;
 		}
 		else if (it.is_regular_file() && it.path().extension() == ".png")
 		{
