@@ -79,6 +79,7 @@ inline std::wostream& cwout = std::wcout;
 #include "Animator.h"
 #include "Image.h"
 #include "Button.h"
+#include "Slide_Bar.h"
 #include "RenderInfo.h"
 #include "D2DRenderer.h"
 #include "PhysicsManager.h"

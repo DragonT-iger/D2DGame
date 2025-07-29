@@ -54,10 +54,10 @@ public:
 	void AddChild(Transform* child);
 	void RemoveChild(Transform* child);
 
+	void SetSpriteSize(const D2D1_SIZE_F& size) { m_spriteSize = size; SetDirty(); }
 private:
 	void SetDirty();
 	void UpdateMatrices();
-	void SetSpriteSize(const D2D1_SIZE_F& size) { m_spriteSize = size; SetDirty(); }
 
 	bool m_dirty = false;
 

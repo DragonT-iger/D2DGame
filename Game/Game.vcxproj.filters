@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{51c7c679-b50d-46a0-aeb4-5af557e74fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\ButtonTest">
+      <UniqueIdentifier>{e3b9643b-d1a2-462a-9164-14ff1fc50b0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,6 +36,9 @@
     <ClCompile Include="CinemachineCamera.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="UITest.cpp">
+      <Filter>Scripts\ButtonTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -43,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="CinemachineCamera.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UITest.h">
+      <Filter>Scripts\ButtonTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

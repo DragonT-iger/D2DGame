@@ -6,11 +6,22 @@ public:
 	Image() = default;
 	virtual ~Image() = default;
 
-	void Start() override;
-
 	void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap, D2D1_SIZE_F size) { 
+		m_pos = GetComponent<Transform>()->GetPosition();
+		m_size = size;
 		m_renderInfo.m_bitmap = bitmap;
-		m_renderInfo.m_destRect = { -(size.width / 2) + m_pos.x, -(size.height / 2) + m_pos.y, (size.width / 2) + m_pos.x , (size.height / 2) + m_pos.y };
+		m_renderInfo.m_destRect = { -(m_size.width / 2) + m_pos.x, -(m_size.height / 2) + m_pos.y, (m_size.width / 2) + m_pos.x , (m_size.height / 2) + m_pos.y };
+		m_renderInfo.m_srcRect = { 0, 0, bitmap->GetSize().width, bitmap->GetSize().height };
+	}
+
+	void SetSrcRect(D2D1_RECT_F rect)
+	{
+		m_renderInfo.m_srcRect = rect;
+	}
+
+	void SetDestRect(D2D1_RECT_F rect)
+	{
+		m_renderInfo.m_destRect = rect;
 	}
 
 	void SetOrderInLayer(int ord) { m_renderInfo.orderLayer = ord; }
@@ -19,5 +30,6 @@ public:
 
 private:
 	Vector2									m_pos;
+	D2D1_SIZE_F							m_size;
 	UIRenderInfo				m_renderInfo;
 };
