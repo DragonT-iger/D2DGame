@@ -135,13 +135,47 @@ void Scene::Render()
         D2DRenderer::Instance().SetTransform(mWV);
         //D2DRenderer::Instance().DrawCircle(0, 0, info.radius, RGB(255, 0, 0));
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect, info.opacity);
-#ifdef _DEBUG
-        if (SceneManager::Instance().GetDebugMode() && info.m_collider)
-        {
-            info.m_collider->DrawCollider();
-        }
-#endif
 	}
+
+#ifdef _DEBUG
+    for (const auto& info : m_renderQ)
+    {
+		if (SceneManager::Instance().GetDebugMode() && info.m_collider)
+		{
+			D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
+			D2D1::Matrix3x2F mWV = renderTM * info.worldTM * viewTM;
+			D2DRenderer::Instance().SetTransform(mWV);
+			info.m_collider->DrawCollider();
+		}
+    }
+#endif
+
+#ifdef _DEBUG
+	//그리드 출력
+	if (SceneManager::Instance().GetDebugMode())
+	{
+		RECT sr;
+		::GetClientRect(D2DRenderer::Instance().GetHandle(), &sr);
+		float w = 6528.f;
+		float h = 4320.f;
+
+		float halfW = w / 2;
+		float halfH = h / 2;
+
+		D2DRenderer::Instance().SetTransform(viewTM);
+		//x축 그리드
+		for (float y = -halfH; y <= halfH; y += 100.f)
+		{
+			D2DRenderer::Instance().DrawLine(-halfW, y, halfW, y, D2D1::ColorF::Black);
+		}
+
+		//y축 그리드
+		for (float x = -halfW; x <= halfW; x += 100.f)
+		{
+			D2DRenderer::Instance().DrawLine(x, -halfH, x, halfH, D2D1::ColorF::Black);
+		}
+	}
+#endif
 
     //ui render
     D2DRenderer::Instance().SetTransform(D2D1::Matrix3x2F::Identity());
@@ -151,6 +185,7 @@ void Scene::Render()
     }
 
 	m_renderQ.clear();
+    m_UIRenderQ.clear();
 }
 
 void Scene::UnInitialize()
