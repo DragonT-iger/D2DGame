@@ -66,6 +66,18 @@ void Scene::Update(float deltaTime)
     for (auto& obj : m_gameObjects) obj->Update(deltaTime);
     m_isIterating = false;
     FlushPending();
+
+    if (m_deltatime >= 1000.f)
+    {
+        m_deltatime = 0.0f;
+        m_fps = m_frameCount;
+        m_frameCount = 0;
+    }
+    else
+    {
+        m_deltatime += deltaTime * 1000.0f;
+        m_frameCount++;
+    }
 }
 
 void Scene::FixedUpdate(float fixedDelta)
@@ -154,25 +166,41 @@ void Scene::Render()
 	//그리드 출력
 	if (SceneManager::Instance().GetDebugMode())
 	{
+        float unit = 100.f;
+
 		RECT sr;
 		::GetClientRect(D2DRenderer::Instance().GetHandle(), &sr);
-		float w = 6528.f;
-		float h = 4320.f;
+        float w = static_cast<float>(sr.right - sr.left);
+		float h = static_cast<float>(sr.bottom - sr.top);
 
-		float halfW = w / 2;
-		float halfH = h / 2;
+        D2D1::Matrix3x2F invViewTM = viewTM;
+        invViewTM.Invert();
+
+        D2D1_POINT_2F topLeft = D2D1::Point2F(0, 0);
+        D2D1_POINT_2F topRight = D2D1::Point2F(w, 0);
+        D2D1_POINT_2F bottomLeft = D2D1::Point2F(0, h);
+        D2D1_POINT_2F bottomRight = D2D1::Point2F(w, h);
+
+        topLeft = invViewTM.TransformPoint(topLeft);
+        topRight = invViewTM.TransformPoint(topRight);
+        bottomLeft = invViewTM.TransformPoint(bottomLeft);
+        bottomRight = invViewTM.TransformPoint(bottomRight);
+
+		float startX = std::floor(topLeft.x / unit) * unit;
+		float endX = std::ceil(bottomRight.x / unit) * unit;
+		float startY = std::floor(topLeft.y / unit) * unit;
+		float endY = std::ceil(bottomRight.y / unit) * unit;
 
 		D2DRenderer::Instance().SetTransform(viewTM);
-		//x축 그리드
-		for (float y = -halfH; y <= halfH; y += 100.f)
-		{
-			D2DRenderer::Instance().DrawLine(-halfW, y, halfW, y, D2D1::ColorF::Black);
-		}
-
 		//y축 그리드
-		for (float x = -halfW; x <= halfW; x += 100.f)
+		for (float x = startX; x <= endX; x += unit)
 		{
-			D2DRenderer::Instance().DrawLine(x, -halfH, x, halfH, D2D1::ColorF::Black);
+			D2DRenderer::Instance().DrawLine(x, startY, x, endY, D2D1::ColorF::Black);
+		}
+		//x축 그리드
+		for (float y = startY; y >= endY; y -= unit)
+		{
+			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
 		}
 	}
 #endif
@@ -183,6 +211,9 @@ void Scene::Render()
     {
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect);
     }
+
+    std::wstring fps = L"fps : " + std::to_wstring(m_fps) + L" / " + std::to_wstring(static_cast<int>(m_deltatime));
+    D2DRenderer::Instance().DrawMessage(fps.c_str(), 0, 0, 150, 50, D2D1::ColorF::Blue);
 
 	m_renderQ.clear();
     m_UIRenderQ.clear();
