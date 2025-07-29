@@ -29,14 +29,6 @@ void ExampleScene::Awake()
 
 	m_button->GetComponent<Transform>()->Translate({ 100, 100 });
 
-	m_background = Instantiate(L"background");
-
-	m_spriteRenderer = m_background->AddComponent<SpriteRenderer>();
-
-	m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("Test_back_02.png"));
-
-	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
-
 	m_player = Instantiate(L"Player");
 
 	m_player->SetTag(L"Player");

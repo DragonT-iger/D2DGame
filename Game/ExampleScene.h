@@ -12,6 +12,5 @@ class ExampleScene : public Scene
 	GameObject* m_player = nullptr;
 	GameObject* m_player2 = nullptr;
 	GameObject*			m_button = nullptr;
-	GameObject* m_background;
 };
 
