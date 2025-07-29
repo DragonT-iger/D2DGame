@@ -25,7 +25,17 @@ void ExampleScene::Awake()
 	b->AddEventSprite(b1, ButtonEvent::Highlight);
 	b->AddEventSprite(b3, ButtonEvent::Pressed);
 
+	
+
 	m_button->GetComponent<Transform>()->Translate({ 100, 100 });
+
+	m_background = Instantiate(L"background");
+
+	m_spriteRenderer = m_background->AddComponent<SpriteRenderer>();
+
+	m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("Test_back_02.png"));
+
+	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
 	m_player = Instantiate(L"Player");
 
@@ -40,6 +50,9 @@ void ExampleScene::Awake()
 	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
 	m_player->AddComponent<BoxCollider>();
+
+	b->AddPressEvent([this]() {m_player->GetComponent<Transform>()->Translate({ 20.f, 20.f }); });
+	b->AddPressEvent([]() { std::cout << "¹öÆ° ´­·¶À½2" << std::endl; });
 
 	GameObject* a = Instantiate(L"aa");
 

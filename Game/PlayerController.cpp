@@ -30,6 +30,7 @@ void  PlayerController::Start()
 	auto collider = GetComponent<BoxCollider>();
 
 	collider->SetSize({ m_spriteRenderer->GetSize().width, m_spriteRenderer->GetSize().height});
+	//m_spriteRenderer->SetOpacity(0.5f);
 }
 
 
