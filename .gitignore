@@ -33,7 +33,6 @@ D2DEngine/D2DEngine.vcxproj_REMOTE_1088.filters
 ThirdParty/
 Game/Assets/
 
-*.lnk
 
 
 
@@ -45,3 +44,6 @@ Game/Assets/
 *_LOCAL_*.h
 *_REMOTE_*.h
 *_BACKUP_*.h
+
+*.lnk
+*.svn

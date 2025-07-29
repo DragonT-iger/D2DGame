@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\User\Desktop\DT_Engin\ThirdParty\fmod\api\core\lib\x64;$(LibraryPath)</LibraryPath>
-    <PublicIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc;$(SolutionDir)..\ThirdParty\fmod\api\studio\inc;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <!-- ===== 컴파일러/링커 공통 정의 ===== -->
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -114,7 +114,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\studio\inc;$(SolutionDir)..\ThirdParty\fmod\api\core\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -8,8 +8,8 @@ void ExampleScene::Awake()
 	if(!IsActive())
 		return;
 
-	/* ********ÁÖÀÇ********
-		Awake¿¡¼­ Scene::Awake() Àü¿¡ °ÔÀÓ¿ÀºêÁ§Æ®¿¡´Ù°¡ ÄÄÆ÷³ÍÆ®¸¸ ´Ù¼À µý°Ç ÇÏÁö¸¶»ù
+	/* ********ï¿½ï¿½ï¿½ï¿½********
+		Awakeï¿½ï¿½ï¿½ï¿½ Scene::Awake() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ù¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 
 	m_button = Instantiate(L"buttonTest");
@@ -43,7 +43,7 @@ void ExampleScene::Awake()
 
 	m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
 	m_player->AddComponent<Animator>();
-	// ÇÒ´ç ¾ÈµÅ¼­ assert °É¸²
+	// ï¿½Ò´ï¿½ ï¿½ÈµÅ¼ï¿½ assert ï¿½É¸ï¿½
 	
 	m_player->AddComponent<PlayerController>();
 
@@ -52,7 +52,7 @@ void ExampleScene::Awake()
 	m_player->AddComponent<BoxCollider>();
 
 	b->AddPressEvent([this]() {m_player->GetComponent<Transform>()->Translate({ 20.f, 20.f }); });
-	b->AddPressEvent([]() { std::cout << "¹öÆ° ´­·¶À½2" << std::endl; });
+	b->AddPressEvent([]() { std::cout << "ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2" << std::endl; });
 
 	GameObject* a = Instantiate(L"aa");
 
@@ -82,8 +82,8 @@ void ExampleScene::Awake()
 	pc->m_ySpeed = 175.f;
 
 	
-	// ÀÏ´ÜÀº Awake¿¡¼­ ¾ÀÀ» ÃÊ±âÈ­ÇÏ´Â °É·Î
-	// ¾ÀÀº °ÔÀÓ¿ÀºêÁ§Æ® ÃÊ±âÈ­¸¸ ´ã´çÇÔ	(ÀÎ½ºÆåÅÍ »ý°¢ÇÏ¼À)
+	// ï¿½Ï´ï¿½ï¿½ï¿½ Awakeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ï´ï¿½ ï¿½É·ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½	(ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½)
 
 
 	Scene::Awake();
@@ -93,12 +93,12 @@ void ExampleScene::Awake()
 void ExampleScene::Start()
 {
 
-	// Á¤È®ÇÑ ÀÌÇØ¾øÀÌ start ¾²Áö ¸¶¼À °¡´ÉÇÏ¸é Awake¿¡¼­ Ã³¸®ÇÏ¼¼¿ä
+	// ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½ start ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ Awakeï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
 	
 	if (!IsActive())
 		return;
 
-	// Ä«¸Þ¶ó´Â awake¿¡¼­ ÃÊ±âÈ­µÅ¼­ ±×³É ¿©±â¼­ ÀûÀ½
+	// Ä«ï¿½Þ¶ï¿½ï¿½ awakeï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Å¼ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½
 
 	Camera* camera = GetCamera();
 	
