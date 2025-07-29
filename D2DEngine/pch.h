@@ -60,6 +60,12 @@ inline std::wostream& cwout = std::wcout;
 #include <fmod.hpp>
 //----Sound----end
 
+#ifdef _DEBUG
+#include <imgui.h>
+#include <imgui_impl_win32.h>
+#include <imgui_impl_dx11.h>
+#endif
+
 
 #include "MonoBehaviour.h"
 #include "Behaviour.h"
@@ -85,6 +91,11 @@ inline std::wostream& cwout = std::wcout;
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "SoundManager.h"
+
+#ifdef _DEBUG
+#include "ImGuiManager.h"
+#endif // _DEBUG
+
 
 
 namespace DX

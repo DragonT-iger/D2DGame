@@ -117,7 +117,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)..\ThirdParty\fmod\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -161,6 +161,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="ImGuiManager.h" />
     <!-- 병합 추가 ↓ -->
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="json.hpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImGuiManager.cpp" />
     <!-- 병합 추가 ↓ -->
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JsonParser.cpp" />

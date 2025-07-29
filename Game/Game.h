@@ -15,6 +15,8 @@ private:
 
 	// 윈도우 프로시저 재정의
 
+	bool OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) override;
+
 	void OnResize(int width, int height) override;
 	void OnClose() override;
 

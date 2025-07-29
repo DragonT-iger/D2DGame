@@ -1,9 +1,10 @@
 #include "pch.h"
-#include <iostream>
-
+#include "NzWndBase.h"
 
 LRESULT CALLBACK NzWndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
+	
+
 	NzWndBase* pNzWnd = reinterpret_cast<NzWndBase*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 
 	if (pNzWnd != nullptr)

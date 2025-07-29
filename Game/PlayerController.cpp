@@ -19,7 +19,7 @@ void  PlayerController::Start()
 {
 	auto pandaEat = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagEat");
 	auto pandaWave = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagWave");
-	auto molewalk = ResourceManager::Instance().LoadAnimationClip("sample_mole_1.json", "Walk");
+	auto molewalk = ResourceManager::Instance().LoadAnimationClip("character.json", "Walk");
 
 
     m_animator->AddClip("eat", pandaEat);

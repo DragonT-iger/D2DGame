@@ -105,13 +105,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\D2DEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)..\D2DEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64;$(SolutionDir)..\ThirdParty\fmod\api\studio\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64;$(SolutionDir)..\ThirdParty\fmod\api\studio\lib\x64;$(SolutionDir)\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ImGUIDX11D.lib;</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.dll" "$(OutDir)"</Command>

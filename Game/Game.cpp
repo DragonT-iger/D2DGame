@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Game.h"
 #include "ExampleScene.h"
-
 bool Game::Initialize()
 {
 	m_timer = std::make_unique<GameTimer>();
@@ -28,6 +27,12 @@ bool Game::Initialize()
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<ExampleScene>());
 
     
+    //ImGui 초기화
+#ifdef _DEBUG
+	ImGuiManager::Instance().Initialize(static_cast<HWND>(GetHandle()), D2DRenderer::Instance().GetD3DDevice(), D2DRenderer::Instance().GetD3DContext());
+
+
+#endif
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
 
@@ -68,7 +73,13 @@ void Game::LifeCycle(float deltaTime)
 
     Scene* scene = SceneManager::Instance().GetActiveScene();
 
+
 	D2DRenderer::Instance().RenderBegin();
+
+#ifdef _DEBUG
+    ImGuiManager::Instance().BeginFrame(deltaTime);
+#endif // _DEBUG
+
 
 
     if (scene && scene->IsActive())
@@ -87,12 +98,25 @@ void Game::LifeCycle(float deltaTime)
 	}
 
     InputManager::Instance().EndFrame();
-    D2DRenderer::Instance().RenderEnd();
+
+
+
+
+    D2DRenderer::Instance().RenderEnd(false);
+
+#ifdef _DEBUG
+    ImGuiManager::Instance().EndFrame(D2DRenderer::Instance().GetD3DRenderTargetView());
+#endif
+
+    D2DRenderer::Instance().Present();
 }
 
 void Game::Release()
 {
     m_timer = nullptr;
+#ifdef _DEBUG
+	ImGuiManager::Instance().Shutdown();
+#endif
     __super::Destroy();
 }
 
@@ -101,6 +125,17 @@ void Game::UpdateTime()
     assert(m_timer != nullptr && "타이머가 존재하지 않습니다!" );
 
     m_timer->Tick();
+}
+
+bool Game::OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+#ifdef _DEBUG
+    //if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
+    //{
+    //    return true; // ImGui가 메시지를 처리했으면 true 반환
+    //}
+#endif
+    return false;
 }
 
 void Game::OnResize(int width, int height)

@@ -192,6 +192,9 @@
     <ClInclude Include="SoundManager.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuiManager.h">
+      <Filter>SystemManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -276,6 +279,9 @@
       <Filter>Component\UIComponent\Button</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
+      <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiManager.cpp">
       <Filter>SystemManager</Filter>
     </ClCompile>
   </ItemGroup>
