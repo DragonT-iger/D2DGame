@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Game.h"
 #include "ExampleScene.h"
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 bool Game::Initialize()
 {
 	m_timer = std::make_unique<GameTimer>();
@@ -130,10 +133,10 @@ void Game::UpdateTime()
 bool Game::OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 #ifdef _DEBUG
-    //if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
-    //{
-    //    return true; // ImGui가 메시지를 처리했으면 true 반환
-    //}
+    if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
+    {
+        return true; // ImGui가 메시지를 처리했으면 true 반환
+    }
 #endif
     return false;
 }
