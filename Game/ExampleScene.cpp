@@ -77,7 +77,7 @@ void ExampleScene::Awake()
 
 	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
-	m_player->AddComponent<BoxCollider>();
+	m_player->AddComponent<CircleCollider>();
 
 	//b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
 	//b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
@@ -106,8 +106,8 @@ void ExampleScene::Awake()
 
 	m_player2->AddComponent<BoxCollider>();
 
-	pc->m_xSpeed = 1750.f;
-	pc->m_ySpeed = 1750.f;
+	pc->m_xSpeed = 550.f;
+	pc->m_ySpeed = 550.f;
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로

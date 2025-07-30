@@ -8,14 +8,14 @@
 /// </summary>
 class Behaviour : public Component {
 public:
-    Behaviour() : m_enabled(true) {}
+    Behaviour() : m_active(true) {}
     virtual ~Behaviour() = default;
 
-    void Enable() { m_enabled = true; }
-    void Disable() { m_enabled = false; }
-    void SetEnabled(bool state) { m_enabled = state; }
-    bool IsEnabled() const { return m_enabled; }
+    void Enable() { m_active = true; }
+    void Disable() { m_active = false; }
+    void SetActive(bool state) { m_active = state; }
+    bool IsActive() const { return m_active; }
 
 private:
-    bool m_enabled;
+    bool m_active;
 };

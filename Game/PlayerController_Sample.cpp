@@ -25,7 +25,13 @@ void  PlayerController_Sample::Start()
 
 	auto collider = GetComponent<BoxCollider>();
 
-	collider->SetSize({ m_spriteRenderer->GetSize().width, m_spriteRenderer->GetSize().height});
+	if (collider) {
+		collider->SetSize({ m_spriteRenderer->GetSize().width, m_spriteRenderer->GetSize().height });
+	}
+	else {
+		GetComponent<CircleCollider>()->SetRadius({ m_spriteRenderer->GetSize().width / 2 });
+	}
+
 	//m_spriteRenderer->SetOpacity(0.5f);
 }
 

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ImGuiWindow.h"
 #ifdef _DEBUG
-void ImGuiWindow::Draw(float)
+void ImGuiWindow::Draw(float deltaTime)
 {
     DrawHierarchy();
     DrawInspector();
@@ -68,10 +68,10 @@ void ImGuiWindow::DrawInspector()
         const char* typeName = typeid(*c).name();
         if (auto* beh = dynamic_cast<Behaviour*>(c.get()))
         {
-            bool enabled = beh->IsEnabled();        // Behaviour 에서 on/off 상태 얻기
+            bool enabled = beh->IsActive();        // Behaviour 에서 on/off 상태 얻기
             ImGui::Checkbox(typeName, &enabled);
             if (ImGui::IsItemEdited())
-                beh->SetEnabled(enabled);
+                beh->SetActive(enabled);
         }
         else
         {
