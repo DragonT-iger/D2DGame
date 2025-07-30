@@ -168,7 +168,7 @@ void Scene::Render()
 #endif
 
 #ifdef _DEBUG
-	//æ´¹ëªƒ?”ï¿½ë±¶ ?•°?’•? °
+	//
 	if (SceneManager::Instance().GetDebugMode())
 	{
         float unit = 100.f;
@@ -197,12 +197,12 @@ void Scene::Render()
 		float endY = std::ceil(bottomRight.y / unit) * unit;
 
 		D2DRenderer::Instance().SetTransform(viewTM);
-		//y?•°ï¿? æ´¹ëªƒ?”ï¿½ë±¶
+		//y
 		for (float x = startX; x <= endX; x += unit)
 		{
 			D2DRenderer::Instance().DrawLine(x, startY, x, endY, D2D1::ColorF::Black);
 		}
-		//x?•°ï¿? æ´¹ëªƒ?”ï¿½ë±¶
+		//x
 		for (float y = startY; y >= endY; y -= unit)
 		{
 			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
