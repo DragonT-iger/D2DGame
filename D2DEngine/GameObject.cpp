@@ -34,7 +34,9 @@ void GameObject::Awake() {
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            mb->Awake();
+            if (IsActive())
+                if(mb->IsActive())
+                    mb->Awake();
     m_isIterating = false;
     FlushPending();
 }
@@ -43,7 +45,9 @@ void GameObject::Start() {
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            mb->Start();
+            if(IsActive())
+                if (mb->IsActive())
+                    mb->Start();
     m_isIterating = false;
     FlushPending();
 }
@@ -52,7 +56,9 @@ void GameObject::Update(float deltaTime) {
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            mb->Update(deltaTime);
+            if(IsActive())
+                if (mb->IsActive())
+                    mb->Update(deltaTime);
     m_isIterating = false;
     FlushPending();
 }
@@ -61,7 +67,9 @@ void GameObject::FixedUpdate(float fixedDeltaTime) {
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            mb->FixedUpdate(fixedDeltaTime);
+            if (IsActive())
+                if (mb->IsActive())
+                    mb->FixedUpdate(fixedDeltaTime);
     m_isIterating = false;
     FlushPending();
 }
@@ -70,7 +78,9 @@ void GameObject::LateUpdate(float deltaTime) {
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            mb->LateUpdate(deltaTime);
+            if (IsActive())
+                if (mb->IsActive())
+                    mb->LateUpdate(deltaTime);
     m_isIterating = false;
     FlushPending();
 }
