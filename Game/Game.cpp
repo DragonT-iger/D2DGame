@@ -2,7 +2,9 @@
 #include "Game.h"
 #include "ExampleScene.h"
 
+#ifdef _DEBUG
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
 
 bool Game::Initialize()
 {
@@ -135,7 +137,6 @@ bool Game::OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         return true; // ImGui가 메시지를 처리했으면 true 반환
     }
 #endif
-
     InputManager::Instance().OnHandleMessage({ hwnd, msg , wParam, lParam, 0 , {0, 0} });
 
     return false;

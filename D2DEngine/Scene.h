@@ -25,10 +25,10 @@ public:
         Render
     };
 
-    explicit Scene(const std::wstring& name = L"NewScene") : m_name(name) {};
+    explicit Scene(const std::string& name = "NewScene") : m_name(name) {};
     virtual ~Scene() = default;
 
-    GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
+    GameObject* CreateGameObject(const std::string& name = "GameObject");
 	const std::vector<std::unique_ptr<GameObject>>& GetGameObjects() const { return m_gameObjects; }
 
 	void Destroy(GameObject* object);
@@ -65,8 +65,10 @@ public:
 
     virtual void OnResize(int width, int height) {}; // (필요한가?? 왜적었더라)
 
-    const std::wstring& GetName() const { return m_name; }
+    const std::string& GetName() const { return m_name; }
 
+
+    
 protected:
     /* 지연 큐 적용 */
     void FlushPending();
@@ -80,7 +82,7 @@ private:
     int                                                                       m_frameCount = 0;
     float                                                                   m_deltatime = 0.0f;
 
-    std::wstring                                                                        m_name;
+    std::string                                                                        m_name;
     bool                                                                         m_active = true; // 아직 작동 안함
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
     std::vector<RenderInfo>		                                        m_renderQ;

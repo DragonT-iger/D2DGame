@@ -12,7 +12,7 @@
 class GameObject
 {
 public:
-    GameObject(const std::wstring& name = L"GameObject");
+    GameObject(const std::string& name = "GameObject");
 
     template<typename T, typename... Args>
     T* AddComponent(Args&&... args);
@@ -40,17 +40,19 @@ public:
 
     //getname
 
-	const std::wstring& GetName() const { return m_name; }
-    void SetName(const std::wstring& name) { m_name = name; }
+	const std::string& GetName() const { return m_name; }
+    void SetName(const std::string& name) { m_name = name; }
 
-	const std::wstring& GetTag() const { return m_tag; }
-    void SetTag(const std::wstring& tag) { m_tag = tag; }
+	const std::string& GetTag() const { return m_tag; }
+    void SetTag(const std::string& tag) { m_tag = tag; }
 
+    //에디터에서 가져오기위한용
+    const std::vector<std::unique_ptr<Component>>& GetComponents() const { return m_components; }
 private:
     void FlushPending();
 
-    std::wstring                                  m_name;
-	std::wstring                                  m_tag = L"Untagged";
+    std::string                                   m_name;
+	std::string                                   m_tag = "Untagged";
     bool                                          m_active = true;
     std::vector<std::unique_ptr<Component>>       m_components;
     std::unique_ptr<Transform>                    m_transform;

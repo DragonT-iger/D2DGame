@@ -9,7 +9,7 @@
 // GameObject ���� / �ı�
 // -----------------------------------------------------------------------------
 
-GameObject* Scene::CreateGameObject(const std::wstring& name)
+GameObject* Scene::CreateGameObject(const std::string& name)
 {
     auto go = std::make_unique<GameObject>(name);
     GameObject* raw = go.get();
@@ -37,7 +37,7 @@ void Scene::Awake()
     //if (!m_active) return;
     m_phase = ScenePhase::Awake;
 
-    GameObject* camera = CreateGameObject(L"Camera");
+    GameObject* camera = CreateGameObject("Camera");
     camera->AddComponent<Camera>();
     camera->AddComponent<CinemachineCamera>();
 

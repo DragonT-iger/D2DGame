@@ -12,7 +12,7 @@ void ExampleScene::Awake()
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
 
-	m_button = Instantiate(L"buttonTest");
+	m_button = Instantiate("buttonTest");
 
 	m_button->AddComponent<Image>();
 	auto b = m_button->AddComponent<Button>();
@@ -29,7 +29,7 @@ void ExampleScene::Awake()
 
 	m_button->GetComponent<Transform>()->Translate({ 100, 100 });
 
-	m_background = Instantiate(L"background");
+	m_background = Instantiate("background");
 
 	m_spriteRenderer = m_background->AddComponent<SpriteRenderer>();
 
@@ -37,9 +37,9 @@ void ExampleScene::Awake()
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
-	m_player = Instantiate(L"Player");
+	m_player = Instantiate("Player");
 
-	m_player->SetTag(L"Player");
+	m_player->SetTag("Player");
 
 	m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
 	m_player->AddComponent<Animator>();
@@ -54,7 +54,7 @@ void ExampleScene::Awake()
 	b->AddPressEvent([this]() {m_player->GetComponent<Transform>()->Translate({ 20.f, 20.f }); });
 	b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
 
-	GameObject* a = Instantiate(L"aa");
+	GameObject* a = Instantiate("aa");
 
 	SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
 
@@ -64,8 +64,8 @@ void ExampleScene::Awake()
 
 	spriteRenderer->SetSize(64.f, 64.f);
 
-	m_player2 = Instantiate(L"Player2");
-	m_player2->SetTag(L"Player2");
+	m_player2 = Instantiate("Player2");
+	m_player2->SetTag("Player2");
 
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();

@@ -4,7 +4,7 @@
 #include "MonoBehaviour.h"
 #include "Transform.h"
 
-GameObject::GameObject(const std::wstring& name)
+GameObject::GameObject(const std::string& name)
     : m_name{ name }, m_active{ true } {
     this->AddComponent<Transform>();
 }

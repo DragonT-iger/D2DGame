@@ -1,4 +1,5 @@
 #pragma once
+class ImGuiWindow;
 #ifdef _DEBUG
 class ImGuiManager
 {
@@ -27,5 +28,7 @@ private:
     HWND                 m_hwnd{ nullptr };
     ID3D11Device*        m_device{ nullptr };
     ID3D11DeviceContext* m_context{ nullptr };
+
+    std::unique_ptr<ImGuiWindow> m_imGuiWindow = std::make_unique<ImGuiWindow>();
 };
 #endif

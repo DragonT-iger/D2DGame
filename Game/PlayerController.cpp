@@ -80,7 +80,7 @@ void PlayerController::OnTriggerEnter(Collider* other)
 
 
 #ifdef _DEBUG
-     cwout << "PlayerController::OnTriggerEnter: " << other->GetOwner()->GetName() << std::endl;
+	std::cout << "PlayerController::OnTriggerEnter: " << other->GetOwner()->GetName() << std::endl;
 #endif // !__DEBUG
 
 }
@@ -88,13 +88,13 @@ void PlayerController::OnTriggerEnter(Collider* other)
 void PlayerController::OnTriggerStay(Collider* other)
 {
 	#ifdef _DEBUG
-	cwout << "PlayerController::OnTriggerStay: " << other->GetOwner()->GetName() << std::endl;
+	std::cout << "PlayerController::OnTriggerStay: " << other->GetOwner()->GetName() << std::endl;
 #endif // !__DEBUG
 }
 
 void PlayerController::OnTriggerExit(Collider* other)
 {
 	#ifdef _DEBUG
-	cwout << "PlayerController::OnTriggerExit: " << other->GetOwner()->GetName() << std::endl;
+	std::cout << "PlayerController::OnTriggerExit: " << other->GetOwner()->GetName() << std::endl;
 #endif // !__DEBUG
 }

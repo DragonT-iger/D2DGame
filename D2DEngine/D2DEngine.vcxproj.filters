@@ -88,6 +88,9 @@
     <Filter Include="Component\UIComponent\Button">
       <UniqueIdentifier>{06a14180-6cef-426a-a66f-929eb7a0ed41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{f9f6b3b6-2a3c-45d9-ac86-cadbf3e7f892}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -193,7 +196,10 @@
       <Filter>SystemManager</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiManager.h">
-      <Filter>SystemManager</Filter>
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiWindow.h">
+      <Filter>Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -282,7 +288,10 @@
       <Filter>SystemManager</Filter>
     </ClCompile>
     <ClCompile Include="ImGuiManager.cpp">
-      <Filter>SystemManager</Filter>
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiWindow.cpp">
+      <Filter>Editor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

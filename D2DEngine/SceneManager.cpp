@@ -27,8 +27,8 @@ void SceneManager::LoadScene(const std::wstring& name)
 
 #ifdef _DEBUG
 
-	if (prev) cwout << "LoadScene: " << prev->GetName() << "->" << it->second.get()->GetName() << std::endl;
-	else  cwout << "LoadScene: " << "Nothing" << "->" << it->second.get()->GetName() << std::endl;
+	if (prev) std::cout << "LoadScene: " << prev->GetName() << "->" << it->second.get()->GetName() << std::endl;
+	else  std::cout << "LoadScene: " << "Nothing" << "->" << it->second.get()->GetName() << std::endl;
 	
 #endif // !_DEBUG
 

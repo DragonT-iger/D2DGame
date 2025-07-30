@@ -9,8 +9,10 @@ LRESULT CALLBACK NzWndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 	if (pNzWnd != nullptr)
 	{
-		if (pNzWnd->OnWndProc(hwnd, msg, wparam, lparam))
+		if (pNzWnd->OnWndProc(hwnd, msg, wparam, lparam)) {
 			return 0;
+		}
+			
 	}
 	switch (msg)
 	{

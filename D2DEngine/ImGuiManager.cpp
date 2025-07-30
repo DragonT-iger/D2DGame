@@ -1,6 +1,7 @@
 
 #include "pch.h"
 #include "ImGuiManager.h"
+#include "ImGuiWindow.h"
 #ifdef _DEBUG
 ImGuiManager& ImGuiManager::Instance()
 {
@@ -42,7 +43,8 @@ void ImGuiManager::BeginFrame(float deltaTime)
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
-    Show(deltaTime);
+
+    m_imGuiWindow->Draw();
 }
 
 void ImGuiManager::EndFrame(ID3D11RenderTargetView* mainRTV)

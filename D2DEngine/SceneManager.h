@@ -38,7 +38,7 @@ private:
 
 
 //   일단 SceneManager에 정의 나중에 위치 수정
-inline GameObject* Instantiate(const std::wstring& name = L"GameObject")
+inline GameObject* Instantiate(const std::string& name = "GameObject")
 {
     Scene* s = SceneManager::Instance().GetActiveScene();
     assert(s && "Instantiate: active scene is null!");
