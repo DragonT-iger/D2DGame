@@ -239,16 +239,15 @@ void Scene::SetRenderQ()
         const auto& spRender = obj->GetComponent<SpriteRenderer>();
         if (spRender)
         {
-            if(!spRender->IsEnabled())
+            if(!spRender->IsActive())
                 continue;
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
         else if (auto* img = obj->GetComponent<Image>())
         {
-            const auto& img = obj->GetComponent<Image>();
             if (img)
             {
-				if (!img->IsEnabled())
+				if (!img->IsActive())
 					continue;
                 m_UIRenderQ.push_back(img->GetRenderInfo());
             }
