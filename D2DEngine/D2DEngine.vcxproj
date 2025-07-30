@@ -178,6 +178,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SimpleMathHelper.h" />
+    <ClInclude Include="Slide_Bar.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TMHelper.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SimpleMathHelper.cpp" />
+    <ClCompile Include="Slide_Bar.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TMHelper.cpp" />

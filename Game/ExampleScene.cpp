@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ExampleScene.h"
 #include "PlayerController.h"
+#include "UITest.h"
 #include "CinemachineCamera.h"
 
 void ExampleScene::Awake()
@@ -11,6 +12,15 @@ void ExampleScene::Awake()
 	/* ********주의********
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
+
+	m_slidebar = Instantiate("slidebar");
+	m_slidebar->AddComponent<Image>();	
+	m_slidebar->AddComponent<Slide_Bar>();
+	m_slidebar->AddComponent<UITest>();
+
+	m_slidebar->GetComponent<Transform>()->SetPosition({ 100, 150 });
+
+	m_slidebar->GetComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 160, 20 });
 
 	m_button = Instantiate("buttonTest");
 
@@ -51,8 +61,8 @@ void ExampleScene::Awake()
 
 	m_player->AddComponent<BoxCollider>();
 
-	b->AddPressEvent([this]() {m_player->GetComponent<Transform>()->Translate({ 20.f, 20.f }); });
-	b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
+	//b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
+	//b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
 
 	GameObject* a = Instantiate("aa");
 
@@ -105,8 +115,7 @@ void ExampleScene::Start()
 	camera->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(m_player2);
 
 
-
-
+	
 
 
 
@@ -115,4 +124,8 @@ void ExampleScene::Start()
 
 
 	Scene::Start();
+
+	auto sb = m_slidebar->GetComponent<Slide_Bar>();
+
+	sb->UpdateWidthRatio(1.f);
 }

@@ -145,12 +145,14 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="UITest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CinemachineCamera.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ExampleScene.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="UITest.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\D2DEngine\D2DEngine.vcxproj">

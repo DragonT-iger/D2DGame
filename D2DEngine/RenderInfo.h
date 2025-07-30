@@ -24,6 +24,7 @@ struct RenderInfo {
 struct UIRenderInfo {
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_bitmap;
 	D2D1_RECT_F												m_destRect;
+	D2D1_RECT_F													m_srcRect;
 	int																		orderLayer;
 
 	bool operator<(const UIRenderInfo& rhs)

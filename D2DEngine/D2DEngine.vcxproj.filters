@@ -88,8 +88,13 @@
     <Filter Include="Component\UIComponent\Button">
       <UniqueIdentifier>{06a14180-6cef-426a-a66f-929eb7a0ed41}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Editor">
       <UniqueIdentifier>{f9f6b3b6-2a3c-45d9-ac86-cadbf3e7f892}</UniqueIdentifier>
+=======
+    <Filter Include="Component\UIComponent\Slide_bar">
+      <UniqueIdentifier>{24c2b882-e957-4f6a-96ee-87efe1861993}</UniqueIdentifier>
+>>>>>>> origin/chs2
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,11 +200,16 @@
     <ClInclude Include="SoundManager.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="ImGuiManager.h">
       <Filter>Editor</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiWindow.h">
       <Filter>Editor</Filter>
+=======
+    <ClInclude Include="Slide_Bar.h">
+      <Filter>Component\UIComponent\Slide_bar</Filter>
+>>>>>>> origin/chs2
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +302,9 @@
     </ClCompile>
     <ClCompile Include="ImGuiWindow.cpp">
       <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Slide_Bar.cpp">
+      <Filter>Component\UIComponent\Slide_bar</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
