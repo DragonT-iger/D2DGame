@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ImGuiWindow.h"
-
+#ifdef _DEBUG
 void ImGuiWindow::Draw(float)
 {
     DrawHierarchy();
@@ -81,3 +81,5 @@ void ImGuiWindow::DrawInspector()
 
     ImGui::End();
 }
+
+#endif

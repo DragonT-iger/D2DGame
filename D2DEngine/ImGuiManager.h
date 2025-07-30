@@ -1,6 +1,6 @@
 #pragma once
-class ImGuiWindow;
 #ifdef _DEBUG
+class ImGuiWindow;
 class ImGuiManager
 {
 public:                  

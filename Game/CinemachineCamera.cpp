@@ -40,6 +40,7 @@ void CinemachineCamera::Update(float deltaTime)
     m_transform->SetScale(newScale);
 
 
+#endif
 
     if (m_player)
     {
@@ -53,5 +54,4 @@ void CinemachineCamera::Update(float deltaTime)
     }
 
 
-#endif
 }
