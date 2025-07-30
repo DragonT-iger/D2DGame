@@ -234,18 +234,19 @@ void Scene::SetRenderQ()
     m_isIterating = true;
     for (auto& obj : m_gameObjects)
     {
-        const auto& spRender = obj->GetComponent<SpriteRenderer>();
-        if (spRender)
+
+        if (!obj->IsActive())           // GameObject 전체 비활성화 체크
+            continue;
+
+        if (auto* sr = obj->GetComponent<SpriteRenderer>())
         {
-            m_renderQ.push_back(spRender->GetRenderInfo());
+            if (sr->IsActive())        // 컴포넌트 단위 enable/disable
+                m_renderQ.emplace_back(sr->GetRenderInfo());
         }
-        else
+        else if (auto* img = obj->GetComponent<Image>())
         {
-            const auto& img = obj->GetComponent<Image>();
-            if (img)
-            {
-                m_UIRenderQ.push_back(img->GetRenderInfo());
-            }
+            if (img->IsActive())
+                m_UIRenderQ.emplace_back(img->GetRenderInfo());
         }
     }
 

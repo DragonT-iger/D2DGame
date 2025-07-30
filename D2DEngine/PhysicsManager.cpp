@@ -19,7 +19,11 @@ void PhysicsManager::Step(float fixedDelta)
         if (!go->IsActive()) continue;
 
         if (auto* col = go->GetComponent<Collider>())
-            colliders.push_back(col);
+        {
+            if (col->IsActive()) {
+                colliders.push_back(col);
+            }
+        }
     }
 
     const size_t n = colliders.size();
