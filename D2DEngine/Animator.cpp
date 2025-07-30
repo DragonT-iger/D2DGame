@@ -12,7 +12,6 @@ void Animator::Update(float deltaTime)
 {
 	if (m_curFrame->duration <= m_duration)
 	{
-		std::cout << m_duration << std::endl;
 		if (++m_curFrame == m_frameDatas.end())
 			m_curFrame = m_frameDatas.begin();
 
