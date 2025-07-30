@@ -145,7 +145,7 @@ void Scene::Render()
     for(auto& info : m_renderQ)
     {
         D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
-        D2D1::Matrix3x2F mWV = renderTM * info.worldTM * viewTM;
+        D2D1::Matrix3x2F mWV = renderTM * info.m_transform->GetWorldMatrix() * viewTM;
         D2DRenderer::Instance().SetTransform(mWV);
         //D2DRenderer::Instance().DrawCircle(0, 0, info.radius, RGB(255, 0, 0));
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect, info.opacity);
@@ -156,8 +156,11 @@ void Scene::Render()
     {
 		if (SceneManager::Instance().GetDebugMode() && info.m_collider)
 		{
+            Vector2 s = info.m_transform->GetScale();
+            Vector2 p = info.m_transform->GetPosition();
 			D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
-			D2D1::Matrix3x2F mWV = renderTM * info.worldTM * viewTM;
+            D2D1::Matrix3x2F worldTM = D2D1::Matrix3x2F::Scale(s.x, s.y) * D2D1::Matrix3x2F::Translation({ p.x, p.y });
+			D2D1::Matrix3x2F mWV = renderTM * worldTM * viewTM;
 			D2DRenderer::Instance().SetTransform(mWV);
 			info.m_collider->DrawCollider();
 		}

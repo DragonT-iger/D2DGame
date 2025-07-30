@@ -12,7 +12,7 @@ struct RenderInfo {
 	bool																			isFlip;
 	int																		orderLayer;
 	float																opacity = 1.0f;
-	D2D1::Matrix3x2F												worldTM;
+	Transform*													m_transform;
 	Collider*															m_collider;	//디버그용
 
 	bool operator<(const RenderInfo& rhs)
