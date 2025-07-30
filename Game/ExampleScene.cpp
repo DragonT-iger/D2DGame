@@ -126,8 +126,4 @@ void ExampleScene::Start()
 
 
 	Scene::Start();
-
-	auto sb = m_slidebar->GetComponent<Slide_Bar>();
-
-	sb->UpdateWidthRatio(1.f);
 }

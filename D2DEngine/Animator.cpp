@@ -10,6 +10,7 @@ void Animator::Awake()
 
 void Animator::Update(float deltaTime)
 {
+	
 	if (m_curFrame->duration <= m_duration)
 	{
 		if (++m_curFrame == m_frameDatas.end())
@@ -19,8 +20,8 @@ void Animator::Update(float deltaTime)
 
 		m_duration = 0.0f;
 	}
-
-	m_duration += deltaTime;
+	else
+		m_duration += deltaTime;
 }
 
 void Animator::ChangeState(const std::string& name)
