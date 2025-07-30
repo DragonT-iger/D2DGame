@@ -155,6 +155,7 @@
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CSVParser.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="Fmod_Error.h" />
     <ClInclude Include="framework.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CSVParser.cpp" />
     <ClCompile Include="D2DEngine.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="GameObject.cpp" />

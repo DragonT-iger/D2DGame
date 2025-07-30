@@ -119,6 +119,7 @@ void Game::Release()
 #ifdef _DEBUG
 	ImGuiManager::Instance().Shutdown();
 #endif
+    
     __super::Destroy();
 }
 

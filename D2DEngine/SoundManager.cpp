@@ -104,6 +104,8 @@ void SoundManager::Shutdown()
 
 void SoundManager::BGM_Shot(const std::string& fileName)
 {
+	std::cout << fileName << std::endl;
+
 	bool isBGMPlaying = false;
 	if (m_bgmGroup->isPlaying(&isBGMPlaying))
 	{
@@ -113,6 +115,8 @@ void SoundManager::BGM_Shot(const std::string& fileName)
 
 	FMOD::Channel* channel = nullptr;
 	auto it = L_BGM.find(fileName);
+
+	std::cout << "it Ã£À½?: " << it->first << std::endl;
 
 	if (it != L_BGM.end())
 	{

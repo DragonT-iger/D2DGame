@@ -19,6 +19,9 @@
     <Filter Include="Scripts\ButtonTest">
       <UniqueIdentifier>{e3b9643b-d1a2-462a-9164-14ff1fc50b0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainScene">
+      <UniqueIdentifier>{f1421778-0388-4ad7-947e-558ebe6abe02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,7 +33,7 @@
     <ClCompile Include="ExampleScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
+    <ClCompile Include="PlayerController_Sample.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CinemachineCamera.cpp">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="UITest.cpp">
       <Filter>Scripts\ButtonTest</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>MainScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,7 +53,7 @@
     <ClInclude Include="ExampleScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerController.h">
+    <ClInclude Include="PlayerController_Sample.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CinemachineCamera.h">
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="UITest.h">
       <Filter>Scripts\ButtonTest</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>MainScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
