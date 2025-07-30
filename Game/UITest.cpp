@@ -19,6 +19,12 @@ void UITest::Update(float dt)
 	}
 	if (Input.GetKeyPressed(Keycode::A))
 	{
-		m_value -= 0.001;
+		if(m_value > 0.f)
+			m_value -= 0.002;
+	}
+	else if (Input.GetKeyPressed(Keycode::D))
+	{
+		if (m_value < 1.f)
+			m_value += 0.002;
 	}
 }
