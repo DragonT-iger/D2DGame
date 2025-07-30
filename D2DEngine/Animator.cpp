@@ -13,11 +13,19 @@ void Animator::Update(float deltaTime)
 	
 	if (m_curFrame->duration <= m_duration)
 	{
-		if (++m_curFrame == m_frameDatas.end())
+		++m_curFrame;
+		if (m_curFrame == m_frameDatas.end() && m_curAnimeLoop)
+		{
 			m_curFrame = m_frameDatas.begin();
-
+		}
+		else if (m_curFrame == m_frameDatas.end() && m_curAnimeLoop)
+		{
+			if(!m_isEnd)
+				m_isEnd = true;
+			return;
+		}
+			
 		m_sRenderer->SetSrcRect(m_curFrame->ToRectF());
-
 		m_duration = 0.0f;
 	}
 	else
@@ -38,6 +46,7 @@ void Animator::ChangeState(const std::string& name)
 	m_frameDatas = m_curClip->GetFrames();
 	m_curFrame = m_frameDatas.begin();
 	m_sRenderer->SetSrcRect(m_curFrame->ToRectF());
+	m_curAnimeLoop = m_loopmap.at(name);
 }
 
 void Animator::SetEntryState(const std::string& name)
@@ -45,7 +54,8 @@ void Animator::SetEntryState(const std::string& name)
 	ChangeState(name);
 }
 
-void Animator::AddClip(const std::string& name, std::shared_ptr<AnimationClip> clip)
+void Animator::AddClip(const std::string& name, std::shared_ptr<AnimationClip> clip, bool isLoop)
 {
 	m_animations.emplace(name, clip);
+	m_loopmap.emplace(name, isLoop);
 }

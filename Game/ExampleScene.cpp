@@ -2,6 +2,7 @@
 #include "ExampleScene.h"
 #include "PlayerController.h"
 #include "UITest.h"
+#include "Crop.h"
 #include "PlayerController_Sample.h"
 #include "CinemachineCamera.h"
 
@@ -29,7 +30,6 @@ void ExampleScene::Awake()
 	auto b = m_button->AddComponent<Button>();
 
 	auto b1 = ResourceManager::Instance().LoadTexture("button1_basic100.png");
-	auto b2 = ResourceManager::Instance().LoadTexture("button1_mouse_action.png");
 	auto b3 = ResourceManager::Instance().LoadTexture("button1_mouse_click.png");
 
 	b->AddEventSprite(b3, ButtonEvent::Idle);
@@ -49,6 +49,22 @@ void ExampleScene::Awake()
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
+	m_Crop = Instantiate("Crop");
+
+	m_Crop->AddComponent<SpriteRenderer>();
+	auto crop = m_Crop->AddComponent<Crop>();
+
+
+	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> pumkins;
+
+	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_C.png"));
+	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_B.png"));
+	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_A.png"));
+
+	crop->SetCropData(FarmRank::Rank_C, Crops::Pumpkin, pumkins);
+
+	m_Crop->GetComponent<Transform>()->SetPosition({ -200.f, -200.f });
+
 	m_player = Instantiate("Player");
 
 	m_player->SetTag("Player");
@@ -61,7 +77,7 @@ void ExampleScene::Awake()
 
 	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
-	m_player->AddComponent<BoxCollider>();
+	m_player->AddComponent<CircleCollider>();
 
 	//b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
 	//b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
@@ -90,8 +106,8 @@ void ExampleScene::Awake()
 
 	m_player2->AddComponent<BoxCollider>();
 
-	pc->m_xSpeed = 1750.f;
-	pc->m_ySpeed = 1750.f;
+	pc->m_xSpeed = 550.f;
+	pc->m_ySpeed = 550.f;
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로

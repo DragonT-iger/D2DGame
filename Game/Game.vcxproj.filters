@@ -28,6 +28,12 @@
     <Filter Include="SampleFile">
       <UniqueIdentifier>{55fdba89-d5bd-46d9-9f4d-dc5c81198352}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Items">
+      <UniqueIdentifier>{e3a5e1c9-459f-4c15-89d9-b5ab3607fdea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\SpawnManager">
+      <UniqueIdentifier>{26d23b65-ee9d-464d-bcda-a77eab820a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -54,6 +60,24 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Crop.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Potato.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Eggplant.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Pumpkin.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnManager.cpp">
+      <Filter>Scripts\SpawnManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -76,6 +100,24 @@
     </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Crop.h">
+      <Filter>Scripts\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Pumpkin.h">
+      <Filter>Scripts\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Eggplant.h">
+      <Filter>Scripts\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Potato.h">
+      <Filter>Scripts\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnManager.h">
+      <Filter>Scripts\SpawnManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

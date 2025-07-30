@@ -6,7 +6,7 @@
 
 
 // -----------------------------------------------------------------------------
-// GameObject ï¿½ï¿½ï¿½ï¿½ / ï¿½Ä±ï¿½
+// GameObject »ý¼º / ÆÄ±«
 // -----------------------------------------------------------------------------
 
 GameObject* Scene::CreateGameObject(const std::string& name)
@@ -41,7 +41,7 @@ void Scene::Awake()
     camera->AddComponent<Camera>();
     camera->AddComponent<CinemachineCamera>();
 
-	// Ä«ï¿½Þ¶ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    // Ä«¸Þ¶ó´Â ±âº»ÀûÀ¸·Î ¾À¿¡ µî·Ï
 
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->Awake();
@@ -109,24 +109,24 @@ void Scene::LateUpdate(float deltaTime)
 
     
 
-	/*if (!cam) std::cout << "Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½" << std::endl;
-	else std::cout << "Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½" << std::endl;*/
+    /*if (!cam) std::cout << "Ä«¸Þ¶ó°¡ ¾øÀ½" << std::endl;
+    else std::cout << "Ä«¸Þ¶ó°¡ ÀÖÀ½" << std::endl;*/
 
-    //assert(cam && "Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½"); Ä«ï¿½Þ¶ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½îµµ ï¿½ï¿½ï¿½Ý¾ï¿½?
+    //assert(cam && "Ä«¸Þ¶ó ¾øÀ½"); Ä«¸Þ¶ó´Â ÀÏ´Ü ¾ø¾îµµ µÇÀÝ¾Æ?
 
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡
+    // ·»´õ¸µ ·ÎÁ÷Àº ¿©±â¿¡
 
 
     /* example
-    
+
 
     const auto& view = cam->GetViewTM();
     for (auto& go : m_gameObjects)
         if (auto* sr = go->GetComponent<SpriteRenderer>())
             sr->Render(r, view);
-    
-    
+
+
     */
 }
 
@@ -152,13 +152,13 @@ void Scene::Render()
 	}
 
 #ifdef _DEBUG
-    for (const auto& info : m_renderQ)
+    for (const auto& info : m_colliderQ)
     {
 		if (SceneManager::Instance().GetDebugMode() && info.m_collider)
 		{
             Vector2 s = info.m_transform->GetScale();
             Vector2 p = info.m_transform->GetPosition();
-			D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
+			D2D1::Matrix3x2F renderTM = GetRenderTM();
             D2D1::Matrix3x2F worldTM = D2D1::Matrix3x2F::Scale(s.x, s.y) * D2D1::Matrix3x2F::Translation({ p.x, p.y });
 			D2D1::Matrix3x2F mWV = renderTM * worldTM * viewTM;
 			D2DRenderer::Instance().SetTransform(mWV);
@@ -168,8 +168,8 @@ void Scene::Render()
 #endif
 
 #ifdef _DEBUG
-	//ê·¸ë¦¬ë“œ ì¶œë ¥
-	if (SceneManager::Instance().GetDebugMode())
+    //±×¸®µå Ãâ·Â
+	if (SceneManager::Instance().GetDebugMode() && m_isGridOn)
 	{
         float unit = 100.f;
 
@@ -197,12 +197,12 @@ void Scene::Render()
 		float endY = std::ceil(bottomRight.y / unit) * unit;
 
 		D2DRenderer::Instance().SetTransform(viewTM);
-		//yì¶• ê·¸ë¦¬ë“œ
+        //xÃà ±×¸®µå
 		for (float x = startX; x <= endX; x += unit)
 		{
 			D2DRenderer::Instance().DrawLine(x, startY, x, endY, D2D1::ColorF::Black);
 		}
-		//xì¶• ê·¸ë¦¬ë“œ
+        //yÃà ±×¸®µå
 		for (float y = startY; y >= endY; y -= unit)
 		{
 			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
@@ -221,6 +221,7 @@ void Scene::Render()
     D2DRenderer::Instance().DrawMessage(fps.c_str(), 0, 0, 150, 50, D2D1::ColorF::Blue);
 
 	m_renderQ.clear();
+    m_colliderQ.clear();
     m_UIRenderQ.clear();
 }
 
@@ -234,18 +235,30 @@ void Scene::SetRenderQ()
     m_isIterating = true;
     for (auto& obj : m_gameObjects)
     {
+        if(!obj->IsActive())
+            continue;
         const auto& spRender = obj->GetComponent<SpriteRenderer>();
+        const auto& collider = obj->GetComponent<Collider>();
         if (spRender)
         {
+            if(!spRender->IsActive())
+                continue;
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
-        else
+        else if (auto* img = obj->GetComponent<Image>())
         {
-            const auto& img = obj->GetComponent<Image>();
             if (img)
             {
+				if (!img->IsActive())
+					continue;
                 m_UIRenderQ.push_back(img->GetRenderInfo());
             }
+        }
+        if (collider)
+        {
+            if(!collider->IsActive())
+                continue;
+            m_colliderQ.push_back(collider->GetColliderInfo());
         }
     }
 
@@ -258,7 +271,7 @@ void Scene::SetRenderQ()
 void Scene::RegisterCamera(Camera* cam)
 {
     if (m_Camera) {
-        assert(false && "ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½Î´ï¿½ï¿½Ï¼ï¿½ ï¿½ï¿½ï¿½ï¿½");
+        assert(false && "¾À¿¡ Ä«¸Þ¶ó°¡ µÎ´ëÀÏ¼ö ¾ø½¿");
     }
 
     m_Camera = cam;

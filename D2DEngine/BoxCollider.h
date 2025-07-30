@@ -12,6 +12,8 @@ public:
 	//디버그용
 	void DrawCollider() override;
 
+	ColliderInfo GetColliderInfo() override { return { m_transform, this }; } 
+
 private:
 	Vector2 size = { 1, 1 }; // 상대적 크기 아님
 };

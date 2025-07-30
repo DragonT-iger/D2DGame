@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ImGuiWindow.h"
 #ifdef _DEBUG
-void ImGuiWindow::Draw(float)
+void ImGuiWindow::Draw(float deltaTime)
 {
     DrawHierarchy();
     DrawInspector();
@@ -11,7 +11,11 @@ void ImGuiWindow::DrawHierarchy()
 {
     auto* scene = SceneManager::Instance().GetActiveScene();
     if (!scene) return;
-
+    static bool m_showGrid = false;
+    if (ImGui::Checkbox("Show Grid", &m_showGrid)) {
+        Scene* curScene = SceneManager::Instance().GetActiveScene();
+        curScene->SetGridOn(m_showGrid);
+    }
     ImGui::Begin("Hierarchy");
     for (auto& goPtr : scene->GetGameObjects())
     {
@@ -20,6 +24,7 @@ void ImGuiWindow::DrawHierarchy()
         if (ImGui::Selectable(go->GetName().c_str(), selected))
             m_selected = go;
     }
+    
     ImGui::End();
 }
 
@@ -68,10 +73,10 @@ void ImGuiWindow::DrawInspector()
         const char* typeName = typeid(*c).name();
         if (auto* beh = dynamic_cast<Behaviour*>(c.get()))
         {
-            bool enabled = beh->IsEnabled();        // Behaviour 에서 on/off 상태 얻기
+            bool enabled = beh->IsActive();        // Behaviour 에서 on/off 상태 얻기
             ImGui::Checkbox(typeName, &enabled);
             if (ImGui::IsItemEdited())
-                beh->SetEnabled(enabled);
+                beh->SetActive(enabled);
         }
         else
         {

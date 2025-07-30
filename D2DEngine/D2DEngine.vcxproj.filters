@@ -207,6 +207,9 @@
     <ClInclude Include="Slide_Bar.h">
       <Filter>Component\UIComponent\Slide_bar</Filter>
     </ClInclude>
+    <ClInclude Include="CSVParser.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -301,6 +304,12 @@
     </ClCompile>
     <ClCompile Include="Slide_Bar.cpp">
       <Filter>Component\UIComponent\Slide_bar</Filter>
+    </ClCompile>
+    <ClCompile Include="CSVParser.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderInfo.cpp">
+      <Filter>D2DRenderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

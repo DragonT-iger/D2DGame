@@ -14,5 +14,6 @@ class ExampleScene : public Scene
 	GameObject*			m_button = nullptr;
 	GameObject*			m_slidebar = nullptr;
 	GameObject*			m_background = nullptr;
+	GameObject*			m_Crop = nullptr;
 };
 

@@ -17,19 +17,21 @@ void PlayerController_Sample::Awake()
 
 void  PlayerController_Sample::Start()
 {
-	auto pandaEat = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagEat");
-	auto pandaWave = ResourceManager::Instance().LoadAnimationClip("PandaSpriteSheet.json", "TagWave");
 	auto molewalk = ResourceManager::Instance().LoadAnimationClip("sample_mole_1.json", "Walk");
 
-
-    m_animator->AddClip("eat", pandaEat);
-    m_animator->AddClip("wave", pandaWave);
 	m_animator->AddClip("Walk", molewalk);
-    m_animator->SetEntryState("eat");
+    m_animator->SetEntryState("Walk");
+	curAnim = "Walk";
 
 	auto collider = GetComponent<BoxCollider>();
 
-	collider->SetSize({ m_spriteRenderer->GetSize().width, m_spriteRenderer->GetSize().height});
+	if (collider) {
+		collider->SetSize({ m_spriteRenderer->GetSize().width, m_spriteRenderer->GetSize().height });
+	}
+	else {
+		GetComponent<CircleCollider>()->SetRadius({ m_spriteRenderer->GetSize().width / 2 });
+	}
+
 	//m_spriteRenderer->SetOpacity(0.5f);
 }
 
@@ -41,7 +43,7 @@ void PlayerController_Sample::Update(float deltatime)
 	if (Input.GetKeyDown(Keycode::UP))
 	{
 		m_transform->Translate(0, m_ySpeed * deltatime);
-		if (curAnim != "wave")
+		if (curAnim != "Walk")
 		{
 			curAnim = "Walk";
 			m_animator->ChangeState("Walk");
@@ -65,7 +67,7 @@ void PlayerController_Sample::Update(float deltatime)
 	}
 	else
 	{
-		if (curAnim != "eat")
+		if (curAnim != "Walk")
 		{
 			curAnim = "Walk";
 			m_animator->ChangeState("Walk");

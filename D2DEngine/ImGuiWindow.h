@@ -4,7 +4,7 @@
 class ImGuiWindow
 {
 public:
-    void Draw(float deltaTime = 0.f);   // BeginFrame 에서 호출
+    void Draw(float deltaTime);   // BeginFrame 에서 호출
 
 private:
     void DrawHierarchy();
