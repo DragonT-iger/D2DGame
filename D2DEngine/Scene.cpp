@@ -152,13 +152,13 @@ void Scene::Render()
 	}
 
 #ifdef _DEBUG
-    for (const auto& info : m_renderQ)
+    for (const auto& info : m_colliderQ)
     {
 		if (SceneManager::Instance().GetDebugMode() && info.m_collider)
 		{
             Vector2 s = info.m_transform->GetScale();
             Vector2 p = info.m_transform->GetPosition();
-			D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
+			D2D1::Matrix3x2F renderTM = GetRenderTM();
             D2D1::Matrix3x2F worldTM = D2D1::Matrix3x2F::Scale(s.x, s.y) * D2D1::Matrix3x2F::Translation({ p.x, p.y });
 			D2D1::Matrix3x2F mWV = renderTM * worldTM * viewTM;
 			D2DRenderer::Instance().SetTransform(mWV);
@@ -237,6 +237,7 @@ void Scene::SetRenderQ()
         if(!obj->IsActive())
             continue;
         const auto& spRender = obj->GetComponent<SpriteRenderer>();
+        const auto& collider = obj->GetComponent<Collider>();
         if (spRender)
         {
             if(!spRender->IsActive())
@@ -251,6 +252,12 @@ void Scene::SetRenderQ()
 					continue;
                 m_UIRenderQ.push_back(img->GetRenderInfo());
             }
+        }
+        if (collider)
+        {
+            if(!collider->IsActive())
+                continue;
+            m_colliderQ.push_back(collider->GetColliderInfo());
         }
     }
 

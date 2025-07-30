@@ -66,3 +66,8 @@ void CircleCollider::DrawCollider()
 {
 	D2DRenderer::Instance().DrawCircle(0.f, 0.f, m_radius, D2D1::ColorF(1.f, 0.f, 0.f));
 }
+
+ColliderInfo CircleCollider::GetColliderInfo()
+{
+	return { m_transform, this };
+}

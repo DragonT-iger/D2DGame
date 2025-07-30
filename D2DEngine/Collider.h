@@ -1,4 +1,10 @@
 #pragma once
+
+struct ColliderInfo {
+	Transform* m_transform;
+	Collider* m_collider;
+};
+
 class Collider : public MonoBehaviour
 {
 public:
@@ -14,6 +20,8 @@ public:
 	
 	//디버그 용
 	virtual void DrawCollider() = 0;
+
+	virtual ColliderInfo GetColliderInfo() = 0;
 
 protected:
 	Transform* m_transform = nullptr;
