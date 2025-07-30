@@ -22,6 +22,9 @@
     <Filter Include="MainScene">
       <UniqueIdentifier>{f1421778-0388-4ad7-947e-558ebe6abe02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Items">
+      <UniqueIdentifier>{e3a5e1c9-459f-4c15-89d9-b5ab3607fdea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +48,21 @@
     <ClCompile Include="MainScene.cpp">
       <Filter>MainScene</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Crop.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Potato.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Eggplant.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Pumpkin.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -64,6 +82,21 @@
     </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Crop.h">
+      <Filter>Scripts\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Pumpkin.h">
+      <Filter>Scripts\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Eggplant.h">
+      <Filter>Scripts\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Potato.h">
+      <Filter>Scripts\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

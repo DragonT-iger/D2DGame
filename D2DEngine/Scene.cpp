@@ -234,9 +234,13 @@ void Scene::SetRenderQ()
     m_isIterating = true;
     for (auto& obj : m_gameObjects)
     {
+        if(!obj->IsActive())
+            continue;
         const auto& spRender = obj->GetComponent<SpriteRenderer>();
         if (spRender)
         {
+            if(!spRender->IsEnabled())
+                continue;
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
         else
@@ -244,6 +248,8 @@ void Scene::SetRenderQ()
             const auto& img = obj->GetComponent<Image>();
             if (img)
             {
+				if (!img->IsEnabled())
+					continue;
                 m_UIRenderQ.push_back(img->GetRenderInfo());
             }
         }

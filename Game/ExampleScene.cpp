@@ -2,6 +2,7 @@
 #include "ExampleScene.h"
 #include "PlayerController.h"
 #include "UITest.h"
+#include "Crop.h"
 #include "PlayerController_Sample.h"
 #include "CinemachineCamera.h"
 
@@ -29,7 +30,6 @@ void ExampleScene::Awake()
 	auto b = m_button->AddComponent<Button>();
 
 	auto b1 = ResourceManager::Instance().LoadTexture("button1_basic100.png");
-	auto b2 = ResourceManager::Instance().LoadTexture("button1_mouse_action.png");
 	auto b3 = ResourceManager::Instance().LoadTexture("button1_mouse_click.png");
 
 	b->AddEventSprite(b3, ButtonEvent::Idle);
@@ -48,6 +48,22 @@ void ExampleScene::Awake()
 	m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("Test_back_02.png"));
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
+
+	m_Crop = Instantiate("Crop");
+
+	m_Crop->AddComponent<SpriteRenderer>();
+	auto crop = m_Crop->AddComponent<Crop>();
+
+
+	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> pumkins;
+
+	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_C.png"));
+	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_B.png"));
+	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_A.png"));
+
+	crop->SetCropData(FarmRank::Rank_C, Crops::Pumpkin, pumkins);
+
+	m_Crop->GetComponent<Transform>()->SetPosition({ -200.f, -200.f });
 
 	m_player = Instantiate("Player");
 
