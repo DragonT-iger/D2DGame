@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Game.h"
-#include "ExampleScene.h"
+//#include "ExampleScene.h"
+#include "MainScene.h"
 
 #ifdef _DEBUG
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -29,7 +30,7 @@ bool Game::Initialize()
 
 
     // 맨 처음 씬 만들고 로드하는법
-	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<ExampleScene>());
+	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 
     
     //ImGui 초기화

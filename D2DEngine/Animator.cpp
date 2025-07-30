@@ -10,6 +10,7 @@ void Animator::Awake()
 
 void Animator::Update(float deltaTime)
 {
+	
 	if (m_curFrame->duration <= m_duration)
 	{
 		++m_curFrame;
@@ -27,8 +28,8 @@ void Animator::Update(float deltaTime)
 		m_sRenderer->SetSrcRect(m_curFrame->ToRectF());
 		m_duration = 0.0f;
 	}
-
-	m_duration += deltaTime;
+	else
+		m_duration += deltaTime;
 }
 
 void Animator::ChangeState(const std::string& name)
