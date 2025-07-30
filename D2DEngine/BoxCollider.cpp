@@ -1,12 +1,39 @@
 #include "pch.h"
 #include "BoxCollider.h"
+#include <algorithm>
 
 
 bool BoxCollider::IsCollide(const Collider* other) const
 {
-	// Circle vs Circle collision detection logic
 	if (const CircleCollider* circle = dynamic_cast<const CircleCollider*>(other))
 	{
+		Vector2 scale = circle->GetComponent<Transform>()->GetScale();
+		Vector2 clampCirclePos = circle->GetCenter();
+
+		Vector2 otherCenter = other->GetCenter();
+		Vector2 otherScale = other->GetComponent<Transform>()->GetScale();
+		Vector2 otherLeftDown = otherCenter - size * otherScale / 2 ;
+		Vector2 otherRightUp = otherCenter + size * otherScale / 2 ;
+
+
+
+		clampCirclePos.x = std::clamp(clampCirclePos.x, otherLeftDown.x, otherRightUp.x);
+		clampCirclePos.y = std::clamp(clampCirclePos.y, otherLeftDown.y, otherRightUp.y);
+
+
+		float SquareLength = (circle->GetCenter() - clampCirclePos).SqrMagnitude();
+
+		if (SquareLength < (circle->GetRadius() * circle->GetRadius())) {
+			return true;
+		};
+		
+		return false;
+
+		//if(clampCirclePos.x , other->GetCenter().x 
+
+
+
+
 	}
 	else if (const BoxCollider* box = dynamic_cast<const BoxCollider*>(other)) {
 

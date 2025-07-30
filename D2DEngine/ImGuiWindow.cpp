@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ImGuiWindow.h"
 #ifdef _DEBUG
-void ImGuiWindow::Draw(float)
+void ImGuiWindow::Draw(float deltaTime)
 {
     DrawHierarchy();
     DrawInspector();

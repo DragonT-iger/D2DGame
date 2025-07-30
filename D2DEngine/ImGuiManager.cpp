@@ -44,7 +44,7 @@ void ImGuiManager::BeginFrame(float deltaTime)
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    m_imGuiWindow->Draw();
+    m_imGuiWindow->Draw(deltaTime);
 }
 
 void ImGuiManager::EndFrame(ID3D11RenderTargetView* mainRTV)

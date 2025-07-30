@@ -10,17 +10,11 @@ bool CircleCollider::IsCollide(const Collider* other) const
 
 		//constexpr float PPM = 50.0f;
 		//std::cout << circle->GetCenter().x << " " << circle->GetCenter().y << " " << circle->m_radius * PPM << " " << GetCenter().x << " " << GetCenter().y << " " << m_radius * PPM << std::endl;
-
-
-		
-		
-		
-		float length = abs(sqrt((pow(GetCenter().x - circle->GetCenter().x, 2) + pow(GetCenter().y - circle->GetCenter().y, 2))));
-
-
+				
+		float squareLength = (pow(GetCenter().x - circle->GetCenter().x, 2) + pow(GetCenter().y - circle->GetCenter().y, 2));
 
 		//std::cout << circle->GetRadius() + m_radius << " " << length << std::endl;
-		if((circle->GetRadius() + m_radius) >= length) // 임의 반지름 값 일단
+		if (pow((circle->GetRadius() + m_radius), 2) >= squareLength) // 임의 반지름 값 일단
 		{
 			return true;
 		}
@@ -35,8 +29,31 @@ bool CircleCollider::IsCollide(const Collider* other) const
 	
 
 	}
-	else if (const BoxCollider* circle = dynamic_cast<const BoxCollider*>(other)) {
+	else if (const BoxCollider* box = dynamic_cast<const BoxCollider*>(other)) {
 		//CircletoBox();
+
+		Vector2 scale = GetComponent<Transform>()->GetScale();
+		Vector2 clampCirclePos = GetCenter();
+
+		Vector2 otherCenter = box->GetCenter();
+		Vector2 otherScale = box->GetComponent<Transform>()->GetScale();
+		Vector2 otherLeftDown = otherCenter - box->GetSize() * otherScale / 2 ;
+		Vector2 otherRightUp = otherCenter + box->GetSize() * otherScale / 2 ;
+
+
+
+		clampCirclePos.x = std::clamp(clampCirclePos.x, otherLeftDown.x, otherRightUp.x);
+		clampCirclePos.y = std::clamp(clampCirclePos.y, otherLeftDown.y, otherRightUp.y);
+
+
+		float SquareLength = (GetCenter() - clampCirclePos).SqrMagnitude();
+
+		if (SquareLength < GetRadius() * GetRadius()) {
+			return true;
+		};
+
+		return false;
+		
 
 	}
 
