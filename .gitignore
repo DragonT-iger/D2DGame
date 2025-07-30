@@ -31,7 +31,11 @@ D2DEngine/D2DEngine.vcxproj_REMOTE_1088.filters
 
 # SVN 관리
 ThirdParty/
+imgui
+Game/imgui.ini
+
 Game/Assets/
+
 
 
 
