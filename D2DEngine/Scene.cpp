@@ -6,7 +6,7 @@
 
 
 // -----------------------------------------------------------------------------
-// GameObject ? ?™?˜™? ?™?˜™ / ? ?‹ê¹ì˜™
+// GameObject »ý¼º / ÆÄ±«
 // -----------------------------------------------------------------------------
 
 GameObject* Scene::CreateGameObject(const std::string& name)
@@ -41,7 +41,7 @@ void Scene::Awake()
     camera->AddComponent<Camera>();
     camera->AddComponent<CinemachineCamera>();
 
-	// ì¹´å ?Œ¨?°?˜™? ï¿? ? ?©ë³¸å ?™?˜™? ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™ ? ?™?˜™? ï¿?
+    // Ä«¸Þ¶ó´Â ±âº»ÀûÀ¸·Î ¾À¿¡ µî·Ï
 
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->Awake();
@@ -109,24 +109,24 @@ void Scene::LateUpdate(float deltaTime)
 
     
 
-	/*if (!cam) std::cout << "ì¹´å ?Œ¨?°?˜™ ? ?™?˜™? ?™?˜™" << std::endl;
-	else std::cout << "ì¹´å ?Œ¨?°?˜™ ? ?™?˜™? ?™?˜™" << std::endl;*/
+    /*if (!cam) std::cout << "Ä«¸Þ¶ó°¡ ¾øÀ½" << std::endl;
+    else std::cout << "Ä«¸Þ¶ó°¡ ÀÖÀ½" << std::endl;*/
 
-    //assert(cam && "ì¹´å ?Œ¨?°?˜™ ? ?™?˜™? ?™?˜™"); ì¹´å ?Œ¨?°?˜™? ï¿? ? ?‹¹?Œ?˜™ ? ?™?˜™? ?˜?„ ? ?™?˜™? ?Œ¥?–µ?˜™?
+    //assert(cam && "Ä«¸Þ¶ó ¾øÀ½"); Ä«¸Þ¶ó´Â ÀÏ´Ü ¾ø¾îµµ µÇÀÝ¾Æ?
 
 
-    // ? ?™?˜™? ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™? ?™?˜™ ? ?™?˜™? ?©?—
+    // ·»´õ¸µ ·ÎÁ÷Àº ¿©±â¿¡
 
 
     /* example
-    
+
 
     const auto& view = cam->GetViewTM();
     for (auto& go : m_gameObjects)
         if (auto* sr = go->GetComponent<SpriteRenderer>())
             sr->Render(r, view);
-    
-    
+
+
     */
 }
 
@@ -168,7 +168,7 @@ void Scene::Render()
 #endif
 
 #ifdef _DEBUG
-	//
+    //±×¸®µå Ãâ·Â
 	if (SceneManager::Instance().GetDebugMode())
 	{
         float unit = 100.f;
@@ -197,12 +197,12 @@ void Scene::Render()
 		float endY = std::ceil(bottomRight.y / unit) * unit;
 
 		D2DRenderer::Instance().SetTransform(viewTM);
-		//y
+        //xÃà ±×¸®µå
 		for (float x = startX; x <= endX; x += unit)
 		{
 			D2DRenderer::Instance().DrawLine(x, startY, x, endY, D2D1::ColorF::Black);
 		}
-		//x
+        //yÃà ±×¸®µå
 		for (float y = startY; y >= endY; y -= unit)
 		{
 			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
@@ -263,7 +263,7 @@ void Scene::SetRenderQ()
 void Scene::RegisterCamera(Camera* cam)
 {
     if (m_Camera) {
-        assert(false && "¾À¿¡ Ä«¸Þ¶ó µÎ´ëx");
+        assert(false && "¾À¿¡ Ä«¸Þ¶ó°¡ µÎ´ëÀÏ¼ö ¾ø½¿");
     }
 
     m_Camera = cam;
