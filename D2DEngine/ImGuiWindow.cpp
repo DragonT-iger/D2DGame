@@ -11,7 +11,11 @@ void ImGuiWindow::DrawHierarchy()
 {
     auto* scene = SceneManager::Instance().GetActiveScene();
     if (!scene) return;
-
+    static bool m_showGrid = false;
+    if (ImGui::Checkbox("Show Grid", &m_showGrid)) {
+        Scene* curScene = SceneManager::Instance().GetActiveScene();
+        curScene->SetGridOn(m_showGrid);
+    }
     ImGui::Begin("Hierarchy");
     for (auto& goPtr : scene->GetGameObjects())
     {
@@ -20,6 +24,7 @@ void ImGuiWindow::DrawHierarchy()
         if (ImGui::Selectable(go->GetName().c_str(), selected))
             m_selected = go;
     }
+    
     ImGui::End();
 }
 

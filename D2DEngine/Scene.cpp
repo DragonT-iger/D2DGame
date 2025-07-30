@@ -169,7 +169,7 @@ void Scene::Render()
 
 #ifdef _DEBUG
     //그리드 출력
-	if (SceneManager::Instance().GetDebugMode())
+	if (SceneManager::Instance().GetDebugMode() && m_isGridOn)
 	{
         float unit = 100.f;
 

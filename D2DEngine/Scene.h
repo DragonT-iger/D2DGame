@@ -67,6 +67,10 @@ public:
 
     const std::string& GetName() const { return m_name; }
 
+    void SetGridOn(bool isOn) { m_isGridOn = isOn; }
+
+    bool GetGridOn() { return m_isGridOn; }
+
 
     
 protected:
@@ -90,4 +94,5 @@ private:
     std::vector<Collider>		                                           m_colliderQ;
     Camera*                                                         m_Camera = nullptr;
     ScenePhase                                      m_phase = ScenePhase::None;
+    bool                                            m_isGridOn; // 초기화는 imgui에서 함
 };
