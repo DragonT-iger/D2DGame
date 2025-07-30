@@ -221,6 +221,7 @@ void Scene::Render()
     D2DRenderer::Instance().DrawMessage(fps.c_str(), 0, 0, 150, 50, D2D1::ColorF::Blue);
 
 	m_renderQ.clear();
+    m_colliderQ.clear();
     m_UIRenderQ.clear();
 }
 
