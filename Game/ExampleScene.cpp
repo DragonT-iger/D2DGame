@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ExampleScene.h"
-#include "PlayerController.h"
+#include "PlayerController_Sample.h"
 #include "CinemachineCamera.h"
 
 void ExampleScene::Awake()
@@ -25,7 +25,8 @@ void ExampleScene::Awake()
 	b->AddEventSprite(b1, ButtonEvent::Highlight);
 	b->AddEventSprite(b3, ButtonEvent::Pressed);
 
-	
+	SoundManager::Instance().Init();
+	SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
 	m_button->GetComponent<Transform>()->Translate({ 100, 100 });
 
@@ -45,7 +46,7 @@ void ExampleScene::Awake()
 	m_player->AddComponent<Animator>();
 	// 할당 안돼서 assert 걸림
 	
-	m_player->AddComponent<PlayerController>();
+	m_player->AddComponent<PlayerController_Sample>();
 
 	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
@@ -74,12 +75,12 @@ void ExampleScene::Awake()
 
 	m_spriteRenderer->SetOrderInLayer(2);
 
-	PlayerController* pc = m_player2->AddComponent<PlayerController>();
+	PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
 
 	m_player2->AddComponent<BoxCollider>();
 
-	pc->m_xSpeed = 175.f;
-	pc->m_ySpeed = 175.f;
+	pc->m_xSpeed = 1750.f;
+	pc->m_ySpeed = 1750.f;
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로

@@ -88,6 +88,9 @@
     <Filter Include="Component\UIComponent\Button">
       <UniqueIdentifier>{06a14180-6cef-426a-a66f-929eb7a0ed41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CSV">
+      <UniqueIdentifier>{094a1194-c827-434b-bef1-cc06fe326031}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -192,6 +195,9 @@
     <ClInclude Include="SoundManager.h">
       <Filter>SystemManager</Filter>
     </ClInclude>
+    <ClInclude Include="CSVParser.h">
+      <Filter>CSV</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DEngine.cpp">
@@ -277,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSVParser.cpp">
+      <Filter>CSV</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

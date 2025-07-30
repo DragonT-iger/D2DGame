@@ -16,7 +16,7 @@ private:
     float       m_followDamping = 6.f;
 
 
-
+    
     Camera*      m_Camera = nullptr; // 카메라 컴포넌트
     float        m_minZoom = 0.5f;     // 최소 scale.x
     float        m_maxZoom = 10.0f;    // 최대 scale.x

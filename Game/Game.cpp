@@ -93,6 +93,7 @@ void Game::LifeCycle(float deltaTime)
 void Game::Release()
 {
     m_timer = nullptr;
+    
     __super::Destroy();
 }
 
