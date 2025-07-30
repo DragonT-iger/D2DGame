@@ -91,7 +91,7 @@ private:
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
     std::vector<RenderInfo>		                                        m_renderQ;
     std::vector<UIRenderInfo>		                               m_UIRenderQ;
-    std::vector<Collider>		                                           m_colliderQ;
+    std::vector<ColliderInfo>		                                   m_colliderQ;
     Camera*                                                         m_Camera = nullptr;
     ScenePhase                                      m_phase = ScenePhase::None;
     bool                                            m_isGridOn; // 초기화는 imgui에서 함

@@ -12,6 +12,8 @@ public:
 	//디버그용
 	void DrawCollider() override;
 
+	ColliderInfo GetColliderInfo() override;
+
 private:
 	float m_radius = 1.0f; // 상대적 크기 아님
 };

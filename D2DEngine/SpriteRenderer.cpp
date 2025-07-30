@@ -19,10 +19,6 @@ D2D1_SIZE_F SpriteRenderer::GetSize()
 RenderInfo& SpriteRenderer::GetRenderInfo()
 {
 	m_renderInfo.m_transform = GetComponent<Transform>();
-	if (auto col = GetComponent<Collider>())
-	{
-		m_renderInfo.m_collider = col;
-	}
 
 	return m_renderInfo;
 }
