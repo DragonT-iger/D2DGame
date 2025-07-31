@@ -40,6 +40,21 @@ public:
 
     static GameObject* Find(std::string name);
 
+
+    enum class Phase
+    {
+        None,
+        Awake,
+        Start,
+        Update,
+        FixedUpdate,
+        LateUpdate
+    };
+
+    Phase                                         m_phase = Phase::None;
+    bool                                          m_awakeCalled = false;
+    bool                                          m_startCalled = false;
+
     //getname
 
 	const std::string& GetName() const { return m_name; }

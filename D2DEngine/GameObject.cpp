@@ -31,6 +31,7 @@ bool GameObject::IsActive() const { return m_active; }
 /* Lifecycle Methods -------------------------------------------- */
 
 void GameObject::Awake() {
+    m_phase = Phase::Awake;
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
@@ -39,9 +40,11 @@ void GameObject::Awake() {
                     mb->Awake();
     m_isIterating = false;
     FlushPending();
+    m_awakeCalled = true;
 }
 
 void GameObject::Start() {
+    m_phase = Phase::Start;
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
@@ -50,9 +53,11 @@ void GameObject::Start() {
                     mb->Start();
     m_isIterating = false;
     FlushPending();
+    m_startCalled = true;
 }
 
 void GameObject::Update(float deltaTime) {
+    m_phase = Phase::Update;
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
@@ -64,6 +69,7 @@ void GameObject::Update(float deltaTime) {
 }
 
 void GameObject::FixedUpdate(float fixedDeltaTime) {
+    m_phase = Phase::FixedUpdate;
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
@@ -75,6 +81,7 @@ void GameObject::FixedUpdate(float fixedDeltaTime) {
 }
 
 void GameObject::LateUpdate(float deltaTime) {
+    m_phase = Phase::LateUpdate;
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
@@ -120,9 +127,29 @@ GameObject* GameObject::Find(std::string name)
 void GameObject::FlushPending()
 {
     /* 1) Add */
+    std::vector<Component*> added;
     for (auto& up : m_pendingAdd)
+    {
+        Component* raw = up.get();
         m_components.emplace_back(std::move(up));
+        added.push_back(raw);
+    }
     m_pendingAdd.clear();
+
+    bool callAwake = (m_phase == Phase::Awake) || m_awakeCalled;
+    bool callStart = (m_phase == Phase::Start) || m_startCalled;
+
+    if (!added.empty())
+    {
+        for (auto* comp : added)
+            if (auto* mb = dynamic_cast<MonoBehaviour*>(comp))
+            {
+                if (callAwake && IsActive() && mb->IsActive())
+                    mb->Awake();
+                if (callStart && IsActive() && mb->IsActive())
+                    mb->Start();
+            }
+    }
 
     /* 2) Remove */
     for (auto* dead : m_pendingRemove)
