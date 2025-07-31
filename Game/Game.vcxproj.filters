@@ -34,6 +34,9 @@
     <Filter Include="Scripts\SpawnManager">
       <UniqueIdentifier>{26d23b65-ee9d-464d-bcda-a77eab820a6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestScene">
+      <UniqueIdentifier>{2d957d93-a156-4bf5-8c30-68f6e2366393}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -78,6 +81,9 @@
     <ClCompile Include="SpawnManager.cpp">
       <Filter>Scripts\SpawnManager</Filter>
     </ClCompile>
+    <ClCompile Include="HSTestScene.cpp">
+      <Filter>TestScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -118,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="SpawnManager.h">
       <Filter>Scripts\SpawnManager</Filter>
+    </ClInclude>
+    <ClInclude Include="HSTestScene.h">
+      <Filter>TestScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

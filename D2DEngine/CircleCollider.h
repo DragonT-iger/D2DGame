@@ -3,6 +3,7 @@
 class CircleCollider : public Collider
 {
 public:
+	void Awake() override;
 
 	void SetRadius(float newRadius) { m_radius = newRadius; }
 	float GetRadius() const { return m_radius; }

@@ -3,6 +3,14 @@
 #include <algorithm>
 
 
+void BoxCollider::Awake()
+{
+	Collider::Awake();
+
+	if (auto sr = GetComponent<SpriteRenderer>())
+		size = { sr->GetSize().width, sr->GetSize().height };
+}
+
 bool BoxCollider::IsCollide(const Collider* other) const
 {
 	if (const CircleCollider* circle = dynamic_cast<const CircleCollider*>(other))
@@ -62,5 +70,5 @@ bool BoxCollider::IsCollide(const Collider* other) const
 
 void BoxCollider::DrawCollider()
 {
-	D2DRenderer::Instance().DrawRectangle(-size.x / 2, -size.y / 2, size.x / 2, size.y / 2, D2D1::ColorF(1.f, 0.f, 0.f));
+	D2DRenderer::Instance().DrawRectangle((- size.x / 2) + m_offset.x, (-size.y / 2) + m_offset.y, (size.x / 2)+ m_offset.x, (size.y / 2) + m_offset.y, D2D1::ColorF(1.f, 0.f, 0.f));
 }

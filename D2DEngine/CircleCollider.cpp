@@ -1,6 +1,16 @@
 #include "pch.h"
 #include "CircleCollider.h"
 
+void CircleCollider::Awake()
+{
+	Collider::Awake();
+
+	if (auto sr = GetComponent<SpriteRenderer>())
+	{
+		m_radius = sr->GetSize().width;
+	}
+}
+
 bool CircleCollider::IsCollide(const Collider* other) const
 {
 		// Circle vs Circle collision detection logic
@@ -64,10 +74,12 @@ bool CircleCollider::IsCollide(const Collider* other) const
 
 void CircleCollider::DrawCollider()
 {
-	D2DRenderer::Instance().DrawCircle(0.f, 0.f, m_radius, D2D1::ColorF(1.f, 0.f, 0.f));
+	D2DRenderer::Instance().DrawCircle(0.f + m_offset.x, 0.f + m_offset.y, m_radius, D2D1::ColorF(1.f, 0.f, 0.f));
 }
 
 ColliderInfo CircleCollider::GetColliderInfo()
 {
+	if (!m_transform)
+		m_transform = GetComponent<Transform>();
 	return { m_transform, this };
 }

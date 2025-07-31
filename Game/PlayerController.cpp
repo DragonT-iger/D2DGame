@@ -41,11 +41,11 @@ void PlayerController::Start()
 	auto moleSteal = ResourceManager::Instance().LoadAnimationClip("mole.json", "steal");
 	auto moleDead = ResourceManager::Instance().LoadAnimationClip("mole.json", "dead");
 
-	m_animator->AddClip("idle", moleIdle);
-	m_animator->AddClip("walk", molewalk);
-	m_animator->AddClip("hit", moleHit);
-	m_animator->AddClip("steal", moleSteal);
-	m_animator->AddClip("dead", moleDead);
+	m_animator->AddClip("idle", moleIdle, true);
+	m_animator->AddClip("walk", molewalk, true);
+	m_animator->AddClip("hit", moleHit, false);
+	m_animator->AddClip("steal", moleSteal, false);
+	m_animator->AddClip("dead", moleDead, false);
 
 	auto collider = GetComponent<BoxCollider>();
 

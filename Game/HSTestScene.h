@@ -1,5 +1,6 @@
 #pragma once
-class ExampleScene : public Scene
+
+class HSTestScene : public Scene
 {
 	void Awake() override;
 	void Start() override;
@@ -11,9 +12,8 @@ class ExampleScene : public Scene
 	Camera* m_camera = nullptr;
 	GameObject* m_player = nullptr;
 	GameObject* m_player2 = nullptr;
-	GameObject*			m_button = nullptr;
-	GameObject*			m_slidebar = nullptr;
-	GameObject*			m_background = nullptr;
-	GameObject*			m_SpawnManager = nullptr;
+	GameObject* m_button = nullptr;
+	GameObject* m_slidebar = nullptr;
+	GameObject* m_background = nullptr;
+	GameObject* m_SpawnManager = nullptr;
 };
-

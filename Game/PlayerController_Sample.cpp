@@ -17,11 +17,13 @@ void PlayerController_Sample::Awake()
 
 void  PlayerController_Sample::Start()
 {
-	auto molewalk = ResourceManager::Instance().LoadAnimationClip("sample_mole_1.json", "Walk");
+	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole.json", "walk");
+	auto moleidle = ResourceManager::Instance().LoadAnimationClip("mole.json", "idle");
 
-	m_animator->AddClip("Walk", molewalk);
-    m_animator->SetEntryState("Walk");
-	curAnim = "Walk";
+	m_animator->AddClip("walk", molewalk, true);
+	m_animator->AddClip("idle", moleidle, true);
+    m_animator->SetEntryState("idle");
+	curAnim = "idle";
 
 	auto collider = GetComponent<BoxCollider>();
 
@@ -40,39 +42,7 @@ void PlayerController_Sample::Update(float deltatime)
 {
 	/*m_transform->Translate(m_xSpeed * deltatime, m_ySpeed * deltatime);
 	m_transform->Rotate(0.10f * deltatime);*/
-	if (Input.GetKeyDown(Keycode::UP))
-	{
-		m_transform->Translate(0, m_ySpeed * deltatime);
-		if (curAnim != "Walk")
-		{
-			curAnim = "Walk";
-			m_animator->ChangeState("Walk");
-		}
-	}
-	else if (Input.GetKeyDown(Keycode::DOWN))
-	{
-		m_transform->Translate(0, -m_ySpeed * deltatime);
-	}
-	else if (Input.GetKeyDown(Keycode::RIGHT))
-	{
-		if (m_spriteRenderer->IsFlip())
-			m_spriteRenderer->SetFlip(false);
-		m_transform->Translate(m_xSpeed * deltatime, 0);
-	}
-	else if (Input.GetKeyDown(Keycode::LEFT))
-	{
-		if(!m_spriteRenderer->IsFlip())
-			m_spriteRenderer->SetFlip(true);
-		m_transform->Translate(-m_xSpeed * deltatime, 0);
-	}
-	else
-	{
-		if (curAnim != "Walk")
-		{
-			curAnim = "Walk";
-			m_animator->ChangeState("Walk");
-		}
-	}
+	
 
 }
 

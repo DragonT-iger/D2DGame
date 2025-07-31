@@ -5,6 +5,7 @@
 #include "Crop.h"
 #include "PlayerController_Sample.h"
 #include "CinemachineCamera.h"
+#include "SpawnManager.h"
 
 void ExampleScene::Awake()
 {
@@ -14,17 +15,20 @@ void ExampleScene::Awake()
 	/* ********주의********
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
+	m_SpawnManager = Instantiate("SpawnManager");
 
-	m_slidebar = Instantiate("slidebar");
+	m_SpawnManager->AddComponent<SpawnManager>();
+
+	/*m_slidebar = Instantiate("slidebar");
 	m_slidebar->AddComponent<Image>();	
 	m_slidebar->AddComponent<Slide_Bar>();
 	m_slidebar->AddComponent<UITest>();
 
 	m_slidebar->GetComponent<Transform>()->SetPosition({ 100, 150 });
 
-	m_slidebar->GetComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 160, 20 });
+	m_slidebar->GetComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 160, 20 });*/
 
-	m_button = Instantiate("buttonTest");
+	/*m_button = Instantiate("buttonTest");
 
 	m_button->AddComponent<Image>();
 	auto b = m_button->AddComponent<Button>();
@@ -34,12 +38,12 @@ void ExampleScene::Awake()
 
 	b->AddEventSprite(b3, ButtonEvent::Idle);
 	b->AddEventSprite(b1, ButtonEvent::Highlight);
-	b->AddEventSprite(b3, ButtonEvent::Pressed);
+	b->AddEventSprite(b3, ButtonEvent::Pressed);*/
 
 	SoundManager::Instance().Init();
 	SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
-	m_button->GetComponent<Transform>()->Translate({ 100, 100 });
+	//m_button->GetComponent<Transform>()->Translate({ 100, 100 });
 
 	m_background = Instantiate("background");
 
@@ -49,65 +53,49 @@ void ExampleScene::Awake()
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
-	m_Crop = Instantiate("Crop");
+	//m_player = Instantiate("Player");
 
-	m_Crop->AddComponent<SpriteRenderer>();
-	auto crop = m_Crop->AddComponent<Crop>();
+	//m_player->SetTag("Player");
 
+	//m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
+	//m_player->AddComponent<Animator>();
+	//// 할당 안돼서 assert 걸림
+	//
+	//m_player->AddComponent<PlayerController_Sample>();
 
-	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> pumkins;
+	//m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
-	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_C.png"));
-	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_B.png"));
-	pumkins.push_back(ResourceManager::Instance().LoadTexture("pumpkin_A.png"));
+	//m_player->AddComponent<CircleCollider>();
 
-	crop->SetCropData(FarmRank::Rank_C, Crops::Pumpkin, pumkins);
+	////b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
+	////b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
 
-	m_Crop->GetComponent<Transform>()->SetPosition({ -200.f, -200.f });
+	//GameObject* a = Instantiate("aa");
 
-	m_player = Instantiate("Player");
+	//SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
 
-	m_player->SetTag("Player");
+	//ComPtr<ID2D1Bitmap1> bitmap;
+	//bitmap = ResourceManager::Instance().LoadTexture("Player.png");
+	//spriteRenderer->SetBitmap(bitmap);
 
-	m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
-	m_player->AddComponent<Animator>();
-	// 할당 안돼서 assert 걸림
-	
-	m_player->AddComponent<PlayerController_Sample>();
+	//spriteRenderer->SetSize(64.f, 64.f);
 
-	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
+	//m_player2 = Instantiate("Player2");
+	//m_player2->SetTag("Player2");
 
-	m_player->AddComponent<CircleCollider>();
+	//m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
+	//m_player2->AddComponent<Animator>();
 
-	//b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
-	//b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
+	//m_player2->GetComponent<Transform>()->SetScale({ 2, 2 });
 
-	GameObject* a = Instantiate("aa");
+	//m_spriteRenderer->SetOrderInLayer(2);
 
-	SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
+	//PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
 
-	ComPtr<ID2D1Bitmap1> bitmap;
-	bitmap = ResourceManager::Instance().LoadTexture("Player.png");
-	spriteRenderer->SetBitmap(bitmap);
+	//m_player2->AddComponent<BoxCollider>();
 
-	spriteRenderer->SetSize(64.f, 64.f);
-
-	m_player2 = Instantiate("Player2");
-	m_player2->SetTag("Player2");
-
-	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
-	m_player2->AddComponent<Animator>();
-
-	m_player2->GetComponent<Transform>()->SetScale({ 2, 2 });
-
-	m_spriteRenderer->SetOrderInLayer(2);
-
-	PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
-
-	m_player2->AddComponent<BoxCollider>();
-
-	pc->m_xSpeed = 550.f;
-	pc->m_ySpeed = 550.f;
+	//pc->m_xSpeed = 550.f;
+	//pc->m_ySpeed = 550.f;
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로
