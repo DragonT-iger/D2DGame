@@ -17,8 +17,7 @@ void MainScene::Awake()
 
 	PlayerController* pc = player->AddComponent<PlayerController>();
 
-	pc->m_Spd_X = 1500.0f;
-	pc->m_Spd_Y = 1500.0f;
+	pc->m_Spd = 1500;
 
 	Scene::Awake();
 }

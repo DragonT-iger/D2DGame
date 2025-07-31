@@ -33,8 +33,8 @@ public:
 	//void OnTriggerStay(Collider* other)  override;
 	//void OnTriggerExit(Collider* other)  override;
 
-	float m_Spd_X = 10.0f;
-	float m_Spd_Y = 10.0f;
+	float m_Spd;
+	bool m_canMove = true;
 private:
 
 	Action state = Action::Idle;
