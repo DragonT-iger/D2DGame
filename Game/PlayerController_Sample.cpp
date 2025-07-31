@@ -18,10 +18,19 @@ void PlayerController_Sample::Awake()
 void  PlayerController_Sample::Start()
 {
 	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole.json", "walk");
+<<<<<<< HEAD
 
 	m_animator->AddClip("walk", molewalk);
     m_animator->SetEntryState("walk");
 	curAnim = "walk";
+=======
+	auto moleidle = ResourceManager::Instance().LoadAnimationClip("mole.json", "idle");
+
+	m_animator->AddClip("walk", molewalk, true);
+	m_animator->AddClip("idle", moleidle, true);
+    m_animator->SetEntryState("idle");
+	curAnim = "idle";
+>>>>>>> origin/chs2
 
 	auto collider = GetComponent<BoxCollider>();
 
@@ -40,6 +49,7 @@ void PlayerController_Sample::Update(float deltatime)
 {
 	/*m_transform->Translate(m_xSpeed * deltatime, m_ySpeed * deltatime);
 	m_transform->Rotate(0.10f * deltatime);*/
+<<<<<<< HEAD
 	if (Input.GetKeyDown(Keycode::UP))
 	{
 		m_transform->Translate(0, m_ySpeed * deltatime);
@@ -73,6 +83,9 @@ void PlayerController_Sample::Update(float deltatime)
 			m_animator->ChangeState("walk");
 		}
 	}
+=======
+	
+>>>>>>> origin/chs2
 
 }
 

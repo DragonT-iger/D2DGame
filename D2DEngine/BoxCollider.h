@@ -2,7 +2,7 @@
 class BoxCollider : public Collider
 {
 public:
-
+	void Awake() override;
 	Vector2 GetSize() const { return size; }
 	void SetSize(const Vector2& newSize) { size = newSize; }
 
@@ -12,7 +12,11 @@ public:
 	//디버그용
 	void DrawCollider() override;
 
-	ColliderInfo GetColliderInfo() override { return { m_transform, this }; } 
+	ColliderInfo GetColliderInfo() override { 
+		if (!m_transform)
+			m_transform = GetComponent<Transform>();
+		return { m_transform, this };
+	} 
 
 private:
 	Vector2 size = { 1, 1 }; // 상대적 크기 아님
