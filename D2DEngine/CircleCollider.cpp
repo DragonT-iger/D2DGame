@@ -58,7 +58,7 @@ bool CircleCollider::IsCollide(const Collider* other) const
 
 		float SquareLength = (GetCenter() - clampCirclePos).SqrMagnitude();
 
-		if (SquareLength < GetRadius() * GetRadius()) {
+		if (SquareLength < GetRadius() * GetRadius() * scale.x * scale.x) {
 			return true;
 		};
 
@@ -74,7 +74,7 @@ bool CircleCollider::IsCollide(const Collider* other) const
 
 void CircleCollider::DrawCollider()
 {
-	D2DRenderer::Instance().DrawCircle(0.f + m_offset.x, 0.f + m_offset.y, m_radius, D2D1::ColorF(1.f, 0.f, 0.f));
+	D2DRenderer::Instance().DrawCircle(0.f + m_offset.x, 0.f - m_offset.y, m_radius, D2D1::ColorF(1.f, 0.f, 0.f));
 }
 
 ColliderInfo CircleCollider::GetColliderInfo()
@@ -82,4 +82,16 @@ ColliderInfo CircleCollider::GetColliderInfo()
 	/*if (!m_transform)
 		m_transform = GetComponent<Transform>();*/
 	return { m_transform, this };
+}
+
+void CircleCollider::OnInspectorGUI()
+{
+	float radius = GetRadius();
+	if (ImGui::DragFloat("Radius", &radius))
+	{
+		SetRadius(radius);
+	}
+
+
+	__super::OnInspectorGUI();
 }
