@@ -24,6 +24,6 @@ void Slide_Bar::UpdateHeightRatio(float v)
 	value = v;
 	D2D1_RECT_F destRect = m_Image->GetRenderInfo().m_destRect;
 	float ratio = m_orignal.height * value;
-	destRect.bottom = destRect.bottom + ratio;
+	destRect.top = destRect.bottom - ratio;
 	m_Image->SetDestRect(destRect);
 }

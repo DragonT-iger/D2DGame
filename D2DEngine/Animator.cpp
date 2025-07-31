@@ -59,6 +59,15 @@ void Animator::SetEntryState(const std::string& name)
 
 void Animator::AddClip(const std::string& name, std::shared_ptr<AnimationClip> clip, bool isLoop)
 {
-	m_animations.emplace(name, clip);
-	m_loopmap.emplace(name, isLoop);
+	if (m_animations.empty())
+	{
+		m_animations.emplace(name, clip);
+		m_loopmap.emplace(name, isLoop);
+		SetEntryState(name);
+	}
+	else
+	{
+		m_animations.emplace(name, clip);
+		m_loopmap.emplace(name, isLoop);
+	}
 }

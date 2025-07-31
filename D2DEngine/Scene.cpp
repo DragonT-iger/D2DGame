@@ -239,25 +239,17 @@ void Scene::SetRenderQ()
             continue;
         const auto& spRender = obj->GetComponent<SpriteRenderer>();
         const auto& collider = obj->GetComponent<Collider>();
-        if (spRender)
+        if (spRender && spRender->IsActive())
         {
-            if(!spRender->IsActive())
-                continue;
             m_renderQ.push_back(spRender->GetRenderInfo());
         }
         else if (auto* img = obj->GetComponent<Image>())
         {
-            if (img)
-            {
-				if (!img->IsActive())
-					continue;
+            if (img && img->IsActive()){
                 m_UIRenderQ.push_back(img->GetRenderInfo());
             }
         }
-        if (collider)
-        {
-            if(!collider->IsActive())
-                continue;
+        if (collider && collider->IsActive()){
             m_colliderQ.push_back(collider->GetColliderInfo());
         }
     }
@@ -285,6 +277,17 @@ D2D1::Matrix3x2F Scene::GetRenderTM(bool isFlip, float offsetX, float offsetY)
     offsetY = -offsetY;
 
     return D2D1::Matrix3x2F::Scale(scaleX, -1.0f) * D2D1::Matrix3x2F::Translation(offsetX, offsetY);
+}
+
+GameObject* Scene::FindGameObject(std::string name)
+{
+    for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
+        if ((*it)->GetName() == name) {
+            return (*it).get();
+        }
+    }
+
+    return nullptr;
 }
 
 void Scene::FlushPending()
