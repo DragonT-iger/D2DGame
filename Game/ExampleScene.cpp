@@ -5,11 +5,8 @@
 #include "Crop.h"
 #include "PlayerController_Sample.h"
 #include "CinemachineCamera.h"
-<<<<<<< HEAD
 #include "GameObjectFindTest.h"
-=======
 #include "SpawnManager.h"
->>>>>>> origin/chs2
 
 void ExampleScene::Awake()
 {
@@ -19,9 +16,6 @@ void ExampleScene::Awake()
 	/* ********주의********
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
-	m_SpawnManager = Instantiate("SpawnManager");
-
-	m_SpawnManager->AddComponent<SpawnManager>();
 
 	/*m_slidebar = Instantiate("slidebar");
 	m_slidebar->AddComponent<Image>();	
@@ -57,54 +51,35 @@ void ExampleScene::Awake()
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
-	//m_player = Instantiate("Player");
+	m_player = Instantiate("Player");
 
-	//m_player->SetTag("Player");
+	m_player->SetTag("Player");
 
-	//m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
-	//m_player->AddComponent<Animator>();
-	//// 할당 안돼서 assert 걸림
-	//
-	//m_player->AddComponent<PlayerController_Sample>();
+	m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
+	m_player->AddComponent<Animator>();
+	// 할당 안돼서 assert 걸림
+	
+	m_player->AddComponent<PlayerController_Sample>();
 
-	//m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
+	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
-	//m_player->AddComponent<CircleCollider>();
+	m_player->AddComponent<CircleCollider>();
 
-	////b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
-	////b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
+	//b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
+	//b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
 
-	//GameObject* a = Instantiate("aa");
+	GameObject* a = Instantiate("aa");
 
-	//SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
+	SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
 
-	//ComPtr<ID2D1Bitmap1> bitmap;
-	//bitmap = ResourceManager::Instance().LoadTexture("Player.png");
-	//spriteRenderer->SetBitmap(bitmap);
+	ComPtr<ID2D1Bitmap1> bitmap;
+	bitmap = ResourceManager::Instance().LoadTexture("Player.png");
+	spriteRenderer->SetBitmap(bitmap);
 
-	//spriteRenderer->SetSize(64.f, 64.f);
-
-	//m_player2 = Instantiate("Player2");
-	//m_player2->SetTag("Player2");
-
-	//m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
-	//m_player2->AddComponent<Animator>();
-
-	//m_player2->GetComponent<Transform>()->SetScale({ 2, 2 });
-
-	//m_spriteRenderer->SetOrderInLayer(2);
-
-	//PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
-
-	//m_player2->AddComponent<BoxCollider>();
-
-<<<<<<< HEAD
 	spriteRenderer->SetSize(64.f, 64.f);
 
 	m_player2 = Instantiate("Player2");
 	m_player2->SetTag("Player2");
-
-	m_player2->AddComponent<GameObjectFindTest>();
 
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();
@@ -119,10 +94,6 @@ void ExampleScene::Awake()
 
 	pc->m_xSpeed = 550.f;
 	pc->m_ySpeed = 550.f;
-=======
-	//pc->m_xSpeed = 550.f;
-	//pc->m_ySpeed = 550.f;
->>>>>>> origin/chs2
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로
