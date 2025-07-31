@@ -29,9 +29,9 @@ bool SoundManager::Init()
 	m_mainGroup->addGroup(m_sfxGroup);
 	m_mainGroup->addGroup(m_uiGroup);
 
-	ConvertBGMSource(ResourceManager::Instance().GetBGMPaths());
-	ConvertSFXSource(ResourceManager::Instance().GetSFXPaths());
-	ConvertUISource(ResourceManager::Instance().GetUIPaths());
+	ConvertBGMSource(ResourceManager::Instance().GetBGMPaths());	//args paths
+	ConvertSFXSource(ResourceManager::Instance().GetSFXPaths());	//args paths
+	ConvertUISource(ResourceManager::Instance().GetUIPaths());		//args paths
 
 	return true;
 }
