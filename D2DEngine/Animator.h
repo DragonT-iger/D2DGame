@@ -19,6 +19,8 @@ public:
 
 	void ChangeState(const std::string& name);
 
+	const std::string& GetCurState();
+
 	void SetEntryState(const std::string& name);
 
 	bool IsAnimeEnd() { return m_isEnd; }
@@ -30,6 +32,7 @@ private:
 	std::unordered_map<std::string, std::shared_ptr<AnimationClip>> m_animations;
 	std::unordered_map<std::string, bool>													m_loopmap;
 	std::shared_ptr<AnimationClip>																	m_curClip;
+	std::string																											m_curState;
 	std::vector<FrameData>																			m_frameDatas;
 	std::vector<FrameData>::iterator																m_curFrame;
 	float 																										m_duration = 0.0f;

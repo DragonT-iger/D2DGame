@@ -31,7 +31,7 @@ bool BoxCollider::IsCollide(const Collider* other) const
 
 		float SquareLength = (circle->GetCenter() - clampCirclePos).SqrMagnitude();
 
-		if (SquareLength < (circle->GetRadius() * circle->GetRadius())) {
+		if (SquareLength < (circle->GetRadius() * circle->GetRadius() * scale.x * scale.x)) {
 			return true;
 		};
 		
@@ -70,5 +70,19 @@ bool BoxCollider::IsCollide(const Collider* other) const
 
 void BoxCollider::DrawCollider()
 {
-	D2DRenderer::Instance().DrawRectangle((- size.x / 2) + m_offset.x, (-size.y / 2) + m_offset.y, (size.x / 2)+ m_offset.x, (size.y / 2) + m_offset.y, D2D1::ColorF(1.f, 0.f, 0.f));
+	D2DRenderer::Instance().DrawRectangle((- size.x / 2) + m_offset.x, (-size.y / 2) - m_offset.y, (size.x / 2)+ m_offset.x, (size.y / 2) - m_offset.y, D2D1::ColorF(1.f, 0.f, 0.f));
+}
+
+void BoxCollider::OnInspectorGUI()
+{
+
+	Vector2 sz = GetSize();
+	float size[2] = { sz.x, sz.y };
+	if (ImGui::DragFloat2("Size", size))
+	{
+		SetSize({ size[0], size[1] });
+	}
+
+
+	__super::OnInspectorGUI();
 }
