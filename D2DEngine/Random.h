@@ -4,19 +4,33 @@
 class Random
 {
 public:
-	int operator()(int one, int two) // range
+	static Random& Instance()
 	{
-		std::random_device rd;
-		std::mt19937 gen(rd());
+		static Random inst;
+		return inst;
+	}
+
+	int Range(int one,int two) // range
+	{
+		gen.seed(rd());
 		std::uniform_int_distribution<int> dis(one, two);
 		return dis(gen);
 	}
-
-	float operator()(float one, float two) // range
+	float Range(float one, float two) // range
 	{
-		std::random_device rd;
-		std::mt19937 gen(rd());
+		gen.seed(rd());
 		std::uniform_int_distribution<float> dis(one, two);
 		return dis(gen);
 	}
+
+private:
+	Random() = default;
+	~Random() = default;
+	Random(const Random&) = delete;
+	Random(Random&&) = delete;
+	Random operator= (const Random&) = delete;
+	Random operator= (Random&&) = delete;
+
+	std::mt19937 gen;
+	std::random_device rd;
 };
