@@ -2,6 +2,29 @@
 class PlayerController : public MonoBehaviour
 {
 public:
+
+	enum class Action
+	{
+		Idle,
+		Walk,
+		Hit,
+		Steal,
+		Alive,
+		Dead
+	};
+
+	enum class Visibilty
+	{
+		Hide,
+		Visible
+	};
+
+	//enum class State
+	//{
+	//	Alive,
+	//	Dead
+	//};
+
 	void Awake()                         override;
 	void Start()                         override;
 	void Update(float deltaTime)         override;
@@ -13,6 +36,8 @@ public:
 	float m_Spd_X = 10.0f;
 	float m_Spd_Y = 10.0f;
 private:
+
+	Action state = Action::Idle;
 
 	std::string str_currentState;
 	Animator* m_animator = nullptr;

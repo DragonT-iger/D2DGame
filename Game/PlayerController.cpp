@@ -1,27 +1,7 @@
 #include "pch.h"
 #include "PlayerController.h"
 
-enum class Action
-{
-	Idle,
-	Walk,
-	Hit,
-	Steal,
-	Alive,
-	Dead
-};
 
-enum class Visibilty
-{
-	Hide,
-	Visible
-};
-
-//enum class State
-//{
-//	Alive,
-//	Dead
-//};
 
 void PlayerController::Awake()
 {
@@ -41,11 +21,13 @@ void PlayerController::Start()
 	auto moleSteal = ResourceManager::Instance().LoadAnimationClip("mole.json", "steal");
 	auto moleDead = ResourceManager::Instance().LoadAnimationClip("mole.json", "dead");
 
-	m_animator->AddClip("idle", moleIdle);
-	m_animator->AddClip("walk", molewalk);
-	m_animator->AddClip("hit", moleHit);
-	m_animator->AddClip("steal", moleSteal);
-	m_animator->AddClip("dead", moleDead);
+	m_animator->AddClip("idle", moleIdle,true);
+	m_animator->AddClip("walk", molewalk,true);
+	m_animator->AddClip("hit", moleHit,false);
+	m_animator->AddClip("steal", moleSteal,false);
+	m_animator->AddClip("dead", moleDead,false);
+
+	m_animator->SetEntryState("idle");
 
 	auto collider = GetComponent<BoxCollider>();
 
@@ -55,18 +37,16 @@ void PlayerController::Start()
 
 void PlayerController::Update(float deltaTime)
 {
-	Action a = Action::Idle;
-
-	if (Input.GetKeyDown(Keycode::UP))			{ a = Action::Walk; m_transform->Translate(0, m_Spd_Y * deltaTime); }
-	else if (Input.GetKeyDown(Keycode::DOWN))	{ a = Action::Walk; m_transform->Translate(0, -m_Spd_Y * deltaTime); }
-	else if (Input.GetKeyDown(Keycode::LEFT))  { a = Action::Walk; m_transform->Translate(-m_Spd_X * deltaTime, 0); if (!m_spriteRenderer->IsFlip()) m_spriteRenderer->SetFlip(true); }
-	else if (Input.GetKeyDown(Keycode::RIGHT))  { a = Action::Walk; m_transform->Translate(m_Spd_X * deltaTime, 0); if(m_spriteRenderer->IsFlip()) m_spriteRenderer->SetFlip(false); }
-	else if (Input.GetKeyDown(Keycode::Z))		{ a = Action::Steal; }
-	else if (Input.GetKeyDown(Keycode::Q))		{ a = Action::Dead; }
-	else if (Input.GetKeyDown(Keycode::W))		 { a = Action::Hit; }
+	if (Input.GetKeyDown(Keycode::UP))			{ state = Action::Walk; m_transform->Translate(0, m_Spd_Y * deltaTime); }
+	else if (Input.GetKeyDown(Keycode::DOWN))	{ state = Action::Walk; m_transform->Translate(0, -m_Spd_Y * deltaTime); }
+	else if (Input.GetKeyDown(Keycode::LEFT))  { state = Action::Walk; m_transform->Translate(-m_Spd_X * deltaTime, 0); if (!m_spriteRenderer->IsFlip()) m_spriteRenderer->SetFlip(true); }
+	else if (Input.GetKeyDown(Keycode::RIGHT))  { state = Action::Walk; m_transform->Translate(m_Spd_X * deltaTime, 0); if(m_spriteRenderer->IsFlip()) m_spriteRenderer->SetFlip(false); }
+	else if (Input.GetKeyDown(Keycode::Z))		{ state = Action::Steal; }
+	else if (Input.GetKeyDown(Keycode::Q))		{ state = Action::Dead; }
+	else if (Input.GetKeyDown(Keycode::W))		 { state = Action::Hit; }
 
 
-	switch (a)
+	switch (state)
 	{
 	case Action::Idle:
 		if (str_currentState != "idle") m_animator->ChangeState("idle");
@@ -82,10 +62,10 @@ void PlayerController::Update(float deltaTime)
 	case Action::Hit:
 		break;
 	case Action::Steal:
+		if (str_currentState != "steal")m_animator->ChangeState("steal"); str_currentState = "steal";
 		break;
 	case Action::Dead:
-		break;
-	default:
+		if (str_currentState != "dead")m_animator->ChangeState("dead"); str_currentState = "dead";
 		break;
 	}
 }

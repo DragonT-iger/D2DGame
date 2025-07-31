@@ -10,7 +10,9 @@ void Animator::Awake()
 
 void Animator::Update(float deltaTime)
 {
-	
+	if (m_isEnd)
+		return;
+
 	if (m_curFrame->duration <= m_duration)
 	{
 		++m_curFrame;
@@ -18,9 +20,9 @@ void Animator::Update(float deltaTime)
 		{
 			m_curFrame = m_frameDatas.begin();
 		}
-		else if (m_curFrame == m_frameDatas.end() && m_curAnimeLoop)
+		else if (m_curFrame == m_frameDatas.end() && !m_curAnimeLoop)
 		{
-			if(!m_isEnd)
+			if(!m_isEnd) 
 				m_isEnd = true;
 			return;
 		}
@@ -47,6 +49,7 @@ void Animator::ChangeState(const std::string& name)
 	m_curFrame = m_frameDatas.begin();
 	m_sRenderer->SetSrcRect(m_curFrame->ToRectF());
 	m_curAnimeLoop = m_loopmap.at(name);
+	m_isEnd = false;
 }
 
 void Animator::SetEntryState(const std::string& name)

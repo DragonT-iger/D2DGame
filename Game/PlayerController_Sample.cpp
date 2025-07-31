@@ -19,7 +19,7 @@ void  PlayerController_Sample::Start()
 {
 	auto molewalk = ResourceManager::Instance().LoadAnimationClip("sample_mole_1.json", "Walk");
 
-	m_animator->AddClip("Walk", molewalk);
+	//m_animator->AddClip("Walk", molewalk);
     m_animator->SetEntryState("Walk");
 	curAnim = "Walk";
 
