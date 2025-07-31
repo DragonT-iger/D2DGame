@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Game.h"
-//#include "ExampleScene.h"
+#include "ExampleScene.h"
 #include "MainScene.h"
 
 #ifdef _DEBUG
@@ -30,6 +30,7 @@ bool Game::Initialize()
 
 
     // 맨 처음 씬 만들고 로드하는법
+    SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"ExampleScene", std::make_unique<ExampleScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 
     
@@ -42,7 +43,8 @@ bool Game::Initialize()
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
 
-    SceneManager::Instance().LoadScene(L"MainScene");
+    //SceneManager::Instance().LoadScene(L"MainScene");
+    SceneManager::Instance().LoadScene(L"ExampleScene");
 
 	return true;
 }

@@ -5,6 +5,7 @@
 #include "Crop.h"
 #include "PlayerController_Sample.h"
 #include "CinemachineCamera.h"
+#include "GameObjectFindTest.h"
 
 void ExampleScene::Awake()
 {
@@ -94,6 +95,8 @@ void ExampleScene::Awake()
 
 	m_player2 = Instantiate("Player2");
 	m_player2->SetTag("Player2");
+
+	m_player2->AddComponent<GameObjectFindTest>();
 
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();

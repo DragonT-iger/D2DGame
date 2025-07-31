@@ -78,6 +78,9 @@
     <ClCompile Include="SpawnManager.cpp">
       <Filter>Scripts\SpawnManager</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjectFindTest.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="SpawnManager.h">
       <Filter>Scripts\SpawnManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectFindTest.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
