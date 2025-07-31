@@ -5,6 +5,7 @@
 
 void SpawnManager::Awake()
 {
+	curScene = SceneManager::Instance().GetActiveScene();
 	//구역 설정
 	farm_A = { -1120, 771, 1120, -771 };
 	farm_B = { -2182, 1387, 2182, -1387};
@@ -81,6 +82,48 @@ void SpawnManager::Update(float deltaTime)
 	}
 }
 
+void SpawnManager::DestroyObject(GameObject* obj)
+{
+	auto rank = obj->GetComponent<Crop>()->GetFarmRank();
+
+	switch (rank)
+	{
+	case Rank_A:
+		for (auto it = m_farmAList.begin(); it != m_farmAList.end(); it++)
+		{
+			if (*it == obj)
+			{
+				m_farmAList.erase(it);
+				break;
+			}	
+		}
+		break;
+	case Rank_B:
+		for (auto it = m_farmBList.begin(); it != m_farmBList.end(); it++)
+		{
+			if (*it == obj)
+			{
+				m_farmBList.erase(it);
+				break;
+			}
+		}
+		break;
+	case Rank_C:
+		for (auto it = m_farmCList.begin(); it != m_farmCList.end(); it++)
+		{
+			if (*it == obj)
+			{
+				m_farmCList.erase(it);
+				break;
+			}
+		}
+		break;
+	default:
+		break;
+	}
+	curScene->Destroy(obj);
+}
+
 GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 {
 	Vector2 pos = { 0, 0 };
@@ -110,7 +153,6 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	SetCropData(crop, type, rank);
 	obj->GetComponent<Transform>()->SetPosition(pos);
 	obj->GetComponent<Transform>()->SetScale({0.5f, 0.5f});
-	//box->SetSize({ sr->GetSize().width, sr->GetSize().height });
 
 	return obj;
 }
@@ -171,7 +213,7 @@ Vector2 SpawnManager::CreateSpawnPoint(const RECT& outRect, const RECT& inRect, 
 	do {
 		x = posX(gen);
 		y = posY(gen);
-	} while (IsInnerRect(inRect, x, y) && CheckRange({ static_cast<float>(x), static_cast<float>(y) }, rank));
+	} while (IsInnerRect(inRect, x, y) || CheckRange({ static_cast<float>(x), static_cast<float>(y) }, rank));
 
 	return { static_cast<float>(x),  static_cast<float>(y) };
 }

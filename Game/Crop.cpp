@@ -62,6 +62,7 @@ void Crop::SetCropData(
 	}
 	}
 
+	m_rank = rank;
 	m_type = type;
 	m_GameSprites = gameSprites;
 

@@ -7,6 +7,8 @@ public:
 	void Awake() override;
 	void Start() override;
 	void Update(float deltaTime) override;
+
+	void DestroyObject(GameObject* obj);
 	
 	using Random = std::uniform_int_distribution<int>;
 
@@ -34,6 +36,8 @@ private:
 	RECT						   farm_B;
 	RECT						   farm_C;
 	RECT							 Home;
+
+	Scene* curScene;
 
 	int		m_maxRate_A;
 	int		m_maxRate_B;

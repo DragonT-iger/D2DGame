@@ -27,6 +27,7 @@ public:
 
 	Size GetSize() { return m_size; }
 	Crops	GetCropType() { return m_type; }
+	FarmRank GetFarmRank() { return m_rank; }
 
 	void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites);
 
@@ -37,6 +38,8 @@ protected:
 	Size m_size = Size::S;
 	Size m_maxSize;
 	Crops	m_type;
+
+	FarmRank m_rank;
 
 	bool isSpawn = false;
 
