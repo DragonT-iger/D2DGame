@@ -42,7 +42,7 @@ public:
 private:
 	Image*																				m_image;
 	D2D1_SIZE_F													m_size = { 160.f, 40.f };
-	Vector2																					m_pos;
+	Transform*																					m_pos;
 	ButtonEvent								m_curEvent = ButtonEvent::MaxEvent;
 	std::vector<std::function<void()>>									m_events;
 	std::array<Microsoft::WRL::ComPtr<ID2D1Bitmap1>, static_cast<size_t>(ButtonEvent::MaxEvent)> m_sprites;

@@ -13,10 +13,7 @@ void UITest::Start()
 
 void UITest::Update(float dt)
 {
-	if (Input.GetKeyPressed(Keycode::LEFT))
-	{
-		m_SlideBar->UpdateWidthRatio(m_value);
-	}
+	m_SlideBar->UpdateWidthRatio(m_value);
 	if (Input.GetKeyPressed(Keycode::A))
 	{
 		if(m_value > 0.f)

@@ -17,16 +17,17 @@ void ExampleScene::Awake()
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
 
-	/*m_slidebar = Instantiate("slidebar");
+	m_slidebar = Instantiate("slidebar");
 	m_slidebar->AddComponent<Image>();	
 	m_slidebar->AddComponent<Slide_Bar>();
 	m_slidebar->AddComponent<UITest>();
 
 	m_slidebar->GetComponent<Transform>()->SetPosition({ 100, 150 });
 
-	m_slidebar->GetComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 160, 20 });*/
+	m_slidebar->GetComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 160, 20 });
 
-	/*m_button = Instantiate("buttonTest");
+	m_button = Instantiate("buttonTest");
+	m_button->GetComponent<Transform>()->SetPosition({100, 100});
 
 	m_button->AddComponent<Image>();
 	auto b = m_button->AddComponent<Button>();
@@ -36,7 +37,7 @@ void ExampleScene::Awake()
 
 	b->AddEventSprite(b3, ButtonEvent::Idle);
 	b->AddEventSprite(b1, ButtonEvent::Highlight);
-	b->AddEventSprite(b3, ButtonEvent::Pressed);*/
+	b->AddEventSprite(b3, ButtonEvent::Pressed);
 
 	SoundManager::Instance().Init();
 	SoundManager::Instance().BGM_Shot("sample_ten.wav");

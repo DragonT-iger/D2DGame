@@ -13,7 +13,7 @@ public:
 
 	Vector2() : x(0.f), y(0.f) {}
 	Vector2(float x, float y) : x(x), y(y) {}
-	// 연산자 오버로드
+	// 연산자 오버로드d
 
 	Vector2 operator+(const Vector2& rhs) const; // R-value 지원
 	Vector2 operator-(const Vector2& rhs) const;

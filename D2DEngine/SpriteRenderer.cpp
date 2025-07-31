@@ -15,13 +15,13 @@ void SpriteRenderer::OnInspectorGUI()
     ImGui::Text("Bitmap : %p", m_renderInfo.m_bitmap.Get());
 
     // ¦¡¦¡ SrcRect ------------------------------------------------
-    //float src[4] = { m_renderInfo.m_srcRect.left,  m_renderInfo.m_srcRect.top,
-    //                 m_renderInfo.m_srcRect.right, m_renderInfo.m_srcRect.bottom };
-    //if (ImGui::InputFloat4("SrcRect", src))
-    //{
-    //    m_renderInfo.m_srcRect = { src[0], src[1], src[2], src[3] };
-    //    SetSrcRect(m_renderInfo.m_srcRect);      
-    //}
+    float src[4] = { m_renderInfo.m_srcRect.left,  m_renderInfo.m_srcRect.top,
+                     m_renderInfo.m_srcRect.right, m_renderInfo.m_srcRect.bottom };
+    if (ImGui::InputFloat4("SrcRect", src))
+    {
+        m_renderInfo.m_srcRect = { src[0], src[1], src[2], src[3] };
+        SetSrcRect(m_renderInfo.m_srcRect);      
+    }
 
     D2D1_SIZE_F sz = GetSize();
     float size[2] = { sz.width, sz.height };
