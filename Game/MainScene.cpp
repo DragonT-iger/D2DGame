@@ -13,7 +13,6 @@ void MainScene::Awake()
 	player->AddComponent<PlayerController>();
 	player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
-	player->AddComponent<CircleCollider>();
 
 	PlayerController* pc = player->AddComponent<PlayerController>();
 
