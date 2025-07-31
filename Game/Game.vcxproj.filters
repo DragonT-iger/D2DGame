@@ -87,6 +87,9 @@
     <ClCompile Include="HSTestScene.cpp">
       <Filter>TestScene</Filter>
     </ClCompile>
+    <ClCompile Include="Farmer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="HSTestScene.h">
       <Filter>TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Farmer.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
