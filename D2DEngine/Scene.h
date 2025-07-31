@@ -71,6 +71,7 @@ public:
 
     bool GetGridOn() { return m_isGridOn; }
 
+    GameObject* FindGameObject(std::string name);
 
     
 protected:

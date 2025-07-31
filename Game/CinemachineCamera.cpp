@@ -14,7 +14,6 @@ void CinemachineCamera::Awake()
 
 void CinemachineCamera::Start()
 {
-
 	m_Camera = GetComponent<Camera>();
 }
 

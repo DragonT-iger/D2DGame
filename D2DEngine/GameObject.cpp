@@ -111,6 +111,12 @@ void GameObject::BroadcastTriggerExit(Collider* other)
         }
 	}
 }
+GameObject* GameObject::Find(std::string name)
+{
+    Scene* curScene = SceneManager::Instance().GetActiveScene();
+    return curScene->FindGameObject(name);
+
+}
 void GameObject::FlushPending()
 {
     /* 1) Add */

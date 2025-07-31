@@ -38,6 +38,8 @@ public:
 	void BroadcastTriggerStay(Collider* other);
 	void BroadcastTriggerExit(Collider* other);
 
+    GameObject* Find(std::string name);
+
     //getname
 
 	const std::string& GetName() const { return m_name; }
