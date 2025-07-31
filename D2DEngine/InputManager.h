@@ -59,6 +59,8 @@ public:
 	bool GetWheelUp()         const { return m_CurMouse.wheelUp; }
 	bool GetWheelDown()       const { return m_CurMouse.wheelDown; }
 
+	int GetAxisRaw(const std::string& axis);
+
 private:
 
 	void HandleMsgKeyDown(WPARAM wParam, LPARAM lParam);
