@@ -43,13 +43,18 @@ void Animator::ChangeState(const std::string& name)
 	}
 #endif
 	m_curClip = m_animations.at(name);
-
+	m_curState = name;
 	m_sRenderer->SetBitmap(m_curClip->GetBitmap());
 	m_frameDatas = m_curClip->GetFrames();
 	m_curFrame = m_frameDatas.begin();
 	m_sRenderer->SetSrcRect(m_curFrame->ToRectF());
 	m_curAnimeLoop = m_loopmap.at(name);
 	m_isEnd = false;
+}
+
+const std::string& Animator::GetCurState()
+{
+	return m_curState;
 }
 
 void Animator::SetEntryState(const std::string& name)
