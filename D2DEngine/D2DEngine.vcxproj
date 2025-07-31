@@ -163,7 +163,7 @@
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImGuiManager.h" />
-    <ClInclude Include="ImGuiWindow.h" />
+    <ClInclude Include="EditorWindow.h" />
     <!-- 병합 추가 ↓ -->
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="json.hpp" />
@@ -204,7 +204,7 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />
-    <ClCompile Include="ImGuiWindow.cpp" />
+    <ClCompile Include="EditorWindow.cpp" />
     <!-- 병합 추가 ↓ -->
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JsonParser.cpp" />

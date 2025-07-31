@@ -201,7 +201,7 @@
     <ClInclude Include="ImGuiManager.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="ImGuiWindow.h">
+    <ClInclude Include="EditorWindow.h">
       <Filter>Editor</Filter>
     </ClInclude>
     <ClInclude Include="Slide_Bar.h">
@@ -299,7 +299,7 @@
     <ClCompile Include="ImGuiManager.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
-    <ClCompile Include="ImGuiWindow.cpp">
+    <ClCompile Include="EditorWindow.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
     <ClCompile Include="Slide_Bar.cpp">

@@ -1,13 +1,13 @@
 #include "pch.h"
-#include "ImGuiWindow.h"
+#include "EditorWindow.h"
 #ifdef _DEBUG
-void ImGuiWindow::Draw(float deltaTime)
+void EditorWindow::Draw(float deltaTime)
 {
     DrawHierarchy();
     DrawInspector();
 }
 
-void ImGuiWindow::DrawHierarchy()
+void EditorWindow::DrawHierarchy()
 {
     auto* scene = SceneManager::Instance().GetActiveScene();
     if (!scene) return;
@@ -28,7 +28,7 @@ void ImGuiWindow::DrawHierarchy()
     ImGui::End();
 }
 
-void ImGuiWindow::DrawInspector()
+void EditorWindow::DrawInspector()
 {
     if (!m_selected) return;
 
@@ -68,19 +68,38 @@ void ImGuiWindow::DrawInspector()
 
     // ── 컴포넌트 리스트 & Behaviour 토글 ──
     ImGui::Text("Components:");
+
     for (const auto& c : m_selected->GetComponents())
     {
+        ImGui::PushID(c.get());
         const char* typeName = typeid(*c).name();
-        if (auto* beh = dynamic_cast<Behaviour*>(c.get()))
+
+        Behaviour* beh = dynamic_cast<Behaviour*>(c.get());
+        bool enabled = beh ? beh->IsActive() : true;
+
+        if (ImGui::Checkbox("##Enabled", &enabled) && beh)
+            beh->SetActive(enabled);
+
+        ImGui::SameLine();
+
+        ImGui::TextUnformatted(typeName);
+        ImGui::SameLine();
+
+        bool open = m_componentOpen[c.get()];
+        ImGui::SameLine(ImGui::GetCursorPosX()
+            + ImGui::GetContentRegionAvail().x
+            - ImGui::GetFrameHeight());  
+
+        if (ImGui::SmallButton(open ? "-##toggle" : "+##toggle"))
+            m_componentOpen[c.get()] = !open;
+
+        ImGui::PopID();
+
+        if (open)
         {
-            bool enabled = beh->IsActive();        // Behaviour 에서 on/off 상태 얻기
-            ImGui::Checkbox(typeName, &enabled);
-            if (ImGui::IsItemEdited())
-                beh->SetActive(enabled);
-        }
-        else
-        {
-            ImGui::TextUnformatted(typeName);
+            ImGui::Indent();
+            c->OnInspectorGUI();
+            ImGui::Unindent();
         }
     }
 

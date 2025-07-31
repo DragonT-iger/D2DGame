@@ -10,6 +10,7 @@ public:
 	SpriteRenderer() = default;
 	virtual ~SpriteRenderer() = default;
 
+	void OnInspectorGUI() override;
 
 	void SetBitmap(const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& bitmap) {
 		m_renderInfo.m_bitmap = bitmap;
