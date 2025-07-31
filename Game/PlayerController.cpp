@@ -37,4 +37,11 @@ void PlayerController::Start()
 
 void PlayerController::Update(float deltaTime)
 {
+	int x = Input.GetAxisRaw("Horizontal");
+	int y = Input.GetAxisRaw("Vertical");
+
+	Vector2 dir{ (float)x,(float)y };
+
+	m_transform->Translate(dir * m_Spd * deltaTime);
+
 }
