@@ -1,14 +1,11 @@
 #include "pch.h"
 #include "PlayerController.h"
 
-
-
 void PlayerController::Awake()
 {
 	m_transform = GetComponent<Transform>();
 	m_spriteRenderer = GetComponent<SpriteRenderer>();
 	m_animator = GetComponent<Animator>();
-	auto collider = GetComponent<CircleCollider>();
 
 	str_currentState = "idle";
 }
@@ -30,7 +27,6 @@ void PlayerController::Start()
 	m_animator->SetEntryState("idle");
 
 	auto collider = GetComponent<BoxCollider>();
-
 	collider->SetSize({ 100, 100 });
 	m_spriteRenderer->SetOpacity(1);
 }
@@ -47,8 +43,8 @@ void PlayerController::Update(float deltaTime)
 		if (x < 0) { m_spriteRenderer->SetFlip(true); }
 		else if (x > 0) { m_spriteRenderer->SetFlip(false); }
 
-		if (Input.GetKeyDown(Keycode::Q)) { action = Action::Hit; }
-		if (Input.GetKeyDown(Keycode::W)) { m_animator->ChangeState("dead"); }
+		if (Input.GetKeyDown(Keycode::B)) { action = Action::Hit; }
+		if (Input.GetKeyDown(Keycode::N)) { m_animator->ChangeState("dead"); state = State::Dead; return; }
 		if (Input.GetKeyDown(Keycode::Z)) { action = Action::Steal; }
 
 		switch (action)
@@ -60,10 +56,10 @@ void PlayerController::Update(float deltaTime)
 				action = Action::Walk;
 				break;
 			}
-			else
+			else if (m_animator->GetCurState() != "idle")
 			{
-				if(action != Action::Idle)
 				m_animator->ChangeState("idle");
+				action = Action::Idle;
 			}
 			break;
 		case Action::Walk:
@@ -76,15 +72,24 @@ void PlayerController::Update(float deltaTime)
 			m_transform->Translate(dir * m_Spd * deltaTime);
 			break;
 		case Action::Hit:
-			action = Action::Idle;
-			m_animator->ChangeState("hit");
+			if (m_animator->GetCurState() != "hit")
+			{
+				m_animator->ChangeState("hit");
+			}
+			if (m_animator->IsAnimeEnd())
+			{
+				action = Action::Idle;
+			}
 			break;
 		case Action::Steal:
-			action = Action::Idle;
-			m_animator->ChangeState("steal");
-
-			break;
-		default:
+			if (m_animator->GetCurState() != "steal")
+			{
+				m_animator->ChangeState("steal");
+			}
+			if (m_animator->IsAnimeEnd())
+			{
+				action = Action::Idle;
+			}
 			break;
 		}
 	}
