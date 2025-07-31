@@ -1,7 +1,7 @@
 
 #include "pch.h"
 #include "ImGuiManager.h"
-#include "ImGuiWindow.h"
+#include "EditorWindow.h"
 #ifdef _DEBUG
 ImGuiManager& ImGuiManager::Instance()
 {
@@ -30,13 +30,6 @@ void ImGuiManager::Initialize(HWND hwnd,
 
     m_initialized = true;
 }
-
-void ImGuiManager::Show(float deltaTime)
-{
-    static bool show_demo = true;
-    ImGui::ShowDemoWindow(&show_demo);
-}
-
 void ImGuiManager::BeginFrame(float deltaTime)
 {
     assert(m_initialized && "ImGuiManager not initialized!");

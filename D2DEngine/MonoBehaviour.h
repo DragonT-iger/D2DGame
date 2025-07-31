@@ -13,6 +13,8 @@ class MonoBehaviour : public Behaviour {
 public:
     virtual ~MonoBehaviour() = default;
 
+    
+
     virtual void Awake() {}
     virtual void Start() {}
 	virtual void Update(float deltaTime) {};

@@ -36,6 +36,17 @@ void Transform::RemoveChild(Transform* child)
 	);
 }
 
+void Transform::OnInspectorGUI()
+{
+	Vector2 pos = m_position;
+	float   rot = m_rotation;
+	Vector2 scl = m_scale;
+
+	if (ImGui::DragFloat2("Position", &pos.x, 0.1f))   SetPosition(pos);
+	if (ImGui::DragFloat("Rotation", &rot, 1.0f))   SetRotation(rot);
+	if (ImGui::DragFloat2("Scale", &scl.x, 0.01f))  SetScale(scl);
+}
+
 void Transform::SetDirty()
 {
 

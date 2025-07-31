@@ -55,6 +55,8 @@ public:
 	void RemoveChild(Transform* child);
 
 	void SetSpriteSize(const D2D1_SIZE_F& size) { m_spriteSize = size; SetDirty(); }
+
+	void OnInspectorGUI() override;
 private:
 	void SetDirty();
 	void UpdateMatrices();

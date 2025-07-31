@@ -9,6 +9,12 @@ void SpriteRenderer::SetSize(float width, float height)
 	GetComponent<Transform>()->SetSpriteSize(D2D1::SizeF(width, height)); // Transform 에서 스프라이트 크기 설정
 }
 
+void SpriteRenderer::OnInspectorGUI()
+{
+	/*ImGui::Text("Bitmap : %p", m_renderInfo
+	ImGui::DragRect2D("DestRect", &m_destRect);*/
+}
+
 D2D1_SIZE_F SpriteRenderer::GetSize()
 {
 	float w = m_renderInfo.m_destRect.right - m_renderInfo.m_destRect.left;
