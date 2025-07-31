@@ -13,8 +13,8 @@ public:
 	void DrawCollider() override;
 
 	ColliderInfo GetColliderInfo() override { 
-		if (!m_transform)
-			m_transform = GetComponent<Transform>();
+		/*if (!m_transform)
+			m_transform = GetComponent<Transform>();*/
 		return { m_transform, this };
 	} 
 

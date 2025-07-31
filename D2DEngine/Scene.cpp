@@ -301,12 +301,20 @@ void Scene::FlushPending()
     }
     m_pendingAdd.clear();
 
-	if (m_phase == ScenePhase::Awake)
+    if (m_phase == ScenePhase::Awake)
+    {
         for (auto* obj : added)
             obj->Awake();
-    else if (m_phase == ScenePhase::Start)
+    }
+    else
+    {
         for (auto* obj : added)
+        {
+            obj->Awake();
             obj->Start();
+
+        }
+    }
 
     for (auto* dead : m_pendingDestroy)
     {
