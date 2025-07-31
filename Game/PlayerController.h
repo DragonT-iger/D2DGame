@@ -9,8 +9,6 @@ public:
 		Walk,
 		Hit,
 		Steal,
-		Alive,
-		Dead
 	};
 
 	enum class Visibilty
@@ -19,11 +17,11 @@ public:
 		Visible
 	};
 
-	//enum class State
-	//{
-	//	Alive,
-	//	Dead
-	//};
+	enum class State
+	{
+		Alive,
+		Dead
+	};
 
 	void Awake()                         override;
 	void Start()                         override;
@@ -37,7 +35,8 @@ public:
 	bool m_canMove = true;
 private:
 
-	Action state = Action::Idle;
+	Action action = Action::Idle;
+	State state = State::Alive;
 
 	std::string str_currentState;
 	Animator* m_animator = nullptr;

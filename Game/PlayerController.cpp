@@ -37,11 +37,56 @@ void PlayerController::Start()
 
 void PlayerController::Update(float deltaTime)
 {
-	int x = Input.GetAxisRaw("Horizontal");
-	int y = Input.GetAxisRaw("Vertical");
+	if (state == State::Alive)
+	{
+		int x = Input.GetAxisRaw("Horizontal");
+		int y = Input.GetAxisRaw("Vertical");
+		Vector2 dir{ (float)x,(float)y };
+		dir.Normalize();
 
-	Vector2 dir{ (float)x,(float)y };
+		if (x < 0) { m_spriteRenderer->SetFlip(true); }
+		else if (x > 0) { m_spriteRenderer->SetFlip(false); }
 
-	m_transform->Translate(dir * m_Spd * deltaTime);
+		if (Input.GetKeyDown(Keycode::Q)) { action = Action::Hit; }
+		if (Input.GetKeyDown(Keycode::W)) { m_animator->ChangeState("dead"); }
+		if (Input.GetKeyDown(Keycode::Z)) { action = Action::Steal; }
+
+		switch (action)
+		{
+		case Action::Idle:
+			if (dir != Vector2{ 0,0 })
+			{
+				m_animator->ChangeState("walk");
+				action = Action::Walk;
+				break;
+			}
+			else
+			{
+				if(action != Action::Idle)
+				m_animator->ChangeState("idle");
+			}
+			break;
+		case Action::Walk:
+			if (dir == Vector2{ 0,0 })
+			{
+				m_animator->ChangeState("idle");
+				action = Action::Idle;
+				break;
+			}
+			m_transform->Translate(dir * m_Spd * deltaTime);
+			break;
+		case Action::Hit:
+			action = Action::Idle;
+			m_animator->ChangeState("hit");
+			break;
+		case Action::Steal:
+			action = Action::Idle;
+			m_animator->ChangeState("steal");
+
+			break;
+		default:
+			break;
+		}
+	}
 
 }
