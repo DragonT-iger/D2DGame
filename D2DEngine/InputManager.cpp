@@ -66,6 +66,40 @@ bool InputManager::GetKeyDown(Keycode vk)
 	return m_keyDown[static_cast<UINT>(vk)];
 }
 
+int InputManager::GetAxisRaw(const std::string& axis)
+{
+	if (axis == "Vertical")
+	{
+		if (m_keyDown[static_cast<UINT>(Keycode::UP)]
+			|| m_keyDown[static_cast<UINT>(Keycode::W)])
+		{
+			return 1;
+		}
+		else if (m_keyDown[static_cast<UINT>(Keycode::DOWN)]
+					|| m_keyDown[static_cast<UINT>(Keycode::S)])
+		{
+			return -1;
+		}
+		else return 0;
+	}
+	else if (axis == "Horizontal")
+	{
+		if (m_keyDown[static_cast<UINT>(Keycode::RIGHT)]
+			|| m_keyDown[static_cast<UINT>(Keycode::D)])
+		{
+			return 1;
+		}
+		else if (m_keyDown[static_cast<UINT>(Keycode::LEFT)]
+			|| m_keyDown[static_cast<UINT>(Keycode::A)])
+		{
+			return -1;
+		}
+		else return 0;
+	}
+
+	return 0;
+}
+
 void InputManager::HandleMsgKeyDown(WPARAM wParam, LPARAM lParam)
 {
 	assert(wParam < 256); //wParam은 0~255 사이의 값이 들어옴
