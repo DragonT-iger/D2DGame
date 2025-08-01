@@ -39,6 +39,8 @@
     </Filter>
     <Filter Include="Scripts\Inventory">
       <UniqueIdentifier>{05878aea-ee56-4e6e-a3cc-0a2390868afc}</UniqueIdentifier>
+    <Filter Include="Player">
+      <UniqueIdentifier>{b9d1abe3-e78c-48f1-9bd8-b83c8acb6f24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +100,14 @@
     </ClCompile>
     <ClCompile Include="InventorySlot.cpp">
       <Filter>Scripts\Inventory</Filter>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="StealMessage.cpp">
+      <Filter>Scripts\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +164,14 @@
     </ClInclude>
     <ClInclude Include="InventorySlot.h">
       <Filter>Scripts\Inventory</Filter>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="StealMessage.h">
+      <Filter>Scripts\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

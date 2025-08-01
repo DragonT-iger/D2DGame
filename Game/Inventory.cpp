@@ -24,6 +24,57 @@ void Inventory::Start()
 	m_curSlot = m_slots[m_curSlotNum];
 }
 
+void Inventory::Update(float deltaTime)
+{
+	if (Input.GetKeyPressed(Keycode::Q))
+	{
+		AddCrop(Eggplant, S);
+	}
+	if (Input.GetKeyPressed(Keycode::W))
+	{
+		AddCrop(Potato, S);
+	}
+	if (Input.GetKeyPressed(Keycode::E))
+	{
+		AddCrop(Pumpkin, S);
+	}
+	if (Input.GetKeyPressed(Keycode::X))
+	{
+		ChangeSlot();
+		std::cout << m_curSlotNum << std::endl;
+		std::cout << m_curSlot->GetData().count << std::endl;
+	}
+	if (Input.GetKeyPressed(Keycode::C))
+	{
+		ThrowItem();
+	}
+	if (Input.GetKeyPressed(Keycode::A))
+	{
+		int w = GetWeight();
+		auto datas = SubMissonItem();
+
+		std::cout << "현재 무게 : " << w << std::endl;
+
+		for (const auto& data : datas)
+		{
+			switch (data.type)
+			{
+			case Eggplant:
+				std::cout << "가지 : " << data.count << std::endl;
+				break;
+			case Potato:
+				std::cout << "감자 : " << data.count << std::endl;
+				break;
+			case Pumpkin:
+				std::cout << "호박 : " << data.count << std::endl;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
+
 
 
 void Inventory::AddCrop(Crops type, Size size)
@@ -37,6 +88,8 @@ void Inventory::AddCrop(Crops type, Size size)
 				slot->AddItem(type, size, m_itemSprite[type]);
 			else
 				slot->AddItem(type, size);
+
+			break;
 		}
 	}
 }
@@ -60,7 +113,7 @@ std::vector<SlotData> Inventory::SubMissonItem()
 	std::vector<SlotData> datas;
 	for (auto& slot : m_slots)
 	{
-		//datas.push_back(slot->ThrowAll());
+		datas.push_back(slot->ThrowAll());
 	}
 
 	return datas;

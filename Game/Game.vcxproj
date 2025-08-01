@@ -1,4 +1,4 @@
-ï»¿<?xml version="1.0" encoding="utf-8"?>
+ï»?<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -151,10 +151,12 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Potato.cpp" />
     <ClCompile Include="Pumpkin.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
+    <ClCompile Include="StealMessage.cpp" />
     <ClCompile Include="UITest.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="PlayerController_Sample.cpp" />
@@ -170,10 +172,12 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="HSTestScene.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventorySlot.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Potato.h" />
     <ClInclude Include="Pumpkin.h" />
     <ClInclude Include="SpawnManager.h" />
+    <ClInclude Include="StealMessage.h" />
     <ClInclude Include="UITest.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerController_Sample.h" />

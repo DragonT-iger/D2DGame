@@ -61,6 +61,8 @@ bool InputManager::GetKeyPressed(Keycode vk)
 {
 	bool p = m_keyEdge[static_cast<UINT>(vk)].pressed;
 
+	m_keyEdge[static_cast<UINT>(vk)].pressed = false;	//때는 타이밍에 false인데 교수님 코드는 여기서 안하고 GetKeyPressed에서 처리했었음 뭐가 다른가?
+
 	return p;
 }
 
@@ -108,6 +110,7 @@ void InputManager::HandleMsgKeyDown(WPARAM wParam, LPARAM lParam)
 	assert(wParam < 256); //wParam은 0~255 사이의 값이 들어옴
 
 	bool wasPressed = (lParam & (1 << 30)) != 0; // lParam의 30번째 비트가 눌린 상태인지 여부를 나타냄
+
 	m_keyDown[wParam] = true;
 
 	if (!wasPressed)
@@ -123,7 +126,6 @@ void InputManager::HandleMsgKeyUp(WPARAM wParam, LPARAM lParam)
 	assert(wParam < 256); //wParam은 0~255 사이의 값이 들어옴
 
 	m_keyDown[wParam] = false;
-	m_keyEdge[wParam].pressed = false;	//때는 타이밍에 false인데 교수님 코드는 여기서 안하고 GetKeyPressed에서 처리했었음 뭐가 다른가?
 	m_keyEdge[wParam].released = true;
 }
 

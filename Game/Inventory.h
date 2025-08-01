@@ -9,6 +9,8 @@ public:
 	void Awake() override;
 	void Start() override;
 
+	void Update(float deltaTime) override;
+
 	void AddCrop(Crops type, Size size);
 
 	void ChangeSlot();
