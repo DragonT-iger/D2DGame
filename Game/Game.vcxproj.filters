@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="¼Ò½º ÆÄÀÏ">
+    <Filter Include="ì†ŒìŠ¤ íŒŒì¼">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Çì´õ ÆÄÀÏ">
+    <Filter Include="í—¤ë” íŒŒì¼">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="¸®¼Ò½º ÆÄÀÏ">
+    <Filter Include="ë¦¬ì†ŒìŠ¤ íŒŒì¼">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
@@ -39,13 +39,14 @@
     </Filter>
     <Filter Include="Scripts\Inventory">
       <UniqueIdentifier>{05878aea-ee56-4e6e-a3cc-0a2390868afc}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Player">
       <UniqueIdentifier>{b9d1abe3-e78c-48f1-9bd8-b83c8acb6f24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="UITest.cpp">
       <Filter>Scripts\ButtonTest</Filter>
@@ -60,16 +61,16 @@
       <Filter>Untouchable</Filter>
     </ClCompile>
     <ClCompile Include="CinemachineCamera.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController_Sample.cpp">
       <Filter>SampleFile</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="Crop.cpp">
       <Filter>Scripts\Items</Filter>
@@ -87,19 +88,20 @@
       <Filter>Scripts\SpawnManager</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectFindTest.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="HSTestScene.cpp">
       <Filter>TestScene</Filter>
     </ClCompile>
     <ClCompile Include="Farmer.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>Scripts\Inventory</Filter>
     </ClCompile>
     <ClCompile Include="InventorySlot.cpp">
       <Filter>Scripts\Inventory</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -112,7 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="UITest.h">
       <Filter>Scripts\ButtonTest</Filter>
@@ -127,13 +129,13 @@
       <Filter>SampleFile</Filter>
     </ClInclude>
     <ClInclude Include="CinemachineCamera.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="Crop.h">
       <Filter>Scripts\Items</Filter>
@@ -151,19 +153,20 @@
       <Filter>Scripts\SpawnManager</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectFindTest.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="HSTestScene.h">
       <Filter>TestScene</Filter>
     </ClInclude>
     <ClInclude Include="Farmer.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>Scripts\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="InventorySlot.h">
       <Filter>Scripts\Inventory</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Player</Filter>
     </ClInclude>
