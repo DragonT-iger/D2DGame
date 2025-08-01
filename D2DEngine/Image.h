@@ -36,7 +36,7 @@ public:
 	UIRenderInfo& GetRenderInfo() { return m_renderInfo; }
 
 private:
-	Transform*								m_pos;
+	Transform*							m_pos;
 	D2D1_SIZE_F							m_size;
 	UIRenderInfo				m_renderInfo;
 };
