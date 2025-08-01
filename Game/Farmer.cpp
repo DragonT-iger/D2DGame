@@ -48,9 +48,11 @@ void Farmer::Start()
     AttackRangeObject = Instantiate("AttackRangeObject");
 
     AttackRangeObject->AddComponent<CircleCollider>()->SetRadius(maxAttackRange);
-    AttackRangeObject->GetComponent<Transform>()->SetParent(GetComponent<Transform>());
+    AttackRangeObject->GetComponent<Transform>()->SetParent(m_transform);
 
-    AttackRangeObject->GetComponent<Transform>()->SetScale({ 1,1 });
+    /*AttackRangeObject->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
+
+    AttackRangeObject->GetComponent<Transform>()->SetScale({ 1,1 });*/
 
 
 }
@@ -79,6 +81,8 @@ void Farmer::Update(float deltaTime)
 
 
     //std::cout << m_transform->GetPosition().x << " " << m_transform->GetPosition().y << std::endl;
+
+    std::cout << AttackRangeObject->GetComponent<Transform>()->GetPosition().x << std::endl;
     m_dirTimer += deltaTime;
     if (m_dirTimer > m_dirInterval)
     {

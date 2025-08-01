@@ -44,6 +44,9 @@ public:
 	void SetParent(Transform* parent);
 	void DetachChildren();
 
+
+	const Vector2& GetWorldPosition();
+
 	const Matrix3x2& GetLocalMatrix();
 	const Matrix3x2& GetWorldMatrix();
 	Matrix3x2 GetInverseWorldMatrix();
