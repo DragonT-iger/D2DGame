@@ -95,3 +95,11 @@ void PlayerController::Update(float deltaTime)
 	}
 
 }
+
+void PlayerController::OnTriggerStay(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "crop")
+	{
+
+	}
+}

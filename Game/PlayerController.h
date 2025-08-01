@@ -28,7 +28,7 @@ public:
 	void Update(float deltaTime)         override;
 
 	//void OnTriggerEnter(Collider* other) override;
-	//void OnTriggerStay(Collider* other)  override;
+	void OnTriggerStay(Collider* other)  override;
 	//void OnTriggerExit(Collider* other)  override;
 
 	float m_Spd;
