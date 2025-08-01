@@ -16,7 +16,7 @@ public:
 
 	Vector2	 GetOffset() const { return m_offset; }
 	void	 SetOffset(const Vector2& newOffset) { m_offset = newOffset; }
-	Vector2  GetCenter() const { return m_transform->GetPosition() + m_offset * m_transform->GetScale(); }
+	Vector2  GetCenter() const { return m_transform->GetWorldPosition() + m_offset * m_transform->GetScale(); }
 	
 	//디버그 용
 	virtual void DrawCollider() = 0;

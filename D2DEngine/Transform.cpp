@@ -16,7 +16,7 @@ void Transform::AddChild(Transform* child)
 	chiledLocalTM = chiledLocalTM * GetInverseWorldMatrix();
 
 	auto M_noPivot = MYTM::RemovePivot(chiledLocalTM, child->GetPivotPoint());
-	MYTM::DecomposeMatrix3x2(M_noPivot, child->m_position, child->m_rotation, child->m_scale);
+	//MYTM::DecomposeMatrix3x2(M_noPivot, child->m_position, child->m_rotation, child->m_scale);
 
 	m_children.push_back(child);
 }
@@ -28,7 +28,7 @@ void Transform::RemoveChild(Transform* child)
 	chiledLocalTM = chiledLocalTM * GetWorldMatrix();
 
 	auto M_noPivot = MYTM::RemovePivot(chiledLocalTM, child->GetPivotPoint());
-	MYTM::DecomposeMatrix3x2(M_noPivot, child->m_position, child->m_rotation, child->m_scale);
+	//MYTM::DecomposeMatrix3x2(M_noPivot, child->m_position, child->m_rotation, child->m_scale);
 
 	m_children.erase(
 		std::remove(m_children.begin(), m_children.end(), child),
@@ -53,9 +53,6 @@ void Transform::SetDirty()
 	m_dirty = true;
 
 	for (auto* child : m_children) {
-		std::cout << "asda" << std::endl;
-
-		std::cout << "asda22" << std::endl;
 		child->SetDirty();
 	}
 }
@@ -109,6 +106,12 @@ void Transform::DetachChildren()
 	m_parent = nullptr;
 
 	SetDirty();
+}
+
+const Vector2& Transform::GetWorldPosition()
+{
+	const auto& m = GetWorldMatrix();
+	return { m._31, m._32 };
 }
 
 const Matrix3x2& Transform::GetLocalMatrix()
