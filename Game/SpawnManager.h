@@ -23,12 +23,19 @@ private:
 
 	void SetCropData(Crop* obj, Crops type, FarmRank rank);
 
-	float			m_spawnTimeA;
-	float			m_elapsedTimeA;
-	float			m_spawnTimeB;
-	float			m_elapsedTimeB;
-	float			m_spawnTimeC;
-	float			m_elapsedTimeC;
+	struct FarmData {
+		FarmRank rank;
+		int maxRate;
+		float elapsedTime;
+		float spawnTime;
+		std::vector<GameObject*>* farmlist;
+	};
+
+	std::vector<FarmData> farmArr;
+
+	std::vector<GameObject*> m_farmAList;
+	std::vector<GameObject*> m_farmBList;
+	std::vector<GameObject*> m_farmCList;
 
 	float			m_spawnRange = 200.f;
 
@@ -37,19 +44,10 @@ private:
 	RECT						   farm_C;
 	RECT							 Home;
 
-	Scene* curScene;
-
-	int		m_maxRate_A;
-	int		m_maxRate_B;
-	int		m_maxRate_C;
-
-	std::list<GameObject*> m_farmAList;
-	std::list<GameObject*> m_farmBList;
-	std::list<GameObject*> m_farmCList;
-
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_pumpkinSprite;
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_eggplantSprite;
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_potatoSprite;
 
 	std::mt19937 gen;
+	Scene* curScene;
 };
