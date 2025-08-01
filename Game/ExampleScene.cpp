@@ -18,32 +18,32 @@ void ExampleScene::Awake()
 		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
 	*/
 
-	m_slidebar = Instantiate("slidebar");
-	m_slidebar->AddComponent<Image>();	
-	m_slidebar->AddComponent<Slide_Bar>();
-	m_slidebar->AddComponent<UITest>();
+	//m_slidebar = Instantiate("slidebar");
+	//m_slidebar->AddComponent<Image>();	
+	//m_slidebar->AddComponent<Slide_Bar>();
+	//m_slidebar->AddComponent<UITest>();
 
-	m_slidebar->GetComponent<Transform>()->SetPosition({ 100, 150 });
+	//m_slidebar->GetComponent<Transform>()->SetPosition({ 100, 150 });
 
-	m_slidebar->GetComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 160, 20 });
+	//m_slidebar->GetComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 160, 20 });
 
-	m_button = Instantiate("buttonTest");
-	m_button->GetComponent<Transform>()->SetPosition({100, 100});
+	//m_button = Instantiate("buttonTest");
+	//m_button->GetComponent<Transform>()->SetPosition({100, 100});
 
-	m_button->AddComponent<Image>();
-	auto b = m_button->AddComponent<Button>();
+	//m_button->AddComponent<Image>();
+	//auto b = m_button->AddComponent<Button>();
 
-	auto b1 = ResourceManager::Instance().LoadTexture("button1_basic100.png");
-	auto b3 = ResourceManager::Instance().LoadTexture("button1_mouse_click.png");
+	//auto b1 = ResourceManager::Instance().LoadTexture("button1_basic100.png");
+	//auto b3 = ResourceManager::Instance().LoadTexture("button1_mouse_click.png");
 
-	b->AddEventSprite(b3, ButtonEvent::Idle);
-	b->AddEventSprite(b1, ButtonEvent::Highlight);
-	b->AddEventSprite(b3, ButtonEvent::Pressed);
+	//b->AddEventSprite(b3, ButtonEvent::Idle);
+	//b->AddEventSprite(b1, ButtonEvent::Highlight);
+	//b->AddEventSprite(b3, ButtonEvent::Pressed);
 
-	SoundManager::Instance().Init();
-	SoundManager::Instance().BGM_Shot("sample_ten.wav");
+	//SoundManager::Instance().Init();
+	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
-	//m_button->GetComponent<Transform>()->Translate({ 100, 100 });
+	////m_button->GetComponent<Transform>()->Translate({ 100, 100 });
 
 	m_background = Instantiate("background");
 
@@ -53,53 +53,53 @@ void ExampleScene::Awake()
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
-	m_player = Instantiate("Player");
+	//m_player = Instantiate("Player");
 
-	m_player->SetTag("Player");
+	//m_player->SetTag("Player");
 
-	m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
-	m_player->AddComponent<Animator>();
-	// 할당 안돼서 assert 걸림
-	
-	m_player->AddComponent<PlayerController_Sample>();
+	//m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
+	//m_player->AddComponent<Animator>();
+	//// 할당 안돼서 assert 걸림
+	//
+	//m_player->AddComponent<PlayerController_Sample>();
 
-	m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
+	//m_player->GetComponent<Transform>()->SetPosition({ 100.f, 100.f });
 
-	m_player->AddComponent<CircleCollider>();
+	//m_player->AddComponent<CircleCollider>();
 
 	//b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
 	//b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
 
-	GameObject* a = Instantiate("aa");
+	/*GameObject* a = Instantiate("aa");
 
-	SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();
+	SpriteRenderer* spriteRenderer = a->AddComponent<SpriteRenderer>();*/
 
-	ComPtr<ID2D1Bitmap1> bitmap;
-	bitmap = ResourceManager::Instance().LoadTexture("Player.png");
-	spriteRenderer->SetBitmap(bitmap);
+	//ComPtr<ID2D1Bitmap1> bitmap;
+	//bitmap = ResourceManager::Instance().LoadTexture("Player.png");
+	//spriteRenderer->SetBitmap(bitmap);
 
-	spriteRenderer->SetSize(64.f, 64.f);
+	//spriteRenderer->SetSize(64.f, 64.f);
 
-	m_player2 = Instantiate("Player2");
-	m_player2->SetTag("Player2");
+	//m_player2 = Instantiate("Player2");
+	//m_player2->SetTag("Player2");
 
-	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
-	m_player2->AddComponent<Animator>();
+	//m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
+	//m_player2->AddComponent<Animator>();
 
-	m_player2->GetComponent<Transform>()->SetScale({ 2, 2 });
+	//m_player2->GetComponent<Transform>()->SetScale({ 2, 2 });
 
-	m_spriteRenderer->SetOrderInLayer(2);
+	//m_spriteRenderer->SetOrderInLayer(2);
 
-	PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
+	//PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
 
-	m_player2->AddComponent<BoxCollider>();
+	//m_player2->AddComponent<BoxCollider>();
 
-	pc->m_xSpeed = 550.f;
-	pc->m_ySpeed = 550.f;
+	//pc->m_xSpeed = 550.f;
+	//pc->m_ySpeed = 550.f;
 
 
-	GameObject* farmer = Instantiate("Farmer");
-	farmer->AddComponent<Farmer>();
+	m_farmer = Instantiate("Farmer");
+	m_farmer->AddComponent<Farmer>();
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로
@@ -122,7 +122,7 @@ void ExampleScene::Start()
 
 	Camera* camera = GetCamera();
 	
-	camera->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(m_player2);
+	camera->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(m_farmer);
 
 
 	

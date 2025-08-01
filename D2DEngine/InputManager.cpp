@@ -6,6 +6,7 @@
 
 bool InputManager::Init(HWND hwnd)
 {
+	
 	return true;
 }
 
@@ -40,6 +41,8 @@ bool InputManager::OnHandleMessage(const MSG& msg)
 	case WM_LBUTTONUP:
 	case WM_RBUTTONDOWN:
 	case WM_RBUTTONUP:
+	case WM_MBUTTONDOWN:
+	case WM_MBUTTONUP:
 	case WM_MOUSEWHEEL:
 	{
 		HandleMsgMouse(msg);
@@ -146,6 +149,16 @@ void InputManager::HandleMsgMouse(const MSG& msg)
 		m_CurMouse.LButtonPressed = false;
 		ReleaseCapture();
 	}
+	else if (msg.message == WM_MBUTTONDOWN) 
+	{
+		m_CurMouse.MButtonPressed = true;
+		SetCapture(msg.hwnd);
+	}
+	else if (msg.message == WM_MBUTTONUP)
+    {
+        m_CurMouse.MButtonPressed = false;
+        ReleaseCapture();
+    }
 	else if (msg.message == WM_RBUTTONUP)
 	{
 		m_CurMouse.RButtonPressed = false;

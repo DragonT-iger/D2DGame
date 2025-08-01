@@ -21,6 +21,30 @@ void CinemachineCamera::Update(float deltaTime)
 {
 #ifdef _DEBUG
 
+    auto mouse = Input.GetMouseState();
+    Vector2 mousePos{ static_cast<float>(mouse.pos.x), static_cast<float>(mouse.pos.y) };
+    if (mouse.MButtonPressed)
+    {
+        if (!m_isPanning)
+        {
+            m_isPanning = true;
+            m_prevMousePos = mousePos;
+        }
+        else
+        {
+            Vector2 delta = mousePos - m_prevMousePos;
+            delta.y = -delta.y;
+            delta.x *= m_currentZoom;
+            delta.y *= m_currentZoom;
+            m_panOffset -= delta;
+            m_prevMousePos = mousePos;
+        }
+    }
+    else
+    {
+        m_isPanning = false;
+    }
+
     int wheelDelta = InputManager::Instance().GetWheelDelta();
     if (wheelDelta != 0)
     {
@@ -41,9 +65,16 @@ void CinemachineCamera::Update(float deltaTime)
 
 #endif
 
+    
+
     if (m_player)
     {
+#ifdef _DEBUG
+        Vector2 targetPos = m_player->GetComponent<Transform>()->GetPosition() + m_panOffset;
+        //std::cout << m_panOffset.x << m_panOffset.y << std::endl;
+#else // _DEBUG
         Vector2 targetPos = m_player->GetComponent<Transform>()->GetPosition();
+#endif
         Vector2 currentPos = m_transform->GetPosition();
 
         float   lerpFactor = 1.f - std::exp(-m_followDamping * deltaTime); // °¨¼è
