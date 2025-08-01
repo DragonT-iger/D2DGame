@@ -15,7 +15,7 @@ void ExampleScene::Awake()
 		return;
 
 	/* ********주의********
-		Awake에서 Scene::Awake() 전에 게임오브젝트에다가 컴포넌트만 다셈 딴건 하지마샘
+		Awake?�서 Scene::Awake() ?�에 게임?�브?�트?�다가 컴포?�트�??�셈 ?�건 ?��?마샘
 	*/
 
 	//m_slidebar = Instantiate("slidebar");
@@ -59,7 +59,7 @@ void ExampleScene::Awake()
 
 	//m_spriteRenderer = m_player->AddComponent<SpriteRenderer>();
 	//m_player->AddComponent<Animator>();
-	//// 할당 안돼서 assert 걸림
+	//// ?�당 ?�돼??assert 걸림
 	//
 	//m_player->AddComponent<PlayerController_Sample>();
 
@@ -68,7 +68,7 @@ void ExampleScene::Awake()
 	//m_player->AddComponent<CircleCollider>();
 
 	//b->AddPressEvent([this]() { m_slidebar->GetComponent<Slide_Bar>()->UpdateWidthRatio(1.0f); });
-	//b->AddPressEvent([]() { std::cout << "버튼 눌렀음2" << std::endl; });
+	//b->AddPressEvent([]() { std::cout << "버튼 ?��???" << std::endl; });
 
 	/*GameObject* a = Instantiate("aa");
 
@@ -102,8 +102,8 @@ void ExampleScene::Awake()
 	m_farmer->AddComponent<Farmer>();
 
 	
-	// 일단은 Awake에서 씬을 초기화하는 걸로
-	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)
+	// ?�단?� Awake?�서 ?�을 초기?�하??걸로
+	// ?��? 게임?�브?�트 초기?�만 ?�당??(?�스?�터 ?�각?�셈)
 
 
 	Scene::Awake();
@@ -113,12 +113,12 @@ void ExampleScene::Awake()
 void ExampleScene::Start()
 {
 
-	// 정확한 이해없이 start 쓰지 마셈 가능하면 Awake에서 처리하세요
+	// ?�확???�해?�이 start ?��? 마셈 가?�하�?Awake?�서 처리?�세??
 	
 	if (!IsActive())
 		return;
 
-	// 카메라는 awake에서 초기화돼서 그냥 여기서 적음
+	// 카메?�는 awake?�서 초기?�돼??그냥 ?�기???�음
 
 	Camera* camera = GetCamera();
 	

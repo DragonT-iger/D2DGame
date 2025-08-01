@@ -133,7 +133,7 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 		break;
 	}
 
-	SetCropData(crop, type, rank);
+	//SetCropData(crop, type, rank); 이거 머지안돼서 내가 주석했음 - 권 
 	obj->GetComponent<Transform>()->SetPosition(pos);
 	obj->GetComponent<Transform>()->SetScale({0.5f, 0.5f});
 
