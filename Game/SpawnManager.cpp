@@ -12,24 +12,15 @@ void SpawnManager::Awake()
 	farm_C = { -3264, 2160, 3264, -2160 };
 	Home = {-50, 50, 50, -50};
 	
-	//스폰 시간 설정
-	m_spawnTimeA = 3.f;
-	m_spawnTimeB = 4.f;
-	m_spawnTimeC = 5.f;
-
-	m_elapsedTimeA = 0.f;
-	m_elapsedTimeB = 0.f;
-	m_elapsedTimeC = 0.f;
-
-	//구역 별 최대 스폰 개수 설정
-	m_maxRate_A = 20;
-	m_maxRate_B = 15;
-	m_maxRate_C = 10;
+	farmArr.reserve(3);
+	farmArr.push_back({ Rank_A, 20, 0.0f, 3.f, &m_farmAList });
+	farmArr.push_back({ Rank_B, 15, 0.0f, 4.f, &m_farmAList });
+	farmArr.push_back({ Rank_C, 10, 0.0f, 5.f, &m_farmAList });
 
 	//리스트 초기화
-	m_farmAList.clear();
-	m_farmBList.clear();
-	m_farmCList.clear();
+	m_farmAList.reserve(20);
+	m_farmBList.reserve(15);
+	m_farmCList.reserve(10);
 
 	//농작물 스프라이트 설정
 	m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinS.png"));
@@ -53,32 +44,17 @@ void SpawnManager::Start()
 
 void SpawnManager::Update(float deltaTime)
 {
-	m_elapsedTimeA += deltaTime;
-	m_elapsedTimeB += deltaTime;
-	m_elapsedTimeC += deltaTime;
-
-	if (m_elapsedTimeA >= m_spawnTimeA && m_farmAList.size() <= m_maxRate_A)
+	for (auto& farm : farmArr)
 	{
-		GameObject* obj = CreateNewCrop(Rank_A);
-		m_farmAList.push_back(obj);
-		m_elapsedTimeA = 0.f;
-		std::cout << "farm A spawn" << std::endl;
-	}
+		if (farm.farmlist->size() >= farm.maxRate)
+			farm.elapsedTime += deltaTime;
 
-	if (m_elapsedTimeB >= m_spawnTimeB && m_farmBList.size() <= m_maxRate_B)
-	{
-		GameObject* obj = CreateNewCrop(Rank_B);
-		m_farmBList.push_back(obj);
-		m_elapsedTimeB = 0.f;
-		std::cout << "farm B spawn" << std::endl;
-	}
-
-	if (m_elapsedTimeC >= m_spawnTimeC && m_farmCList.size() <= m_maxRate_C)
-	{
-		GameObject* obj = CreateNewCrop(Rank_C);
-		m_farmCList.push_back(obj);
-		m_elapsedTimeC = 0.f;
-		std::cout << "farm C spawn" << std::endl;
+		if (farm.elapsedTime >= farm.spawnTime)
+		{
+			GameObject* obj = CreateNewCrop(farm.rank);
+			farm.farmlist->push_back(obj);
+			farm.elapsedTime = 0.f;
+		}
 	}
 }
 
@@ -129,8 +105,10 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	Vector2 pos = { 0, 0 };
 
 	GameObject* obj = Instantiate("crop");
+	obj->SetTag("crop");
 	
 	auto sr = obj->AddComponent<SpriteRenderer>();
+	auto anim = obj->AddComponent<Animator>();
 	auto box = obj->AddComponent<BoxCollider>();
 	auto crop = obj->AddComponent<Crop>();
 	Crops type = SetCropType();
@@ -232,13 +210,22 @@ void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank)
 	switch (type)
 	{
 	case Pumpkin:
-		obj->SetCropData(rank, type, m_pumpkinSprite);
+		if(rank == Rank_C)
+			obj->SetCropData(rank, type, m_pumpkinSprite);
+		else
+			obj->SetCropData(rank, type, m_pumpkinSprite);		//3단계 애니메이션 나오면 추가
 		break;
 	case Eggplant:
-		obj->SetCropData(rank, type, m_eggplantSprite);
+		if (rank == Rank_C)
+			obj->SetCropData(rank, type, m_eggplantSprite);
+		else
+			obj->SetCropData(rank, type, m_eggplantSprite);
 		break;
 	case Potato:
-		obj->SetCropData(rank, type, m_potatoSprite);
+		if(rank == Rank_C)
+			obj->SetCropData(rank, type, m_potatoSprite);
+		else
+			obj->SetCropData(rank, type, m_potatoSprite);
 		break;
 	default:
 		break;
