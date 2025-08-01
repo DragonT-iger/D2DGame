@@ -162,9 +162,8 @@ void Scene::Render()
 			D2D1::Matrix3x2F renderTM = GetRenderTM();
             D2D1::Matrix3x2F worldTM;
             if (info.m_transform->GetParent()) {
-                worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x)
-                    * D2D1::Matrix3x2F::Translation({ p.x, p.y })
-                    * info.m_transform->GetParent()->GetWorldMatrix();
+                Vector2 v = info.m_transform->GetParent()->GetPosition();
+                worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x) * D2D1::Matrix3x2F::Translation({ p.x, p.y }) * D2D1::Matrix3x2F::Translation(v.x, v.y);
             }
             else
             {

@@ -45,15 +45,15 @@ void Slot::ThrowItem()
 	}
 }
 
-SlotData Slot::ThrowAll()
-{
-	auto data = m_data;
-
-	m_data.count = 0;
-	SetEmpty();
-
-	return data;
-}
+//SlotData Slot::ThrowAll()
+//{
+//	auto data = m_data;
+//
+//	m_data.count = 0;
+//	SetEmpty();
+//
+//	return data;
+//}
 
 void Slot::SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
 {

@@ -60,7 +60,7 @@ std::vector<SlotData> Inventory::SubMissonItem()
 	std::vector<SlotData> datas;
 	for (auto& slot : m_slots)
 	{
-		datas.push_back(slot->ThrowAll());
+		//datas.push_back(slot->ThrowAll());
 	}
 
 	return datas;
