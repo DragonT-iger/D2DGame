@@ -27,9 +27,9 @@ public:
 	void Start()                         override;
 	void Update(float deltaTime)         override;
 
-	//void OnTriggerEnter(Collider* other) override;
+	void OnTriggerEnter(Collider* other) override;
 	void OnTriggerStay(Collider* other)  override;
-	//void OnTriggerExit(Collider* other)  override;
+	void OnTriggerExit(Collider* other)  override;
 
 	float m_Spd;
 	bool m_canMove = true;
@@ -42,5 +42,7 @@ private:
 	Animator* m_animator = nullptr;
 	Transform* m_transform = nullptr;
 	SpriteRenderer* m_spriteRenderer = nullptr;
+
+	GameObject* message = nullptr;
 };
 

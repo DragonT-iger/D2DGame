@@ -25,5 +25,10 @@ private:
     float        m_targetZoom = 1.0f;  // 목표 확대·축소 배수
     float        m_zoomStep = 0.2f;    // 확대·축소 단계
 	float        m_damping = 5.0f;     // 부드럽게 수렴하는 정도
+
+
+    Vector2     m_panOffset = Vector2::zero;
+    bool        m_isPanning = false;
+    Vector2     m_prevMousePos = Vector2::zero;
 };
 

@@ -29,6 +29,8 @@ void PlayerController::Start()
 	auto collider = GetComponent<BoxCollider>();
 	collider->SetSize({ 100, 100 });
 	m_spriteRenderer->SetOpacity(1);
+
+	message = message->Find("steal_message");
 }
 
 void PlayerController::Update(float deltaTime)
@@ -40,12 +42,15 @@ void PlayerController::Update(float deltaTime)
 		Vector2 dir{ (float)x,(float)y };
 		dir.Normalize();
 
-		if (x < 0) { m_spriteRenderer->SetFlip(true); }
-		else if (x > 0) { m_spriteRenderer->SetFlip(false); }
-
+		if (action == Action::Idle || action == Action::Walk)
+		{
+			if (x < 0) { m_spriteRenderer->SetFlip(true); }
+			else if (x > 0) { m_spriteRenderer->SetFlip(false); }
+		}
+		
 		if (Input.GetKeyDown(Keycode::B)) { action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_animator->ChangeState("dead"); state = State::Dead; return; }
-		if (Input.GetKeyDown(Keycode::Z)) { action = Action::Steal; }
+		
 
 		switch (action)
 		{
@@ -96,10 +101,26 @@ void PlayerController::Update(float deltaTime)
 
 }
 
+void PlayerController::OnTriggerEnter(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "crop")
+	{
+		message->SetActive(true);
+	}
+}
+
 void PlayerController::OnTriggerStay(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "crop")
 	{
+		if (Input.GetKeyDown(Keycode::Z)) { action = Action::Steal; }
+	}
+}
 
+void PlayerController::OnTriggerExit(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "crop")
+	{
+		message->SetActive(false);
 	}
 }

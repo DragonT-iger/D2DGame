@@ -53,6 +53,9 @@ void Transform::SetDirty()
 	m_dirty = true;
 
 	for (auto* child : m_children) {
+		std::cout << "asda" << std::endl;
+
+		std::cout << "asda22" << std::endl;
 		child->SetDirty();
 	}
 }
