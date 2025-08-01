@@ -10,7 +10,7 @@ void Animator::Awake()
 
 void Animator::Update(float deltaTime)
 {
-	if (m_isEnd)
+	if (m_isEnd || m_animations.empty())
 		return;
 
 	if (m_curFrame->duration <= m_duration)

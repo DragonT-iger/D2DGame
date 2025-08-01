@@ -31,7 +31,7 @@ private:
 	SpriteRenderer* m_sRenderer;
 	std::unordered_map<std::string, std::shared_ptr<AnimationClip>> m_animations;
 	std::unordered_map<std::string, bool>													m_loopmap;
-	std::shared_ptr<AnimationClip>																	m_curClip;
+	std::shared_ptr<AnimationClip>									  				  m_curClip = nullptr;
 	std::string																											m_curState;
 	std::vector<FrameData>																			m_frameDatas;
 	std::vector<FrameData>::iterator																m_curFrame;
