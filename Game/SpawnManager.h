@@ -1,16 +1,12 @@
 #pragma once
-#include <random>
 
 class SpawnManager : public MonoBehaviour
 {
 public:
 	void Awake() override;
-	void Start() override;
 	void Update(float deltaTime) override;
 
 	void DestroyObject(GameObject* obj);
-	
-	using Random = std::uniform_int_distribution<int>;
 
 private:
 	bool IsInnerRect(const RECT& rect, const int& x, const int& y);
@@ -21,7 +17,7 @@ private:
 	Vector2 CreateSpawnPoint(const RECT& outRect, const RECT& inRect, FarmRank rank);
 	Crops SetCropType(FarmRank rank);
 
-	void SetCropData(Crop* obj, Crops type, FarmRank rank);
+	void SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* msg);
 
 	struct FarmData {
 		FarmRank rank;
@@ -48,6 +44,5 @@ private:
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_eggplantSprite;
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_potatoSprite;
 
-	std::mt19937 gen;
 	Scene* curScene;
 };

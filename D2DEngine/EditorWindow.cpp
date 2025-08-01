@@ -68,7 +68,6 @@ void EditorWindow::DrawInspector()
 
     ImGui::Separator();
 
-    // ── 컴포넌트 리스트 & Behaviour 토글 ──
     ImGui::Text("Components:");
 
     for (const auto& c : m_selected->GetComponents())
@@ -87,7 +86,8 @@ void EditorWindow::DrawInspector()
         ImGui::TextUnformatted(typeName);
         ImGui::SameLine();
 
-        bool open = m_componentOpen[c.get()];
+        bool& open = m_componentOpen.try_emplace(c.get(), true).first->second;
+
         ImGui::SameLine(ImGui::GetCursorPosX()
             + ImGui::GetContentRegionAvail().x
             - ImGui::GetFrameHeight());  

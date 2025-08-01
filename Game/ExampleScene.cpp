@@ -80,22 +80,22 @@ void ExampleScene::Awake()
 
 	//spriteRenderer->SetSize(64.f, 64.f);
 
-	//m_player2 = Instantiate("Player2");
-	//m_player2->SetTag("Player2");
+	m_player2 = Instantiate("Player2");
+	m_player2->SetTag("Player2");
 
-	//m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
-	//m_player2->AddComponent<Animator>();
+	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
+	m_player2->AddComponent<Animator>();
 
-	//m_player2->GetComponent<Transform>()->SetScale({ 2, 2 });
+	m_player2->GetComponent<Transform>()->SetScale({ 0.35, 0.35 });
 
 	//m_spriteRenderer->SetOrderInLayer(2);
 
-	//PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
+	PlayerController_Sample* pc = m_player2->AddComponent<PlayerController_Sample>();
 
-	//m_player2->AddComponent<BoxCollider>();
+	m_player2->AddComponent<BoxCollider>();
 
-	//pc->m_xSpeed = 550.f;
-	//pc->m_ySpeed = 550.f;
+	pc->m_xSpeed = 350.f;
+	pc->m_ySpeed = 350.f;
 
 
 	m_farmer = Instantiate("Farmer");
@@ -122,7 +122,7 @@ void ExampleScene::Start()
 
 	Camera* camera = GetCamera();
 	
-	camera->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(m_farmer);
+	camera->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(m_player2);
 
 
 	

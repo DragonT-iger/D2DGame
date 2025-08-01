@@ -18,12 +18,13 @@ bool BoxCollider::IsCollide(const Collider* other) const
 		Vector2 scale = circle->GetComponent<Transform>()->GetScale();
 		Vector2 clampCirclePos = circle->GetCenter();
 
-		Vector2 otherCenter = other->GetCenter();
-		Vector2 otherScale = other->GetComponent<Transform>()->GetScale();
+		Vector2 otherCenter = GetCenter();
+		Vector2 otherScale = GetComponent<Transform>()->GetScale();
 		Vector2 otherLeftDown = otherCenter - size * otherScale / 2 ;
 		Vector2 otherRightUp = otherCenter + size * otherScale / 2 ;
 
 
+		//std::cout << "asdasd" << std::endl;
 
 		clampCirclePos.x = std::clamp(clampCirclePos.x, otherLeftDown.x, otherRightUp.x);
 		clampCirclePos.y = std::clamp(clampCirclePos.y, otherLeftDown.y, otherRightUp.y);
@@ -61,6 +62,8 @@ bool BoxCollider::IsCollide(const Collider* other) const
 		{
 			return true; 
 		}
+
+
 
 		
 	}

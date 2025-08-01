@@ -11,14 +11,10 @@ void MainScene::Awake()
 
 //begin player-----
 	player = Instantiate("Player");
-	player_S = player->AddComponent<SpriteRenderer>();
+	player->AddComponent<SpriteRenderer>();
 	player->AddComponent<PlayerController>();
 	player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
-
-	PlayerController* pc = player->GetComponent<PlayerController>();
-
-	pc->m_Spd = 1500;
 //end player-----
 
 

@@ -34,11 +34,22 @@ void Crop::Update(float deltaTime)
 	}
 }
 
+void Crop::OnTriggerEnter(Collider* other)
+{
+	
+}
+
+void Crop::OnTriggerExit(Collider* other)
+{
+
+}
+
 void Crop::SetCropData(
 											FarmRank rank,
 											Crops type, 
 											std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites,
-											std::shared_ptr<AnimationClip> clip
+											std::shared_ptr<AnimationClip> clip,
+											GameObject* msg
 											)
 {
 	switch (rank)
@@ -69,7 +80,7 @@ void Crop::SetCropData(
 	m_rank = rank;
 	m_type = type;
 	m_GameSprites = gameSprites;
-	
+	m_steal_message = msg;
 
 	m_SpriteRenderer = GetComponent<SpriteRenderer>();
 	m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(S)]);

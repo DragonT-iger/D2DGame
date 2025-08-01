@@ -11,7 +11,6 @@ void SpriteRenderer::SetSize(float width, float height)
 
 void SpriteRenderer::OnInspectorGUI()
 {
-
     // ── 텍스처 핸들 ─────────────────────────────────────────────
     ImGui::Text("Bitmap : %p", m_renderInfo.m_bitmap.Get());
 

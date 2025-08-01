@@ -32,5 +32,16 @@ private:
     float   m_speed = 100.f;
     float   m_dirTimer = 0.f;
     float   m_dirInterval = 2.f;
+
+
+
+    Vector2 m_initalPosition;
+    GameObject* ChaseMinAreaObject;
+    float chaseMinRange = 350.0f;
+    GameObject* ChaseMaxAreaObject;
+    float chaseMaxRange = 500.0f;
+
+    GameObject* AttackRangeObject;
+    float maxAttackRange = 200.0f;
 };
 

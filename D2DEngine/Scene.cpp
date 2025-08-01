@@ -160,7 +160,17 @@ void Scene::Render()
             Vector2 s = info.m_transform->GetScale();
             Vector2 p = info.m_transform->GetPosition();
 			D2D1::Matrix3x2F renderTM = GetRenderTM();
-            D2D1::Matrix3x2F worldTM = D2D1::Matrix3x2F::Scale(s.x, s.y) * D2D1::Matrix3x2F::Translation({ p.x, p.y });
+            D2D1::Matrix3x2F worldTM;
+            if (info.m_transform->GetParent()) {
+                Vector2 v = info.m_transform->GetParent()->GetPosition();
+                worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x) * D2D1::Matrix3x2F::Translation({ p.x, p.y }) * D2D1::Matrix3x2F::Translation(v.x, v.y);
+            }
+            else
+            {
+                worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x)
+                    * D2D1::Matrix3x2F::Translation({ p.x, p.y });
+            }
+            
 			D2D1::Matrix3x2F mWV = renderTM * worldTM * viewTM;
 			D2DRenderer::Instance().SetTransform(mWV);
 			info.m_collider->DrawCollider();
