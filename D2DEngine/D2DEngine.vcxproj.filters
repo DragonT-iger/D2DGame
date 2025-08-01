@@ -314,5 +314,8 @@
     <ClCompile Include="RenderInfo.cpp">
       <Filter>D2DRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
