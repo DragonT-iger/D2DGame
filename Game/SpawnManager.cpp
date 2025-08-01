@@ -46,7 +46,7 @@ void SpawnManager::Update(float deltaTime)
 {
 	for (auto& farm : farmArr)
 	{
-		if (farm.farmlist->size() >= farm.maxRate)
+		if (farm.farmlist->size() <= farm.maxRate)
 			farm.elapsedTime += deltaTime;
 
 		if (farm.elapsedTime >= farm.spawnTime)
@@ -111,7 +111,7 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	auto anim = obj->AddComponent<Animator>();
 	auto box = obj->AddComponent<BoxCollider>();
 	auto crop = obj->AddComponent<Crop>();
-	Crops type = SetCropType();
+	Crops type = SetCropType(rank);
 
 	switch (rank)
 	{
@@ -196,7 +196,7 @@ Vector2 SpawnManager::CreateSpawnPoint(const RECT& outRect, const RECT& inRect, 
 	return { static_cast<float>(x),  static_cast<float>(y) };
 }
 
-Crops SpawnManager::SetCropType()
+Crops SpawnManager::SetCropType(FarmRank rank)
 {
 	Random type(0, 2);
 

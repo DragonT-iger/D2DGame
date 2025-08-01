@@ -19,7 +19,7 @@ private:
 	GameObject* CreateNewCrop(FarmRank rank);
 
 	Vector2 CreateSpawnPoint(const RECT& outRect, const RECT& inRect, FarmRank rank);
-	Crops SetCropType();
+	Crops SetCropType(FarmRank rank);
 
 	void SetCropData(Crop* obj, Crops type, FarmRank rank);
 
