@@ -26,6 +26,7 @@ void  PlayerController_Sample::Start()
 	curAnim = "idle";
 
 	auto collider = GetComponent<BoxCollider>();
+	
 
 	if (collider) {
 		collider->SetSize({ m_spriteRenderer->GetSize().width, m_spriteRenderer->GetSize().height });
@@ -40,6 +41,10 @@ void  PlayerController_Sample::Start()
 
 void PlayerController_Sample::Update(float deltatime)
 {
+
+	float random = static_cast<float> (Random::Instance().Range(1, 6));
+	std::cout << random << std::endl;
+
 	/*m_transform->Translate(m_xSpeed * deltatime, m_ySpeed * deltatime);
 	m_transform->Rotate(0.10f * deltatime);*/
 	if (Input.GetKeyDown(Keycode::UP))

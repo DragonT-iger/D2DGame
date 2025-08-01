@@ -92,6 +92,7 @@ inline std::wostream& cwout = std::wcout;
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "SoundManager.h"
+#include "Random.h"
 
 #ifdef _DEBUG
 #include "ImGuiManager.h"
