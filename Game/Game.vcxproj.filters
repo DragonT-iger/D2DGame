@@ -93,6 +93,12 @@
     <ClCompile Include="Farmer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Scripts\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySlot.cpp">
+      <Filter>Scripts\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -142,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="Farmer.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Scripts\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySlot.h">
+      <Filter>Scripts\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

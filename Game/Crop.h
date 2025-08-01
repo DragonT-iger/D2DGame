@@ -4,6 +4,7 @@ enum Crops {
 	Eggplant = 0,
 	Potato = 1,
 	Pumpkin = 2,
+	Nothing
 };
 
 enum Size {
