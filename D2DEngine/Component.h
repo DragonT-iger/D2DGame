@@ -15,6 +15,7 @@ public:
 	Component() = default;
     virtual ~Component() = default;
     virtual void OnInspectorGUI() {}
+    void Destroy(GameObject* gameObject);
 
 	GameObject* GetOwner() const { return m_owner; } // 나중에 protected로 바꿀수도 있음 wrapper 함수만 보이게 하기 위해서
 

@@ -82,7 +82,7 @@ void Farmer::Update(float deltaTime)
 
     //std::cout << m_transform->GetPosition().x << " " << m_transform->GetPosition().y << std::endl;
 
-    std::cout << AttackRangeObject->GetComponent<Transform>()->GetPosition().x << std::endl;
+    //std::cout << AttackRangeObject->GetComponent<Transform>()->GetPosition().x << std::endl;
     m_dirTimer += deltaTime;
     if (m_dirTimer > m_dirInterval)
     {
