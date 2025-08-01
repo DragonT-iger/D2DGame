@@ -11,13 +11,14 @@ void SpriteRenderer::SetSize(float width, float height)
 
 void SpriteRenderer::OnInspectorGUI()
 {
+
     // ── 텍스처 핸들 ─────────────────────────────────────────────
     ImGui::Text("Bitmap : %p", m_renderInfo.m_bitmap.Get());
 
     // ── SrcRect ------------------------------------------------
     float src[4] = { m_renderInfo.m_srcRect.left,  m_renderInfo.m_srcRect.top,
                      m_renderInfo.m_srcRect.right, m_renderInfo.m_srcRect.bottom };
-    if (ImGui::InputFloat4("SrcRect", src))
+    if (ImGui::DragFloat4("SrcRect", src))
     {
         m_renderInfo.m_srcRect = { src[0], src[1], src[2], src[3] };
         SetSrcRect(m_renderInfo.m_srcRect);      

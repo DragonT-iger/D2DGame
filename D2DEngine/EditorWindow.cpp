@@ -20,9 +20,11 @@ void EditorWindow::DrawHierarchy()
     for (auto& goPtr : scene->GetGameObjects())
     {
         GameObject* go = goPtr.get();
+        ImGui::PushID(go);
         bool selected = (go == m_selected);
         if (ImGui::Selectable(go->GetName().c_str(), selected))
             m_selected = go;
+        ImGui::PopID();
     }
     
     ImGui::End();
@@ -98,7 +100,10 @@ void EditorWindow::DrawInspector()
         if (open)
         {
             ImGui::Indent();
+            auto* go = c.get();
+            ImGui::PushID(go);
             c->OnInspectorGUI();
+            ImGui::PopID();
             ImGui::Unindent();
         }
     }
