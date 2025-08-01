@@ -144,6 +144,7 @@ void Scene::Render()
     //object render
     for(auto& info : m_renderQ)
     {
+        if (info.m_bitmap == nullptr) continue;
         D2D1::Matrix3x2F renderTM = GetRenderTM(info.isFlip);
         D2D1::Matrix3x2F mWV = renderTM * info.m_transform->GetWorldMatrix() * viewTM;
         D2DRenderer::Instance().SetTransform(mWV);

@@ -16,6 +16,7 @@ struct MouseState
 
 	bool LButtonPressed{ false };	// 마우스 왼쪽 버튼 눌림 상태
 	bool RButtonPressed{ false };	// 마우스 오른쪽 버튼 눌림 상태
+	bool MButtonPressed{ false };
 	int  wheelDelta{ 0 };
 	bool wheelUp{ false };			// 마우스 휠 위로 스크롤
 	bool wheelDown{ false };		// 마우스 휠 아래로 스크롤
