@@ -24,15 +24,17 @@ class Crop : public MonoBehaviour
 {
 public:
 
+	//void Awake()		  override;
 	void Update(float dt) override;
 
 	Size GetSize() { return m_size; }
 	Crops	GetCropType() { return m_type; }
 
-
+	void OnTriggerEnter(Collider* other) override;
+	void OnTriggerExit(Collider* other) override;
 	FarmRank GetFarmRank() { return m_rank; }
 
-	void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, std::shared_ptr<AnimationClip> clip = nullptr);
+	void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, std::shared_ptr<AnimationClip> clip = nullptr, GameObject* msg);
 
 protected:
 	float m_growSpeed_M;
@@ -47,10 +49,12 @@ protected:
 	bool isSpawn = false;
 
 	SpriteRenderer* m_SpriteRenderer;
-	Animator*			   m_Animator;
+	Animator* m_Animator;
 
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_GameSprites;
 	std::shared_ptr<AnimationClip>										   m_largeClip = nullptr;
+
+	GameObject* m_steal_message;
 };
 
 

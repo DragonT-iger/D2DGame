@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Crop.h"
+#include "StealMessage.h"
 #include "SpawnManager.h"
 
 
@@ -103,11 +104,18 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 
 	GameObject* obj = Instantiate("crop");
 	obj->SetTag("crop");
-	
+
 	auto sr = obj->AddComponent<SpriteRenderer>();
 	auto anim = obj->AddComponent<Animator>();
 	auto box = obj->AddComponent<BoxCollider>();
 	auto crop = obj->AddComponent<Crop>();
+	/*auto msg = obj->AddComponent<StealMessage>();
+
+
+	msg->GetComponent<Transform>()->SetParent(obj->GetComponent<Transform>());
+	msg->GetComponent<Transform>()->SetPosition({ 0,250 });
+	msg->SetActive(false);*/
+	
 	Crops type = SetCropType(rank);
 
 	switch (rank)
@@ -213,27 +221,27 @@ Crops SpawnManager::SetCropType(FarmRank rank)
 	return  crop;
 }
 
-void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank)
+void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* msg)
 {
 	switch (type)
 	{
 	case Pumpkin:
 		if(rank == Rank_C)
-			obj->SetCropData(rank, type, m_pumpkinSprite);
+			obj->SetCropData(rank, type, m_pumpkinSprite, nullptr, msg);
 		else
-			obj->SetCropData(rank, type, m_pumpkinSprite);		//3단계 애니메이션 나오면 추가
+			obj->SetCropData(rank, type, m_pumpkinSprite, nullptr, msg);		//3단계 애니메이션 나오면 추가
 		break;
 	case Eggplant:
 		if (rank == Rank_C)
-			obj->SetCropData(rank, type, m_eggplantSprite);
+			obj->SetCropData(rank, type, m_eggplantSprite, nullptr, msg);
 		else
-			obj->SetCropData(rank, type, m_eggplantSprite);
+			obj->SetCropData(rank, type, m_eggplantSprite, nullptr, msg);
 		break;
 	case Potato:
 		if(rank == Rank_C)
-			obj->SetCropData(rank, type, m_potatoSprite);
+			obj->SetCropData(rank, type, m_potatoSprite, nullptr, msg);
 		else
-			obj->SetCropData(rank, type, m_potatoSprite);
+			obj->SetCropData(rank, type, m_potatoSprite, nullptr, msg);
 		break;
 	default:
 		break;
