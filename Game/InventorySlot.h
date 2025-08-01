@@ -18,7 +18,7 @@ public:
 	void AddItem(Crops type, Size count, Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite = nullptr);	//아이템 처음 넣을 때 스프라이트 세팅용
 
 	void ThrowItem();
-	//void ThrowAll();
+	SlotData ThrowAll();
 	
 	void SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite);
 
