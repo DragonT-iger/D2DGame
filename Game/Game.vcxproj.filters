@@ -37,6 +37,9 @@
     <Filter Include="TestScene">
       <UniqueIdentifier>{2d957d93-a156-4bf5-8c30-68f6e2366393}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Inventory">
+      <UniqueIdentifier>{05878aea-ee56-4e6e-a3cc-0a2390868afc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">

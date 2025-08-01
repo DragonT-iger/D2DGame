@@ -7,17 +7,20 @@ void SpawnManager::Awake()
 {
 	curScene = SceneManager::Instance().GetActiveScene();
 	//구역 설정
-	farm_A = { -1120, 771, 1120, -771 };
-	farm_B = { -2182, 1387, 2182, -1387};
-	farm_C = { -3264, 2160, 3264, -2160 };
+	farm_A = { -1070, 720, 1070, -720 };
+	farm_B = { -2130, 1330, 2130, -1330};
+	farm_C = { -3210, 2110, 3210, -2110 };
 	Home = {-50, 50, 50, -50};
 	
 	farmArr.reserve(3);
 	farmArr.push_back({ Rank_A, 20, 0.0f, 3.f, &m_farmAList });
-	farmArr.push_back({ Rank_B, 15, 0.0f, 4.f, &m_farmAList });
-	farmArr.push_back({ Rank_C, 10, 0.0f, 5.f, &m_farmAList });
+	farmArr.push_back({ Rank_B, 15, 0.0f, 4.f, &m_farmBList });
+	farmArr.push_back({ Rank_C, 10, 0.0f, 5.f, &m_farmCList });
 
 	//리스트 초기화
+	m_farmAList.clear();
+	m_farmBList.clear();
+	m_farmCList.clear();
 	m_farmAList.reserve(20);
 	m_farmBList.reserve(15);
 	m_farmCList.reserve(10);
@@ -34,12 +37,6 @@ void SpawnManager::Awake()
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoS.png"));
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoM.png"));
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoL.png"));
-}
-
-void SpawnManager::Start()
-{
-	std::random_device rd;
-	gen.seed(rd());
 }
 
 void SpawnManager::Update(float deltaTime)
@@ -137,7 +134,7 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 
 bool SpawnManager::IsInnerRect(const RECT& rect, const int& x, const int& y)
 {
-	return (rect.left <= x && rect.right >= x) && (rect.top >= y && rect.bottom <= y);
+	return (rect.left - 50 <= x && rect.right + 50 >= x) && (rect.top + 50 >= y && rect.bottom - 50 <= y);	// 경계에 자꾸 생성돼서 차이를 좀 줘야할듯
 }
 
 bool SpawnManager::CheckRange(const Vector2& pos, FarmRank rank)
@@ -182,15 +179,12 @@ bool SpawnManager::CheckRange(const Vector2& pos, FarmRank rank)
 
 Vector2 SpawnManager::CreateSpawnPoint(const RECT& outRect, const RECT& inRect, FarmRank rank)
 {
-	Random posX(outRect.left, outRect.right);
-	Random posY(outRect.bottom, outRect.top);
-
 	int x = 0;
 	int y = 0;
 
 	do {
-		x = posX(gen);
-		y = posY(gen);
+		x = Random::Instance().Range(outRect.left, outRect.right);
+		y = Random::Instance().Range(outRect.bottom, outRect.top);
 	} while (IsInnerRect(inRect, x, y) || CheckRange({ static_cast<float>(x), static_cast<float>(y) }, rank));
 
 	return { static_cast<float>(x),  static_cast<float>(y) };
@@ -198,9 +192,7 @@ Vector2 SpawnManager::CreateSpawnPoint(const RECT& outRect, const RECT& inRect, 
 
 Crops SpawnManager::SetCropType(FarmRank rank)
 {
-	Random type(0, 9);
-
-	int p = type(gen);
+	int p = Random::Instance().Range(0, 9);
 
 	switch (p)
 	{
@@ -216,7 +208,7 @@ Crops SpawnManager::SetCropType(FarmRank rank)
 		break;
 	}
 
-	Crops crop = static_cast<Crops>(type(gen) % 3);
+	Crops crop = static_cast<Crops>(p % 3);
 
 	return  crop;
 }
