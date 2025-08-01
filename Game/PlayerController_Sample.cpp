@@ -42,8 +42,8 @@ void  PlayerController_Sample::Start()
 void PlayerController_Sample::Update(float deltatime)
 {
 
-	float random = static_cast<float> (Random::Instance().Range(1, 6));
-	std::cout << random << std::endl;
+	//float random = Random::Instance().Range(1, 6));
+	//std::cout << random << std::endl;
 
 	/*m_transform->Translate(m_xSpeed * deltatime, m_ySpeed * deltatime);
 	m_transform->Rotate(0.10f * deltatime);*/

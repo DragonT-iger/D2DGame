@@ -7,6 +7,7 @@
 #include "CinemachineCamera.h"
 #include "GameObjectFindTest.h"
 #include "SpawnManager.h"
+#include "Farmer.h"
 
 void ExampleScene::Awake()
 {
@@ -95,6 +96,10 @@ void ExampleScene::Awake()
 
 	pc->m_xSpeed = 550.f;
 	pc->m_ySpeed = 550.f;
+
+
+	GameObject* farmer = Instantiate("Farmer");
+	farmer->AddComponent<Farmer>();
 
 	
 	// 일단은 Awake에서 씬을 초기화하는 걸로

@@ -6,12 +6,15 @@
 void Animator::Awake()
 {
 	m_sRenderer = GetOwner()->GetComponent<SpriteRenderer>();
+	if (m_sRenderer == nullptr) { assert(false && "애니메이터 사용시 스프라이트 렌더러 필요"); }
 }
 
 void Animator::Update(float deltaTime)
 {
 	if (m_isEnd)
 		return;
+
+	if (m_sRenderer->GetRenderInfo().m_bitmap == nullptr) return;
 
 	if (m_curFrame->duration <= m_duration)
 	{
