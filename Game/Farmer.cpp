@@ -6,8 +6,10 @@ void Farmer::Awake()
     m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
 	m_animator = GetOwner()->AddComponent<Animator>();
     m_transform = GetComponent<Transform>();
-    m_transform->SetScale({ 0.5f, 0.5f });
+    m_transform->SetScale({ 0.35f, 0.35f });
     m_boxCollider = GetOwner()->AddComponent<BoxCollider>();
+
+    
 }
 
 void Farmer::Start()
@@ -27,6 +29,30 @@ void Farmer::Start()
 	m_animator->SetEntryState("idle");
 	//m_animator->ChangeState("idle");
 	PickRandomDirection();
+
+
+
+    //SetInitalPosition
+    m_initalPosition = m_transform->GetPosition();
+
+    ChaseMinAreaObject = Instantiate("ChaseMinObject");
+
+    ChaseMinAreaObject->AddComponent<CircleCollider>()->SetRadius(chaseMinRange);
+    ChaseMinAreaObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
+
+    ChaseMaxAreaObject = Instantiate("ChaseMaxObject");
+
+    ChaseMaxAreaObject->AddComponent<CircleCollider>()->SetRadius(chaseMaxRange);
+    ChaseMaxAreaObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    
+    AttackRangeObject = Instantiate("AttackRangeObject");
+
+    AttackRangeObject->AddComponent<CircleCollider>()->SetRadius(maxAttackRange);
+    AttackRangeObject->GetComponent<Transform>()->SetParent(GetComponent<Transform>());
+
+    AttackRangeObject->GetComponent<Transform>()->SetScale({ 1,1 });
+
+
 }
 
 void Farmer::PickRandomDirection()
@@ -52,6 +78,7 @@ void Farmer::Update(float deltaTime)
 {
 
 
+    //std::cout << m_transform->GetPosition().x << " " << m_transform->GetPosition().y << std::endl;
     m_dirTimer += deltaTime;
     if (m_dirTimer > m_dirInterval)
     {
