@@ -21,7 +21,7 @@ private:
 	Vector2 CreateSpawnPoint(const RECT& outRect, const RECT& inRect, FarmRank rank);
 	Crops SetCropType(FarmRank rank);
 
-	void SetCropData(Crop* obj, Crops type, FarmRank rank);
+	void SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* msg);
 
 	struct FarmData {
 		FarmRank rank;

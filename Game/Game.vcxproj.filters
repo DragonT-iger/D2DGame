@@ -37,6 +37,9 @@
     <Filter Include="TestScene">
       <UniqueIdentifier>{2d957d93-a156-4bf5-8c30-68f6e2366393}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{b9d1abe3-e78c-48f1-9bd8-b83c8acb6f24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -59,9 +62,6 @@
     </ClCompile>
     <ClCompile Include="PlayerController_Sample.cpp">
       <Filter>SampleFile</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>소스 파일</Filter>
@@ -90,6 +90,15 @@
     <ClCompile Include="Farmer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="StealMessage.cpp">
+      <Filter>Scripts\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -108,9 +117,6 @@
       <Filter>SampleFile</Filter>
     </ClInclude>
     <ClInclude Include="CinemachineCamera.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
@@ -139,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="Farmer.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="StealMessage.h">
+      <Filter>Scripts\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
