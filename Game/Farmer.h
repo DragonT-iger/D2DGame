@@ -36,11 +36,15 @@ private:
 
 
     Vector2 m_initalPosition;
-    GameObject* patrolArea;  float patrolAreaValue = 350.0f;
-    GameObject* chaseArea;  float chaseAreaValue = 500.0f;
 
-    GameObject* alertArea;   float alertAreaValue = 300.0f;
 
-    GameObject* attackArea;  float attackAreaValue = 200.0f;
+
+    //GameObject* farmerArea[4]; // patrol , chase , alert , attack;
+    //float areaRadius[4] = { 350, 500, 300 ,200 };
+    GameObject* patrolObject;  float patrolAreaValue = 350.0f;
+    GameObject* chaseObject;  float chaseAreaValue = 500.0f;
+    GameObject* alertObject;   float alertAreaValue = 300.0f;
+    GameObject* attackObject;  float attackAreaValue = 200.0f;
+
 };
 

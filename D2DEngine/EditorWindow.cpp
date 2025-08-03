@@ -38,12 +38,19 @@ void EditorWindow::DrawInspector()
 
     // 式式 檜葷 & Active 式式
 
-    static char nameBuf[128];
+    static char buf[128];
 
-    strncpy_s(nameBuf, m_selected->GetName().c_str(), sizeof(nameBuf));
+    strncpy_s(buf, m_selected->GetName().c_str(), sizeof(buf));
 
-    if (ImGui::InputText("Name", nameBuf, IM_ARRAYSIZE(nameBuf)))
-        m_selected->SetName(std::string(nameBuf));
+    if (ImGui::InputText("Name", buf, IM_ARRAYSIZE(buf)))
+        m_selected->SetName(std::string(buf));
+
+
+    strncpy_s(buf, m_selected->GetTag().c_str(), sizeof(buf));
+
+    if (ImGui::InputText("Tag", buf, IM_ARRAYSIZE(buf)))
+        m_selected->SetTag(std::string(buf));
+
 
     bool active = m_selected->IsActive();
     if (ImGui::Checkbox("Active", &active))

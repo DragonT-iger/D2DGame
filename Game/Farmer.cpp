@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Farmer.h"
+#include "FarmerZone.h"
 
 void Farmer::Awake()
 {
@@ -9,7 +10,6 @@ void Farmer::Awake()
     m_transform->SetScale({ 0.35f, 0.35f });
     m_boxCollider = GetOwner()->AddComponent<BoxCollider>();
 
-    
 }
 
 void Farmer::Start()
@@ -35,26 +35,31 @@ void Farmer::Start()
     //SetInitalPosition
     m_initalPosition = m_transform->GetPosition();
 
-    patrolArea = Instantiate("PatrolArea");
-    patrolArea->AddComponent<CircleCollider>()->SetRadius(patrolAreaValue);
-    patrolArea->GetComponent<Transform>()->SetPosition(m_initalPosition);
-    //auto AreaComponent = patrolArea->AddComponent<PatrolArea>();
+
+    patrolObject = Instantiate("PatrolArea");
+    patrolObject->AddComponent<CircleCollider>()->SetRadius(patrolAreaValue);
+    patrolObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    auto patrolZone = patrolObject->AddComponent<PatrolZone>();
+    patrolZone->Initalize(this, patrolAreaValue);
 
 
-    chaseArea = Instantiate("ChaseArea");
-    chaseArea->AddComponent<CircleCollider>()->SetRadius(chaseAreaValue);
-    chaseArea->GetComponent<Transform>()->SetPosition(m_initalPosition);
-    //auto AreaComponent = chaseArea->AddComponent<ChaseArea>();
+    chaseObject = Instantiate("ChaseArea");
+    chaseObject->AddComponent<CircleCollider>()->SetRadius(chaseAreaValue);
+    chaseObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    auto chaseZone = chaseObject->AddComponent<ChaseZone>();
+    chaseZone->Initalize(this, chaseAreaValue);
     
-    alertArea = Instantiate("AlertArea");
-    alertArea->AddComponent<CircleCollider>()->SetRadius(alertAreaValue);
-    alertArea->GetComponent<Transform>()->SetParent(m_transform);
-    //auto AreaComponent = alertArea->AddComponent<AlertArea>();
+    alertObject = Instantiate("AlertArea");
+    alertObject->AddComponent<CircleCollider>()->SetRadius(alertAreaValue);
+    alertObject->GetComponent<Transform>()->SetParent(m_transform);
+    auto alertZone = alertObject->AddComponent<AlertZone>();
+    alertZone->Initalize(this, alertAreaValue);
 
-    attackArea = Instantiate("AttackArea");
-    attackArea->AddComponent<CircleCollider>()->SetRadius(attackAreaValue);
-    attackArea->GetComponent<Transform>()->SetParent(m_transform);
-    //auto AreaComponent = attackArea->AddComponent<AttackArea>();
+    attackObject = Instantiate("AttackArea");
+    attackObject->AddComponent<CircleCollider>()->SetRadius(attackAreaValue);
+    attackObject->GetComponent<Transform>()->SetParent(m_transform);
+    auto attackZone = attackObject->AddComponent<AttackZone>();
+    attackZone->Initalize(this, attackAreaValue);
 
     /*AttackRangeObject->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
