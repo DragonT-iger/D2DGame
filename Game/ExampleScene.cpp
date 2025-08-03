@@ -81,7 +81,7 @@ void ExampleScene::Awake()
 	//spriteRenderer->SetSize(64.f, 64.f);
 
 	m_player2 = Instantiate("Player2");
-	m_player2->SetTag("Player2");
+	m_player2->SetTag("Player");
 
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();

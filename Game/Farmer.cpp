@@ -35,20 +35,26 @@ void Farmer::Start()
     //SetInitalPosition
     m_initalPosition = m_transform->GetPosition();
 
-    ChaseMinAreaObject = Instantiate("ChaseMinObject");
+    patrolArea = Instantiate("PatrolArea");
+    patrolArea->AddComponent<CircleCollider>()->SetRadius(patrolAreaValue);
+    patrolArea->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    //auto AreaComponent = patrolArea->AddComponent<PatrolArea>();
 
-    ChaseMinAreaObject->AddComponent<CircleCollider>()->SetRadius(chaseMinRange);
-    ChaseMinAreaObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
 
-    ChaseMaxAreaObject = Instantiate("ChaseMaxObject");
-
-    ChaseMaxAreaObject->AddComponent<CircleCollider>()->SetRadius(chaseMaxRange);
-    ChaseMaxAreaObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    chaseArea = Instantiate("ChaseArea");
+    chaseArea->AddComponent<CircleCollider>()->SetRadius(chaseAreaValue);
+    chaseArea->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    //auto AreaComponent = chaseArea->AddComponent<ChaseArea>();
     
-    AttackRangeObject = Instantiate("AttackRangeObject");
+    alertArea = Instantiate("AlertArea");
+    alertArea->AddComponent<CircleCollider>()->SetRadius(alertAreaValue);
+    alertArea->GetComponent<Transform>()->SetParent(m_transform);
+    //auto AreaComponent = alertArea->AddComponent<AlertArea>();
 
-    AttackRangeObject->AddComponent<CircleCollider>()->SetRadius(maxAttackRange);
-    AttackRangeObject->GetComponent<Transform>()->SetParent(m_transform);
+    attackArea = Instantiate("AttackArea");
+    attackArea->AddComponent<CircleCollider>()->SetRadius(attackAreaValue);
+    attackArea->GetComponent<Transform>()->SetParent(m_transform);
+    //auto AreaComponent = attackArea->AddComponent<AttackArea>();
 
     /*AttackRangeObject->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 

@@ -73,6 +73,10 @@ public:
 
     GameObject* FindGameObject(std::string name);
 
+
+    GameObject* GetPlayer() { if (m_player == nullptr) std::cout << "플레이어를 씬에 등록하세요" << std::endl;  return m_player; }
+    void SetPlayer(GameObject* player) { m_player = player; }
+
     
 protected:
     /* 지연 큐 적용 */
@@ -96,4 +100,8 @@ private:
     Camera*                                                         m_Camera = nullptr;
     ScenePhase                                      m_phase = ScenePhase::None;
     bool                                            m_isGridOn; // 초기화는 imgui에서 함
+
+
+
+    GameObject* m_player = nullptr;
 };
