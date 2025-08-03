@@ -147,8 +147,9 @@ const char* Farmer::ToString(FarmerState s) const
 
 void Farmer::OnInspectorGUI()
 {
+    std::string animation_state = m_animator->GetCurState();
     ImGui::Text("AI  : %s", ToString(m_farmerState));
-    ImGui::Text("Anim: %s", m_animator->GetCurState());
+    ImGui::Text("Anim: %s", animation_state.c_str() );
     ImGui::Separator();
 
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
