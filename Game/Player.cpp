@@ -17,6 +17,10 @@ void Player::Awake()
 
 }
 
+void Player::OnTriggerEnter(Collider* other)
+{
+}
+
 void Player::OnTriggerStay(Collider* other)
 {
 	if (m_hp > 0)

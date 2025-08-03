@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "MainScene.h"
+#include "Player.h"
+#include "PlayerAnimator.h"
 #include "PlayerController.h"
 #include "CinemachineCamera.h"
 #include "Crop.h"
@@ -12,9 +14,13 @@ void MainScene::Awake()
 //begin player-----
 	player = Instantiate("Player");
 	player->AddComponent<SpriteRenderer>();
-	player->AddComponent<PlayerController>();
 	player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
+
+	player->AddComponent<Player>();
+	player->AddComponent<PlayerAnimator>();
+	player->AddComponent<PlayerController>();
+	
 //end player-----
 
 

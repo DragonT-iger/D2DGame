@@ -11,49 +11,54 @@ void PlayerController::Awake()
 
 void PlayerController::Start()
 {
+	c_state = m_Player->GetState_adr();
+	c_action = m_Player->GetAction_adr();
+	c_visibilty = m_Player->GetVisibilty_adr();
+
+	p_Spd = m_Player->GetSpd_adr();
 }
 
 void PlayerController::Update(float deltaTime)
 {
-	if (state == State::Alive)
+	if (*c_state == State::Alive)
 	{
 		int x = Input.GetAxisRaw("Horizontal");
 		int y = Input.GetAxisRaw("Vertical");
 		Vector2 dir{ (float)x,(float)y };
 		dir.Normalize();
 
-		if (action == Action::Idle || action == Action::Walk)
+		if (*c_action == Action::Idle || *c_action == Action::Walk)
 		{
 			if (x < 0) { m_spriteRenderer->SetFlip(true); }
 			else if (x > 0) { m_spriteRenderer->SetFlip(false); }
 		}
 		
-		if (Input.GetKeyDown(Keycode::B)) { action = Action::Hit; }
+		if (Input.GetKeyDown(Keycode::B)) { *c_action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_animator->ChangeState("dead"); state = State::Dead; return; }
 		
 
-		switch (action)
+		switch (*c_action)
 		{
 		case Action::Idle:
 			if (dir != Vector2{ 0,0 })
 			{
 				m_animator->ChangeState("walk");
-				action = Action::Walk;
+				*c_action = Action::Walk;
 				break;
 			}
 			else if (m_animator->GetCurState() != "idle")
 			{
 				m_animator->ChangeState("idle");
-				action = Action::Idle;
+				*c_action = Action::Idle;
 			}
 			break;
 		case Action::Walk:
 			if (dir == Vector2{ 0,0 })
 			{
 				m_animator->ChangeState("idle");
-				action = Action::Idle;
+				*c_action = Action::Idle;
 			}
-			m_transform->Translate(dir * m_Spd * deltaTime);
+			m_transform->Translate(dir * (*p_Spd) * deltaTime);
 			break;
 		case Action::Hit:
 			if (m_animator->GetCurState() != "hit")
@@ -62,7 +67,7 @@ void PlayerController::Update(float deltaTime)
 			}
 			if (m_animator->IsAnimeEnd())
 			{
-				action = Action::Idle;
+				*c_action = Action::Idle;
 			}
 			break;
 		case Action::Steal:
@@ -72,7 +77,7 @@ void PlayerController::Update(float deltaTime)
 			}
 			if (m_animator->IsAnimeEnd())
 			{
-				action = Action::Idle;
+				*c_action = Action::Idle;
 			}
 			break;
 		}

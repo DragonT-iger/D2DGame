@@ -32,11 +32,11 @@ public:
 	void OnTriggerStay(Collider* other)  override;
 	void OnTriggerExit(Collider* other)  override;
 
-	State& GetState_ref() { return state; }
-	Action& GetAction_ref() { return action; }
-	Visibilty& GetVisibilty_ref() { return visibilty; }
+	State* GetState_adr() { return &state; }
+	Action* GetAction_adr() { return &action; }
+	Visibilty* GetVisibilty_adr() { return &visibilty; }
 
-	float& GetSpd_ref() { return m_spd; }
+	float* GetSpd_adr() { return &m_spd; }
 
 private:
 	int     m_hp			= 3;

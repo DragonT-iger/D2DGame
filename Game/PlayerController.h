@@ -15,6 +15,10 @@ private:
 
 	Player* m_Player = nullptr;
 	Transform* m_transform = nullptr;
-	
-};
 
+	float* p_Spd = nullptr;
+
+	State* c_state = nullptr;
+	Action* c_action = nullptr;
+	Visibilty* c_visibilty = nullptr;
+};
