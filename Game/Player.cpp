@@ -10,28 +10,20 @@ int Player::invincible_Count = 0;
 
 void Player::Awake()
 {
-	hp	= PlayerHP;
-	spd = PlayerSpeed;
+	m_hp = PlayerHP;
+	m_spd = PlayerSpeed;
 	//starv_level = BabyMoleStarvLevel;
-	ivc_T = invincibleTime;
+	m_ivc_T = invincibleTime;
 
-}
-
-void Player::OnTriggerEnter(Collider* other)
-{
-	//if (other->GetOwner()->GetTag() == "crop")
-	//{
-		//other->
-	//}
 }
 
 void Player::OnTriggerStay(Collider* other)
 {
-	if (hp > 0)
+	if (m_hp > 0)
 	{
 		invincible_Count++;
 
-		if (ivc_T < invincible_Count)
+		if (m_ivc_T < invincible_Count)
 		{
 			action = Action::Hit;
 			invincible_Count = 0;

@@ -26,7 +26,7 @@ bool Game::Initialize()
 	D2DRenderer::Instance().Initialize(static_cast<HWND>(GetHandle()));
     
     //리소스 매니저 세팅
-    ResourceManager::Instance().SetResourcePath(std::filesystem::current_path() / "Assets");
+    ResourceManager::Instance().SetResourcePath(std::filesystem::current_path() /"Assets");
     ResourceManager::Instance().LoadPath();
 
 
@@ -45,9 +45,15 @@ bool Game::Initialize()
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
 
+<<<<<<< Updated upstream
     //SceneManager::Instance().LoadScene(L"MainScene");
     SceneManager::Instance().LoadScene(L"ExampleScene");
      //SceneManager::Instance().LoadScene(L"HSTestScene");
+=======
+    SceneManager::Instance().LoadScene(L"MainScene");
+    //SceneManager::Instance().LoadScene(L"ExampleScene");
+    //SceneManager::Instance().LoadScene(L"HSTestScene");
+>>>>>>> Stashed changes
 
 	return true;
 }
