@@ -39,8 +39,8 @@ private:
     GameObject* patrolArea;  float patrolAreaValue = 350.0f;
     GameObject* chaseArea;  float chaseAreaValue = 500.0f;
 
-    GameObject* alertArea;   float alertArea = 300.0f;
+    GameObject* alertArea;   float alertAreaValue = 300.0f;
 
-    GameObject* attackArea;  float attackArea = 200.0f;
+    GameObject* attackArea;  float attackAreaValue = 200.0f;
 };
 
