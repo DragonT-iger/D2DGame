@@ -43,7 +43,7 @@
 #include <wrl/client.h>
 #include <wincodec.h>
 #include <dwrite.h>
-
+#include <DirectXMath.h>
 namespace WRL = Microsoft::WRL;
 inline std::wostream& cwout = std::wcout;
 

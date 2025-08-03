@@ -1,13 +1,35 @@
 #pragma once
 class Farmer : public MonoBehaviour
 {
+    enum class AnimationState
+    {
+        Idle,
+        Run,
+        Attack
+    };
+    AnimationState   m_animationState = AnimationState::Idle;
+    enum class FarmerState
+    {
+        Patrol,
+        Alert,
+        Chase,
+        Attack
+    };
+    FarmerState m_farmerState = FarmerState::Patrol;
+
 	void Awake() override;
 
 	void Start() override;
 	
 	void Update(float deltaTime) override;
 
-    void PickRandomDirection();
+public:
+    //void PickRandomDirection();
+
+    void DoPatrol(float deltaTime);
+    void DoAlert(float deltaTime);
+    void DoChase(float deltaTime);
+    void DoAttack(float deltaTime);
 
 	//애니메이션
 
@@ -15,19 +37,18 @@ class Farmer : public MonoBehaviour
 
 
 private:
-    enum class State
-    {
-        Idle,
-        Run,
-        Attack
-    };
+
+    void OnInspectorGUI() override;
+
+    const char* ToString(AnimationState s) const;
+    const char* ToString(FarmerState   s) const;
+    
 
     Animator* m_animator = nullptr;
     Transform* m_transform = nullptr;
     SpriteRenderer* m_spriteRenderer = nullptr;
     BoxCollider* m_boxCollider = nullptr;
 
-    State   m_state = State::Idle;
     Vector2 m_direction = Vector2::zero;
     float   m_speed = 100.f;
     float   m_dirTimer = 0.f;
@@ -35,16 +56,18 @@ private:
 
 
 
-    Vector2 m_initalPosition;
+    //patrol
+    bool m_hasPatrolTarget = false;
 
 
+    Vector2 m_initialPosition;
+    Vector2 m_patrolTarget; 
+    float   m_patrolBiasExp = 2.f;
+    GameObject* patrolObject;  float m_patrolAreaValue = 350.0f;
 
-    //GameObject* farmerArea[4]; // patrol , chase , alert , attack;
-    //float areaRadius[4] = { 350, 500, 300 ,200 };
-    GameObject* patrolObject;  float patrolAreaValue = 350.0f;
-    GameObject* chaseObject;  float chaseAreaValue = 500.0f;
-    GameObject* alertObject;   float alertAreaValue = 300.0f;
-    GameObject* attackObject;  float attackAreaValue = 200.0f;
+    GameObject* chaseObject;  float m_chaseAreaValue = 500.0f;
+    GameObject* alertObject;   float m_alertAreaValue = 300.0f;
+    GameObject* attackObject;  float m_attackAreaValue = 200.0f;
 
 };
 

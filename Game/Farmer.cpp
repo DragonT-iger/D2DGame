@@ -28,114 +28,147 @@ void Farmer::Start()
 
 	m_animator->SetEntryState("idle");
 	//m_animator->ChangeState("idle");
-	PickRandomDirection();
+	//PickRandomDirection();
 
 
 
     //SetInitalPosition
-    m_initalPosition = m_transform->GetPosition();
+    m_initialPosition = m_transform->GetPosition();
 
 
     patrolObject = Instantiate("PatrolArea");
-    patrolObject->AddComponent<CircleCollider>()->SetRadius(patrolAreaValue);
-    patrolObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    patrolObject->GetComponent<Transform>()->SetPosition(m_initialPosition);
     auto patrolZone = patrolObject->AddComponent<PatrolZone>();
-    patrolZone->Initalize(this, patrolAreaValue);
-
+    patrolZone->Initalize(this, m_patrolAreaValue);
 
     chaseObject = Instantiate("ChaseArea");
-    chaseObject->AddComponent<CircleCollider>()->SetRadius(chaseAreaValue);
-    chaseObject->GetComponent<Transform>()->SetPosition(m_initalPosition);
+    chaseObject->GetComponent<Transform>()->SetPosition(m_initialPosition);
     auto chaseZone = chaseObject->AddComponent<ChaseZone>();
-    chaseZone->Initalize(this, chaseAreaValue);
+    chaseZone->Initalize(this, m_chaseAreaValue);
     
     alertObject = Instantiate("AlertArea");
-    alertObject->AddComponent<CircleCollider>()->SetRadius(alertAreaValue);
     alertObject->GetComponent<Transform>()->SetParent(m_transform);
     auto alertZone = alertObject->AddComponent<AlertZone>();
-    alertZone->Initalize(this, alertAreaValue);
+    alertZone->Initalize(this, m_alertAreaValue);
 
     attackObject = Instantiate("AttackArea");
-    attackObject->AddComponent<CircleCollider>()->SetRadius(attackAreaValue);
     attackObject->GetComponent<Transform>()->SetParent(m_transform);
     auto attackZone = attackObject->AddComponent<AttackZone>();
-    attackZone->Initalize(this, attackAreaValue);
-
-    /*AttackRangeObject->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
-
-    AttackRangeObject->GetComponent<Transform>()->SetScale({ 1,1 });*/
+    attackZone->Initalize(this, m_attackAreaValue);
 
 
-}
-
-void Farmer::PickRandomDirection()
-{
-    int r = Random::Instance().Range(0, 5);
-    switch (r)
-    {
-    case 0: m_direction = Vector2::zero;  break;
-    case 1: m_direction = Vector2::left;  break;
-    case 2: m_direction = Vector2::right; break;
-    case 3: m_direction = Vector2::up;    break;
-    case 4: m_direction = Vector2::down;  break;
-    }
-    if (m_direction.x > 0) {
-        m_spriteRenderer->SetFlip(false);
-    }
-    else if(m_direction.x < 0) {
-        m_spriteRenderer->SetFlip(true);
-    }
 }
 
 void Farmer::Update(float deltaTime)
 {
-
-
-    //std::cout << m_transform->GetPosition().x << " " << m_transform->GetPosition().y << std::endl;
-
-    //std::cout << AttackRangeObject->GetComponent<Transform>()->GetPosition().x << std::endl;
-    m_dirTimer += deltaTime;
-    if (m_dirTimer > m_dirInterval)
+    switch (m_farmerState)
     {
-        PickRandomDirection();
-        m_dirTimer = 0.f;
-    }
-
-    if (Input.GetKeyDown(Keycode::SPACE))
-    {
-        m_state = State::Attack;
-        m_animator->ChangeState("attack");
-    }
-
-    if (m_state == State::Attack)
-    {
-        if (m_animator->IsAnimeEnd())
-        {
-            m_state = State::Idle;
-            m_animator->ChangeState("idle");
-        }
-        return;
-    }
-
-    if (m_direction != Vector2::zero)
-    {
-        m_transform->Translate(m_direction * m_speed * deltaTime);
-        if (m_state != State::Run)
-        {
-            m_animator->ChangeState("run");
-            m_state = State::Run;
-        }
-    }
-    else
-    {
-        if (m_state != State::Idle)
-        {
-            m_animator->ChangeState("idle");
-            m_state = State::Idle;
-        }
+        case FarmerState::Patrol: DoPatrol(deltaTime);  break;
+        case FarmerState::Alert:  DoAlert(deltaTime);  break;
+        case FarmerState::Chase:  DoChase(deltaTime);  break;
+        case FarmerState::Attack: DoAttack(deltaTime);  break;
     }
 }
 
+void Farmer::DoPatrol(float deltaTime)
+{
+    Vector2 cur = m_transform->GetPosition();
+
+    // 목표를 아직 못 잡았거나, 거의 도달했으면 새 목표 생성
+    if (!m_hasPatrolTarget ||
+        (m_patrolTarget - cur).SqrMagnitude() < 4.f)
+    {
+        m_hasPatrolTarget = true;
+
+        /* ---- 무작위 목표 잡기 ---- */
+
+        // 1) 방향(각도)
+        float rad = DirectX::XM_2PI * (Random::Instance().Range(0, 10000) / 10000.f);
+
+        // 2) 0~1 균등 난수
+        float t = Random::Instance().Range(0, 10000) / 10000.f;
+
+        float biased = std::pow(t, m_patrolBiasExp); 
+
+        // 4) 최종 반경
+        float r = m_patrolAreaValue * biased;
+
+        // 5) 목표 좌표
+        m_patrolTarget = {
+            m_initialPosition.x + std::cos(rad) * r,
+            m_initialPosition.y + std::sin(rad) * r
+        };
+    }
+
+    /* ---- 이동 ---- */
+    Vector2 dir = m_patrolTarget - cur;
+    if (dir.SqrMagnitude() > 0.1f)
+    {
+        dir.Normalize();
+        m_transform->Translate(dir * m_speed * deltaTime); 
+
+        if(m_animator->GetCurState() != "run")
+            m_animator->ChangeState("run");
+    }
+    else
+    {
+        if (m_animator->GetCurState() != "idle")
+            m_animator->ChangeState("idle");
+    }
+}
+
+
+void Farmer::DoAlert(float deltaTime)
+{
+}
+
+void Farmer::DoChase(float deltaTime)
+{
+}
+
+void Farmer::DoAttack(float deltaTime)
+{
+}
+
+
+
+#ifdef _DEBUG
+
+/* ── 열거형 → 문자열 ───────────────────────────── */
+const char* Farmer::ToString(AnimationState s) const
+{
+    switch (s)
+    {
+    case AnimationState::Idle:   return "Idle";
+    case AnimationState::Run:    return "Run";
+    case AnimationState::Attack: return "Attack";
+    default:                     return "Unknown";
+    }
+}
+
+const char* Farmer::ToString(FarmerState s) const
+{
+    switch (s)
+    {
+    case FarmerState::Patrol: return "Patrol";
+    case FarmerState::Alert:  return "Alert";
+    case FarmerState::Chase:  return "Chase";
+    case FarmerState::Attack: return "Attack";
+    default:                  return "Unknown";
+    }
+}
+
+void Farmer::OnInspectorGUI()
+{
+    ImGui::Text("AI  : %s", ToString(m_farmerState));
+    ImGui::Text("Anim: %s", ToString(m_animationState));
+    ImGui::Separator();
+
+    ImGui::DragFloat("Move Speed", &m_speed, 1.f);
+    ImGui::DragFloat("Bias", &m_patrolBiasExp , 0.1f, 0.1f, 20.0f); // 아 setter getter도 필요없었네 ㅋㅋㅋㅋ
+}
+
+#endif
 
 
 //void Farmer
