@@ -126,7 +126,10 @@ int Inventory::GetWeight()
 	for (const auto& slot : m_slots)
 	{
 		const auto& data = slot->GetData();
-		int w;
+		
+		if (data.isEmpty)
+			continue;
+		int w = 0;
 
 		switch (data.type)
 		{
