@@ -133,17 +133,6 @@ void Farmer::DoAttack(float deltaTime)
 
 #ifdef _DEBUG
 
-const char* Farmer::ToString(AnimationState s) const
-{
-    switch (s)
-    {
-    case AnimationState::Idle:   return "Idle";
-    case AnimationState::Run:    return "Run";
-    case AnimationState::Attack: return "Attack";
-    default:                     return "Unknown";
-    }
-}
-
 const char* Farmer::ToString(FarmerState s) const
 {
     switch (s)
@@ -159,7 +148,7 @@ const char* Farmer::ToString(FarmerState s) const
 void Farmer::OnInspectorGUI()
 {
     ImGui::Text("AI  : %s", ToString(m_farmerState));
-    ImGui::Text("Anim: %s", ToString(m_animationState));
+    ImGui::Text("Anim: %s", m_animator->GetCurState());
     ImGui::Separator();
 
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);

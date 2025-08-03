@@ -1,13 +1,6 @@
 #pragma once
 class Farmer : public MonoBehaviour
 {
-    enum class AnimationState
-    {
-        Idle,
-        Run,
-        Attack
-    };
-    AnimationState   m_animationState = AnimationState::Idle;
     enum class FarmerState
     {
         Patrol,
@@ -40,7 +33,6 @@ private:
 
     void OnInspectorGUI() override;
 
-    const char* ToString(AnimationState s) const;
     const char* ToString(FarmerState   s) const;
     
 
