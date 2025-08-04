@@ -191,8 +191,10 @@ void Farmer::ChangeState(FarmerState farmerState)
         m_hasPatrolTarget = false;
     }
     if (farmerState == FarmerState::Attack) {
-        m_attackTimer = 0.f;
-        m_attackIndicator = nullptr;
+        if (m_attackIndicator) {
+            Destroy(m_attackIndicator);
+            m_attackIndicator = nullptr;
+        }
     }
     m_farmerState = farmerState;
 }

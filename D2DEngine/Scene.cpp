@@ -133,7 +133,10 @@ void Scene::LateUpdate(float deltaTime)
 void Scene::Render()
 {
 
-	//if (!m_active) return;
+    //if (!m_active) return;
+
+    FlushPending();
+
 	m_phase = ScenePhase::Render;
     SetRenderQ();
 
