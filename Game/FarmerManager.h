@@ -2,8 +2,8 @@
 class FarmerManager : public MonoBehaviour
 {
 public:
-	void Awake() overrride;
+    void Awake() override;
 
 private:
+    std::vector<GameObject*> m_farmers;
 };
-

@@ -111,6 +111,9 @@
     <ClCompile Include="FarmerZone.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="FarmerManager.cpp">
+      <Filter>소스 파일</Filter>
+      </ClCompile>
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -185,6 +188,9 @@
     <ClInclude Include="FarmerZone.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="FarmerManager.h">
+      <Filter>헤더 파일</Filter>
+       </ClInclude>
     <ClInclude Include="PlayerAnimator.h">
       <Filter>Player</Filter>
     </ClInclude>
