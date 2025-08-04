@@ -35,7 +35,7 @@ public:
 	FarmRank GetFarmRank() { return m_rank; }
 
 	//void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, std::shared_ptr<AnimationClip> clip = nullptr, GameObject* msg);
-	void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, std::shared_ptr<AnimationClip> clip = nullptr, GameObject* msg = nullptr);
+	void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, GameObject* eftobj = nullptr);
 protected:
 	float m_growSpeed_M;
 	float m_growSpeed_L;
@@ -55,6 +55,7 @@ protected:
 	std::shared_ptr<AnimationClip>										   m_largeClip = nullptr;
 
 	GameObject* m_steal_message;
+	GameObject* m_eftObj;
 };
 
 

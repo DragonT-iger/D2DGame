@@ -23,10 +23,8 @@ void Crop::Update(float deltaTime)
 		{
 			m_size = L;
 			m_elapsedTime = 0.f;
-			if(m_largeClip)
-				m_Animator->ChangeState("large");
-			else
-				m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(L)]);
+			m_eftObj->SetActive(true);
+			m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(L)]);
 		}
 		else
 			m_elapsedTime += deltaTime;
@@ -48,8 +46,7 @@ void Crop::SetCropData(
 											FarmRank rank,
 											Crops type, 
 											std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites,
-											std::shared_ptr<AnimationClip> clip,
-											GameObject* msg
+											GameObject* eftObj
 											)
 {
 	switch (rank)
@@ -80,16 +77,13 @@ void Crop::SetCropData(
 	m_rank = rank;
 	m_type = type;
 	m_GameSprites = gameSprites;
-	m_steal_message = msg;
 
 	m_SpriteRenderer = GetComponent<SpriteRenderer>();
 	m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(S)]);
 
-	if (clip)
+	if (eftObj)
 	{
-		m_Animator = GetComponent<Animator>();
-		m_largeClip = clip;
-		m_Animator->AddClip("large", m_largeClip, true);
+		m_eftObj = eftObj;
 	}
 
 	isSpawn = true;
