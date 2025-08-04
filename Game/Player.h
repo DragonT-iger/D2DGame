@@ -53,5 +53,7 @@ private:
 	State		state		= State::Alive;
 	Action		action		= Action::Idle;
 	Visibilty	visibilty	= Visibilty::Visible;
+
+	BoxCollider* m_boxCol = nullptr;
 };
 

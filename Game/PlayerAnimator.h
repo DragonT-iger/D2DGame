@@ -9,6 +9,9 @@ public:
 	void OnTriggerStay(Collider* other)  override;
 	void OnTriggerExit(Collider* other)  override;*/
 
+	void ActionAnime();
+	void UpdateVisible();
+
 private:
 	Player* m_Player = nullptr;
 	Animator* m_animator = nullptr;

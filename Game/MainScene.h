@@ -13,5 +13,6 @@ class MainScene : public Scene
 
 	GameObject*				crop		= nullptr;
 	GameObject*				message		= nullptr;
+	GameObject*				bush = nullptr;
 };
 

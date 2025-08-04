@@ -15,11 +15,14 @@ void Player::Awake()
 	//starv_level = BabyMoleStarvLevel;
 	m_ivc_T = invincibleTime;
 
+	m_boxCol = GetComponent<BoxCollider>();
+
 }
 
 void Player::Start()
 {
 
+	m_boxCol->SetSize({ Vector2(150.f,150.f) });
 }
 
 void Player::Update(float deltaTime)
@@ -29,6 +32,10 @@ void Player::Update(float deltaTime)
 
 void Player::OnTriggerEnter(Collider* other)
 {
+	if (other->GetOwner()->GetTag() == "Bush")
+	{
+		visibilty = Visibilty::Hide;
+	}
 }
 
 void Player::OnTriggerStay(Collider* other)
@@ -52,6 +59,10 @@ void Player::OnTriggerStay(Collider* other)
 
 void Player::OnTriggerExit(Collider* other)
 {
+	if (other->GetOwner()->GetTag() == "Bush")
+	{
+		visibilty = Visibilty::Visible;
+	}
 
 }
 

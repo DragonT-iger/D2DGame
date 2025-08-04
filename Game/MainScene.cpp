@@ -5,6 +5,7 @@
 #include "PlayerController.h"
 #include "CinemachineCamera.h"
 #include "Crop.h"
+#include "Bush.h"
 
 void MainScene::Awake()
 {
@@ -24,32 +25,32 @@ void MainScene::Awake()
 //end player-----
 
 
-//begin crop-----
-	crop = Instantiate("Crop");
-	crop->SetTag("crop");
-
-	crop->AddComponent<SpriteRenderer>();
-	crop->AddComponent<BoxCollider>();
-	crop->AddComponent<Animator>();
-	auto crop_scripts	= crop->AddComponent<Crop>();
-
-	crop->GetComponent<Transform>()->SetPosition(Vector2{0,0});
-	crop->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
-
-	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> cropbit = {
-		ResourceManager::Instance().LoadTexture("potatoL.png"),
-		ResourceManager::Instance().LoadTexture("potatoL.png"),
-		ResourceManager::Instance().LoadTexture("potatoL.png")
-	};
-
-	crop_scripts->SetCropData((FarmRank)0, (Crops)1, cropbit);
-
-//end crop------
+////begin crop-----
+//	crop = Instantiate("Crop");
+//	crop->SetTag("crop");
+//
+//	crop->AddComponent<SpriteRenderer>();
+//	crop->AddComponent<BoxCollider>();
+//	crop->AddComponent<Animator>();
+//	auto crop_scripts	= crop->AddComponent<Crop>();
+//
+//	crop->GetComponent<Transform>()->SetPosition(Vector2{0,0});
+//	crop->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
+//
+//	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> cropbit = {
+//		ResourceManager::Instance().LoadTexture("potatoL.png"),
+//		ResourceManager::Instance().LoadTexture("potatoL.png"),
+//		ResourceManager::Instance().LoadTexture("potatoL.png")
+//	};
+//
+//	crop_scripts->SetCropData((FarmRank)0, (Crops)1, cropbit);
+//
+////end crop------
 
 //begin message-----
 
-	message = Instantiate("steal_message");
-	
+	/*message = Instantiate("steal_message");
+
 	auto message_render = message->AddComponent<SpriteRenderer>();
 	message->GetComponent<Transform>()->SetParent(crop->GetComponent<Transform>());
 
@@ -58,11 +59,20 @@ void MainScene::Awake()
 
 	message_render->SetBitmap(ResourceManager::Instance().LoadTexture("steal_message.png"));
 
-	message->SetActive(false);
+	message->SetActive(false);*/
 	
 
 //end message-----
 
+//begin Bush
+
+	bush = Instantiate("Bush");
+	bush->AddComponent<Bush>();
+	bush->AddComponent<SpriteRenderer>();
+	bush->AddComponent<BoxCollider>();
+	bush->GetComponent<Transform>()->SetPosition(Vector2{ -100,0 });
+
+//end Bush
 
 	Scene::Awake();
 }
@@ -75,6 +85,7 @@ void MainScene::Start()
 	Camera* cam = GetCamera();
 
 	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
+
 
 	Scene::Start();
 }

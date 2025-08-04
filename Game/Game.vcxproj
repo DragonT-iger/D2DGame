@@ -140,6 +140,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bush.cpp" />
     <ClCompile Include="CinemachineCamera.cpp" />
     <ClCompile Include="Crop.cpp" />
     <ClCompile Include="Eggplant.cpp" />
@@ -166,6 +167,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="PlayerController_Sample.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bush.h" />
     <ClInclude Include="CinemachineCamera.h" />
     <ClInclude Include="Crop.h" />
     <ClInclude Include="Eggplant.h" />

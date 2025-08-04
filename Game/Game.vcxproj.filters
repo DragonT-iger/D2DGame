@@ -43,6 +43,9 @@
     <Filter Include="Player">
       <UniqueIdentifier>{b9d1abe3-e78c-48f1-9bd8-b83c8acb6f24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Bush">
+      <UniqueIdentifier>{4595413d-120b-4a53-a321-2e1511ebb03e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -117,6 +120,9 @@
     <ClCompile Include="StartButton.cpp">
       <Filter>Scripts\ButtonTest</Filter>
     </ClCompile>
+    <ClCompile Include="Bush.cpp">
+      <Filter>Scripts\Bush</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -187,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="StartButton.h">
       <Filter>Scripts\ButtonTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Bush.h">
+      <Filter>Scripts\Bush</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,53 @@
 #include "Player.h"
 #include "PlayerAnimator.h"
 
+void PlayerAnimator::ActionAnime()
+{
+	switch (m_Player->action)
+	{
+	case Action::Idle:
+		if (m_animator->GetCurState() != "idle")
+		{
+			m_animator->ChangeState("idle");
+		}
+		break;
+	case Action::Walk:
+		if (m_animator->GetCurState() != "walk")
+		{
+			m_animator->ChangeState("walk");
+		}
+		break;
+
+		/*case Action::Hit:
+			if (m_animator->GetCurState() != "hit")
+			{
+				m_animator->ChangeState("hit");
+			}
+			break;*/
+	case Action::Steal:
+		if (m_animator->GetCurState() != "steal")
+		{
+			m_animator->ChangeState("steal");
+		}
+		break;
+	}
+}
+
+void PlayerAnimator::UpdateVisible()
+{
+	switch (m_Player->visibilty)
+	{
+	case Visibilty::Visible:
+		m_spriteRenderer->SetOpacity(1);
+		break;
+	case Visibilty::Hide:
+		m_spriteRenderer->SetOpacity(0.3f);
+		break;
+
+	}
+
+}
+
 void PlayerAnimator::Awake()
 {
 	m_Player = GetComponent<Player>();
@@ -29,35 +76,26 @@ void PlayerAnimator::Start()
 
 void PlayerAnimator::Update(float deltaTime)
 {
-	int x = Input.GetAxisRaw("Horizontal");
-	int y = Input.GetAxisRaw("Vertical");
-	Vector2 dir{ (float)x,(float)y };
-
-	if (m_Player->action == Action::Idle || m_Player->action == Action::Walk)
+	if (m_Player->state == State::Alive)
 	{
-		if (x < 0) { m_spriteRenderer->SetFlip(true); }
-		else if (x > 0) { m_spriteRenderer->SetFlip(false); }
+		int x = Input.GetAxisRaw("Horizontal");
+		int y = Input.GetAxisRaw("Vertical");
+		Vector2 dir{ (float)x,(float)y };
+
+
+		if (m_Player->action == Action::Idle || m_Player->action == Action::Walk)
+		{
+			if (x < 0) { m_spriteRenderer->SetFlip(true); }
+			else if (x > 0) { m_spriteRenderer->SetFlip(false); }
+		}
+
+		ActionAnime();
+		UpdateVisible();
+	}
+	else
+	{
+		if (m_animator->GetCurState() != "dead")
+			m_animator->ChangeState("dead");
 	}
 
-	switch (m_Player->action)
-	{
-	case Action::Idle:
-		if (dir != Vector2{ 0,0 })
-		{
-			m_animator->ChangeState("walk");
-			break;
-		}
-		else if (m_animator->GetCurState() != "idle")
-		{
-			m_animator->ChangeState("idle");
-		}
-	case Action::Walk:
-		if (dir == Vector2{ 0,0 })
-		{
-			m_animator->ChangeState("idle");
-		}
-	case Action::Hit:
-	case Action::Steal:
-		break;
-	}
 }

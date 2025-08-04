@@ -8,8 +8,6 @@ void PlayerController::Awake()
 	m_transform = GetComponent<Transform>();
 	m_animator = GetComponent<Animator>();
 
-	
-
 }
 
 void PlayerController::Start()
@@ -27,18 +25,32 @@ void PlayerController::Update(float deltaTime)
 		int y = Input.GetAxisRaw("Vertical");
 		Vector2 dir{ (float)x,(float)y };
 		dir.Normalize();
-		//std::cout << dir.x << ", " << dir.y << std::endl;
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
 		
-		std::cout << static_cast<int>(m_Player->action) << std::endl;
+		
+		switch (static_cast<int>(m_Player->action))
+		{
+		case 0:
+			std::cout << "Idle" << std::endl;
+			break;
+		case 1:
+			std::cout << "Walk" << std::endl;
+			break;
+		case 2:
+			std::cout << "Hit" << std::endl;
+			break;
+		case 3:
+			std::cout << "Steal" << std::endl;
+			break;
+		}
+
 		switch (m_Player->action)
 		{
 		case Action::Idle:
 			if (dir != Vector2{ 0.f,0.f })
 			{
-				std::cout << "walk로 진입" << std::endl;
 				m_Player->action = Action::Walk;
 				break;
 			}
@@ -55,27 +67,25 @@ void PlayerController::Update(float deltaTime)
 			}
 			m_transform->Translate(dir * (*p_Spd) * deltaTime);
 			break;
-		case Action::Hit:
-			if (m_animator->GetCurState() != "hit")
-			{
-				//m_animator->ChangeState("hit");
-			}
-			if (m_animator->IsAnimeEnd())
-			{
-				m_Player->action = Action::Idle;
-			}
-			break;
+		//case Action::Hit:
+		//	if (m_animator->GetCurState() != "hit")
+		//	{
+		//		//m_animator->ChangeState("hit");
+		//	}
+		//	if (m_animator->IsAnimeEnd())
+		//	{
+		//		m_Player->action = Action::Idle;
+		//	}
+		//	break;
+		// 
 		case Action::Steal:
-			if (m_animator->GetCurState() != "steal")
-			{
-				//m_animator->ChangeState("steal");
-			}
 			if (m_animator->IsAnimeEnd())
 			{
 				m_Player->action = Action::Idle;
 			}
 			break;
 		}
+		//작물과 충돌중일 때 Z키를 누르면 Action -> Steal로 전환
 	}
 
 }
