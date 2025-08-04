@@ -9,7 +9,7 @@ void Crop::Update(float deltaTime)
 	switch (m_size)
 	{
 	case S:
-		if (m_elapsedTime >= m_growSpeed_M)
+		if (m_elapsedTime >= m_growSpeed_S)
 		{
 			m_size = M;
 			m_elapsedTime = 0.f;
@@ -19,12 +19,22 @@ void Crop::Update(float deltaTime)
 			m_elapsedTime += deltaTime;
 		break;
 	case M:
-		if (m_elapsedTime >= m_growSpeed_L)
+		if (m_elapsedTime >= m_growSpeed_M)
 		{
 			m_size = L;
 			m_elapsedTime = 0.f;
-			m_eftObj->SetActive(true);
 			m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(L)]);
+		}
+		else
+			m_elapsedTime += deltaTime;
+		break;
+	case L:
+		if (m_elapsedTime >= m_growSpeed_L)
+		{
+			m_size = XL;
+			m_elapsedTime = 0.f;
+			m_eftObj->SetActive(true);
+			m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(XL)]);
 		}
 		else
 			m_elapsedTime += deltaTime;
@@ -53,23 +63,26 @@ void Crop::SetCropData(
 	{
 	case FarmRank::Rank_A:
 	{
+		m_growSpeed_S = 5.f;
 		m_growSpeed_M = 7.f; //sec
 		m_growSpeed_L = 7.f; //sec
-		m_maxSize = Size::L;
+		m_maxSize = Size::XL;
 		break;
 	}
 	case FarmRank::Rank_B:
 	{
+		m_growSpeed_S = 5.f;
 		m_growSpeed_M = 7.f; //sec
 		m_growSpeed_L = 12.f; //sec
-		m_maxSize = Size::L;
+		m_maxSize = Size::XL;
 		break;
 	}
 	case FarmRank::Rank_C:
 	{
+		m_growSpeed_S = 5.f;
 		m_growSpeed_M = 12.f; //sec
 		m_growSpeed_L = 0.f; //sec //C등급은 최대 M까지
-		m_maxSize = Size::M;
+		m_maxSize = Size::L;
 		break;
 	}
 	}

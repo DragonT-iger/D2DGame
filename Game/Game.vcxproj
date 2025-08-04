@@ -158,7 +158,9 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="Potato.cpp" />
     <ClCompile Include="Pumpkin.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
+    <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="StealMessage.cpp" />
+    <ClCompile Include="TestTitleScene.cpp" />
     <ClCompile Include="UITest.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="PlayerController_Sample.cpp" />
@@ -181,7 +183,9 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="Potato.h" />
     <ClInclude Include="Pumpkin.h" />
     <ClInclude Include="SpawnManager.h" />
+    <ClInclude Include="StartButton.h" />
     <ClInclude Include="StealMessage.h" />
+    <ClInclude Include="TestTitleScene.h" />
     <ClInclude Include="UITest.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerController_Sample.h" />

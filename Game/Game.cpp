@@ -3,6 +3,7 @@
 #include "ExampleScene.h"
 #include "HSTestScene.h"
 #include "MainScene.h"
+#include "TestTitleScene.h"
 
 #ifdef _DEBUG
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -34,6 +35,7 @@ bool Game::Initialize()
     SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"ExampleScene", std::make_unique<ExampleScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"HSTestScene", std::make_unique<HSTestScene>());
+	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"TestTitleScene", std::make_unique<TitleScene>());
 
     
     //ImGui 초기화
@@ -44,16 +46,10 @@ bool Game::Initialize()
 #endif
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
-
-<<<<<<< Updated upstream
     //SceneManager::Instance().LoadScene(L"MainScene");
-    SceneManager::Instance().LoadScene(L"ExampleScene");
-     //SceneManager::Instance().LoadScene(L"HSTestScene");
-=======
-    SceneManager::Instance().LoadScene(L"MainScene");
     //SceneManager::Instance().LoadScene(L"ExampleScene");
     //SceneManager::Instance().LoadScene(L"HSTestScene");
->>>>>>> Stashed changes
+    SceneManager::Instance().LoadScene(L"TestTitleScene");
 
 	return true;
 }
