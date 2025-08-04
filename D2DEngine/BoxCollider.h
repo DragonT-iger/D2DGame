@@ -18,7 +18,9 @@ public:
 		return { m_transform, this };
 	} 
 
+#ifdef _DEBUG
 	void OnInspectorGUI() override;
+#endif
 
 private:
 	Vector2 size = { 1, 1 }; // 상대적 크기 아님

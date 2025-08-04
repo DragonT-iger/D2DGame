@@ -25,7 +25,7 @@ void Farmer::Start()
 
 	m_animator->AddClip("idle", idle, true);
 	m_animator->AddClip("run", run, true);
-	m_animator->AddClip("attack", attack, false);
+	m_animator->AddClip("attack", attack, true);
 
 	m_animator->SetEntryState("idle");
 	//m_animator->ChangeState("idle");
@@ -91,7 +91,6 @@ void Farmer::DoPatrol(float deltaTime)
         //if (cos(rad) < 0) m_spriteRenderer->SetFlip(true);
         //if (cos(rad) > 0) m_spriteRenderer->SetFlip(false);
 
-        // 5) 목표 좌표
         m_patrolTarget = {
             m_initialPosition.x + std::cos(rad) * r,
             m_initialPosition.y + std::sin(rad) * r
@@ -129,27 +128,38 @@ void Farmer::DoChase(float deltaTime)
     dir.Normalize();
 
     m_transform->Translate(dir * m_speed * deltaTime);
+
+    if (dir.x < 0) { m_spriteRenderer->SetFlip(true); }
+    if (dir.x > 0) { m_spriteRenderer->SetFlip(false); }
 }
 
 void Farmer::DoAttack(float deltaTime)
 {
+    if (m_animator->GetCurState() != "attack")
+        m_animator->ChangeState("attack");
 }
 
 void Farmer::ChangeState(FarmerState farmerState)
 {
+    if (m_animator->GetCurState() == "Patrol") {
+        m_hasPatrolTarget = false;
+    }
     m_farmerState = farmerState;
 }
 
-void Farmer::OnTriggerEnter(Collider* other)
-{
-    
-}
 
 void Farmer::OnTriggerExit(Collider* other)
 {
     if (other->GetOwner()->GetName() == "ChaseArea") {
         ChangeState(FarmerState::Patrol);
         m_isAlreadyExitChaseZone = true;
+        Vector2 pos = m_transform->GetPosition();
+        if (m_transform->GetPosition().x - m_patrolTarget.x > 0) {
+            m_spriteRenderer->SetFlip(true);
+        }
+        else if (m_transform->GetPosition().x - m_patrolTarget.x < 0) {
+            m_spriteRenderer->SetFlip(false);
+        }
     }
 }
 
@@ -171,17 +181,29 @@ const char* Farmer::ToString(FarmerState s) const
 
 void Farmer::OnInspectorGUI()
 {
-    std::string animation_state = m_animator->GetCurState();
-    ImGui::Text("AI  : %s", ToString(m_farmerState));
-    ImGui::Text("Anim: %s", animation_state.c_str() );
+    std::string curAnim = m_animator->GetCurState();
+    ImGui::Text("AI   : %s", ToString(m_farmerState));
+    ImGui::Text("Anim : %s", curAnim.c_str());
     ImGui::Separator();
 
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
-    ImGui::DragFloat("Bias", &m_patrolBiasExp , 0.1f, 0.1f, 20.0f); // 아 setter getter도 필요없었네 ㅋㅋㅋㅋ
-    ImGui::Checkbox("isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
+    ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
+    //ImGui::Checkbox("Already Exit Chase?", &m_isAlreadyExitChaseZone);
+
+    bool areaChanged = false;
+
+    areaChanged |= ImGui::DragFloat("Patrol Radius", &m_patrolAreaValue, 1.f, 10.f, 2000.f);
+    areaChanged |= ImGui::DragFloat("Chase  Radius", &m_chaseAreaValue, 1.f, 10.f, 2000.f);
+    areaChanged |= ImGui::DragFloat("Alert  Radius", &m_alertAreaValue, 1.f, 10.f, 2000.f);
+    areaChanged |= ImGui::DragFloat("Attack Radius", &m_attackAreaValue, 1.f, 10.f, 2000.f);
+
+    if (areaChanged)
+    {
+        if (auto c = patrolObject->GetComponent<CircleCollider>()) c->SetRadius(m_patrolAreaValue);
+        if (auto c = chaseObject->GetComponent<CircleCollider>()) c->SetRadius(m_chaseAreaValue);
+        if (auto c = alertObject->GetComponent<CircleCollider>()) c->SetRadius(m_alertAreaValue);
+        if (auto c = attackObject->GetComponent<CircleCollider>()) c->SetRadius(m_attackAreaValue);
+    }
 }
 
 #endif
-
-
-//void Farmer

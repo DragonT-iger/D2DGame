@@ -84,6 +84,7 @@ ColliderInfo CircleCollider::GetColliderInfo()
 	return { m_transform, this };
 }
 
+#ifdef _DEBUG
 void CircleCollider::OnInspectorGUI()
 {
 	float radius = GetRadius();
@@ -95,3 +96,4 @@ void CircleCollider::OnInspectorGUI()
 
 	__super::OnInspectorGUI();
 }
+#endif

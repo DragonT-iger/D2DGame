@@ -15,7 +15,10 @@ public:
 
 	ColliderInfo GetColliderInfo() override;
 
+#ifdef _DEBUG
 	void OnInspectorGUI() override;
+#endif // _DEBUG
+
 
 private:
 	float m_radius = 1.0f; // 상대적 크기 아님
