@@ -10,5 +10,5 @@ void StartButton::Start()
 {
 	m_button = GetComponent<Button>();
 
-	m_button->AddPressEvent([]() {SceneManager::Instance().LoadScene(L"HSTestScene"); });
+	m_button->AddPressEvent([]() {SceneManager::Instance().LoadScene(L"MainScene"); });
 }

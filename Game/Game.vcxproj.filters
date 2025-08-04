@@ -113,7 +113,7 @@
     </ClCompile>
     <ClCompile Include="FarmerManager.cpp">
       <Filter>소스 파일</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -125,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="Bush.cpp">
       <Filter>Scripts\Bush</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSound.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,7 +193,7 @@
     </ClInclude>
     <ClInclude Include="FarmerManager.h">
       <Filter>헤더 파일</Filter>
-       </ClInclude>
+    </ClInclude>
     <ClInclude Include="PlayerAnimator.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Bush.h">
       <Filter>Scripts\Bush</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSound.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
