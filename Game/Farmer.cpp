@@ -25,7 +25,7 @@ void Farmer::Start()
 
 	m_animator->AddClip("idle", idle, true);
 	m_animator->AddClip("run", run, true);
-	m_animator->AddClip("attack", attack, false);
+	m_animator->AddClip("attack", attack, true);
 
 	m_animator->SetEntryState("idle");
 	//m_animator->ChangeState("idle");
@@ -91,7 +91,6 @@ void Farmer::DoPatrol(float deltaTime)
         //if (cos(rad) < 0) m_spriteRenderer->SetFlip(true);
         //if (cos(rad) > 0) m_spriteRenderer->SetFlip(false);
 
-        // 5) ¸ñÇ¥ ÁÂÇ¥
         m_patrolTarget = {
             m_initialPosition.x + std::cos(rad) * r,
             m_initialPosition.y + std::sin(rad) * r
@@ -136,10 +135,15 @@ void Farmer::DoChase(float deltaTime)
 
 void Farmer::DoAttack(float deltaTime)
 {
+    if (m_animator->GetCurState() != "attack")
+        m_animator->ChangeState("attack");
 }
 
 void Farmer::ChangeState(FarmerState farmerState)
 {
+    if (m_animator->GetCurState() == "Patrol") {
+        m_hasPatrolTarget = false;
+    }
     m_farmerState = farmerState;
 }
 
@@ -149,6 +153,13 @@ void Farmer::OnTriggerExit(Collider* other)
     if (other->GetOwner()->GetName() == "ChaseArea") {
         ChangeState(FarmerState::Patrol);
         m_isAlreadyExitChaseZone = true;
+        Vector2 pos = m_transform->GetPosition();
+        if (m_transform->GetPosition().x - m_patrolTarget.x > 0) {
+            m_spriteRenderer->SetFlip(true);
+        }
+        else if (m_transform->GetPosition().x - m_patrolTarget.x < 0) {
+            m_spriteRenderer->SetFlip(false);
+        }
     }
 }
 
