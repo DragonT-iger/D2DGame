@@ -102,7 +102,7 @@ void SoundManager::Shutdown()
 	m_coreSystem->release();
 }
 
-void SoundManager::BGM_Shot(const std::string& fileName)
+void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel* pOutChannel)
 {
 	std::cout << fileName << std::endl;
 
@@ -113,37 +113,33 @@ void SoundManager::BGM_Shot(const std::string& fileName)
 	}
 	//fade in,out 만들거여?
 
-	FMOD::Channel* channel = nullptr;
 	auto it = L_BGM.find(fileName);
 
 	std::cout << "it 찾음?: " << it->first << std::endl;
 
 	if (it != L_BGM.end())
 	{
-		m_coreSystem->playSound(it->second, m_bgmGroup, false, &channel);
+		m_coreSystem->playSound(it->second, m_bgmGroup, false, &pOutChannel);
 	}
-
 }
 
-void SoundManager::SFX_Shot(const std::string& fileName)
+void SoundManager::SFX_Shot(const std::string& fileName, FMOD::Channel* pOutChannel)
 {
-	FMOD::Channel* channel = nullptr;
 	auto it = L_SFX.find(fileName);
 
 	if (it != L_SFX.end())
 	{
-		m_coreSystem->playSound(it->second, m_sfxGroup, false, &channel);
+		m_coreSystem->playSound(it->second, m_sfxGroup, false, &pOutChannel);
 	}
 }
 
-void SoundManager::UI_Shot(const std::string& fileName)
+void SoundManager::UI_Shot(const std::string& fileName, FMOD::Channel* pOutChannel)
 {
-	FMOD::Channel* channel = nullptr;
 	auto it = L_UI.find(fileName);
 
 	if (it != L_UI.end())
 	{
-		m_coreSystem->playSound(it->second, m_uiGroup, false, &channel);
+		m_coreSystem->playSound(it->second, m_uiGroup, false, &pOutChannel);
 	}
 }
 

@@ -41,7 +41,7 @@ void SpawnManager::Awake()
 	
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoS.png"));
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoM.png"));
-	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoXL.png"));
+	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoL.png"));
 	//m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoXL.png"));
 
 	m_cropSprites.emplace(Pumpkin, &m_pumpkinSprite);
@@ -147,7 +147,7 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	}
 
 	obj->GetComponent<Transform>()->SetPosition(pos);
-	obj->GetComponent<Transform>()->SetScale({0.5f, 0.5f});
+	obj->GetComponent<Transform>()->SetScale({0.2f, 0.2f});
 
 	return obj;
 }

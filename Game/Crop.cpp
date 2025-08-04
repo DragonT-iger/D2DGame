@@ -34,7 +34,7 @@ void Crop::Update(float deltaTime)
 			m_size = XL;
 			m_elapsedTime = 0.f;
 			m_eftObj->SetActive(true);
-			m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(XL)]);
+			m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(L)]);
 		}
 		else
 			m_elapsedTime += deltaTime;

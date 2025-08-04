@@ -41,6 +41,7 @@ public:
 
 	friend class PlayerController;
 	friend class PlayerAnimator;
+	friend class PlayerSound;
 
 private:
 	int     m_hp			= 3;
