@@ -9,7 +9,8 @@ void Farmer::Awake()
     m_transform = GetComponent<Transform>();
     m_transform->SetScale({ 0.35f, 0.35f });
     m_boxCollider = GetOwner()->AddComponent<BoxCollider>();
-
+    m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
+    this->GetOwner()->SetTag("Farmer");
 }
 
 void Farmer::Start()
@@ -116,17 +117,40 @@ void Farmer::DoPatrol(float deltaTime)
     }
 }
 
-
 void Farmer::DoAlert(float deltaTime)
 {
 }
 
 void Farmer::DoChase(float deltaTime)
 {
+    Vector2 dir = m_player->GetComponent<Transform>()->GetPosition()
+        - m_transform->GetPosition();
+
+    dir.Normalize();
+
+    m_transform->Translate(dir * m_speed * deltaTime);
 }
 
 void Farmer::DoAttack(float deltaTime)
 {
+}
+
+void Farmer::ChangeState(FarmerState farmerState)
+{
+    m_farmerState = farmerState;
+}
+
+void Farmer::OnTriggerEnter(Collider* other)
+{
+    
+}
+
+void Farmer::OnTriggerExit(Collider* other)
+{
+    if (other->GetOwner()->GetName() == "ChaseArea") {
+        ChangeState(FarmerState::Patrol);
+        m_isAlreadyExitChaseZone = true;
+    }
 }
 
 
@@ -154,6 +178,7 @@ void Farmer::OnInspectorGUI()
 
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Bias", &m_patrolBiasExp , 0.1f, 0.1f, 20.0f); // 아 setter getter도 필요없었네 ㅋㅋㅋㅋ
+    ImGui::Checkbox("isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
 }
 
 #endif

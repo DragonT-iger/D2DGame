@@ -83,6 +83,8 @@ void ExampleScene::Awake()
 	m_player2 = Instantiate("Player2");
 	m_player2->SetTag("Player");
 
+	SetPlayer(m_player2);
+
 	m_spriteRenderer = m_player2->AddComponent<SpriteRenderer>();
 	m_player2->AddComponent<Animator>();
 
