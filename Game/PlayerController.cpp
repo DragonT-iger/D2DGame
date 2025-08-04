@@ -33,16 +33,16 @@ void PlayerController::Update(float deltaTime)
 		switch (static_cast<int>(m_Player->action))
 		{
 		case 0:
-			std::cout << "Idle" << std::endl;
+			//std::cout << "Idle" << std::endl;
 			break;
 		case 1:
-			std::cout << "Walk" << std::endl;
+			//std::cout << "Walk" << std::endl;
 			break;
 		case 2:
-			std::cout << "Hit" << std::endl;
+			//std::cout << "Hit" << std::endl;
 			break;
 		case 3:
-			std::cout << "Steal" << std::endl;
+			//std::cout << "Steal" << std::endl;
 			break;
 		}
 

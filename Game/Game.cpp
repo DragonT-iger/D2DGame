@@ -4,6 +4,7 @@
 #include "HSTestScene.h"
 #include "MainScene.h"
 #include "TestTitleScene.h"
+#include "DTtestScene.h"
 
 #ifdef _DEBUG
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -36,6 +37,7 @@ bool Game::Initialize()
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"HSTestScene", std::make_unique<HSTestScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"TestTitleScene", std::make_unique<TitleScene>());
+    SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"DTtestScene", std::make_unique<DTtestScene>());
 
     
     //ImGui √ ±‚»≠
@@ -49,7 +51,8 @@ bool Game::Initialize()
     //SceneManager::Instance().LoadScene(L"MainScene");
     //SceneManager::Instance().LoadScene(L"ExampleScene");
     //SceneManager::Instance().LoadScene(L"HSTestScene");
-    SceneManager::Instance().LoadScene(L"TestTitleScene");
+    //SceneManager::Instance().LoadScene(L"TestTitleScene");
+    SceneManager::Instance().LoadScene(L"DTtestScene");
 
 	return true;
 }

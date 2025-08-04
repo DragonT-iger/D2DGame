@@ -1,18 +1,18 @@
 #pragma once
-class MainScene : public Scene
+class DTtestScene : public Scene
 {
 	void Awake() override;
 	void Start() override;
 
-	Camera*					main_Cam	= nullptr;
+	Camera* main_Cam = nullptr;
 
-	GameObject*				player		= nullptr;
-	Transform*				player_T	= nullptr;
-	SpriteRenderer*			player_S	= nullptr;
+	GameObject* player = nullptr;
+	Transform* player_T = nullptr;
+	SpriteRenderer* player_S = nullptr;
 
-	GameObject*				crop		= nullptr;
-	GameObject*				message		= nullptr;
-	GameObject*				bush = nullptr;
+	GameObject* crop = nullptr;
+	GameObject* message = nullptr;
+	GameObject* bush = nullptr;
 
 
 
