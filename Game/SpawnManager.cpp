@@ -32,14 +32,17 @@ void SpawnManager::Awake()
 	m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinS.png"));
 	m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinM.png"));
 	m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinL.png"));
+	//m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinXL.png"));
 
 	m_eggplantSprite.push_back(ResourceManager::Instance().LoadTexture("eggplantS.png"));
 	m_eggplantSprite.push_back(ResourceManager::Instance().LoadTexture("eggplantM.png"));
 	m_eggplantSprite.push_back(ResourceManager::Instance().LoadTexture("eggplantL.png"));
+	//m_eggplantSprite.push_back(ResourceManager::Instance().LoadTexture("eggplantXL.png"));
 	
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoS.png"));
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoM.png"));
-	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoL.png"));
+	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoXL.png"));
+	//m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoXL.png"));
 
 	m_cropSprites.emplace(Pumpkin, &m_pumpkinSprite);
 	m_cropSprites.emplace(Eggplant, &m_eggplantSprite);

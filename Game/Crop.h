@@ -11,6 +11,7 @@ enum Size {
 	S = 0,
 	M = 1,
 	L = 2,
+	XL = 3,
 };
 
 enum FarmRank
@@ -37,6 +38,7 @@ public:
 	//void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, std::shared_ptr<AnimationClip> clip = nullptr, GameObject* msg);
 	void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, GameObject* eftobj = nullptr);
 protected:
+	float m_growSpeed_S;
 	float m_growSpeed_M;
 	float m_growSpeed_L;
 	float m_elapsedTime = 0.0f;
