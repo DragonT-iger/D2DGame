@@ -123,7 +123,7 @@ void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel** pOutCha
 	}
 }
 
-void SoundManager::SFX_Shot(const std::string& fileName, FMOD::Channel** pOutChannel = nullptr)
+void SoundManager::SFX_Shot(const std::string& fileName, FMOD::Channel** pOutChannel)
 {
 	auto it = L_SFX.find(fileName);
 
