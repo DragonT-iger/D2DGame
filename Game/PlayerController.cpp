@@ -5,38 +5,46 @@
 void PlayerController::Awake()
 {
 	m_Player = GetComponent<Player>();
-	m_transform = GetComponent<Transform>();	
+	m_transform = GetComponent<Transform>();
+	m_animator = GetComponent<Animator>();
+
+	
+
 }
 
 void PlayerController::Start()
 {
+	
 }
 
 void PlayerController::Update(float deltaTime)
 {
+	p_Spd = &(m_Player->m_spd);
+
 	if (m_Player->state == State::Alive)
 	{
 		int x = Input.GetAxisRaw("Horizontal");
 		int y = Input.GetAxisRaw("Vertical");
 		Vector2 dir{ (float)x,(float)y };
 		dir.Normalize();
+		//std::cout << dir.x << ", " << dir.y << std::endl;
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
 		
-
+		std::cout << static_cast<int>(m_Player->action) << std::endl;
 		switch (m_Player->action)
 		{
 		case Action::Idle:
-			if (dir != Vector2{ 0,0 })
+			if (dir != Vector2{ 0.f,0.f })
 			{
-				m_animator->ChangeState("walk");
+				std::cout << "walk·Î ÁøÀÔ" << std::endl;
 				m_Player->action = Action::Walk;
 				break;
 			}
 			else if (m_animator->GetCurState() != "idle")
 			{
-				m_animator->ChangeState("idle");
+				//m_animator->ChangeState("idle");
 				m_Player->action = Action::Idle;
 			}
 			break;
@@ -50,7 +58,7 @@ void PlayerController::Update(float deltaTime)
 		case Action::Hit:
 			if (m_animator->GetCurState() != "hit")
 			{
-				m_animator->ChangeState("hit");
+				//m_animator->ChangeState("hit");
 			}
 			if (m_animator->IsAnimeEnd())
 			{
@@ -60,7 +68,7 @@ void PlayerController::Update(float deltaTime)
 		case Action::Steal:
 			if (m_animator->GetCurState() != "steal")
 			{
-				m_animator->ChangeState("steal");
+				//m_animator->ChangeState("steal");
 			}
 			if (m_animator->IsAnimeEnd())
 			{

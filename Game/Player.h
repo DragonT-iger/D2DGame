@@ -3,7 +3,7 @@
 enum class State
 {
 	Alive,
-	Dead
+	Dead,
 };
 
 enum class Action
@@ -17,13 +17,12 @@ enum class Action
 enum class Visibilty
 {
 	Hide,
-	Visible
+	Visible,
 };
 
 class Player : public MonoBehaviour
 {
 public:
-
 	void Awake()                         override;
 	void Start()                         override;
 	void Update(float deltaTime)         override;

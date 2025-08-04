@@ -58,5 +58,6 @@ void PlayerAnimator::Update(float deltaTime)
 		}
 	case Action::Hit:
 	case Action::Steal:
+		break;
 	}
 }
