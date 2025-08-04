@@ -43,7 +43,7 @@ void PlayerSound::PlayWalk()
 	if (!isPlaying || !m_walkChannel)
 	{
 		size_t index = Random::Instance().Range(0, 4);
-		SoundManager::Instance().SFX_Shot(m_walkSounds[index], m_walkChannel);
+		SoundManager::Instance().SFX_Shot(m_walkSounds[index], &m_walkChannel);
 	}
 	
 }

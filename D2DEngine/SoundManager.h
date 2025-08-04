@@ -9,9 +9,9 @@ public:
 	void Update();
 	void Shutdown();
 
-	void BGM_Shot(const std::string& eventPath, FMOD::Channel* pChannel = nullptr);
-	void SFX_Shot(const std::string& eventPath, FMOD::Channel* pChannel = nullptr);
-	void UI_Shot(const std::string& eventPath, FMOD::Channel* pChannel = nullptr);
+	void BGM_Shot(const std::string& eventPath, FMOD::Channel** pChannel = nullptr);
+	void SFX_Shot(const std::string& eventPath, FMOD::Channel** pChannel = nullptr);
+	void UI_Shot(const std::string& eventPath, FMOD::Channel** pChannel = nullptr);
 
 	void SetVolume_Main(float volume); //other volume = mainV * otherV;
 	void SetVolume_BGM(float volume);
