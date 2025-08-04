@@ -31,8 +31,8 @@ public:
 
 	//AI
 
-    void OnTriggerEnter(Collider* other) override;
     void OnTriggerExit(Collider* other) override;
+
 
 
 
@@ -40,8 +40,9 @@ public:
 
 private:
 
+#ifdef _DEBUG
     void OnInspectorGUI() override;
-
+#endif // _DEBUG
     const char* ToString(FarmerState   s) const;
     
     //component

@@ -129,6 +129,9 @@ void Farmer::DoChase(float deltaTime)
     dir.Normalize();
 
     m_transform->Translate(dir * m_speed * deltaTime);
+
+    if (dir.x < 0) { m_spriteRenderer->SetFlip(true); }
+    if (dir.x > 0) { m_spriteRenderer->SetFlip(false); }
 }
 
 void Farmer::DoAttack(float deltaTime)
@@ -140,10 +143,6 @@ void Farmer::ChangeState(FarmerState farmerState)
     m_farmerState = farmerState;
 }
 
-void Farmer::OnTriggerEnter(Collider* other)
-{
-    
-}
 
 void Farmer::OnTriggerExit(Collider* other)
 {
@@ -197,6 +196,3 @@ void Farmer::OnInspectorGUI()
 }
 
 #endif
-
-
-//void Farmer

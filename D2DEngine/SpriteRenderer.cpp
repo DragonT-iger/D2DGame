@@ -9,6 +9,7 @@ void SpriteRenderer::SetSize(float width, float height)
 	GetComponent<Transform>()->SetSpriteSize(D2D1::SizeF(width, height)); // Transform 에서 스프라이트 크기 설정
 }
 
+#ifdef _DEBUG
 void SpriteRenderer::OnInspectorGUI()
 {
     // ── 텍스처 핸들 ─────────────────────────────────────────────
@@ -48,6 +49,7 @@ void SpriteRenderer::OnInspectorGUI()
     }
 }
 
+#endif
 D2D1_SIZE_F SpriteRenderer::GetSize()
 {
 	float w = m_renderInfo.m_destRect.right - m_renderInfo.m_destRect.left;
