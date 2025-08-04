@@ -38,7 +38,7 @@ public:
 
 
 
-
+    bool m_isAlreadyExitAttackZone = false;
     bool m_isAlreadyExitChaseZone = false;
     bool m_hasPatrolTarget = false;
 

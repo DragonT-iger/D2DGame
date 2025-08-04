@@ -19,7 +19,10 @@ void AttackZone::OnTriggerEnter(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
 		m_farmer->ChangeState(Farmer::FarmerState::Attack);
+		m_farmer->m_isAlreadyExitAttackZone = false;
 	}
+
+	
 }
 
 void AttackZone::OnTriggerExit(Collider* other)
@@ -35,6 +38,7 @@ void AttackZone::OnTriggerExit(Collider* other)
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 		}
 		m_farmer->m_hasPatrolTarget = false;
+		m_farmer->m_isAlreadyExitAttackZone = true;
 	}
 }
 

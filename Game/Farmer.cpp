@@ -167,7 +167,13 @@ void Farmer::DoAttack(float deltaTime)
             }
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
-            ChangeState(FarmerState::Chase);
+            // 안나갔으면 Attack 계속
+            if (m_isAlreadyExitAttackZone == true) {
+                ChangeState(FarmerState::Chase);
+            }
+            else {
+                ChangeState(FarmerState::Attack);
+            }
         }
     }
     
