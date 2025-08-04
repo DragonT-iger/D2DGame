@@ -10,6 +10,7 @@ public:
 	void OnTriggerExit(Collider* other)  override;*/
 
 private:
+	Player* m_Player = nullptr;
 	Animator* m_animator = nullptr;
 	SpriteRenderer* m_spriteRenderer = nullptr;
 };

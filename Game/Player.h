@@ -32,11 +32,16 @@ public:
 	void OnTriggerStay(Collider* other)  override;
 	void OnTriggerExit(Collider* other)  override;
 
-	State* GetState_adr() { return &state; }
-	Action* GetAction_adr() { return &action; }
-	Visibilty* GetVisibilty_adr() { return &visibilty; }
+	//void SetState(State ste);
+	//void SetAction(Action act);
+	//void SetVisible(Visibilty vib);
+	//
+	//State GetState() { return state; }
+	//Action GetAction() { return action; }
+	//Visibilty GetVisible() { return visibilty; }
 
-	float* GetSpd_adr() { return &m_spd; }
+	friend class PlayerController;
+	friend class PlayerAnimator;
 
 private:
 	int     m_hp			= 3;

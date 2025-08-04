@@ -44,3 +44,18 @@ void Player::OnTriggerExit(Collider* other)
 {
 
 }
+
+//void Player::SetState(State ste)
+//{
+//	state = ste;
+//}
+//
+//void Player::SetAction(Action act)
+//{
+//	action = act;
+//}
+//
+//void Player::SetVisible(Visibilty vib)
+//{
+//	visibilty = vib;
+//}

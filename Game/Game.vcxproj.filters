@@ -111,13 +111,11 @@
     <ClCompile Include="StealMessage.cpp">
       <Filter>Scripts\Items</Filter>
     </ClCompile>
-<<<<<<< Updated upstream
     <ClCompile Include="FarmerZone.cpp">
       <Filter>소스 파일</Filter>
-=======
+	</ClCompile>
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>Player</Filter>
->>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,13 +182,11 @@
     <ClInclude Include="StealMessage.h">
       <Filter>Scripts\Items</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="FarmerZone.h">
       <Filter>헤더 파일</Filter>
-=======
+	</ClInclude>
     <ClInclude Include="PlayerAnimator.h">
       <Filter>Player</Filter>
->>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
 </Project>
