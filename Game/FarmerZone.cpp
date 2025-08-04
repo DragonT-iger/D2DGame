@@ -31,6 +31,7 @@ void AttackZone::OnTriggerExit(Collider* other)
 		else {
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 		}
+		m_farmer->m_hasPatrolTarget = false;
 	}
 }
 
@@ -43,6 +44,7 @@ void AlertZone::OnTriggerEnter(Collider* other)
 		else {
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 		}
+		m_farmer->m_hasPatrolTarget = false;
 	}
 }
 

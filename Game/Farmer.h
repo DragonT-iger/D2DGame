@@ -27,7 +27,10 @@ public:
 
     void ChangeState(FarmerState farmerState);
 
+   
+
 	//애니메이션
+
 
 	//AI
 
@@ -37,6 +40,7 @@ public:
 
 
     bool m_isAlreadyExitChaseZone = false;
+    bool m_hasPatrolTarget = false;
 
 private:
 
@@ -59,7 +63,6 @@ private:
 
 
     //patrol
-    bool m_hasPatrolTarget = false;
     Vector2 m_initialPosition;
     Vector2 m_patrolTarget; 
     float   m_patrolBiasExp = 2.f;

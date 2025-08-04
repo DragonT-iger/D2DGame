@@ -19,19 +19,20 @@ void Farmer::Start()
     m_boxCollider->SetOffset({ 4.0f, 0.0f });
     m_boxCollider->SetSize({ 140.0f , 400.0f });
 
-	auto idle = ResourceManager::Instance().LoadAnimationClip("farmertest2.json", "idle");
-	auto run = ResourceManager::Instance().LoadAnimationClip("farmertest2.json", "run");
-	auto attack = ResourceManager::Instance().LoadAnimationClip("farmertest2.json", "attack");
+	auto idle = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "idle");
+    auto angryidle = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "angryidle");
+    auto walk = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "walk");
+    auto angrywalk = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "angrywalk");
+	auto attack = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "attack");
 
-	m_animator->AddClip("idle", idle, true);
-	m_animator->AddClip("run", run, true);
+    m_animator->AddClip("idle", idle, true); 
+    m_animator->AddClip("angryidle", angryidle, true);
+	m_animator->AddClip("walk", walk, true);
+    m_animator->AddClip("angrywalk", angrywalk, true);
 	m_animator->AddClip("attack", attack, true);
+    
 
 	m_animator->SetEntryState("idle");
-	//m_animator->ChangeState("idle");
-	//PickRandomDirection();
-
-
 
     //SetInitalPosition
     m_initialPosition = m_transform->GetPosition();
@@ -88,9 +89,6 @@ void Farmer::DoPatrol(float deltaTime)
 
         float r = m_patrolAreaValue * biased;
 
-        //if (cos(rad) < 0) m_spriteRenderer->SetFlip(true);
-        //if (cos(rad) > 0) m_spriteRenderer->SetFlip(false);
-
         m_patrolTarget = {
             m_initialPosition.x + std::cos(rad) * r,
             m_initialPosition.y + std::sin(rad) * r
@@ -106,8 +104,8 @@ void Farmer::DoPatrol(float deltaTime)
         dir.Normalize();
         m_transform->Translate(dir * m_speed * deltaTime); 
 
-        if(m_animator->GetCurState() != "run")
-            m_animator->ChangeState("run");
+        if(m_animator->GetCurState() != "walk")
+            m_animator->ChangeState("walk");
     }
     else
     {
@@ -122,6 +120,10 @@ void Farmer::DoAlert(float deltaTime)
 
 void Farmer::DoChase(float deltaTime)
 {
+
+    if (m_animator->GetCurState() != "angrywalk")
+        m_animator->ChangeState("angrywalk");
+
     Vector2 dir = m_player->GetComponent<Transform>()->GetPosition()
         - m_transform->GetPosition();
 
@@ -135,17 +137,26 @@ void Farmer::DoChase(float deltaTime)
 
 void Farmer::DoAttack(float deltaTime)
 {
-    if (m_animator->GetCurState() != "attack")
+    if (m_animator->GetCurState() != "attack") {
         m_animator->ChangeState("attack");
+    }
+    if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
+        m_spriteRenderer->SetFlip(false);
+    }
+    else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
+        m_spriteRenderer->SetFlip(true);
+    }
+    
 }
 
 void Farmer::ChangeState(FarmerState farmerState)
 {
-    if (m_animator->GetCurState() == "Patrol") {
+    if (m_animator->GetCurState() == "patrol") {
         m_hasPatrolTarget = false;
     }
     m_farmerState = farmerState;
 }
+
 
 
 void Farmer::OnTriggerExit(Collider* other)
@@ -189,6 +200,10 @@ void Farmer::OnInspectorGUI()
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
     //ImGui::Checkbox("Already Exit Chase?", &m_isAlreadyExitChaseZone);
+
+    //m_hasPatrolTarget
+
+    //ImGui::Checkbox("hasPatrolTarget", &m_hasPatrolTarget);
 
     bool areaChanged = false;
 
