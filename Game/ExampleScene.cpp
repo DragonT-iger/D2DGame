@@ -8,6 +8,7 @@
 #include "GameObjectFindTest.h"
 #include "SpawnManager.h"
 #include "Farmer.h"
+#include "FarmerManager.h"
 
 void ExampleScene::Awake()
 {
@@ -100,8 +101,8 @@ void ExampleScene::Awake()
 	pc->m_ySpeed = 350.f;
 
 
-	m_farmer = Instantiate("Farmer");
-	m_farmer->AddComponent<Farmer>();
+	m_farmerManager = Instantiate("FarmerManager");
+	m_farmerManager->AddComponent<FarmerManager>();
 
 	
 	// ?¼ë‹¨?€ Awake?ì„œ ?¬ì„ ì´ˆê¸°?”í•˜??ê±¸ë¡œ

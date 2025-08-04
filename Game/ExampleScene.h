@@ -5,7 +5,7 @@ class ExampleScene : public Scene
 	void Start() override;
 
 
-	GameObject* m_farmer = nullptr;
+	GameObject* m_farmerManager = nullptr;
 
 	Transform* m_playerTransform = nullptr;
 	SpriteRenderer* m_spriteRenderer = nullptr;
