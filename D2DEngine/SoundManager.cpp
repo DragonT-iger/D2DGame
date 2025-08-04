@@ -102,7 +102,7 @@ void SoundManager::Shutdown()
 	m_coreSystem->release();
 }
 
-void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel* pOutChannel)
+void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel** pOutChannel)
 {
 	std::cout << fileName << std::endl;
 
@@ -119,27 +119,27 @@ void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel* pOutChan
 
 	if (it != L_BGM.end())
 	{
-		m_coreSystem->playSound(it->second, m_bgmGroup, false, &pOutChannel);
+		m_coreSystem->playSound(it->second, m_bgmGroup, false, pOutChannel);
 	}
 }
 
-void SoundManager::SFX_Shot(const std::string& fileName, FMOD::Channel* pOutChannel)
+void SoundManager::SFX_Shot(const std::string& fileName, FMOD::Channel** pOutChannel)
 {
 	auto it = L_SFX.find(fileName);
 
 	if (it != L_SFX.end())
 	{
-		m_coreSystem->playSound(it->second, m_sfxGroup, false, &pOutChannel);
+		m_coreSystem->playSound(it->second, m_sfxGroup, false, pOutChannel);
 	}
 }
 
-void SoundManager::UI_Shot(const std::string& fileName, FMOD::Channel* pOutChannel)
+void SoundManager::UI_Shot(const std::string& fileName, FMOD::Channel** pOutChannel)
 {
 	auto it = L_UI.find(fileName);
 
 	if (it != L_UI.end())
 	{
-		m_coreSystem->playSound(it->second, m_uiGroup, false, &pOutChannel);
+		m_coreSystem->playSound(it->second, m_uiGroup, false, pOutChannel);
 	}
 }
 

@@ -38,7 +38,7 @@ public:
 
 
 
-
+    bool m_isAlreadyExitAttackZone = false;
     bool m_isAlreadyExitChaseZone = false;
     bool m_hasPatrolTarget = false;
 
@@ -56,7 +56,7 @@ private:
     BoxCollider* m_boxCollider = nullptr;
 
     Vector2 m_direction = Vector2::zero;
-    float   m_speed = 100.f;
+    float   m_speed = 200.f;
 
 
     GameObject* m_player;
@@ -76,5 +76,9 @@ private:
     GameObject* alertObject;   float m_alertAreaValue = 300.0f;
     GameObject* attackObject;  float m_attackAreaValue = 200.0f;
 
+
+    GameObject* m_attackIndicator = nullptr;
+    float       m_attackDelay = 1.5f;
+    float       m_attackTimer = 0.0f;
 };
 

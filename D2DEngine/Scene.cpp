@@ -133,7 +133,10 @@ void Scene::LateUpdate(float deltaTime)
 void Scene::Render()
 {
 
-	//if (!m_active) return;
+    //if (!m_active) return;
+
+    FlushPending();
+
 	m_phase = ScenePhase::Render;
     SetRenderQ();
 
@@ -225,7 +228,9 @@ void Scene::Render()
     D2DRenderer::Instance().SetTransform(D2D1::Matrix3x2F::Identity());
     for (auto& info : m_UIRenderQ)
     {
-        D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
+        if (info.m_bitmap.Get() != nullptr) {
+            D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
+        }
     }
 
     std::wstring fps = L"fps : " + std::to_wstring(m_fps) + L" / " + std::to_wstring(static_cast<int>(m_deltatime));

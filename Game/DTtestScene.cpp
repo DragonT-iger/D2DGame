@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "MainScene.h"
+#include "DTtestScene.h"
 #include "Player.h"
 #include "PlayerAnimator.h"
 #include "PlayerController.h"
@@ -10,14 +10,13 @@
 #include "InventorySlot.h"
 #include "Inventory.h"
 #include "SpawnManager.h"
-#include "PlayerSound.h"
 
-void MainScene::Awake()
+void DTtestScene::Awake()
 {
 	if (!IsActive())
 		return;
 
-//begin player-----
+	//begin player-----
 	player = Instantiate("Player");
 	auto playerSR = player->AddComponent<SpriteRenderer>();
 	player->AddComponent<BoxCollider>();
@@ -26,53 +25,53 @@ void MainScene::Awake()
 	player->AddComponent<Player>();
 	player->AddComponent<PlayerAnimator>();
 	player->AddComponent<PlayerController>();
-	player->AddComponent<PlayerSound>();
+	player->GetComponent<Transform>()->SetScale({0.35f, 0.35f});
 
 	playerSR->SetOrderInLayer(1);
-	
-//end player-----
+
+	//end player-----
 
 
-////begin crop-----
-//	crop = Instantiate("Crop");
-//	crop->SetTag("crop");
-//
-//	crop->AddComponent<SpriteRenderer>();
-//	crop->AddComponent<BoxCollider>();
-//	crop->AddComponent<Animator>();
-//	auto crop_scripts	= crop->AddComponent<Crop>();
-//
-//	crop->GetComponent<Transform>()->SetPosition(Vector2{0,0});
-//	crop->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
-//
-//	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> cropbit = {
-//		ResourceManager::Instance().LoadTexture("potatoL.png"),
-//		ResourceManager::Instance().LoadTexture("potatoL.png"),
-//		ResourceManager::Instance().LoadTexture("potatoL.png")
-//	};
-//
-//	crop_scripts->SetCropData((FarmRank)0, (Crops)1, cropbit);
-//
-////end crop------
+	////begin crop-----
+	//	crop = Instantiate("Crop");
+	//	crop->SetTag("crop");
+	//
+	//	crop->AddComponent<SpriteRenderer>();
+	//	crop->AddComponent<BoxCollider>();
+	//	crop->AddComponent<Animator>();
+	//	auto crop_scripts	= crop->AddComponent<Crop>();
+	//
+	//	crop->GetComponent<Transform>()->SetPosition(Vector2{0,0});
+	//	crop->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
+	//
+	//	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> cropbit = {
+	//		ResourceManager::Instance().LoadTexture("potatoL.png"),
+	//		ResourceManager::Instance().LoadTexture("potatoL.png"),
+	//		ResourceManager::Instance().LoadTexture("potatoL.png")
+	//	};
+	//
+	//	crop_scripts->SetCropData((FarmRank)0, (Crops)1, cropbit);
+	//
+	////end crop------
 
-//begin message-----
+	//begin message-----
 
-	/*message = Instantiate("steal_message");
+		/*message = Instantiate("steal_message");
 
-	auto message_render = message->AddComponent<SpriteRenderer>();
-	message->GetComponent<Transform>()->SetParent(crop->GetComponent<Transform>());
+		auto message_render = message->AddComponent<SpriteRenderer>();
+		message->GetComponent<Transform>()->SetParent(crop->GetComponent<Transform>());
 
-	message->GetComponent<Transform>()->SetPosition(Vector2{ 0,250 });
-	message->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
+		message->GetComponent<Transform>()->SetPosition(Vector2{ 0,250 });
+		message->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
 
-	message_render->SetBitmap(ResourceManager::Instance().LoadTexture("steal_message.png"));
+		message_render->SetBitmap(ResourceManager::Instance().LoadTexture("steal_message.png"));
 
-	message->SetActive(false);*/
-	
+		message->SetActive(false);*/
 
-//end message-----
 
-//begin Bush
+		//end message-----
+
+		//begin Bush
 
 	bush = Instantiate("Bush");
 	bush->AddComponent<Bush>();
@@ -80,14 +79,14 @@ void MainScene::Awake()
 	bush->AddComponent<BoxCollider>();
 	bush->GetComponent<Transform>()->SetPosition(Vector2{ -100,0 });
 
-//end Bush
+	//end Bush
 
 
 
 
-	//Farmer
+		//Farmer
 
-	//m_player2 = Instantiate("Player2");
+		//m_player2 = Instantiate("Player2");
 	player->SetTag("Player"); //<<- 이거 해주고
 
 	SetPlayer(player); //<-- 씬에 정보 알려주고
@@ -95,7 +94,6 @@ void MainScene::Awake()
 
 	m_farmerManager = Instantiate("FarmerManager");
 	m_farmerManager->AddComponent<FarmerManager>();
-
 
 #pragma region SpawnManager,Inventory
 
@@ -140,7 +138,7 @@ void MainScene::Awake()
 	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
 
 	SoundManager::Instance().Init();
-	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
+	SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
 	m_background = Instantiate("background");
 
@@ -155,7 +153,7 @@ void MainScene::Awake()
 	Scene::Awake();
 }
 
-void MainScene::Start()
+void DTtestScene::Start()
 {
 	if (!IsActive())
 		return;
