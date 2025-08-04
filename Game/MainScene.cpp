@@ -6,6 +6,10 @@
 #include "CinemachineCamera.h"
 #include "Crop.h"
 #include "Bush.h"
+#include "FarmerManager.h"
+#include "InventorySlot.h"
+#include "Inventory.h"
+#include "SpawnManager.h"
 
 void MainScene::Awake()
 {
@@ -14,13 +18,15 @@ void MainScene::Awake()
 
 //begin player-----
 	player = Instantiate("Player");
-	player->AddComponent<SpriteRenderer>();
+	auto playerSR = player->AddComponent<SpriteRenderer>();
 	player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
 
 	player->AddComponent<Player>();
 	player->AddComponent<PlayerAnimator>();
 	player->AddComponent<PlayerController>();
+
+	playerSR->SetOrderInLayer(1);
 	
 //end player-----
 
@@ -73,6 +79,75 @@ void MainScene::Awake()
 	bush->GetComponent<Transform>()->SetPosition(Vector2{ -100,0 });
 
 //end Bush
+
+
+
+
+	//Farmer
+
+	//m_player2 = Instantiate("Player2");
+	player->SetTag("Player"); //<<- 이거 해주고
+
+	SetPlayer(player); //<-- 씬에 정보 알려주고
+
+
+	m_farmerManager = Instantiate("FarmerManager");
+	m_farmerManager->AddComponent<FarmerManager>();
+
+#pragma region SpawnManager,Inventory
+
+
+	m_SpawnManager = Instantiate("SpawnManager");
+
+	m_SpawnManager->AddComponent<SpawnManager>();
+
+	m_inventory = Instantiate("Inventory");
+	m_inventory->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventoryBG.png"), { 1200, 300 });
+	m_inventory->AddComponent<Inventory>();
+	m_inventory->GetComponent<Transform>()->SetPosition({ 960, 930 });
+
+	m_slot1BG = Instantiate("Slot1BG");
+	m_slot1BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventorySlot.png"), { 350, 250 });
+	m_slot1BG->GetComponent<Transform>()->SetPosition({ 550, 930 });
+
+	m_slot2BG = Instantiate("Slot2BG");
+	m_slot2BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventorySlot.png"), { 350, 250 });
+	m_slot2BG->GetComponent<Transform>()->SetPosition({ 950, 930 });
+
+	m_slot3BG = Instantiate("Slot3BG");
+	m_slot3BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventorySlot.png"), { 350, 250 });
+	m_slot3BG->GetComponent<Transform>()->SetPosition({ 1350, 930 });
+
+	m_slot1 = Instantiate("Slot1");
+	m_slot1->AddComponent<Image>();
+	m_slot1->AddComponent<Slot>();
+	m_slot1->GetComponent<Transform>()->SetPosition({ 550, 930 });
+	m_slot1->GetComponent<Transform>()->SetParent(m_slot1BG->GetComponent<Transform>());
+
+	m_slot2 = Instantiate("Slot2");
+	m_slot2->AddComponent<Image>();
+	m_slot2->AddComponent<Slot>();
+	m_slot2->GetComponent<Transform>()->SetPosition({ 950, 930 });
+	m_slot2->GetComponent<Transform>()->SetParent(m_slot2BG->GetComponent<Transform>());
+
+	m_slot3 = Instantiate("Slot3");
+	m_slot3->AddComponent<Image>();
+	m_slot3->AddComponent<Slot>();
+	m_slot3->GetComponent<Transform>()->SetPosition({ 1350, 930 });
+	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
+
+	SoundManager::Instance().Init();
+	SoundManager::Instance().BGM_Shot("sample_ten.wav");
+
+	m_background = Instantiate("background");
+
+	auto sr = m_background->AddComponent<SpriteRenderer>();
+
+	sr->SetBitmap(ResourceManager::Instance().LoadTexture("Test_back_02.png"));
+	sr->SetOrderInLayer(-2);
+
+	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
+#pragma endregion
 
 	Scene::Awake();
 }
