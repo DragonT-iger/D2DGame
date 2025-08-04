@@ -17,13 +17,23 @@ void Player::Awake()
 
 }
 
+void Player::Start()
+{
+
+}
+
+void Player::Update(float deltaTime)
+{
+
+}
+
 void Player::OnTriggerEnter(Collider* other)
 {
 }
 
 void Player::OnTriggerStay(Collider* other)
 {
-	if (m_hp > 0)
+	/*if (m_hp > 0)
 	{
 		invincible_Count++;
 
@@ -36,7 +46,7 @@ void Player::OnTriggerStay(Collider* other)
 	else
 	{
 		state = State::Dead;
-	}
+	}*/
 	
 }
 

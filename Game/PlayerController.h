@@ -1,4 +1,7 @@
 #pragma once
+
+class Player;
+
 class PlayerController : public MonoBehaviour
 {
 public:
@@ -10,11 +13,11 @@ public:
 	//void OnTriggerEnter(Collider* other) override;
 	void OnTriggerStay(Collider* other)  override;
 	//void OnTriggerExit(Collider* other)  override;
-
 private:
 
 	Player* m_Player = nullptr;
 	Transform* m_transform = nullptr;
+	Animator* m_animator = nullptr;
 
 	float* p_Spd = nullptr;
 };
