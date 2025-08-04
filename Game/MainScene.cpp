@@ -10,6 +10,7 @@
 #include "InventorySlot.h"
 #include "Inventory.h"
 #include "SpawnManager.h"
+#include "PlayerSound.h"
 
 void MainScene::Awake()
 {
@@ -25,6 +26,7 @@ void MainScene::Awake()
 	player->AddComponent<Player>();
 	player->AddComponent<PlayerAnimator>();
 	player->AddComponent<PlayerController>();
+	player->AddComponent<PlayerSound>();
 
 	playerSR->SetOrderInLayer(1);
 	
@@ -94,6 +96,7 @@ void MainScene::Awake()
 	m_farmerManager = Instantiate("FarmerManager");
 	m_farmerManager->AddComponent<FarmerManager>();
 
+
 #pragma region SpawnManager,Inventory
 
 
@@ -137,7 +140,7 @@ void MainScene::Awake()
 	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
 
 	SoundManager::Instance().Init();
-	SoundManager::Instance().BGM_Shot("sample_ten.wav");
+	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
 	m_background = Instantiate("background");
 
