@@ -146,13 +146,47 @@ void Farmer::DoAttack(float deltaTime)
     else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
         m_spriteRenderer->SetFlip(true);
     }
+
+    if (m_attackIndicator == nullptr) {
+        m_attackIndicator = Instantiate("AttackIndicator");
+        auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
+        indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
+        indicatorTransform->SetScale({ 1.f, 1.f });
+        auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
+        sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
+        m_attackTimer = 0.f;
+    }
+    else {
+        m_attackTimer += deltaTime;
+        if (m_attackTimer >= m_attackDelay) {
+            Vector2 playerPos = m_player->GetComponent<Transform>()->GetPosition();
+            Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
+            Vector2 diff = playerPos - center;
+            if (diff.SqrMagnitude() <= m_attackAreaValue * m_attackAreaValue) {
+                // TODO: apply damage to player
+            }
+            Destroy(m_attackIndicator);
+            m_attackIndicator = nullptr;
+            ChangeState(FarmerState::Chase);
+        }
+    }
     
 }
 
 void Farmer::ChangeState(FarmerState farmerState)
 {
+    if (m_farmerState == FarmerState::Attack && farmerState != FarmerState::Attack) {
+        if (m_attackIndicator) {
+            Destroy(m_attackIndicator);
+            m_attackIndicator = nullptr;
+        }
+    }
     if (m_animator->GetCurState() == "patrol") {
         m_hasPatrolTarget = false;
+    }
+    if (farmerState == FarmerState::Attack) {
+        m_attackTimer = 0.f;
+        m_attackIndicator = nullptr;
     }
     m_farmerState = farmerState;
 }
@@ -161,7 +195,7 @@ void Farmer::ChangeState(FarmerState farmerState)
 
 void Farmer::OnTriggerExit(Collider* other)
 {
-    if (other->GetOwner()->GetName() == "ChaseArea") {
+    if (other->GetOwner() == chaseObject) {
         ChangeState(FarmerState::Patrol);
         m_isAlreadyExitChaseZone = true;
         Vector2 pos = m_transform->GetPosition();
