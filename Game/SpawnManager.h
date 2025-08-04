@@ -17,7 +17,7 @@ private:
 	Vector2 CreateSpawnPoint(const RECT& outRect, const RECT& inRect, FarmRank rank);
 	Crops SetCropType(FarmRank rank);
 
-	void SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* msg);
+	void SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* eftObj);
 
 	struct FarmData {
 		FarmRank rank;
@@ -40,9 +40,13 @@ private:
 	RECT						   farm_C;
 	RECT							 Home;
 
+	std::shared_ptr<AnimationClip> m_effectSprite;
+
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_pumpkinSprite;
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_eggplantSprite;
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_potatoSprite;
+
+	std::unordered_map<Crops, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>*> m_cropSprites;
 
 	Scene* curScene;
 };

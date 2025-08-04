@@ -27,6 +27,8 @@ void SpawnManager::Awake()
 	m_farmCList.reserve(10);
 
 	//농작물 스프라이트 설정
+	m_effectSprite = ResourceManager::Instance().LoadAnimationClip("crop_sparkle.json", "sparkle");
+
 	m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinS.png"));
 	m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinM.png"));
 	m_pumpkinSprite.push_back(ResourceManager::Instance().LoadTexture("pumpkinL.png"));
@@ -38,6 +40,10 @@ void SpawnManager::Awake()
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoS.png"));
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoM.png"));
 	m_potatoSprite.push_back(ResourceManager::Instance().LoadTexture("potatoL.png"));
+
+	m_cropSprites.emplace(Pumpkin, &m_pumpkinSprite);
+	m_cropSprites.emplace(Eggplant, &m_eggplantSprite);
+	m_cropSprites.emplace(Potato, &m_potatoSprite);
 }
 
 void SpawnManager::Update(float deltaTime)
@@ -106,17 +112,21 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	obj->SetTag("crop");
 
 	auto sr = obj->AddComponent<SpriteRenderer>();
-	auto anim = obj->AddComponent<Animator>();
 	auto box = obj->AddComponent<BoxCollider>();
 	auto crop = obj->AddComponent<Crop>();
-	/*auto msg = obj->AddComponent<StealMessage>();
 
-
-	msg->GetComponent<Transform>()->SetParent(obj->GetComponent<Transform>());
-	msg->GetComponent<Transform>()->SetPosition({ 0,250 });
-	msg->SetActive(false);*/
+	GameObject* eftObj = Instantiate("effect");
+	eftObj->SetActive(false);
+	auto eft_sr = eftObj->AddComponent<SpriteRenderer>();
+	auto eft_anim = eftObj->AddComponent<Animator>();
+	eft_anim->AddClip("effect", m_effectSprite, true);
 	
+	eftObj->GetComponent<Transform>()->SetParent(obj->GetComponent<Transform>());
+	eftObj->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
+
 	Crops type = SetCropType(rank);
+
+	SetCropData(crop, type, rank, eftObj);
 
 	switch (rank)
 	{
@@ -133,7 +143,6 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 		break;
 	}
 
-	//SetCropData(crop, type, rank); 이거 머지안돼서 내가 주석했음 - 권 
 	obj->GetComponent<Transform>()->SetPosition(pos);
 	obj->GetComponent<Transform>()->SetScale({0.5f, 0.5f});
 
@@ -221,29 +230,10 @@ Crops SpawnManager::SetCropType(FarmRank rank)
 	return  crop;
 }
 
-void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* msg)
+void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* eftObj)
 {
-	switch (type)
-	{
-	case Pumpkin:
-		if(rank == Rank_C)
-			obj->SetCropData(rank, type, m_pumpkinSprite, nullptr, msg);
-		else
-			obj->SetCropData(rank, type, m_pumpkinSprite, nullptr, msg);		//3단계 애니메이션 나오면 추가
-		break;
-	case Eggplant:
-		if (rank == Rank_C)
-			obj->SetCropData(rank, type, m_eggplantSprite, nullptr, msg);
-		else
-			obj->SetCropData(rank, type, m_eggplantSprite, nullptr, msg);
-		break;
-	case Potato:
-		if(rank == Rank_C)
-			obj->SetCropData(rank, type, m_potatoSprite, nullptr, msg);
-		else
-			obj->SetCropData(rank, type, m_potatoSprite, nullptr, msg);
-		break;
-	default:
-		break;
-	}
+	if (rank == Rank_C)
+		obj->SetCropData(rank, type, *m_cropSprites.at(type), nullptr);
+	else
+		obj->SetCropData(rank, type, *m_cropSprites.at(type), eftObj);		//3단계 애니메이션 나오면 추가
 }
