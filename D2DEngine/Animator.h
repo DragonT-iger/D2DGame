@@ -15,7 +15,7 @@ public:
 
 	virtual void Update(float deltaTime) override;
 
-	void AddClip(const std::string& name, std::shared_ptr<AnimationClip> clip, bool loop = false);
+	void AddClip(const std::string& name, std::shared_ptr<AnimationClip> clip, bool loop = true);
 
 	void ChangeState(const std::string& name);
 

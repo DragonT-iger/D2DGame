@@ -1,0 +1,12 @@
+#pragma once
+
+class TitleScene : public Scene {
+public:
+	void Awake() override;
+
+	void Start() override;
+
+private:
+	GameObject* m_startButton;
+
+};

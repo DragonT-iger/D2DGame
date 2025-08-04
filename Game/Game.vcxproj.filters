@@ -66,12 +66,6 @@
     <ClCompile Include="PlayerController_Sample.cpp">
       <Filter>SampleFile</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Crop.cpp">
       <Filter>Scripts\Items</Filter>
     </ClCompile>
@@ -116,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="FarmerManager.cpp">
       <Filter>소스 파일</Filter>
+      </ClCompile>
+    <ClCompile Include="PlayerAnimator.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestTitleScene.cpp">
+      <Filter>TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButton.cpp">
+      <Filter>Scripts\ButtonTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,12 +138,6 @@
       <Filter>SampleFile</Filter>
     </ClInclude>
     <ClInclude Include="CinemachineCamera.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Crop.h">
@@ -187,6 +184,15 @@
     </ClInclude>
     <ClInclude Include="FarmerManager.h">
       <Filter>헤더 파일</Filter>
+       </ClInclude>
+    <ClInclude Include="PlayerAnimator.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TestTitleScene.h">
+      <Filter>TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButton.h">
+      <Filter>Scripts\ButtonTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

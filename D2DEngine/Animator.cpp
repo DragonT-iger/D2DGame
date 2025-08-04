@@ -45,6 +45,7 @@ void Animator::ChangeState(const std::string& name)
 		throw std::runtime_error("Animator::ChangeState: Animation clip not found: " + name);
 	}
 #endif
+	if (!m_sRenderer) m_sRenderer = GetOwner()->GetComponent<SpriteRenderer>();
 	m_curClip = m_animations.at(name);
 	m_curState = name;
 	m_sRenderer->SetBitmap(m_curClip->GetBitmap());
