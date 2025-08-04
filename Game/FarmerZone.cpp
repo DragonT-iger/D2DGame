@@ -25,6 +25,9 @@ void AttackZone::OnTriggerEnter(Collider* other)
 void AttackZone::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
+		if (m_farmer->m_farmerState == Farmer::FarmerState::Attack) {
+			return;
+		}
 		if (m_farmer->m_isAlreadyExitChaseZone == false) {
 			m_farmer->ChangeState(Farmer::FarmerState::Chase);
 		}
