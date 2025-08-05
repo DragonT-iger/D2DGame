@@ -12,6 +12,8 @@ void PlayerSound::Awake()
 	m_walkSounds.push_back("farmer_Footstep3.mp3");
 	m_walkSounds.push_back("farmer_Footstep4.mp3");
 	m_walkSounds.push_back("farmer_Footstep5.mp3");
+
+	m_walkChannel = nullptr;
 }
 
 void PlayerSound::Start()
@@ -43,15 +45,21 @@ void PlayerSound::PlayWalk()
 {
 	if (m_walkChannel)
 	{
-		m_walkChannel->isPlaying(&isPlaying);
-		std::cout << "IsPlaying" << isPlaying << std::endl;
-		return;
+		bool isPlaying;
+		FMOD_RESULT result = m_walkChannel->isPlaying(&isPlaying);
+		if (result != FMOD_OK || isPlaying)
+		{
+			if(result != FMOD_OK)
+				std::cerr << "FMOD ÅÍÁü" << isPlaying << std::endl;
+			return;
+		}
+		else
+		{
+			m_walkChannel = nullptr;
+		}
 	}
 
-	if (!isPlaying || !m_walkChannel)
-	{
-		std::cout << "·£´ý Àç»ý"  << std::endl;
-		size_t index = Random::Instance().Range(0, 4);
-		SoundManager::Instance().SFX_Shot(m_walkSounds[index], &m_walkChannel);
-	}
+	size_t index = Random::Instance().Range(0, 4);
+	std::cout << "·£´ý Àç»ý : " << index << std::endl;
+	SoundManager::Instance().SFX_Shot(m_walkSounds[index], &m_walkChannel);
 }

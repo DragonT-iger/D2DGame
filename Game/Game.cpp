@@ -48,11 +48,11 @@ bool Game::Initialize()
 #endif
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
-    //SceneManager::Instance().LoadScene(L"MainScene");
+    SceneManager::Instance().LoadScene(L"MainScene");
     //SceneManager::Instance().LoadScene(L"ExampleScene");
     //SceneManager::Instance().LoadScene(L"HSTestScene");
     //SceneManager::Instance().LoadScene(L"TestTitleScene");
-    SceneManager::Instance().LoadScene(L"DTtestScene");
+    //SceneManager::Instance().LoadScene(L"DTtestScene");
 
 	return true;
 }

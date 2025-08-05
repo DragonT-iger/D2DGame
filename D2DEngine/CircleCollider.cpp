@@ -7,7 +7,7 @@ void CircleCollider::Awake()
 
 	if (auto sr = GetComponent<SpriteRenderer>())
 	{
-		m_radius = sr->GetSize().width;
+		m_radius = sr->GetSize().width / 2;
 	}
 }
 
