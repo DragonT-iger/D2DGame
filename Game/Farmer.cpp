@@ -75,7 +75,6 @@ void Farmer::Update(float deltaTime)
 void Farmer::DoPatrol(float deltaTime)
 {
     Vector2 cur = m_transform->GetPosition();
-
     // 목표를 아직 못 잡았거나, 거의 도달했으면 새 목표 생성
     if (!m_hasPatrolTarget || (m_patrolTarget - cur).SqrMagnitude() < 4.f)
     {
@@ -93,9 +92,13 @@ void Farmer::DoPatrol(float deltaTime)
             m_initialPosition.x + std::cos(rad) * r,
             m_initialPosition.y + std::sin(rad) * r
         };
-        if (m_patrolTarget.x - cur.x > 0) m_spriteRenderer->SetFlip(false);
-        if (m_patrolTarget.x - cur.x < 0) m_spriteRenderer->SetFlip(true);
+        /*if (m_patrolTarget.x - cur.x > 0) m_spriteRenderer->SetFlip(false);
+        if (m_patrolTarget.x - cur.x < 0) m_spriteRenderer->SetFlip(true);*/
     }
+
+
+    if (m_patrolTarget.x - cur.x > 0) m_spriteRenderer->SetFlip(false);
+    if (m_patrolTarget.x - cur.x < 0) m_spriteRenderer->SetFlip(true);
 
     /* ---- 이동 ---- */
     Vector2 dir = m_patrolTarget - cur;
@@ -137,8 +140,8 @@ void Farmer::DoChase(float deltaTime)
 
 void Farmer::DoAttack(float deltaTime)
 {
-    if (m_animator->GetCurState() != "attack") {
-        m_animator->ChangeState("attack");
+    if (m_animator->GetCurState() != "angryidle") {
+        m_animator->ChangeState("angryidle");
     }
     if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
         m_spriteRenderer->SetFlip(false);
@@ -153,9 +156,13 @@ void Farmer::DoAttack(float deltaTime)
         indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
         indicatorTransform->SetScale({ 1.f, 1.f });
         auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
-        m_attackIndicator->AddComponent<CircleCollider>();
         sr->SetOpacity(0.1f);
         sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
+
+        m_attackIndicator->AddComponent<CircleCollider>();
+        auto zone = m_attackIndicator->AddComponent<AttackIndicatorZone>();
+        zone->Initialize(this);
+
         m_attackTimer = 0.f;
     }
     else {
@@ -164,7 +171,7 @@ void Farmer::DoAttack(float deltaTime)
             Vector2 playerPos = m_player->GetComponent<Transform>()->GetPosition();
             Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
             Vector2 diff = playerPos - center;
-            if (diff.SqrMagnitude() <= m_attackAreaValue *  4.0f * m_attackAreaValue) {
+            if (diff.SqrMagnitude() <= m_attackAreaValue * m_attackAreaValue) {
                 // TODO: apply damage to player
             }
             Destroy(m_attackIndicator);
@@ -243,8 +250,8 @@ void Farmer::OnInspectorGUI()
 
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
-    //ImGui::Checkbox("Already Exit Chase?", &m_isAlreadyExitChaseZone);
-
+    ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
+    ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
     //m_hasPatrolTarget
 
     //ImGui::Checkbox("hasPatrolTarget", &m_hasPatrolTarget);

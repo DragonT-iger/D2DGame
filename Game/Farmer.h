@@ -17,7 +17,6 @@ public:
         Chase,
         Attack
     };
-    FarmerState m_farmerState = FarmerState::Patrol;
     //void PickRandomDirection();
 
     void DoPatrol(float deltaTime);
@@ -30,6 +29,7 @@ public:
    
 
 	//애니메이션
+    FarmerState GetFarmerState() { return m_farmerState; }
 
 
 	//AI
@@ -38,12 +38,13 @@ public:
 
 
 
-    bool m_isAlreadyExitAttackZone = false;
-    bool m_isAlreadyExitChaseZone = false;
+    bool m_isAlreadyExitAttackZone = true;
+    bool m_isAlreadyExitChaseZone = true;
     bool m_hasPatrolTarget = false;
 
 private:
 
+    FarmerState m_farmerState = FarmerState::Patrol;
 #ifdef _DEBUG
     void OnInspectorGUI() override;
 #endif // _DEBUG
@@ -73,7 +74,7 @@ private:
 
     GameObject* patrolObject;  float m_patrolAreaValue = 350.0f;
     GameObject* chaseObject;  float m_chaseAreaValue = 650.0f;
-    GameObject* alertObject;   float m_alertAreaValue = 300.0f;
+    GameObject* alertObject;   float m_alertAreaValue = 450.0f;
     GameObject* attackObject;  float m_attackAreaValue = 200.0f;
 
 
