@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "D2DRenderer.h"
-
+#include <fstream>
 
 void D2DRenderer::Initialize(HWND hwnd)
 {
@@ -153,27 +153,35 @@ void D2DRenderer::DrawMessage(const wchar_t* text, const D2D1_RECT_F& layoutRect
 
 void D2DRenderer::RegisterFont(const std::filesystem::path& path, const std::wstring& fontname)
 {
-     int n = AddFontResourceEx(path.c_str(), FR_PRIVATE, 0);
 
-     std::cout << "현재 등록된 폰트 개수 : " << n << std::endl;
+    std::ifstream file(path, std::ios::binary | std::ios::ate);
+    if (!file)
+    {
+        std::wcerr << L"fail to open font file : " << path << std::endl;
+        return;
+    }
 
-    HRESULT r = m_writeFactory->CreateTextFormat(
-        fontname.c_str(),
-        nullptr,
-        DWRITE_FONT_WEIGHT_NORMAL,
-        DWRITE_FONT_STYLE_NORMAL,
-        DWRITE_FONT_STRETCH_NORMAL,
-        24.0f,
-        L"ko-kr",
-        m_textFormat.GetAddressOf()
-    );
+    std::streamsize size = file.tellg();
+    file.seekg(0, std::ios::beg);
 
-	if (FAILED(r))
-	{
-		std::cerr << "fail to Load Font2 : " << std::endl;
-	}
+    auto buffer = std::make_unique<BYTE[]>(static_cast<size_t>(size));
+    if (!file.read(reinterpret_cast<char*>(buffer.get()), size))
+    {
+        std::cerr << "fail to read font file" << std::endl;
+        return;
+    }
 
-    m_loadedfonts.push_back(path);
+    DWORD numFonts = 0;
+    HANDLE handle = AddFontMemResourceEx(buffer.get(), static_cast<DWORD>(size), nullptr, &numFonts);
+
+    if (handle == nullptr)
+    {
+        std::cerr << "AddFontMemResourceEx failed" << std::endl;
+        return;
+    }
+
+    m_fontBuffers.push_back(std::move(buffer));
+    m_fontHandles.push_back(handle);
 }
 
 void D2DRenderer::SetFont(const WCHAR* fontname, FLOAT fontsize)
@@ -425,15 +433,13 @@ void D2DRenderer::ReleaseRenderTargets()
 
 void D2DRenderer::ReleaseFonts()
 {
-    for (auto& fontpath : m_loadedfonts)
+    for (auto handle : m_fontHandles)
     {
-        HRESULT r = RemoveFontResourceEx(fontpath.c_str(), FR_PRIVATE, 0);
-        if (r == 0)
-        {
-            DWORD err = GetLastError();
-            std::cerr << err << std::endl;
-        }
+        RemoveFontMemResourceEx(handle);
     }
+
+    m_fontHandles.clear();
+    m_fontBuffers.clear();
 }
 
 void D2DRenderer::CreateBitmapFromFile(const wchar_t* path, ID2D1Bitmap1*& outBitmap)

@@ -97,5 +97,7 @@ private:
 
     WRL::ComPtr<IWICImagingFactory>     m_wicFactory;
     WRL::ComPtr<IDWriteFactory>             m_writeFactory;
-    std::vector<std::filesystem::path>          m_loadedfonts;
+
+    std::vector<std::unique_ptr<BYTE[]>> m_fontBuffers;
+    std::vector<HANDLE>                  m_fontHandles;
 };
