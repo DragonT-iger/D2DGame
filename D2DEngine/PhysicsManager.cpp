@@ -26,6 +26,8 @@ void PhysicsManager::Step(float fixedDelta)
         }
     }
 
+    std::unordered_set<Collider*> activeColliderSet(colliders.begin(), colliders.end());
+
     const size_t n = colliders.size();
     for (size_t i = 0; i < n; ++i)
     {
@@ -57,8 +59,12 @@ void PhysicsManager::Step(float fixedDelta)
 
     for (const auto& pair : m_prevCollisions)
     {
+        if (activeColliderSet.find(pair.a) == activeColliderSet.end() ||
+            activeColliderSet.find(pair.b) == activeColliderSet.end())
+            continue;
+
         if (currCollisions.find(pair) != currCollisions.end())
-            continue; 
+            continue;
 
         pair.a->GetOwner()->BroadcastTriggerExit(pair.b);
         pair.b->GetOwner()->BroadcastTriggerExit(pair.a);
