@@ -30,10 +30,10 @@ void Player::Start()
 
 void Player::Update(float deltaTime)
 {
-	if (m_Inven->GetInvenDirty())
-	{
-		m_spd = PlayerSpeed - (m_Inven->GetWeight());
-	}
+	//if (m_Inven->GetInvenDirty())
+	//{
+	//	m_spd = PlayerSpeed - (m_Inven->GetWeight());
+	//} <-- 실행 안돼서 주석처리 한다
 }
 
 void Player::OnTriggerEnter(Collider* other)
