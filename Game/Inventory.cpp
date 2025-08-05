@@ -165,8 +165,9 @@ int Inventory::GetWeight()
 		weight += w;
 	}
 
-	Inventory::SetInvenDirty();
+	Inventory::SetInvenDirty(false);
 
+	std::cout << weight << std::endl;
 	return weight;
 }
 

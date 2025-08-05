@@ -23,7 +23,7 @@ public:
 	int GetWeight();
 
 	bool GetInvenDirty() { return m_invenDirty; }
-	void SetInvenDirty() { if (m_invenDirty == true) m_invenDirty = false; else m_invenDirty = true; }
+	void SetInvenDirty(bool dirty) { m_invenDirty = dirty; }
 
 private:
 	std::unordered_map<Crops, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_itemSprite;

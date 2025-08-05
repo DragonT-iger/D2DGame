@@ -105,7 +105,8 @@ void PlayerController::OnTriggerStay(Collider* other)
 			Size crop_Size = crop_ptr->GetComponent<Crop>()->GetSize();
 
 			m_Inventory_Obj->GetComponent<Inventory>()->AddCrop(crop_Type, crop_Size);
-			m_Inventory_Obj->GetComponent<Inventory>()->SetInvenDirty();
+			m_Inventory_Obj->GetComponent<Inventory>()->SetInvenDirty(true);
+
 
 			m_SpawnManager->DestroyObject(other->GetOwner());
 		}

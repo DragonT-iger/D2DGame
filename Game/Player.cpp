@@ -30,7 +30,6 @@ void Player::Start()
 
 void Player::Update(float deltaTime)
 {
-	std::cout << m_Inven->GetWeight() << std::endl;
 }
 
 void Player::OnTriggerEnter(Collider* other)
