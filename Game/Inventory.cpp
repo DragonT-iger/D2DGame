@@ -132,7 +132,7 @@ int Inventory::GetWeight()
 		int w = 0;
 		int decrease = 0;
 
-		switch (data.count /3)
+		switch ((data.count + 1)/3)
 		{
 		case 0:
 			decrease = 1;

@@ -135,6 +135,9 @@
     <ClCompile Include="YSort.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ArtTestView.cpp">
+      <Filter>TestScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="YSort.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ArtTestView.h">
+      <Filter>TestScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

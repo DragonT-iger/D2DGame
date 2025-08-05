@@ -115,8 +115,6 @@ void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel** pOutCha
 
 	auto it = L_BGM.find(fileName);
 
-	std::cout << "it Ã£À½?: " << it->first << std::endl;
-
 	if (it != L_BGM.end())
 	{
 		m_coreSystem->playSound(it->second, m_bgmGroup, false, pOutChannel);
