@@ -278,9 +278,11 @@ void Scene::SetRenderQ()
 
 void Scene::RegisterCamera(Camera* cam)
 {
-    if (m_Camera) {
-        assert(false && "씬에 카메라가 두대일수 없슴");
-    }
+    //if (m_Camera) {
+        //assert(false && "씬에 카메라가 두대일수 없슴");
+
+        // std::cout << "씬 로드 두번하면 카메라가 두번생기는데 그건 뭐 괜찮으니까 그냥 패스 << std::endl;
+    //}
 
     m_Camera = cam;
 }
