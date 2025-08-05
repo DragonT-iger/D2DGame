@@ -19,21 +19,18 @@ void Player::Awake()
 	m_ivc_T = invincibleTime;
 
 	m_boxCol = GetComponent<BoxCollider>();
-	m_Inven = GetComponent<Inventory>();
 }
 
 void Player::Start()
 {
 
+	m_Inven = GameObject::Find("Inventory")->GetComponent<Inventory>();
 	m_boxCol->SetSize({ Vector2(150.f,150.f) });
 }
 
 void Player::Update(float deltaTime)
 {
-	//if (m_Inven->GetInvenDirty())
-	//{
-	//	m_spd = PlayerSpeed - (m_Inven->GetWeight());
-	//} <-- 실행 안돼서 주석처리 한다
+	std::cout << m_Inven->GetWeight() << std::endl;
 }
 
 void Player::OnTriggerEnter(Collider* other)

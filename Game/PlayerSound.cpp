@@ -50,7 +50,7 @@ void PlayerSound::PlayWalk()
 		if (result != FMOD_OK || isPlaying)
 		{
 			if(result != FMOD_OK)
-				std::cerr << "FMOD ÅÍÁü" << isPlaying << std::endl;
+				//std::cerr << "FMOD ÅÍÁü" << isPlaying << std::endl;
 			return;
 		}
 		else
@@ -60,6 +60,6 @@ void PlayerSound::PlayWalk()
 	}
 
 	size_t index = Random::Instance().Range(0, 4);
-	std::cout << "·£´ý Àç»ý : " << index << std::endl;
+	//std::cout << "·£´ý Àç»ý : " << index << std::endl;
 	SoundManager::Instance().SFX_Shot(m_walkSounds[index], &m_walkChannel);
 }
