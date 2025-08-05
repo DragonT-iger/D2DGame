@@ -15,6 +15,9 @@ void TitleScene::Awake()
 
 	m_startButton->GetComponent<Transform>()->SetPosition({ 960.f, 540.f });
 
+	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
+	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+
 	// 일단은 Awake에서 씬을 초기화하는 걸로
 	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)
 	Scene::Awake();

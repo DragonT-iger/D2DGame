@@ -2,12 +2,14 @@
 #include "Player.h"
 #include "Inventory.h"
 
-constexpr int	PlayerHP			= 3;
-constexpr float PlayerSpeed			= 500.0f;
-constexpr float BabyMoleStarvLevel	= 500.0f;
-constexpr int	invincibleTime      = 15;		//60fps 기준
+constexpr int	PlayerHP = 3;
+constexpr float PlayerSpeed = 500.0f;
+constexpr float BabyMoleStarvLevel = 500.0f;
+constexpr int	invincibleTime = 15;		//60fps 기준
 
 int Player::invincible_Count = 0;
+
+class Inventory;
 
 void Player::Awake()
 {
@@ -17,7 +19,7 @@ void Player::Awake()
 	m_ivc_T = invincibleTime;
 
 	m_boxCol = GetComponent<BoxCollider>();
-
+	m_Inven = GetComponent<Inventory>();
 }
 
 void Player::Start()
@@ -28,7 +30,10 @@ void Player::Start()
 
 void Player::Update(float deltaTime)
 {
-
+	if (m_Inven->GetInvenDirty())
+	{
+		m_spd = PlayerSpeed - (m_Inven->GetWeight());
+	}
 }
 
 void Player::OnTriggerEnter(Collider* other)
@@ -55,7 +60,7 @@ void Player::OnTriggerStay(Collider* other)
 	{
 		state = State::Dead;
 	}*/
-	
+
 }
 
 void Player::OnTriggerExit(Collider* other)
