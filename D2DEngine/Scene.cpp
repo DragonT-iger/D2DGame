@@ -235,12 +235,18 @@ void Scene::Render()
     {
         if (info.m_bitmap.Get() != nullptr) {
             D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
+            if (info.m_text.data())
+            {
+				D2DRenderer::Instance().SetFont(info.m_font.data(), info.fontSize);
+				D2DRenderer::Instance().DrawMessage(info.m_text.data(), info.m_layoutRect, info.m_color);
+				D2DRenderer::Instance().DrawRectangle(info.m_layoutRect.left, info.m_layoutRect.top, info.m_layoutRect.right, info.m_layoutRect.bottom, D2D1::ColorF::Red);
+            }
         }
         else if (info.m_text.data())
         {
             D2DRenderer::Instance().SetFont(info.m_font.data(), info.fontSize);
-            D2DRenderer::Instance().DrawMessage(info.m_text.data(), info.m_destRect, info.m_color);
-            D2DRenderer::Instance().DrawRectangle(info.m_destRect.left, info.m_destRect.top, info.m_destRect.right, info.m_destRect.bottom, D2D1::ColorF::Red);
+            D2DRenderer::Instance().DrawMessage(info.m_text.data(), info.m_layoutRect, info.m_color);
+            D2DRenderer::Instance().DrawRectangle(info.m_layoutRect.left, info.m_layoutRect.top, info.m_layoutRect.right, info.m_layoutRect.bottom, D2D1::ColorF::Red);
         }
     }
 
@@ -283,6 +289,12 @@ void Scene::SetRenderQ()
         {
             if (img && img->IsActive()){
                 m_UIRenderQ.push_back(img->GetRenderInfo());
+            }
+            if (auto* txt = obj->GetComponent<Text>())
+            {
+				if (txt->IsActive()) {
+					m_UIRenderQ.push_back(txt->GetRenderInfo());
+				}
             }
         }
         else if (auto* txt = obj->GetComponent<Text>())

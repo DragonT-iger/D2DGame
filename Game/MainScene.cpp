@@ -18,6 +18,9 @@ void MainScene::Awake()
 	if (!IsActive())
 		return;
 
+	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
+	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+
 //begin player-----
 	player = Instantiate("Player");
 	auto playerSR = player->AddComponent<SpriteRenderer>();
@@ -129,18 +132,21 @@ void MainScene::Awake()
 	m_slot1->AddComponent<Slot>();
 	m_slot1->GetComponent<Transform>()->SetPosition({ 550, 930 });
 	m_slot1->GetComponent<Transform>()->SetParent(m_slot1BG->GetComponent<Transform>());
+	m_slot1->AddComponent<Text>();
 
 	m_slot2 = Instantiate("Slot2");
 	m_slot2->AddComponent<Image>();
 	m_slot2->AddComponent<Slot>();
 	m_slot2->GetComponent<Transform>()->SetPosition({ 950, 930 });
 	m_slot2->GetComponent<Transform>()->SetParent(m_slot2BG->GetComponent<Transform>());
+	m_slot2->AddComponent<Text>();
 
 	m_slot3 = Instantiate("Slot3");
 	m_slot3->AddComponent<Image>();
 	m_slot3->AddComponent<Slot>();
 	m_slot3->GetComponent<Transform>()->SetPosition({ 1350, 930 });
 	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
+	m_slot3->AddComponent<Text>();
 
 	SoundManager::Instance().Init();
 	//SoundManager::Instance().BGM_Shot("sample_ten.wav");

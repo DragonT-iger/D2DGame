@@ -87,6 +87,7 @@ void Inventory::AddCrop(Crops type, Size size)
 			else
 				slot->AddItem(type, size);
 
+			slot->SetText();
 			break;
 		}
 	}
@@ -117,11 +118,9 @@ std::vector<SlotData> Inventory::SubMissonItem()
 	return datas;
 }
 
-int Inventory::GetWeight()
+float Inventory::GetWeight()
 {
-	if (!m_invenDirty) return -1;
-
-	int weight = 0;
+	float weight = 0;
 
 	for (const auto& slot : m_slots)
 	{
@@ -129,10 +128,11 @@ int Inventory::GetWeight()
 		
 		if (data.isEmpty)
 			continue;
-		int w = 0;
-		int decrease = 0;
 
-		switch ((data.count + 1)/3)
+		float w = 0;
+		float decrease = 1;
+
+		switch ((data.count)/3)
 		{
 		case 0:
 			decrease = 1;
@@ -146,27 +146,28 @@ int Inventory::GetWeight()
 		case 3:
 			decrease = 0.7f;
 			break;
+		default:
+			decrease = 0.7f;
+			break;
 		}
 
-		switch (data.type)
+		for (int i = 0; i < data.count; i++)
 		{
-		case Eggplant:
-			
-			w = decrease * 25;
-			break;
-		case Potato:
-			w = decrease * 10;
-			break;
-		case Pumpkin:
-			w = decrease * 50;
-			break;
+			switch (data.type)
+			{
+			case Eggplant:
+				w = decrease * 25;
+				break;
+			case Potato:
+				w = decrease * 10;
+				break;
+			case Pumpkin:
+				w = decrease * 50;
+				break;
+			}
+			weight += w;
 		}
-
-		weight += w;
 	}
-
-	Inventory::SetInvenDirty(false);
-
 	std::cout << weight << std::endl;
 	return weight;
 }

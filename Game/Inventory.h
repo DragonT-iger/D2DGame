@@ -20,10 +20,7 @@ public:
 
 	std::vector<SlotData> SubMissonItem();
 
-	int GetWeight();
-
-	bool GetInvenDirty() { return m_invenDirty; }
-	void SetInvenDirty(bool dirty) { m_invenDirty = dirty; }
+	float GetWeight();
 
 private:
 	std::unordered_map<Crops, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_itemSprite;
@@ -32,6 +29,4 @@ private:
 	Slot* m_curSlot;
 	int m_curSlotNum;
 	int maxSlotNum = 2;
-
-	bool m_invenDirty = false;
 };
