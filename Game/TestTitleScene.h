@@ -8,5 +8,5 @@ public:
 
 private:
 	GameObject* m_startButton;
-
+	GameObject* m_Title;
 };
