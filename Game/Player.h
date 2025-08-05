@@ -20,6 +20,9 @@ enum class Visibilty
 	Visible,
 };
 
+class Inventory;
+
+
 class Player : public MonoBehaviour
 {
 public:
@@ -56,5 +59,6 @@ private:
 	Visibilty	visibilty	= Visibilty::Visible;
 
 	BoxCollider* m_boxCol = nullptr;
+	Inventory* m_Inven = nullptr;
 };
 

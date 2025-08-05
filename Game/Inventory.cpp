@@ -119,6 +119,8 @@ std::vector<SlotData> Inventory::SubMissonItem()
 
 int Inventory::GetWeight()
 {
+	if (!m_invenDirty) return -1;
+
 	int weight = 0;
 
 	for (const auto& slot : m_slots)
@@ -128,22 +130,42 @@ int Inventory::GetWeight()
 		if (data.isEmpty)
 			continue;
 		int w = 0;
+		int decrease = 0;
+
+		switch (data.count /3)
+		{
+		case 0:
+			decrease = 1;
+			break;
+		case 1:
+			decrease = 0.9f;
+			break;
+		case 2:
+			decrease = 0.8f;
+			break;
+		case 3:
+			decrease = 0.7f;
+			break;
+		}
 
 		switch (data.type)
 		{
 		case Eggplant:
-			w = data.count * 25;
+			
+			w = decrease * 25;
 			break;
 		case Potato:
-			w = data.count * 10;
+			w = decrease * 10;
 			break;
 		case Pumpkin:
-			w = data.count * 50;
+			w = decrease * 50;
 			break;
 		}
 
 		weight += w;
 	}
+
+	Inventory::SetInvenDirty();
 
 	return weight;
 }

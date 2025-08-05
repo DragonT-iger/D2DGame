@@ -22,6 +22,9 @@ public:
 
 	int GetWeight();
 
+	bool GetInvenDirty() { return m_invenDirty; }
+	void SetInvenDirty() { m_invenDirty = !m_invenDirty; }
+
 private:
 	std::unordered_map<Crops, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_itemSprite;
 	std::vector<Slot*>	m_slots;
@@ -29,4 +32,6 @@ private:
 	Slot* m_curSlot;
 	int m_curSlotNum;
 	int maxSlotNum = 2;
+
+	bool m_invenDirty = false;
 };
