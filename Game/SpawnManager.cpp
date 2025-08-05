@@ -3,8 +3,6 @@
 //#include "StealMessage.h"
 #include "SpawnManager.h"
 
-enum FarmRank;
-
 void SpawnManager::Awake()
 {
 	curScene = SceneManager::Instance().GetActiveScene();

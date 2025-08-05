@@ -14,7 +14,7 @@ class MainScene : public Scene
 	GameObject*				message		= nullptr;
 	GameObject*				bush = nullptr;
 
-
+	GameObject*				SubMissionArea = nullptr;
 
 
 

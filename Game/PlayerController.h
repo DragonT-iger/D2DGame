@@ -2,6 +2,7 @@
 
 class Player;
 class SpawnManager;
+class Inventory;
 
 class PlayerController : public MonoBehaviour
 {
@@ -23,6 +24,7 @@ private:
 	Animator* m_animator = nullptr;
 
 	SpawnManager* m_SpawnManager = nullptr;
+	GameObject* m_Inventory_Obj = nullptr;
 
 	float* p_Spd = nullptr;
 };

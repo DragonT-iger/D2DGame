@@ -32,7 +32,7 @@ void MainScene::Awake()
 	
 //end player-----
 
-
+	SubMissionArea = Instantiate("SubMissionArea");
 ////begin crop-----
 //	crop = Instantiate("Crop");
 //	crop->SetTag("crop");

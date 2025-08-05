@@ -1,6 +1,4 @@
 #include "pch.h"
-#include "Crop.h"
-#include "InventorySlot.h"
 #include "Inventory.h"
 
 void Inventory::Awake()
