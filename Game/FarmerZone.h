@@ -35,3 +35,14 @@ class AttackZone : public FarmerZone {
     void OnTriggerEnter(Collider* other) override;
     void OnTriggerExit(Collider* other) override;
 };
+
+
+class AttackIndicatorZone : public MonoBehaviour {
+public:
+    void Initialize(Farmer* farmer) { m_farmer = farmer; }
+
+    void OnTriggerExit(Collider* other) override;
+
+private:
+    Farmer* m_farmer = nullptr;   // 반드시 private 마지막에!
+};

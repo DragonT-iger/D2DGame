@@ -61,7 +61,7 @@ public:
 
 	// ---------- Event ----------
 	virtual void OnEnable() {} 
-    virtual	void OnDisable() {}
+    void OnDisable();
 
     virtual void OnResize(int width, int height) {}; // (필요한가?? 왜적었더라)
 

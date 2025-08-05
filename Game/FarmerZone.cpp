@@ -9,16 +9,29 @@ void FarmerZone::Awake()
 
 void ChaseZone::OnTriggerEnter(Collider* other)
 {
+	if (other->GetOwner()->GetTag() == "Player")
+		m_farmer->m_isAlreadyExitChaseZone = false;
 }
 
 void ChaseZone::OnTriggerExit(Collider* other)
 {
+	if (other->GetOwner()->GetTag() == "Player")
+	{
+		m_farmer->m_isAlreadyExitChaseZone = true; 
+
+		//if (m_farmer->GetFarmerState() != Farmer::FarmerState::Attack)
+		//	m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+	}
 }
 
 void AttackZone::OnTriggerEnter(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
-		m_farmer->ChangeState(Farmer::FarmerState::Attack);
+
+
+		if (Farmer::FarmerState::Attack != m_farmer->GetFarmerState()) {
+			m_farmer->ChangeState(Farmer::FarmerState::Attack);
+		}
 		m_farmer->m_isAlreadyExitAttackZone = false;
 	}
 
@@ -28,7 +41,8 @@ void AttackZone::OnTriggerEnter(Collider* other)
 void AttackZone::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
-		if (m_farmer->m_farmerState == Farmer::FarmerState::Attack) {
+		m_farmer->m_isAlreadyExitAttackZone = true;
+		if (m_farmer->GetFarmerState() == Farmer::FarmerState::Attack) {
 			return;
 		}
 		if (m_farmer->m_isAlreadyExitChaseZone == false) {
@@ -38,7 +52,6 @@ void AttackZone::OnTriggerExit(Collider* other)
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 		}
 		m_farmer->m_hasPatrolTarget = false;
-		m_farmer->m_isAlreadyExitAttackZone = true;
 	}
 }
 
@@ -58,6 +71,10 @@ void AlertZone::OnTriggerEnter(Collider* other)
 void AlertZone::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
+
+		if (m_farmer->GetFarmerState() == Farmer::FarmerState::Attack)
+			return;
+
 		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 	}
 }
@@ -71,4 +88,23 @@ void PatrolZone::OnTriggerEnter(Collider* other)
 
 void PatrolZone::OnTriggerExit(Collider* other)
 {
+
+}
+
+void AttackIndicatorZone::OnTriggerExit(Collider* other)
+{
+	if (other->GetOwner()->GetTag() != "Player") return;
+
+	if (!m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
+		m_farmer->ChangeState(Farmer::FarmerState::Attack);
+	}
+	
+	else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
+		m_farmer->ChangeState(Farmer::FarmerState::Chase);
+	}
+
+	else {
+		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+	}
+
 }

@@ -1,18 +1,19 @@
 #include "pch.h"
+#include "SpawnManager.h"
 #include "Player.h"
 #include "PlayerController.h"
+#include "Inventory.h"
 
 void PlayerController::Awake()
 {
 	m_Player = GetComponent<Player>();
 	m_transform = GetComponent<Transform>();
 	m_animator = GetComponent<Animator>();
-
 }
 
 void PlayerController::Start()
 {
-	
+	m_Inventory_Obj = GameObject::Find("Inventory");
 }
 
 void PlayerController::Update(float deltaTime)
@@ -28,8 +29,8 @@ void PlayerController::Update(float deltaTime)
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
-		
-		
+
+
 		switch (static_cast<int>(m_Player->action))
 		{
 		case 0:
@@ -67,17 +68,17 @@ void PlayerController::Update(float deltaTime)
 			}
 			m_transform->Translate(dir * (*p_Spd) * deltaTime);
 			break;
-		//case Action::Hit:
-		//	if (m_animator->GetCurState() != "hit")
-		//	{
-		//		//m_animator->ChangeState("hit");
-		//	}
-		//	if (m_animator->IsAnimeEnd())
-		//	{
-		//		m_Player->action = Action::Idle;
-		//	}
-		//	break;
-		// 
+			//case Action::Hit:
+			//	if (m_animator->GetCurState() != "hit")
+			//	{
+			//		//m_animator->ChangeState("hit");
+			//	}
+			//	if (m_animator->IsAnimeEnd())
+			//	{
+			//		m_Player->action = Action::Idle;
+			//	}
+			//	break;
+			// 
 		case Action::Steal:
 			if (m_animator->IsAnimeEnd())
 			{
@@ -95,6 +96,17 @@ void PlayerController::OnTriggerStay(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "crop")
 	{
-		if (Input.GetKeyDown(Keycode::Z)) { m_Player->action = Action::Steal; }
+		if (Input.GetKeyDown(Keycode::Z))
+		{
+			m_Player->action = Action::Steal;
+
+			GameObject* crop_ptr = other->GetOwner();
+			Crops crop_Type = crop_ptr->GetComponent<Crop>()->GetCropType();
+			Size crop_Size = crop_ptr->GetComponent<Crop>()->GetSize();
+
+			m_Inventory_Obj->GetComponent<Inventory>()->AddCrop(crop_Type, crop_Size);
+
+			m_SpawnManager->DestroyObject(other->GetOwner());
+		}
 	}
 }

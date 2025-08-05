@@ -1,4 +1,5 @@
 #pragma once
+#include "InventorySlot.h"
 
 class Inventory : public MonoBehaviour
 {

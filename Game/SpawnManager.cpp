@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Crop.h"
-#include "StealMessage.h"
+//#include "StealMessage.h"
 #include "SpawnManager.h"
-
+#include "YSort.h"
 
 void SpawnManager::Awake()
 {
@@ -117,6 +117,7 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	auto sr = obj->AddComponent<SpriteRenderer>();
 	auto box = obj->AddComponent<BoxCollider>();
 	auto crop = obj->AddComponent<Crop>();
+	auto ysort = obj->AddComponent<YSort>();
 
 	GameObject* eftObj = Instantiate("effect");
 	eftObj->SetActive(false);
