@@ -243,6 +243,13 @@ void Scene::Render()
 
 void Scene::UnInitialize()
 {
+    //m_pendingAdd.clear();
+    //m_pendingDestroy.clear();
+    //m_gameObjects.clear();
+    //m_renderQ.clear();
+    //m_UIRenderQ.clear();
+    //m_colliderQ.clear();
+    //m_Camera = nullptr;
     m_gameObjects.clear();
 }
 
@@ -295,6 +302,12 @@ D2D1::Matrix3x2F Scene::GetRenderTM(bool isFlip, float offsetX, float offsetY)
     offsetY = -offsetY;
 
     return D2D1::Matrix3x2F::Scale(scaleX, -1.0f) * D2D1::Matrix3x2F::Translation(offsetX, offsetY);
+}
+
+void Scene::OnDisable()
+{
+    //UnInitialize();
+    
 }
 
 GameObject* Scene::FindGameObject(std::string name)

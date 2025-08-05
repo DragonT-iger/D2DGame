@@ -33,11 +33,11 @@ void SceneManager::LoadScene(const std::wstring& name)
 #endif // !_DEBUG
 
 
-	if(prev) prev->OnDisable();
+	if (prev) prev->OnDisable();
 	m_active = next;
 	m_active->Awake();
 	m_active->Start();
-	m_active->OnEnable();
+	//m_active->OnEnable();
 }
 
 void SceneManager::UnInitialize()

@@ -11,6 +11,7 @@
 #include "Inventory.h"
 #include "SpawnManager.h"
 #include "PlayerSound.h"
+#include "YSort.h"
 
 void MainScene::Awake()
 {
@@ -27,6 +28,8 @@ void MainScene::Awake()
 	player->AddComponent<PlayerAnimator>();
 	player->AddComponent<PlayerController>();
 	player->AddComponent<PlayerSound>();
+	player->AddComponent<YSort>()->SetStatic(false);
+	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
 
 	playerSR->SetOrderInLayer(1);
 	
@@ -147,7 +150,7 @@ void MainScene::Awake()
 	auto sr = m_background->AddComponent<SpriteRenderer>();
 
 	sr->SetBitmap(ResourceManager::Instance().LoadTexture("Test_back_02.png"));
-	sr->SetOrderInLayer(-2);
+	sr->SetOrderInLayer(-200000);
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 #pragma endregion
