@@ -1,4 +1,5 @@
 #pragma once
+#include "Crop.h"
 
 struct SlotData {
 	bool isEmpty;

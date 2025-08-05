@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Player.h"
+#include "Inventory.h"
 
 constexpr int	PlayerHP			= 3;
 constexpr float PlayerSpeed			= 500.0f;

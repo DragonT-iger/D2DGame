@@ -1,5 +1,9 @@
 #pragma once
 
+class Crop;
+enum Crops;
+enum FarmRank;
+
 class SpawnManager : public MonoBehaviour
 {
 public:

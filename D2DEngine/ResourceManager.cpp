@@ -54,6 +54,26 @@ void ResourceManager::LoadPath()
 				m_UIPaths.emplace(std::move(key), std::move(path));
 			}
 		}
+		else if (it.path().extension() == ".mp3")
+		{
+			std::string parent = path.parent_path().string();
+
+			if (parent.find("Sounds\\BGM") != std::string::npos)
+			{
+				std::cout << path << key << std::endl;
+				m_BGMPaths.emplace(std::move(key), std::move(path));
+			}
+			else if (parent.find("Sounds\\SFX") != std::string::npos)
+			{
+				std::cout << key << std::endl;
+				m_SFXPaths.emplace(std::move(key), std::move(path));
+			}
+			else if (parent.find("Sounds\\UI") != std::string::npos)
+			{
+				std::cout << key << std::endl;
+				m_UIPaths.emplace(std::move(key), std::move(path));
+			}
+		}
 	}
 }
 
