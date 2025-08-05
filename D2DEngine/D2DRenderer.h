@@ -46,7 +46,7 @@ public:
 
     void RegisterFont(const std::filesystem::path& path,const std::wstring& fontname);
 
-    void SetFont(std::wstring fontname, FLOAT fontsize = 15.0f);
+    void SetFont(const WCHAR* fontname, FLOAT fontsize = 15.0f);
 
     void SetTransform(const D2D1_MATRIX_3X2_F tm);
 
@@ -97,5 +97,7 @@ private:
 
     WRL::ComPtr<IWICImagingFactory>     m_wicFactory;
     WRL::ComPtr<IDWriteFactory>             m_writeFactory;
-    std::vector<std::filesystem::path>          m_loadedfonts;
+
+    std::vector<std::unique_ptr<BYTE[]>> m_fontBuffers;
+    std::vector<HANDLE>                  m_fontHandles;
 };

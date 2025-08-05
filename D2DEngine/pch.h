@@ -20,6 +20,7 @@
 #include <memory>
 #include <type_traits>
 #include <string>
+#include <string_view>
 #include <functional>
 
 
@@ -85,6 +86,7 @@ inline std::wostream& cwout = std::wcout;
 #include "Animator.h"
 #include "Image.h"
 #include "Button.h"
+#include "Text.h"
 #include "Slide_Bar.h"
 #include "RenderInfo.h"
 #include "D2DRenderer.h"

@@ -59,11 +59,12 @@ void GameObject::Start() {
 void GameObject::Update(float deltaTime) {
     m_phase = Phase::Update;
     m_isIterating = true;
-    for (auto& comp : m_components)
+    for (auto& comp : m_components) {
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            if(IsActive())
+            if (IsActive())
                 if (mb->IsActive())
                     mb->Update(deltaTime);
+    }
     m_isIterating = false;
     FlushPending();
 }

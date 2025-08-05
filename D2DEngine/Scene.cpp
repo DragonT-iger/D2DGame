@@ -35,6 +35,8 @@ void Scene::Destroy(GameObject* object)
 void Scene::Awake()
 {
     //if (!m_active) return;
+
+
     m_phase = ScenePhase::Awake;
 
     GameObject* camera = CreateGameObject("Camera");
@@ -51,8 +53,11 @@ void Scene::Awake()
 
 void Scene::Start()
 {
+
     //if (!m_active) return;
-	m_phase = ScenePhase::Start;
+
+
+    m_phase = ScenePhase::Start;
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->Start();
     m_isIterating = false;
@@ -231,17 +236,18 @@ void Scene::Render()
         if (info.m_bitmap.Get() != nullptr) {
             D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect);
         }
+        else if (info.m_text.data())
+        {
+            D2DRenderer::Instance().SetFont(info.m_font.data(), info.fontSize);
+            D2DRenderer::Instance().DrawMessage(info.m_text.data(), info.m_destRect, info.m_color);
+            D2DRenderer::Instance().DrawRectangle(info.m_destRect.left, info.m_destRect.top, info.m_destRect.right, info.m_destRect.bottom, D2D1::ColorF::Red);
+        }
     }
 
+    D2DRenderer::Instance().SetFont(L"¸¼Àº°íµñ", 15.0f);
     std::wstring fps = L"fps : " + std::to_wstring(m_fps) + L" / " + std::to_wstring(static_cast<int>(m_deltatime));
     D2D1_RECT_F layout = { 0, 0, 150, 50 };
     D2DRenderer::Instance().DrawMessage(fps.c_str(), layout, D2D1::ColorF::Blue);
-
-	D2D1_RECT_F rect = { 300, 300, 900, 900 };
-
-	std::wstring str = L"¾È³çÇÏ¼¼¿ä";
-
-	D2DRenderer::Instance().DrawMessage(str.c_str(), rect, D2D1::ColorF::Black);
 
 	m_renderQ.clear();
     m_colliderQ.clear();
@@ -257,7 +263,7 @@ void Scene::UnInitialize()
     //m_UIRenderQ.clear();
     //m_colliderQ.clear();
     //m_Camera = nullptr;
-    m_gameObjects.clear();
+    //m_gameObjects.clear();
 }
 
 void Scene::SetRenderQ()
@@ -278,6 +284,12 @@ void Scene::SetRenderQ()
             if (img && img->IsActive()){
                 m_UIRenderQ.push_back(img->GetRenderInfo());
             }
+        }
+        else if (auto* txt = obj->GetComponent<Text>())
+        {
+			if (txt && txt->IsActive()) {
+				m_UIRenderQ.push_back(txt->GetRenderInfo());
+			}
         }
         if (collider && collider->IsActive()){
             m_colliderQ.push_back(collider->GetColliderInfo());

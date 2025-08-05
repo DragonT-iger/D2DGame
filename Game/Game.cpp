@@ -33,8 +33,8 @@ bool Game::Initialize()
     ResourceManager::Instance().LoadPath();
 
 
-    // 맨 처음 씬 만들고 로드하는법
-    SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"ExampleScene", std::make_unique<ExampleScene>());
+    // 맨 처음 씬 만들고 로드하는법 수정됨 아래와 같이
+    /*SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"ExampleScene", std::make_unique<ExampleScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"MainScene", std::make_unique<MainScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"HSTestScene", std::make_unique<HSTestScene>());
 	SceneManager::Instance().Instance().Instance().Instance().Instance().RegisterScene(L"TestTitleScene", std::make_unique<TitleScene>());
@@ -49,10 +49,10 @@ bool Game::Initialize()
 #endif
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
-    //SceneManager::Instance().LoadScene(L"MainScene");
+    SceneManager::Instance().LoadScene(std::make_unique<MainScene>());
     //SceneManager::Instance().LoadScene(L"ExampleScene");
-    //SceneManager::Instance().LoadScene(L"HSTestScene");
-    SceneManager::Instance().LoadScene(L"TestTitleScene");
+    //SceneManager::Instance().LoadScene(L"HSTestScene");TestTitleScene
+    SceneManager::Instance().LoadScene(std::make_unique<TitleScene>());
     //SceneManager::Instance().LoadScene(L"DTtestScene");
 	return true;
 }
@@ -78,6 +78,7 @@ void Game::Run()
 
 void Game::LifeCycle(float deltaTime)
 {
+    SceneManager::Instance().ProcessSceneChange();
 
 	static float elapsedTime = 0.0f;
     static float fixedDeltaTime = 0.02f;
