@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Component.h"
+#include <filesystem>
 
 /*
 일단 교수님 렌더러 코드 옮겨둠
@@ -41,7 +42,11 @@ public:
 
     void DrawBitmap(ID2D1Bitmap1* bitmap, D2D1_RECT_F destRect, D2D1_RECT_F srcRect, float opacity = 1.0f);
 
-    void DrawMessage(const wchar_t* text, float left, float top, float width, float height, const D2D1::ColorF& color);
+    void DrawMessage(const wchar_t* text, const D2D1_RECT_F& layoutRect, const D2D1::ColorF& color);
+
+    void RegisterFont(const std::filesystem::path& path,const std::wstring& fontname);
+
+    void SetFont(std::wstring fontname, FLOAT fontsize = 15.0f);
 
     void SetTransform(const D2D1_MATRIX_3X2_F tm);
 
@@ -71,6 +76,8 @@ private:
 
     void ReleaseRenderTargets();
 
+    void ReleaseFonts();
+
 private:
     HWND m_hwnd = nullptr;
 
@@ -89,4 +96,6 @@ private:
     WRL::ComPtr<ID2D1DeviceContext7>    m_d2dContext;
 
     WRL::ComPtr<IWICImagingFactory>     m_wicFactory;
+    WRL::ComPtr<IDWriteFactory>             m_writeFactory;
+    std::vector<std::filesystem::path>          m_loadedfonts;
 };

@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "D2DRenderer.h"
+
+
 void D2DRenderer::Initialize(HWND hwnd)
 {
     m_hwnd = hwnd;
@@ -22,9 +24,11 @@ void D2DRenderer::Initialize(HWND hwnd)
 
 void D2DRenderer::Uninitialize()
 {
+    ReleaseFonts();
     ReleaseRenderTargets();
 
     m_wicFactory = nullptr;
+    m_writeFactory = nullptr;
 
     m_targetBitmap = nullptr;
     m_brush = nullptr;
@@ -34,6 +38,8 @@ void D2DRenderer::Uninitialize()
 
     m_swapChain = nullptr;
     m_d3dDevice = nullptr;
+
+    
 }
 
 void D2DRenderer::Resize(UINT width, UINT height)
@@ -84,24 +90,119 @@ void D2DRenderer::DrawBitmap(ID2D1Bitmap1* bitmap, D2D1_RECT_F destRect, D2D1_RE
 }
 
 
-void D2DRenderer::DrawMessage(const wchar_t* text, float left, float top, float width, float height, const D2D1::ColorF& color)
+void D2DRenderer::DrawMessage(const wchar_t* text, const D2D1_RECT_F& layoutRect, const D2D1::ColorF& color)
 {
     if (nullptr == m_textBrush)
     {
         m_d2dContext->CreateSolidColorBrush(D2D1::ColorF(color), &m_textBrush);
     }
 
-    m_textBrush->SetColor(color);
-    D2D1_RECT_F layoutRect = D2D1::RectF(left, top, left + width, top + height);
+    UINT32 length = static_cast<UINT32>(wcslen(text));
 
-    m_d2dContext->DrawTextW(
+	WRL::ComPtr<IDWriteTextLayout> pTextLayout;
+
+    HRESULT r = m_writeFactory->CreateTextLayout(
         text,
-        static_cast<UINT32>(wcslen(text)),
+        length,
         m_textFormat.Get(),
-        layoutRect,
+        layoutRect.right - layoutRect.left,
+        layoutRect.bottom - layoutRect.top,
+        pTextLayout.GetAddressOf()
+        );
+
+    if (FAILED(r))
+    {
+        std::cerr << "fail to Create TextLayout" << std::endl;
+    }
+
+
+	WRL::ComPtr<IDWriteTypography> pTypography;
+
+    r = m_writeFactory->CreateTypography(&pTypography);
+
+	if (FAILED(r))
+	{
+		std::cerr << "fail to Create Typography" << std::endl;
+	}
+
+	DWRITE_FONT_FEATURE fontFeature = { DWRITE_FONT_FEATURE_TAG_STYLISTIC_SET_7,
+								                                              1 };
+	if (SUCCEEDED(r))
+	{
+		r = pTypography->AddFontFeature(fontFeature);
+	}
+
+    DWRITE_TEXT_RANGE range = { 0, length };
+
+    r = pTextLayout->SetTypography(pTypography.Get(), range);
+
+    if (FAILED(r))
+    {
+        std::cerr << "fail SetTypography" << std::endl;
+    }
+
+    m_textBrush->SetColor(color);
+
+    m_d2dContext->DrawTextLayout(
+        D2D1::Point2F(layoutRect.left, layoutRect.top),
+        pTextLayout.Get(),
         m_textBrush.Get(),
-        D2D1_DRAW_TEXT_OPTIONS_NONE,
-        DWRITE_MEASURING_MODE_NATURAL);
+        D2D1_DRAW_TEXT_OPTIONS_NONE
+    );
+}
+
+void D2DRenderer::RegisterFont(const std::filesystem::path& path, const std::wstring& fontname)
+{
+     int n = AddFontResourceEx(path.c_str(), FR_PRIVATE, 0);
+
+     std::cout << "현재 등록된 폰트 개수 : " << n << std::endl;
+
+    HRESULT r = m_writeFactory->CreateTextFormat(
+        fontname.c_str(),
+        nullptr,
+        DWRITE_FONT_WEIGHT_NORMAL,
+        DWRITE_FONT_STYLE_NORMAL,
+        DWRITE_FONT_STRETCH_NORMAL,
+        24.0f,
+        L"ko-kr",
+        m_textFormat.GetAddressOf()
+    );
+
+	if (FAILED(r))
+	{
+		std::cerr << "fail to Load Font2 : " << std::endl;
+	}
+
+	if (SUCCEEDED(r))
+	{
+		r = m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	}
+
+	if (SUCCEEDED(r))
+	{
+		r = m_textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+	}
+
+    m_loadedfonts.push_back(path);
+}
+
+void D2DRenderer::SetFont(std::wstring fontname, FLOAT fontsize)
+{
+	HRESULT r = m_writeFactory->CreateTextFormat(
+		fontname.c_str(),
+		nullptr,
+		DWRITE_FONT_WEIGHT_NORMAL,
+		DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL,
+        fontsize,
+		L"ko-kr",
+		m_textFormat.GetAddressOf()
+	);
+
+	if (FAILED(r))
+	{
+		std::cerr << "fail to Load Font3" << std::endl;
+	}
 }
 
 void D2DRenderer::SetTransform(const D2D1_MATRIX_3X2_F tm)
@@ -283,15 +384,14 @@ void D2DRenderer::CreateRenderTargets()
 
 void D2DRenderer::CreateWriteResource()
 {
-    WRL::ComPtr<IDWriteFactory> writeFactory = nullptr;
     HRESULT hr = DWriteCreateFactory(
         DWRITE_FACTORY_TYPE_SHARED,
         __uuidof(IDWriteFactory),
-        reinterpret_cast<IUnknown**>(writeFactory.GetAddressOf()));
+        reinterpret_cast<IUnknown**>(m_writeFactory.GetAddressOf()));
 
     DX::ThrowIfFailed(hr);
 
-    writeFactory->CreateTextFormat(
+        m_writeFactory->CreateTextFormat(
         L"", // FontName    제어판-모든제어판-항목-글꼴-클릭 으로 글꼴이름 확인가능
         NULL,
         DWRITE_FONT_WEIGHT_NORMAL,
@@ -320,6 +420,20 @@ void D2DRenderer::ReleaseRenderTargets()
     m_targetBitmap.Reset();
     m_brush.Reset();
     m_textBrush.Reset();
+    m_writeFactory.Reset();
+}
+
+void D2DRenderer::ReleaseFonts()
+{
+    for (auto& fontpath : m_loadedfonts)
+    {
+        HRESULT r = RemoveFontResourceEx(fontpath.c_str(), FR_PRIVATE, 0);
+        if (r == 0)
+        {
+            DWORD err = GetLastError();
+            std::cerr << err << std::endl;
+        }
+    }
 }
 
 void D2DRenderer::CreateBitmapFromFile(const wchar_t* path, ID2D1Bitmap1*& outBitmap)

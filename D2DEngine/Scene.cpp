@@ -234,7 +234,14 @@ void Scene::Render()
     }
 
     std::wstring fps = L"fps : " + std::to_wstring(m_fps) + L" / " + std::to_wstring(static_cast<int>(m_deltatime));
-    D2DRenderer::Instance().DrawMessage(fps.c_str(), 0, 0, 150, 50, D2D1::ColorF::Blue);
+    D2D1_RECT_F layout = { 0, 0, 150, 50 };
+    D2DRenderer::Instance().DrawMessage(fps.c_str(), layout, D2D1::ColorF::Blue);
+
+	D2D1_RECT_F rect = { 300, 300, 900, 900 };
+
+	std::wstring str = L"æ»≥Á«œººø‰";
+
+	D2DRenderer::Instance().DrawMessage(str.c_str(), rect, D2D1::ColorF::Black);
 
 	m_renderQ.clear();
     m_colliderQ.clear();

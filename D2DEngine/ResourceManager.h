@@ -42,6 +42,13 @@ public:
 	const std::unordered_map<std::string, std::filesystem::path>& GetSFXPaths() { return m_SFXPaths; }
 	const std::unordered_map<std::string, std::filesystem::path>& GetUIPaths() { return m_UIPaths; }
 
+	const std::filesystem::path& GetFontPath(std::string fontname) { 
+		if (m_fontPaths.find(fontname) == m_fontPaths.end())
+			std::cerr << "Check your font name" << std::endl;
+
+		return m_fontPaths.at(fontname);
+	}
+
 	const ComPtr<ID2D1Bitmap1>& LoadTexture(const std::string& key);
 	std::shared_ptr<AnimationClip> LoadAnimationClip(const std::string& key, const std::string& cliptag);
 
@@ -52,9 +59,10 @@ private:
 
 	std::unordered_map<std::string, std::filesystem::path> m_JsonPaths;
 	std::unordered_map<std::string, std::filesystem::path> m_PngPaths;
+	std::unordered_map<std::string, std::filesystem::path> m_fontPaths;
 	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_textures;
 	std::unordered_map<std::string, std::shared_ptr<AnimationClip>> m_aniClips;
-
+	
 	std::unordered_map<std::string, std::filesystem::path> m_BGMPaths;
 	std::unordered_map<std::string, std::filesystem::path> m_SFXPaths;
 	std::unordered_map<std::string, std::filesystem::path> m_UIPaths; 

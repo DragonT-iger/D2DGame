@@ -74,6 +74,12 @@ void ResourceManager::LoadPath()
 				m_UIPaths.emplace(std::move(key), std::move(path));
 			}
 		}
+		else if (it.path().extension() == ".ttf")
+		{
+			std::cout << key << std::endl;
+
+			m_fontPaths.emplace(std::move(key), std::move(path));
+		}
 	}
 }
 
