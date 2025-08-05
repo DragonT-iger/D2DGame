@@ -2,6 +2,7 @@
 #include "Farmer.h"
 #include "FarmerZone.h"
 #include "YSort.h"
+#include "Player.h"
 
 void Farmer::Awake()
 {
@@ -125,6 +126,9 @@ void Farmer::DoAlert(float deltaTime)
 
 void Farmer::DoChase(float deltaTime)
 {
+    if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
+        ChangeState(FarmerState::Patrol);
+    }
 
     if (m_animator->GetCurState() != "angrywalk")
         m_animator->ChangeState("angrywalk");
@@ -142,6 +146,12 @@ void Farmer::DoChase(float deltaTime)
 
 void Farmer::DoAttack(float deltaTime)
 {
+    if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
+        Destroy(m_attackIndicator);
+        m_attackIndicator = nullptr;
+        ChangeState(FarmerState::Patrol);
+        return;
+    }
     if (m_animator->GetCurState() != "angryidle") {
         m_animator->ChangeState("angryidle");
     }
