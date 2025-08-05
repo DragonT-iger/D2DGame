@@ -173,23 +173,13 @@ void D2DRenderer::RegisterFont(const std::filesystem::path& path, const std::wst
 		std::cerr << "fail to Load Font2 : " << std::endl;
 	}
 
-	if (SUCCEEDED(r))
-	{
-		r = m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-	}
-
-	if (SUCCEEDED(r))
-	{
-		r = m_textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-	}
-
     m_loadedfonts.push_back(path);
 }
 
-void D2DRenderer::SetFont(std::wstring fontname, FLOAT fontsize)
+void D2DRenderer::SetFont(const WCHAR* fontname, FLOAT fontsize)
 {
 	HRESULT r = m_writeFactory->CreateTextFormat(
-		fontname.c_str(),
+		fontname,
 		nullptr,
 		DWRITE_FONT_WEIGHT_NORMAL,
 		DWRITE_FONT_STYLE_NORMAL,
@@ -202,6 +192,16 @@ void D2DRenderer::SetFont(std::wstring fontname, FLOAT fontsize)
 	if (FAILED(r))
 	{
 		std::cerr << "fail to Load Font3" << std::endl;
+	}
+
+	if (SUCCEEDED(r))
+	{
+		r = m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	}
+
+	if (SUCCEEDED(r))
+	{
+		r = m_textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 	}
 }
 

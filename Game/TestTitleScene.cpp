@@ -4,6 +4,9 @@
 
 void TitleScene::Awake()
 {
+	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
+	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+
 	m_startButton = Instantiate("startBtn");
 
 	auto Img = m_startButton->AddComponent<Image>();
@@ -15,8 +18,13 @@ void TitleScene::Awake()
 
 	m_startButton->GetComponent<Transform>()->SetPosition({ 960.f, 540.f });
 
-	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
-	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+	m_Title = Instantiate("title");
+	auto text = m_Title->AddComponent<Text>();
+
+	text->SetText(L"몰래몰래팜", { 400, 100 }, L"Maplestory", D2D1::ColorF::Black);
+	text->SetFontSize(50);
+
+	m_Title->GetComponent<Transform>()->SetPosition({ 960, 440 });
 
 	// 일단은 Awake에서 씬을 초기화하는 걸로
 	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)
