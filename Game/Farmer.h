@@ -17,7 +17,6 @@ public:
         Chase,
         Attack
     };
-    //void PickRandomDirection();
 
     void DoPatrol(float deltaTime);
     void DoAlert(float deltaTime);

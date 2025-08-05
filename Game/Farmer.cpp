@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Farmer.h"
 #include "FarmerZone.h"
+#include "YSort.h"
 
 void Farmer::Awake()
 {
@@ -11,6 +12,7 @@ void Farmer::Awake()
     m_boxCollider = GetOwner()->AddComponent<BoxCollider>();
     m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
     this->GetOwner()->SetTag("Farmer");
+    GetOwner()->AddComponent<YSort>()->SetStatic(false);
 }
 
 void Farmer::Start()
@@ -154,7 +156,6 @@ void Farmer::DoAttack(float deltaTime)
         m_attackIndicator = Instantiate("AttackIndicator");
         auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
         indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
-        indicatorTransform->SetScale({ 1.f, 1.f });
         auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
         sr->SetOpacity(0.1f);
         sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
