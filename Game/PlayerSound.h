@@ -14,9 +14,7 @@ public:
 	void PlayWalk();
 
 private:
-	Player*													m_player;
+	Player*												m_player;
 	std::vector<std::string>		m_walkSounds;
-	FMOD::Channel*			m_walkChannel = nullptr;
-
-	bool isPlaying = false;
+	FMOD::Channel*	m_walkChannel = nullptr;
 };

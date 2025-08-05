@@ -153,6 +153,8 @@ void Farmer::DoAttack(float deltaTime)
         indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
         indicatorTransform->SetScale({ 1.f, 1.f });
         auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
+        m_attackIndicator->AddComponent<CircleCollider>();
+        sr->SetOpacity(0.1f);
         sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
         m_attackTimer = 0.f;
     }
@@ -162,7 +164,7 @@ void Farmer::DoAttack(float deltaTime)
             Vector2 playerPos = m_player->GetComponent<Transform>()->GetPosition();
             Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
             Vector2 diff = playerPos - center;
-            if (diff.SqrMagnitude() <= m_attackAreaValue * m_attackAreaValue) {
+            if (diff.SqrMagnitude() <= m_attackAreaValue *  4.0f * m_attackAreaValue) {
                 // TODO: apply damage to player
             }
             Destroy(m_attackIndicator);
