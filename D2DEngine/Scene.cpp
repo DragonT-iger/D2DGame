@@ -255,7 +255,7 @@ void Scene::UnInitialize()
     //m_UIRenderQ.clear();
     //m_colliderQ.clear();
     //m_Camera = nullptr;
-    m_gameObjects.clear();
+    //m_gameObjects.clear();
 }
 
 void Scene::SetRenderQ()

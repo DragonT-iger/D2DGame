@@ -78,6 +78,7 @@ void Game::Run()
 
 void Game::LifeCycle(float deltaTime)
 {
+    SceneManager::Instance().ProcessSceneChange();
 
 	static float elapsedTime = 0.0f;
     static float fixedDeltaTime = 0.02f;

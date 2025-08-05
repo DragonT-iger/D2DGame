@@ -14,6 +14,7 @@ public:
     void    SetActiveScene(Scene* scene) { m_active = scene; }
     Scene*  GetActiveScene() const { return m_active; }
     void    LoadScene(std::unique_ptr<Scene> scene);
+    void    ProcessSceneChange();
     void    UnInitialize();
 
     // player °ü¸®
@@ -40,6 +41,7 @@ private:
     Scene*                                                                                m_active = nullptr;
   
     std::unique_ptr<Scene>       m_activeKeep;
+    std::unique_ptr<Scene>       m_pendingScene;
 };
 
 

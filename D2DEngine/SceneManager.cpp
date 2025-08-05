@@ -4,6 +4,14 @@
 
 void SceneManager::LoadScene(std::unique_ptr<Scene> scene)
 {
+	m_pendingScene = std::move(scene);
+}
+
+void SceneManager::ProcessSceneChange()
+{
+    if (!m_pendingScene)
+        return;
+
     Scene* prev = m_active;
 
     if (prev) {
@@ -11,13 +19,14 @@ void SceneManager::LoadScene(std::unique_ptr<Scene> scene)
         prev->UnInitialize();
     }
 
-    m_activeKeep = std::move(scene);
+    m_activeKeep = std::move(m_pendingScene);
     m_active = m_activeKeep.get();
 
 #ifdef _DEBUG
     //std::cout << L"[SceneManager] Load "
     //    << (prev ? prev->GetName() : "None")
-    //    << " ¡æ " << m_active->GetName() << std::endl;
+    //    << "  " << m_active->GetName() << std::endl;
+    //    << "  " << m_active->GetName() << std::endl;
 #endif
 
     m_active->Awake();
