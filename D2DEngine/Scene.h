@@ -2,7 +2,6 @@
 /// 2025-07-11 권용범 최초버전 작성
 #pragma once
 
-#include "GameObject.h"
 #include "RenderInfo.h"
 
 class Camera;

@@ -11,11 +11,9 @@ public:
     };
 
     // 씬 등록/활성화
-    void    RegisterScene(const std::wstring& name, std::unique_ptr<Scene> scene);
-	Scene*  GetScene(const std::wstring& name) { return m_scenes[name].get(); } // 없으면 nullptr 반환
     void    SetActiveScene(Scene* scene) { m_active = scene; }
     Scene*  GetActiveScene() const { return m_active; }
-	void    LoadScene(const std::wstring& name);
+    void    LoadScene(std::unique_ptr<Scene> scene);
     void    UnInitialize();
 
     // player 관리
@@ -40,10 +38,8 @@ private:
 
     bool                                                                              m_debugMode = true;
     Scene*                                                                                m_active = nullptr;
-    std::unordered_map<std::wstring, std::unique_ptr<Scene>> m_scenes;
-
-
-    
+  
+    std::unique_ptr<Scene>       m_activeKeep;
 };
 
 

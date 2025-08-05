@@ -35,6 +35,8 @@ void Scene::Destroy(GameObject* object)
 void Scene::Awake()
 {
     //if (!m_active) return;
+
+
     m_phase = ScenePhase::Awake;
 
     GameObject* camera = CreateGameObject("Camera");
@@ -51,8 +53,11 @@ void Scene::Awake()
 
 void Scene::Start()
 {
+
     //if (!m_active) return;
-	m_phase = ScenePhase::Start;
+
+
+    m_phase = ScenePhase::Start;
     m_isIterating = true;
     for (auto& obj : m_gameObjects) obj->Start();
     m_isIterating = false;

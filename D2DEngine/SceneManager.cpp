@@ -1,43 +1,27 @@
 #include "pch.h"
 #include "SceneManager.h"
 
-void SceneManager::RegisterScene(const std::wstring& name, std::unique_ptr<Scene> scene)
+
+void SceneManager::LoadScene(std::unique_ptr<Scene> scene)
 {
-	auto result = m_scenes.emplace(name, std::move(scene));
-	if (!result.second) {
-		assert(false && "이미 등록된 씬 이름입니다.");
-		return;
-	}
-}
+    Scene* prev = m_active;
 
-void SceneManager::LoadScene(const std::wstring& name)
-{
-	Scene* prev = GetActiveScene(); // 맨 처음은 nullptr 임
+    if (prev) {
+        prev->OnDisable();
+        prev->UnInitialize();
+    }
 
-	auto it = m_scenes.find(name);
-
-	if(it == m_scenes.end()) {
-		assert(false && "존재하지 않는 씬 이름입니다.");
-		return;
-	}
-
-	Scene* next = it->second.get();
-
-	
+    m_activeKeep = std::move(scene);
+    m_active = m_activeKeep.get();
 
 #ifdef _DEBUG
+    //std::cout << L"[SceneManager] Load "
+    //    << (prev ? prev->GetName() : "None")
+    //    << " → " << m_active->GetName() << std::endl;
+#endif
 
-	if (prev) std::cout << "LoadScene: " << prev->GetName() << "->" << it->second.get()->GetName() << std::endl;
-	else  std::cout << "LoadScene: " << "Nothing" << "->" << it->second.get()->GetName() << std::endl;
-	
-#endif // !_DEBUG
-
-
-	if (prev) prev->OnDisable();
-	m_active = next;
-	m_active->Awake();
-	m_active->Start();
-	//m_active->OnEnable();
+    m_active->Awake();
+    m_active->Start();
 }
 
 void SceneManager::UnInitialize()
