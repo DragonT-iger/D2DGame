@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "SpawnManager.h"
 #include "Player.h"
 #include "PlayerController.h"
 
@@ -12,7 +13,6 @@ void PlayerController::Awake()
 
 void PlayerController::Start()
 {
-	
 }
 
 void PlayerController::Update(float deltaTime)
@@ -95,6 +95,10 @@ void PlayerController::OnTriggerStay(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "crop")
 	{
-		if (Input.GetKeyDown(Keycode::Z)) { m_Player->action = Action::Steal; }
+		if (Input.GetKeyDown(Keycode::Z))
+		{
+			m_Player->action = Action::Steal;
+			m_SpawnManager->DestroyObject(other->GetOwner());
+		}
 	}
 }

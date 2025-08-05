@@ -51,8 +51,8 @@ bool Game::Initialize()
     //SceneManager::Instance().LoadScene(L"MainScene");
     //SceneManager::Instance().LoadScene(L"ExampleScene");
     //SceneManager::Instance().LoadScene(L"HSTestScene");
-    //SceneManager::Instance().LoadScene(L"TestTitleScene");
-    SceneManager::Instance().LoadScene(L"DTtestScene");
+    SceneManager::Instance().LoadScene(L"TestTitleScene");
+    //SceneManager::Instance().LoadScene(L"DTtestScene");
 
 	return true;
 }

@@ -152,6 +152,8 @@ void MainScene::Awake()
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 #pragma endregion
 
+	player->GetComponent<PlayerController>()->SetSpawnManager(m_SpawnManager->GetComponent<SpawnManager>());
+
 	Scene::Awake();
 }
 

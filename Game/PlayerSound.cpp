@@ -44,13 +44,13 @@ void PlayerSound::PlayWalk()
 	if (m_walkChannel)
 	{
 		m_walkChannel->isPlaying(&isPlaying);
-		std::cout << "IsPlaying" << isPlaying << std::endl;
+		//std::cout << "IsPlaying" << isPlaying << std::endl;
 		return;
 	}
 
 	if (!isPlaying || !m_walkChannel)
 	{
-		std::cout << "·£´ý Àç»ý"  << std::endl;
+		//std::cout << "·£´ý Àç»ý"  << std::endl;
 		size_t index = Random::Instance().Range(0, 4);
 		SoundManager::Instance().SFX_Shot(m_walkSounds[index], &m_walkChannel);
 	}

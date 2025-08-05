@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "Crop.h"
-#include "StealMessage.h"
+//#include "StealMessage.h"
 #include "SpawnManager.h"
 
+enum FarmRank;
 
 void SpawnManager::Awake()
 {
