@@ -14,7 +14,8 @@ class MainScene : public Scene
 	GameObject*				message		= nullptr;
 	GameObject*				bush = nullptr;
 
-	GameObject*				SubMissionArea = nullptr;
+	GameObject*				SubMissionArea1 = nullptr;
+	GameObject*				SubMissionArea2 = nullptr;
 
 	GameObject*			m_hungryGauge = nullptr;
 

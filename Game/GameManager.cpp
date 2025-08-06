@@ -1,17 +1,17 @@
 #include "pch.h"
 #include "GameManager.h"
+#include "Inventory.h"
 
-void GameManager::Awake()
+
+void GameManager::Init()
 {
 	m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
-}
-
-void GameManager::Start()
-{
-
+	m_inventory = SceneManager::Instance().GetActiveScene()->FindGameObject("Inventory")->GetComponent<Inventory>();
 }
 
 void GameManager::Update(float deltaTime)
 {
+
 }
+
 

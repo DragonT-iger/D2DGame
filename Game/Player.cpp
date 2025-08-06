@@ -44,6 +44,12 @@ void Player::OnTriggerEnter(Collider* other)
 	{
 		visibilty = Visibilty::Hide;
 	}
+
+	if (other->GetOwner()->GetTag() == "SubMissionArea")
+	{
+		std::vector<SlotData> temp = m_Inven->SubMissonItem();
+		
+	}
 }
 
 void Player::OnTriggerStay(Collider* other)
