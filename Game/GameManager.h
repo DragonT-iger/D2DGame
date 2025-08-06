@@ -11,9 +11,6 @@ enum class GameState
 };
 
 
-
-
-
 class GameManager : public MonoBehaviour
 {
 public:
@@ -30,6 +27,8 @@ public:
 	void Init();
 
 	int ReceiveScore(const std::vector<SlotData>& data);
+
+	int GetTotalScore() { return totalscore; }
 
 	enum class EndReason
 	{
@@ -60,8 +59,7 @@ private:
 	static int ep_count;
 	static int pk_count;
 	static int pt_count;
-	static int score;
-
+	static int totalscore;
 
 	EndReason m_endReason = EndReason::None;
 };

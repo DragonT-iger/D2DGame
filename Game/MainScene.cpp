@@ -200,11 +200,19 @@ void MainScene::Awake()
 	SAM1_T->SetPosition(Vector2{ 3580 ,0});
 	SAM2_T->SetPosition(Vector2{ -3580,0 });
 
+#pragma endregion
 
-	GameManager::Instance().Init();
+#pragma region Score
+
+	ui_score = Instantiate("UI_Score");
+	ui_score->AddComponent<UI_Score>();
+	ui_score->AddComponent<Text>();
+	ui_score->AddComponent<Image>();
+	ui_score->GetComponent<Transform>()->SetPosition(Vector2{ 1770,25 });
 
 #pragma endregion
 
+	GameManager::Instance().Init(); //player랑 inventory 연결.
 	Scene::Awake();
 }
 
@@ -216,9 +224,6 @@ void MainScene::Start()
 	Camera* cam = GetCamera();
 
 	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
-
-	//GameManager::Instance().Init();
-	//스타트에 쓰지 말라고 3번말했다.
 
 	Scene::Start();
 }

@@ -7,7 +7,7 @@
 int GameManager::ep_count = 0;
 int GameManager::pt_count = 0;
 int GameManager::pk_count = 0;
-int GameManager::score = 0;
+int GameManager::totalscore = 0;
 
 void GameManager::Init()
 {
@@ -25,25 +25,33 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 {
 	int curScore = 0;
 
+	int temp_ep = 0;
+	int temp_pt = 0;
+	int temp_pk = 0;
+
 	for (auto& cd : data)
 	{
 		switch (cd.type)
 		{
 		case Eggplant:
 			ep_count += cd.count;
+			temp_ep = cd.count;
 			break;
 		case Potato:
 			pt_count += cd.count;
+			temp_pt = cd.count;
 			break;
 		case Pumpkin:
 			pk_count += cd.count;
+			temp_pk = cd.count;
 			break;
 		}
 	}
 
-	curScore = (ep_count * 25) + (pt_count * 10) + (pk_count * 50);
+	curScore = (temp_ep * 25) + (temp_pt * 10) + (temp_pk * 50);
 
-	score += curScore;
+
+	totalscore += curScore;
 
 	return curScore;
 

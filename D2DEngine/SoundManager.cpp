@@ -18,26 +18,25 @@ bool SoundManager::Init()
 	{
 		result = FMOD::System_Create(&m_coreSystem);
 		if (result != FMOD_OK) { FMOD_LOG(result); FMOD_ASSERT(result); return false; }
-	
 
-	//3D Sound 추가시 수정
-	result = m_coreSystem->init(ChannelCount, FMOD_INIT_NORMAL, nullptr);
-	if (result != FMOD_OK) { FMOD_LOG(result); FMOD_ASSERT(result); return false; }
 
-	m_coreSystem->getMasterChannelGroup(&m_mainGroup);
+		//3D Sound 추가시 수정
+		result = m_coreSystem->init(ChannelCount, FMOD_INIT_NORMAL, nullptr);
+		if (result != FMOD_OK) { FMOD_LOG(result); FMOD_ASSERT(result); return false; }
 
-	if(!m_bgmGroup) m_coreSystem->createChannelGroup("BGM", &m_bgmGroup);
-	if(!m_sfxGroup) m_coreSystem->createChannelGroup("SFX", &m_sfxGroup);
-	if(!m_uiGroup) m_coreSystem->createChannelGroup("UI", &m_uiGroup);
+		m_coreSystem->getMasterChannelGroup(&m_mainGroup);
 
-	m_mainGroup->addGroup(m_bgmGroup);
-	m_mainGroup->addGroup(m_sfxGroup);
-	m_mainGroup->addGroup(m_uiGroup);
+		if (!m_bgmGroup) m_coreSystem->createChannelGroup("BGM", &m_bgmGroup);
+		if (!m_sfxGroup) m_coreSystem->createChannelGroup("SFX", &m_sfxGroup);
+		if (!m_uiGroup) m_coreSystem->createChannelGroup("UI", &m_uiGroup);
 
-	ConvertBGMSource(ResourceManager::Instance().GetBGMPaths());	//args paths
-	ConvertSFXSource(ResourceManager::Instance().GetSFXPaths());	//args paths
-	ConvertUISource(ResourceManager::Instance().GetUIPaths());		//args paths
+		m_mainGroup->addGroup(m_bgmGroup);
+		m_mainGroup->addGroup(m_sfxGroup);
+		m_mainGroup->addGroup(m_uiGroup);
 
+		ConvertBGMSource(ResourceManager::Instance().GetBGMPaths());	//args paths
+		ConvertSFXSource(ResourceManager::Instance().GetSFXPaths());	//args paths
+		ConvertUISource(ResourceManager::Instance().GetUIPaths());		//args paths
 	}
 	return true;
 }

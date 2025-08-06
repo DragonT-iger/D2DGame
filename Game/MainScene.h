@@ -18,7 +18,7 @@ class MainScene : public Scene
 	GameObject*				SubMissionArea2 = nullptr;
 
 	GameObject*			m_hungryGauge = nullptr;
-
+	GameObject*				ui_score = nullptr;
 
 
 	//Farmer
