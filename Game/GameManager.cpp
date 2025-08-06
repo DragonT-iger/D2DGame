@@ -21,7 +21,6 @@ void GameManager::LoadEndingScene(EndReason reason)
 	SceneManager::Instance().LoadScene(std::unique_ptr<EndingScene>());
 }
 
-void GameManager::Update(float deltaTime){}
 int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 {
 	int curScore = 0;
