@@ -42,9 +42,3 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 
 }
 
-void GameManager::Update(float deltaTime)
-{
-
-}
-
-

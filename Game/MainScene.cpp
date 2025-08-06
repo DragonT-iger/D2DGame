@@ -16,6 +16,7 @@
 #include "Timer.h"
 #include "HungryGauge.h"
 #include "Baby.h"
+#include "UI_Score.h"
 
 void MainScene::Awake()
 {
