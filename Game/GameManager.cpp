@@ -15,7 +15,3 @@ void GameManager::Update(float deltaTime)
 {
 }
 
-void GameManager::GetCropsFromPlayer()
-{
-
-}

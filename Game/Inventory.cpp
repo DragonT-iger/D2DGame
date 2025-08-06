@@ -56,7 +56,7 @@ void Inventory::Update(float deltaTime)
 		int w = GetWeight();
 		auto datas = SubMissonItem();
 
-		std::cout << "현재 무게 : " << w << std::endl;
+		//std::cout << "현재 무게 : " << w << std::endl;
 
 		for (const auto& data : datas)
 		{
@@ -178,7 +178,7 @@ float Inventory::GetWeight()
 			weight += w;
 		}
 	}
-	std::cout << weight << std::endl;
+	//std::cout << weight << std::endl;
 	return weight;
 }
 

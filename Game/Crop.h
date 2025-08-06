@@ -37,6 +37,8 @@ public:
 
 	//void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, std::shared_ptr<AnimationClip> clip = nullptr, GameObject* msg);
 	void SetCropData(FarmRank rank, Crops type, std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> gameSprites, GameObject* eftobj = nullptr);
+
+	void Destroy();
 protected:
 	float m_growSpeed_S;
 	float m_growSpeed_M;

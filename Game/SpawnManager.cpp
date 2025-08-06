@@ -68,6 +68,7 @@ void SpawnManager::Update(float deltaTime)
 void SpawnManager::DestroyObject(GameObject* obj)
 {
 	auto rank = obj->GetComponent<Crop>()->GetFarmRank();
+	obj->GetComponent<Crop>()->Destroy();
 
 	switch (rank)
 	{

@@ -101,3 +101,8 @@ void Crop::SetCropData(
 
 	isSpawn = true;
 }
+
+void Crop::Destroy()
+{
+	SceneManager::Instance().GetActiveScene()->Destroy(m_eftObj);
+}

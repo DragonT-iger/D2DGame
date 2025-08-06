@@ -17,4 +17,6 @@ private:
 	Player*												m_player;
 	std::vector<std::string>		m_walkSounds;
 	FMOD::Channel*	m_walkChannel = nullptr;
+
+	std::vector<FMOD::Channel*>	m_sfxChannels;
 };

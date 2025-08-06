@@ -14,6 +14,8 @@ void PlayerSound::Awake()
 	m_walkSounds.push_back("farmer_Footstep5.mp3");
 
 	m_walkChannel = nullptr;
+
+	m_sfxChannels.push_back(m_walkChannel);
 }
 
 void PlayerSound::Start()
@@ -30,13 +32,16 @@ void PlayerSound::PlaySound()
 	switch (m_player->action)
 	{
 	case Action::Idle:
+		m_walkChannel = nullptr;
 		break;
 	case Action::Walk:
 		PlayWalk();
 		break;
 	case Action::Hit:
+		m_walkChannel = nullptr;
 		break;
 	case Action::Steal:
+		m_walkChannel = nullptr;
 		break;
 	}
 }
@@ -52,8 +57,8 @@ void PlayerSound::PlayWalk()
 			if (result != FMOD_OK)
 			{
 				std::cerr << "FMOD ลอมü" << isPlaying << std::endl;
-				return;
 			}
+			return;
 		}
 		else
 		{
