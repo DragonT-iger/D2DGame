@@ -41,16 +41,7 @@ void Inventory::Update(float deltaTime)
 	{
 		AddCrop(Pumpkin, S);
 	}
-	if (Input.GetKeyPressed(Keycode::X))
-	{
-		ChangeSlot();
-		std::cout << m_curSlotNum << std::endl;
-		std::cout << m_curSlot->GetData().count << std::endl;
-	}
-	if (Input.GetKeyPressed(Keycode::C))
-	{
-		ThrowItem();
-	}
+
 	if (Input.GetKeyPressed(Keycode::A))
 	{
 		int w = GetWeight();

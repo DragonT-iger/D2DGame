@@ -26,7 +26,7 @@ private:
 	Animator* m_animator = nullptr;
 
 	SpawnManager* m_SpawnManager = nullptr;
-	GameObject* m_Inventory_Obj = nullptr;
+	Inventory* m_inven = nullptr;
 
 	float* p_Spd = nullptr;
 };

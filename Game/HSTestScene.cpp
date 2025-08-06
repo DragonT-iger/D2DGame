@@ -57,7 +57,7 @@ void HSTestScene::Awake()
 	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
 
 	SoundManager::Instance().Init();
-	SoundManager::Instance().BGM_Shot("sample_ten.wav");
+	SoundManager::Instance().BGM_Shot("sample_ten.wav", nullptr);
 
 	m_background = Instantiate("background");
 

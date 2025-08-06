@@ -9,9 +9,13 @@ public:
 	void Update();
 	void Shutdown();
 
-	void BGM_Shot(const std::string& eventPath, FMOD::Channel** pChannel = nullptr);
-	void SFX_Shot(const std::string& eventPath, FMOD::Channel** pChannel = nullptr);
-	void UI_Shot(const std::string& eventPath, FMOD::Channel** pChannel = nullptr);
+	void AddBGMGroup(FMOD::ChannelGroup* ChannelGroup);
+	void AddSFXGroup(FMOD::ChannelGroup* ChannelGroup);
+	void AddUIGroup(FMOD::ChannelGroup* ChannelGroup);
+
+	void BGM_Shot(const std::string& fileName, FMOD::ChannelGroup* ChannelGroup = nullptr);
+	void SFX_Shot(const std::string& fileName, FMOD::ChannelGroup* ChannelGroup = nullptr);
+	void UI_Shot(const std::string& fileName, FMOD::ChannelGroup* ChannelGroup = nullptr);
 
 	void SetVolume_Main(float volume); //other volume = mainV * otherV;
 	void SetVolume_BGM(float volume);
@@ -23,6 +27,8 @@ public:
 	void ConvertBGMSource(const std::unordered_map<std::string, std::filesystem::path>& container);
 	void ConvertSFXSource(const std::unordered_map<std::string, std::filesystem::path>& container);
 	void ConvertUISource(const std::unordered_map<std::string, std::filesystem::path>& container);
+
+	FMOD::System* GetCoreSystem() { return m_coreSystem; }
 
 private:
 	SoundManager()                                = default;
