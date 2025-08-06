@@ -150,6 +150,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="FarmerManager.cpp" />
     <ClCompile Include="FarmerZone.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObjectFindTest.cpp" />
     <ClCompile Include="HSTestScene.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -181,6 +182,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="Farmer.h" />
     <ClInclude Include="FarmerManager.h" />
     <ClInclude Include="FarmerZone.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ExampleScene.h" />
     <ClInclude Include="GameObjectFindTest.h" />

@@ -6,6 +6,8 @@ void Inventory::Awake()
 	m_itemSprite.emplace(Eggplant, ResourceManager::Instance().LoadTexture("eggplant_item.png"));
 	m_itemSprite.emplace(Potato, ResourceManager::Instance().LoadTexture("potato_item.png"));
 	m_itemSprite.emplace(Pumpkin, ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
+	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("inventorySlot.png"));
+	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("CurSlot.png"));
 }
 
 void Inventory::Start()
@@ -20,6 +22,9 @@ void Inventory::Start()
 
 	m_curSlotNum = 0;
 	m_curSlot = m_slots[m_curSlotNum];
+	m_bgImage = m_curSlot->GetOwner()->GetComponent<Transform>()->GetParent()->GetOwner()->GetComponent<Image>();
+	D2D1_SIZE_F size = m_bgImage->GetSize();
+	m_bgImage->SetBitmap(m_SlotSprites[1], size);
 }
 
 void Inventory::Update(float deltaTime)
@@ -99,7 +104,12 @@ void Inventory::ChangeSlot()
 	if (m_curSlotNum > maxSlotNum)
 		m_curSlotNum = 0;
 
+	D2D1_SIZE_F size = m_bgImage->GetSize();
+	m_bgImage->SetBitmap(m_SlotSprites[0], size);
+
 	m_curSlot = m_slots[m_curSlotNum];
+	m_bgImage = m_curSlot->GetOwner()->GetComponent<Transform>()->GetParent()->GetOwner()->GetComponent<Image>();
+	m_bgImage->SetBitmap(m_SlotSprites[1], size);
 }
 
 void Inventory::ThrowItem()

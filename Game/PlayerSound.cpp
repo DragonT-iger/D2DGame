@@ -49,9 +49,11 @@ void PlayerSound::PlayWalk()
 		FMOD_RESULT result = m_walkChannel->isPlaying(&isPlaying);
 		if (result != FMOD_OK || isPlaying)
 		{
-			if(result != FMOD_OK)
-				//std::cerr << "FMOD ลอมü" << isPlaying << std::endl;
-			return;
+			if (result != FMOD_OK)
+			{
+				std::cerr << "FMOD ลอมü" << isPlaying << std::endl;
+				return;
+			}
 		}
 		else
 		{

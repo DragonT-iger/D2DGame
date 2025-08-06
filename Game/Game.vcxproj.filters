@@ -46,6 +46,9 @@
     <Filter Include="Scripts\Bush">
       <UniqueIdentifier>{4595413d-120b-4a53-a321-2e1511ebb03e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\GameManager">
+      <UniqueIdentifier>{b72e3451-2845-4bc8-be41-97ea2b3d1d47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -138,6 +141,9 @@
     <ClCompile Include="ArtTestView.cpp">
       <Filter>TestScene</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Scripts\GameManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -226,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="ArtTestView.h">
       <Filter>TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Scripts\GameManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
