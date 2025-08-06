@@ -25,8 +25,12 @@ public:
 
 	void SetEmpty();
 
+	void SetText();
+
 private:
 	SlotData m_data = { true, Nothing, 0 };
 
 	Image* m_image;
+
+	Text* m_text;
 };

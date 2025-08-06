@@ -14,12 +14,11 @@ void PlayerController::Awake()
 void PlayerController::Start()
 {
 	m_Inventory_Obj = GameObject::Find("Inventory");
+	p_Spd = &(m_Player->m_spd);
 }
 
 void PlayerController::Update(float deltaTime)
 {
-	p_Spd = &(m_Player->m_spd);
-
 	if (m_Player->state == State::Alive)
 	{
 		int x = Input.GetAxisRaw("Horizontal");
@@ -105,8 +104,8 @@ void PlayerController::OnTriggerStay(Collider* other)
 			Size crop_Size = crop_ptr->GetComponent<Crop>()->GetSize();
 
 			m_Inventory_Obj->GetComponent<Inventory>()->AddCrop(crop_Type, crop_Size);
-			m_Inventory_Obj->GetComponent<Inventory>()->SetInvenDirty(true);
 
+			m_Inventory_Obj->GetComponent <Inventory>()->GetWeight();
 
 			m_SpawnManager->DestroyObject(other->GetOwner());
 		}

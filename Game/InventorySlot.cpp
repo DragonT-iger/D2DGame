@@ -7,12 +7,16 @@ void Slot::Start()
 {
 	m_image = GetComponent<Image>();
 	m_image->SetActive(false);
+	m_text = GetComponent<Text>();
+	m_text->SetOrderLayer(3);
 }
 
 void Slot::Update(float deltaTime)
 {
 	if (!m_data.isEmpty && m_data.count == 0)
 		SetEmpty();
+
+	SetText();
 }
 
 void Slot::AddItem(Crops type, Size count, Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
@@ -69,4 +73,12 @@ void Slot::SetEmpty()
 
 	m_data.isEmpty = true;
 	m_data.type = Nothing;
+}
+
+void Slot::SetText()
+{
+	std::wstring ws_Count = std::to_wstring(m_data.count);
+
+	m_text->SetText(ws_Count, {50,50}, L"Maplestory", D2D1::ColorF::Black);
+	m_text->SetFontSize(15.0f);
 }

@@ -24,6 +24,8 @@ public:
 
 	void SetFontSize(size_t size) { fontSize = size; }
 
+	void SetOrderLayer(size_t num) { m_renderInfo.orderLayer = num; }
+
 	const UIRenderInfo& GetRenderInfo() {
 		m_renderInfo.fontSize = fontSize;
 		m_renderInfo.m_text = text.c_str();

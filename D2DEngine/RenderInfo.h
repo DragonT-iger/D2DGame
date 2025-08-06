@@ -26,7 +26,7 @@ struct UIRenderInfo {
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_bitmap = nullptr;
 	D2D1_RECT_F													m_destRect;
 	D2D1_RECT_F													m_srcRect;
-
+	D2D1_RECT_F													m_layoutRect;
 	D2D1::ColorF									m_color = D2D1::ColorF::White;
 	
 	bool operator<(const UIRenderInfo& rhs)
