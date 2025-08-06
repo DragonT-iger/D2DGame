@@ -13,7 +13,7 @@ void PlayerController::Awake()
 
 void PlayerController::Start()
 {
-	m_Inventory_Obj = GameObject::Find("Inventory");
+	m_inven = GameObject::Find("Inventory")->GetComponent<Inventory>();
 	p_Spd = &(m_Player->m_spd);
 }
 
@@ -28,6 +28,15 @@ void PlayerController::Update(float deltaTime)
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
+
+		if (Input.GetKeyPressed(Keycode::X))
+		{
+			m_inven->ChangeSlot();
+		}
+		if (Input.GetKeyPressed(Keycode::C))
+		{
+			m_inven->ThrowItem();
+		}
 
 
 		switch (static_cast<int>(m_Player->action))
@@ -105,8 +114,8 @@ void PlayerController::OnTriggerStay(Collider* other)
 			Crops crop_Type = crop_ptr->GetComponent<Crop>()->GetCropType();
 			Size crop_Size = crop_ptr->GetComponent<Crop>()->GetSize();
 
-			m_Inventory_Obj->GetComponent<Inventory>()->AddCrop(crop_Type, crop_Size);
-			m_Inventory_Obj->GetComponent <Inventory>()->GetWeight();
+			m_inven->AddCrop(crop_Type, crop_Size);
+			m_inven->GetWeight();
 
 			m_SpawnManager->DestroyObject(other->GetOwner());
 

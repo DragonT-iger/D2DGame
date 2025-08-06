@@ -108,12 +108,31 @@ void SoundManager::Shutdown()
 	m_coreSystem->release();
 }
 
-void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel** pOutChannel)
+void SoundManager::AddBGMGroup(FMOD::ChannelGroup* ChannelGroup)
+{
+	m_bgmGroup->addGroup(ChannelGroup);
+}
+
+void SoundManager::AddSFXGroup(FMOD::ChannelGroup* ChannelGroup)
+{
+	m_sfxGroup->addGroup(ChannelGroup);
+}
+
+void SoundManager::AddUIGroup(FMOD::ChannelGroup* ChannelGroup)
+{
+	m_uiGroup->addGroup(ChannelGroup);
+}
+
+void SoundManager::BGM_Shot(const std::string& fileName, FMOD::ChannelGroup* ChannelGroup)
 {
 	std::cout << fileName << std::endl;
 
+	FMOD::Channel* pChannel = nullptr;
+
 	bool isBGMPlaying = false;
-	if (m_bgmGroup->isPlaying(&isBGMPlaying))
+	m_bgmGroup->isPlaying(&isBGMPlaying);
+
+	if (isBGMPlaying)
 	{
 		m_bgmGroup->stop();
 	}
@@ -123,27 +142,31 @@ void SoundManager::BGM_Shot(const std::string& fileName, FMOD::Channel** pOutCha
 
 	if (it != L_BGM.end())
 	{
-		m_coreSystem->playSound(it->second, m_bgmGroup, false, pOutChannel);
+		m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
 	}
 }
 
-void SoundManager::SFX_Shot(const std::string& fileName, FMOD::Channel** pOutChannel)
+void SoundManager::SFX_Shot(const std::string& fileName, FMOD::ChannelGroup* ChannelGroup)
 {
+	FMOD::Channel* pChannel = nullptr;
+
 	auto it = L_SFX.find(fileName);
 
 	if (it != L_SFX.end())
 	{
-		m_coreSystem->playSound(it->second, m_sfxGroup, false, pOutChannel);
+		m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
 	}
 }
 
-void SoundManager::UI_Shot(const std::string& fileName, FMOD::Channel** pOutChannel)
+void SoundManager::UI_Shot(const std::string& fileName, FMOD::ChannelGroup* ChannelGroup)
 {
+	FMOD::Channel* pChannel = nullptr;
+
 	auto it = L_UI.find(fileName);
 
 	if (it != L_UI.end())
 	{
-		m_coreSystem->playSound(it->second, m_uiGroup, false, pOutChannel);
+		m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
 	}
 }
 

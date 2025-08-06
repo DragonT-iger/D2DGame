@@ -13,9 +13,8 @@ void PlayerSound::Awake()
 	m_walkSounds.push_back("farmer_Footstep4.mp3");
 	m_walkSounds.push_back("farmer_Footstep5.mp3");
 
-	m_walkChannel = nullptr;
-
-	m_sfxChannels.push_back(m_walkChannel);
+	SoundManager::Instance().GetCoreSystem()->createChannelGroup("walk", &m_walkGroup);
+	SoundManager::Instance().AddSFXGroup(m_walkGroup);
 }
 
 void PlayerSound::Start()
@@ -32,26 +31,23 @@ void PlayerSound::PlaySound()
 	switch (m_player->action)
 	{
 	case Action::Idle:
-		m_walkChannel = nullptr;
 		break;
 	case Action::Walk:
 		PlayWalk();
 		break;
 	case Action::Hit:
-		m_walkChannel = nullptr;
 		break;
 	case Action::Steal:
-		m_walkChannel = nullptr;
 		break;
 	}
 }
 
 void PlayerSound::PlayWalk()
 {
-	if (m_walkChannel)
+	if (m_walkGroup)
 	{
 		bool isPlaying;
-		FMOD_RESULT result = m_walkChannel->isPlaying(&isPlaying);
+		FMOD_RESULT result = m_walkGroup->isPlaying(&isPlaying);
 		if (result != FMOD_OK || isPlaying)
 		{
 			if (result != FMOD_OK)
@@ -60,13 +56,9 @@ void PlayerSound::PlayWalk()
 			}
 			return;
 		}
-		else
-		{
-			m_walkChannel = nullptr;
-		}
 	}
 
 	size_t index = Random::Instance().Range(0, 4);
 	//std::cout << "·£´ý Àç»ý : " << index << std::endl;
-	SoundManager::Instance().SFX_Shot(m_walkSounds[index], &m_walkChannel);
+	SoundManager::Instance().SFX_Shot(m_walkSounds[index], m_walkGroup);
 }
