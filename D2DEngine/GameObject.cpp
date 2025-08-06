@@ -35,8 +35,6 @@ void GameObject::Awake() {
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            if (IsActive())
-                if(mb->IsActive())
                     mb->Awake();
     m_isIterating = false;
     FlushPending();
@@ -48,8 +46,6 @@ void GameObject::Start() {
     m_isIterating = true;
     for (auto& comp : m_components)
         if (auto* mb = dynamic_cast<MonoBehaviour*>(comp.get()))
-            if(IsActive())
-                if (mb->IsActive())
                     mb->Start();
     m_isIterating = false;
     FlushPending();
