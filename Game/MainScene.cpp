@@ -14,6 +14,7 @@
 #include "YSort.h"
 #include "Timer.h"
 #include "HungryGauge.h"
+#include "Baby.h"
 
 void MainScene::Awake()
 {
@@ -41,6 +42,7 @@ void MainScene::Awake()
 	player->AddComponent<PlayerSound>();
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
+	player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
 
@@ -108,9 +110,9 @@ void MainScene::Awake()
 	//Farmer
 
 	//m_player2 = Instantiate("Player2");
-	player->SetTag("Player"); //<<- ÀÌ°Å ÇØÁÖ°í
+	player->SetTag("Player"); //<<- ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
 
-	SetPlayer(player); //<-- ¾À¿¡ Á¤º¸ ¾Ë·ÁÁÖ°í
+	SetPlayer(player); //<-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½Ö°ï¿½
 
 
 	m_farmerManager = Instantiate("FarmerManager");

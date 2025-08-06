@@ -40,6 +40,7 @@ public:
 	//
 	//State GetState() { return state; }
 	//Action GetAction() { return action; }
+
 	Visibilty GetVisible() { return visibilty; };
 
 	float GetFullness() { return m_fullness; }
