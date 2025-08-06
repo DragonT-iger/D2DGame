@@ -26,6 +26,18 @@ void TitleScene::Awake()
 
 	m_Title->GetComponent<Transform>()->SetPosition({ 960, 440 });
 
+	m_slidebar = Instantiate("testbar");
+	auto img2 = m_slidebar->AddComponent<Image>();
+	auto sb = m_slidebar->AddComponent<Slide_Bar>();
+	auto button2 = m_slidebar->AddComponent<Button>();
+	m_slidebar->GetComponent<Transform>()->SetPosition({ 960, 700 });
+
+	img2->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), {150, 30});
+
+	sb->RegisterButton(button2);
+
+	
+
 	// 일단은 Awake에서 씬을 초기화하는 걸로
 	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)
 	Scene::Awake();

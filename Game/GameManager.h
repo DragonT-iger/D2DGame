@@ -62,6 +62,5 @@ private:
 	static int pt_count;
 	static int score;
 
-
 	EndReason m_endReason = EndReason::None;
 };

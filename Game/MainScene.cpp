@@ -165,7 +165,6 @@ void MainScene::Awake()
 	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
 	m_slot3->AddComponent<Text>();
 
-	SoundManager::Instance().Init();
 	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
 	m_background = Instantiate("background");

@@ -11,8 +11,11 @@ public:
 	void UpdateWidthRatio(float v);
 	void UpdateHeightRatio(float v);
 
+	void RegisterButton(Button* handleButton);
+
 private:
-	Image*					 m_Image;
-	D2D1_SIZE_F			m_orignal;
+	Image*						m_Image = nullptr;
+	Button*					 m_button = nullptr;
+	D2D1_SIZE_F			m_orignal = { 0,0 };
 	float						value = 1.0f; //ÃÖ´ñ°ª 1.0
 };
