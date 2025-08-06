@@ -1,5 +1,6 @@
 #pragma once
 class Inventory;
+struct SlotData;
 
 enum class GameState
 {
@@ -25,6 +26,8 @@ public:
 	void Init();
 	GameState GetGameState() { return m_GameState; }
 	void SetGameState(GameState s) { m_GameState = s; }
+
+	int ReceiveScore(const std::vector<SlotData>& data);
 
 private:
 	GameManager() = default;
