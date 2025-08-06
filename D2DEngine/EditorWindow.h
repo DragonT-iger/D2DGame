@@ -7,6 +7,7 @@ public:
     void Draw(float deltaTime);   // BeginFrame 에서 호출
 
 private:
+    void DrawDebug();
     void DrawHierarchy();
     void DrawInspector();
 

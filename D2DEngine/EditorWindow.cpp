@@ -1,21 +1,57 @@
 #include "pch.h"
 #include "EditorWindow.h"
+#include "../Game/TestTitleScene.h";
+#include "../Game/MainScene.h"
+#include "../Game/EndingScene.h"
+//#include "../Game/
+
 #ifdef _DEBUG
 void EditorWindow::Draw(float deltaTime)
 {
+    DrawDebug();
     DrawHierarchy();
     DrawInspector();
+}
+
+void EditorWindow::DrawDebug() {
+    static bool m_showGrid = false;
+    if (ImGui::Checkbox("Show Grid", &m_showGrid)) {
+        Scene* curScene = SceneManager::Instance().GetActiveScene();
+        curScene->SetGridOn(m_showGrid);
+    }
+
+    static const char* kSceneNames[] = { "TitleScene", "MainScene", "EndingScene" };
+    static constexpr int kSceneCount = sizeof(kSceneNames) / sizeof(kSceneNames[0]);
+
+    static int selected = 0;
+    ImGui::Combo("Scene", &selected, kSceneNames, kSceneCount);
+
+    ImGui::SameLine();
+    if (ImGui::Button("Load"))
+    {
+        // 선택된 이름에 따라 실제 씬 객체 생성 → 고유포인터로 넘김
+        std::unique_ptr<Scene> newScene;
+
+        switch (selected)
+        {
+            case 0: newScene = std::make_unique<TitleScene>();   break;
+            case 1: newScene = std::make_unique<MainScene>();      break;
+            case 2: newScene = std::make_unique<EndingScene>();  break;
+            default: assert(false && "Invalid scene index");     return;
+        }
+
+        SceneManager::Instance().LoadScene(std::move(newScene));
+
+        m_selected = nullptr;        // Hierarchy 선택 리셋
+        m_componentOpen.clear();     // Inspector 폴드 상태 리셋
+    }
 }
 
 void EditorWindow::DrawHierarchy()
 {
     auto* scene = SceneManager::Instance().GetActiveScene();
     if (!scene) return;
-    static bool m_showGrid = false;
-    if (ImGui::Checkbox("Show Grid", &m_showGrid)) {
-        Scene* curScene = SceneManager::Instance().GetActiveScene();
-        curScene->SetGridOn(m_showGrid);
-    }
+
     ImGui::Begin("Hierarchy");
     for (auto& goPtr : scene->GetGameObjects())
     {

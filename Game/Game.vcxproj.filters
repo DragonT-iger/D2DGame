@@ -159,6 +159,9 @@
     <ClCompile Include="Baby.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="EndingScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -258,6 +261,9 @@
       <Filter>Scripts\Timer</Filter>
     </ClInclude>
     <ClInclude Include="Baby.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

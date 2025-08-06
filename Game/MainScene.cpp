@@ -190,6 +190,9 @@ void MainScene::Awake()
 	SubMissionArea1->AddComponent<BoxCollider>();
 	SubMissionArea2->AddComponent<BoxCollider>();
 
+
+	GameManager::Instance().Init();
+
 #pragma endregion
 
 	Scene::Awake();
@@ -204,7 +207,8 @@ void MainScene::Start()
 
 	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
 
-	GameManager::Instance().Init();
+	//GameManager::Instance().Init();
+	//스타트에 쓰지 말라고 3번말했다.
 
 	Scene::Start();
 }

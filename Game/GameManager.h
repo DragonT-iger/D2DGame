@@ -9,6 +9,10 @@ enum class GameState
 	End,
 };
 
+
+
+
+
 class GameManager : public MonoBehaviour
 {
 public:
@@ -25,6 +29,19 @@ public:
 	void Init();
 	GameState GetGameState() { return m_GameState; }
 	void SetGameState(GameState s) { m_GameState = s; }
+
+	enum class EndReason
+	{
+		None,
+		BabyStarved,
+		PlayerStarved,
+		Win
+	};
+
+
+	void LoadEndingScene(EndReason reason);
+	EndReason GetEndReason() { return m_endReason; }
+	// 슬라이더 value 없음? 그걸로 연동하는데 보통
 
 private:
 	GameManager() = default;
@@ -43,4 +60,7 @@ private:
 	static int pk_count;
 	static int pt_count;
 	static int score;
+
+
+	EndReason m_endReason = EndReason::None;
 };
