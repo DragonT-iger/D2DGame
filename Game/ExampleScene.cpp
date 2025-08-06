@@ -41,7 +41,6 @@ void ExampleScene::Awake()
 	//b->AddEventSprite(b1, ButtonEvent::Highlight);
 	//b->AddEventSprite(b3, ButtonEvent::Pressed);
 
-	//SoundManager::Instance().Init();
 	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
 	////m_button->GetComponent<Transform>()->Translate({ 100, 100 });

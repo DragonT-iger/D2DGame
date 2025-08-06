@@ -18,7 +18,6 @@ bool SoundManager::Init()
 	{
 		result = FMOD::System_Create(&m_coreSystem);
 		if (result != FMOD_OK) { FMOD_LOG(result); FMOD_ASSERT(result); return false; }
-	}
 	
 
 	//3D Sound 추가시 수정
@@ -39,6 +38,7 @@ bool SoundManager::Init()
 	ConvertSFXSource(ResourceManager::Instance().GetSFXPaths());	//args paths
 	ConvertUISource(ResourceManager::Instance().GetUIPaths());		//args paths
 
+	}
 	return true;
 }
 

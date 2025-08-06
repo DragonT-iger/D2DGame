@@ -32,6 +32,9 @@ bool Game::Initialize()
     ResourceManager::Instance().SetResourcePath(std::filesystem::current_path() /"Assets");
     ResourceManager::Instance().LoadPath();
 
+    //사운드 매니저 초기화
+
+
 
     // 맨 처음 씬 만들고 로드하는법 수정됨 아래와 같이
     
