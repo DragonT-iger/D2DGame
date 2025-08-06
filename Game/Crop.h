@@ -8,10 +8,10 @@ enum Crops {
 };
 
 enum Size {
-	S = 0,
-	M = 1,
-	L = 2,
-	XL = 3,
+	Born = 0,
+	S = 1,
+	M = 2,
+	L = 3,
 };
 
 enum FarmRank
@@ -25,7 +25,7 @@ class Crop : public MonoBehaviour
 {
 public:
 
-	//void Awake()		  override;
+	void Awake()		  override;
 	void Update(float dt) override;
 
 	Size GetSize() { return m_size; }
@@ -44,7 +44,7 @@ protected:
 	float m_growSpeed_M;
 	float m_growSpeed_L;
 	float m_elapsedTime = 0.0f;
-	Size m_size = Size::S;
+	Size m_size = Size::Born;
 	Size m_maxSize;
 	Crops	m_type;
 
