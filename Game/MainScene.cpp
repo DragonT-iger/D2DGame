@@ -12,6 +12,7 @@
 #include "SpawnManager.h"
 #include "PlayerSound.h"
 #include "YSort.h"
+#include "GameManager.h"
 
 void MainScene::Awake()
 {
@@ -20,6 +21,7 @@ void MainScene::Awake()
 
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+
 
 //begin player-----
 	player = Instantiate("Player");
@@ -38,7 +40,6 @@ void MainScene::Awake()
 	
 //end player-----
 
-	SubMissionArea = Instantiate("SubMissionArea");
 ////begin crop-----
 //	crop = Instantiate("Crop");
 //	crop->SetTag("crop");
@@ -163,6 +164,19 @@ void MainScene::Awake()
 
 	player->GetComponent<PlayerController>()->SetSpawnManager(m_SpawnManager->GetComponent<SpawnManager>());
 
+#pragma  region SubMissionArea
+
+	SubMissionArea1 = Instantiate("SubMissionArea1");
+	SubMissionArea2 = Instantiate("SubMissionArea2");
+
+	SubMissionArea1->SetTag("SubMissionArea");
+	SubMissionArea2->SetTag("SubMissionArea");
+
+	SubMissionArea1->AddComponent<BoxCollider>();
+	SubMissionArea2->AddComponent<BoxCollider>();
+
+#pragma endregion
+
 	Scene::Awake();
 }
 
@@ -175,6 +189,7 @@ void MainScene::Start()
 
 	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
 
+	GameManager::Instance().Init();
 
 	Scene::Start();
 }
