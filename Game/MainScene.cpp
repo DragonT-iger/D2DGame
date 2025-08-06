@@ -13,6 +13,9 @@
 #include "PlayerSound.h"
 #include "YSort.h"
 #include "GameManager.h"
+#include "Timer.h"
+#include "HungryGauge.h"
+#include "Baby.h"
 
 void MainScene::Awake()
 {
@@ -21,6 +24,11 @@ void MainScene::Awake()
 
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+
+//Timer
+	m_Timer = Instantiate("SceneTimer");
+	m_Timer->AddComponent<Timer>();
+
 
 
 //begin player-----
@@ -35,8 +43,15 @@ void MainScene::Awake()
 	player->AddComponent<PlayerSound>();
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
+	player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
+
+	m_hungryGauge = Instantiate("hungryGauge");
+	m_hungryGauge->AddComponent<Image>();
+	m_hungryGauge->AddComponent<Slide_Bar>();
+	m_hungryGauge->AddComponent<HungryGauge>();
+	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 700, 800 });
 	
 //end player-----
 
@@ -95,9 +110,9 @@ void MainScene::Awake()
 	//Farmer
 
 	//m_player2 = Instantiate("Player2");
-	player->SetTag("Player"); //<<- ÀÌ°Å ÇØÁÖ°í
+	player->SetTag("Player"); //<<- ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
 
-	SetPlayer(player); //<-- ¾À¿¡ Á¤º¸ ¾Ë·ÁÁÖ°í
+	SetPlayer(player); //<-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½Ö°ï¿½
 
 
 	m_farmerManager = Instantiate("FarmerManager");

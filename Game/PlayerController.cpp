@@ -88,6 +88,8 @@ void PlayerController::Update(float deltaTime)
 		//작물과 충돌중일 때 Z키를 누르면 Action -> Steal로 전환
 	}
 
+	
+	
 }
 
 
@@ -108,6 +110,7 @@ void PlayerController::OnTriggerStay(Collider* other)
 			m_Inventory_Obj->GetComponent <Inventory>()->GetWeight();
 
 			m_SpawnManager->DestroyObject(other->GetOwner());
+
 		}
 	}
 }

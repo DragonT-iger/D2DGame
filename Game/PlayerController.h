@@ -17,7 +17,9 @@ public:
 	//void OnTriggerExit(Collider* other)  override;
 
 	void SetSpawnManager(SpawnManager* spm_ptr) { m_SpawnManager = spm_ptr; }
+
 private:
+
 
 	Player* m_Player = nullptr;
 	Transform* m_transform = nullptr;
