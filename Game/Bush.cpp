@@ -19,6 +19,7 @@ void Bush::Start()
 	m_spriteRenderer->SetBitmap(bush_sprite);
 
 	m_boxCol->SetSize(Vector2{ 200,200 });
+	m_boxCol->SetOffset({ 0, -50 });
 }
 
 void Bush::OnTriggerEnter(Collider* other)

@@ -49,6 +49,12 @@
     <Filter Include="Scripts\GameManager">
       <UniqueIdentifier>{b72e3451-2845-4bc8-be41-97ea2b3d1d47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\HungryGauge">
+      <UniqueIdentifier>{c206c57c-0f20-4854-a129-b35d8bd0805b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Timer">
+      <UniqueIdentifier>{b3f17829-6704-44ed-83fd-325d430a8a81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -144,6 +150,12 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Scripts\GameManager</Filter>
     </ClCompile>
+    <ClCompile Include="HungryGauge.cpp">
+      <Filter>Scripts\HungryGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Scripts\Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -235,6 +247,12 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Scripts\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="HungryGauge.h">
+      <Filter>Scripts\HungryGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Scripts\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

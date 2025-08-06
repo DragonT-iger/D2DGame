@@ -16,12 +16,15 @@ class MainScene : public Scene
 
 	GameObject*				SubMissionArea = nullptr;
 
+	GameObject*			m_hungryGauge = nullptr;
+
 
 
 	//Farmer
 
 	GameObject* m_farmerManager = nullptr;
 
+	GameObject* m_Timer;
 
 	GameObject* m_inventory = nullptr;
 	GameObject* m_slot1BG = nullptr;

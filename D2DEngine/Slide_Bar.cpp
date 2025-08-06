@@ -4,7 +4,7 @@
 void Slide_Bar::Start()
 {
 	m_Image = GetComponent<Image>();
-	m_orignal = m_Image->GetRenderInfo().m_bitmap->GetSize();
+	m_orignal = m_Image->GetSize();
 }
 
 void Slide_Bar::UpdateWidthRatio(float v)

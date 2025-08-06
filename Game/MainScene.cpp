@@ -12,6 +12,8 @@
 #include "SpawnManager.h"
 #include "PlayerSound.h"
 #include "YSort.h"
+#include "Timer.h"
+#include "HungryGauge.h"
 
 void MainScene::Awake()
 {
@@ -20,6 +22,12 @@ void MainScene::Awake()
 
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+
+//Timer
+	m_Timer = Instantiate("SceneTimer");
+	m_Timer->AddComponent<Timer>();
+
+
 
 //begin player-----
 	player = Instantiate("Player");
@@ -35,6 +43,12 @@ void MainScene::Awake()
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
 
 	playerSR->SetOrderInLayer(1);
+
+	m_hungryGauge = Instantiate("hungryGauge");
+	m_hungryGauge->AddComponent<Image>();
+	m_hungryGauge->AddComponent<Slide_Bar>();
+	m_hungryGauge->AddComponent<HungryGauge>();
+	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 700, 800 });
 	
 //end player-----
 

@@ -153,6 +153,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObjectFindTest.cpp" />
     <ClCompile Include="HSTestScene.cpp" />
+    <ClCompile Include="HungryGauge.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="main.cpp" />
@@ -167,6 +168,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="StealMessage.cpp" />
     <ClCompile Include="TestTitleScene.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UITest.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="PlayerController_Sample.cpp" />
@@ -187,6 +189,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="ExampleScene.h" />
     <ClInclude Include="GameObjectFindTest.h" />
     <ClInclude Include="HSTestScene.h" />
+    <ClInclude Include="HungryGauge.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventorySlot.h" />
     <ClInclude Include="Player.h" />
@@ -199,6 +202,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="StealMessage.h" />
     <ClInclude Include="TestTitleScene.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="UITest.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerController_Sample.h" />

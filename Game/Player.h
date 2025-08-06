@@ -42,6 +42,10 @@ public:
 	//Action GetAction() { return action; }
 	Visibilty GetVisible() { return visibilty; };
 
+	float GetFullness() { return m_fullness; }
+
+	void FeedBaby(float bop);
+
 	friend class PlayerController;
 	friend class PlayerAnimator;
 	friend class PlayerSound;
@@ -51,6 +55,10 @@ private:
 	float   m_spd			= 500.0f;
 	//float m_starv_level   = 500.0f;
 	int		m_ivc_T		    = 15;						//fps ±‚¡ÿ
+
+	float	m_fullness;
+
+	float m_elapsedTime = 0.f;
 
 	static int invincible_Count;
 
