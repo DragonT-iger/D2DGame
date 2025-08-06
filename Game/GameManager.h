@@ -1,5 +1,6 @@
 #pragma once
 class Inventory;
+struct SlotData;
 
 enum class GameState
 {
@@ -24,11 +25,11 @@ public:
 
 	//void Awake()                         override;
 	//void Start()                         override;
-	void Update(float deltaTime)         override;
+	//void Update(float deltaTime)         override;
 
 	void Init();
-	GameState GetGameState() { return m_GameState; }
-	void SetGameState(GameState s) { m_GameState = s; }
+
+	int ReceiveScore(const std::vector<SlotData>& data);
 
 	enum class EndReason
 	{

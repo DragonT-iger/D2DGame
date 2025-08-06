@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "Inventory.h"
+#include "GameManager.h"
 
 int Player::invincible_Count = 0;
 
@@ -47,8 +48,8 @@ void Player::OnTriggerEnter(Collider* other)
 
 	if (other->GetOwner()->GetTag() == "SubMissionArea")
 	{
-		std::vector<SlotData> temp = m_Inven->SubMissonItem();
-		
+		int bob = GameManager::Instance().ReceiveScore(m_Inven->SubMissonItem());
+		FeedBaby(bob);
 	}
 }
 

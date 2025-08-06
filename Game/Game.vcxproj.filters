@@ -55,6 +55,9 @@
     <Filter Include="Scripts\Timer">
       <UniqueIdentifier>{b3f17829-6704-44ed-83fd-325d430a8a81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{99eb897f-f406-42af-9f0d-ce818c5a37ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -162,6 +165,9 @@
     <ClCompile Include="EndingScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Score.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="EndingScene.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Score.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

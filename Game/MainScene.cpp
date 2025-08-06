@@ -16,6 +16,7 @@
 #include "Timer.h"
 #include "HungryGauge.h"
 #include "Baby.h"
+#include "UI_Score.h"
 
 void MainScene::Awake()
 {
@@ -187,8 +188,17 @@ void MainScene::Awake()
 	SubMissionArea1->SetTag("SubMissionArea");
 	SubMissionArea2->SetTag("SubMissionArea");
 
-	SubMissionArea1->AddComponent<BoxCollider>();
-	SubMissionArea2->AddComponent<BoxCollider>();
+	auto SMA1 = SubMissionArea1->AddComponent<BoxCollider>();
+	auto SMA2 = SubMissionArea2->AddComponent<BoxCollider>();
+
+	SMA1->SetSize(Vector2{ 521,4320 });
+	SMA2->SetSize(Vector2{ 521,4320 });
+
+	auto SAM1_T = SubMissionArea1->GetComponent<Transform>();
+	auto SAM2_T = SubMissionArea2->GetComponent<Transform>();
+
+	SAM1_T->SetPosition(Vector2{ 3580 ,0});
+	SAM2_T->SetPosition(Vector2{ -3580,0 });
 
 
 	GameManager::Instance().Init();
