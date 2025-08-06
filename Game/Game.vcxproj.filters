@@ -138,6 +138,9 @@
     <ClCompile Include="ArtTestView.cpp">
       <Filter>TestScene</Filter>
     </ClCompile>
+    <ClCompile Include="Baby.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="ArtTestView.h">
       <Filter>TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Baby.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -38,8 +38,6 @@ bool Game::Initialize()
     //ImGui 초기화
 #ifdef _DEBUG
 	ImGuiManager::Instance().Initialize(static_cast<HWND>(GetHandle()), D2DRenderer::Instance().GetD3DDevice(), D2DRenderer::Instance().GetD3DContext());
-
-
 #endif
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀

@@ -12,6 +12,7 @@
 #include "SpawnManager.h"
 #include "PlayerSound.h"
 #include "YSort.h"
+#include "Baby.h"
 
 void MainScene::Awake()
 {
@@ -30,6 +31,7 @@ void MainScene::Awake()
 	player->AddComponent<PlayerSound>();
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
+	player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
 	
