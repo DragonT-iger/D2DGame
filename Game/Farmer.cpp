@@ -172,7 +172,7 @@ void Farmer::DoAttack(float deltaTime)
             auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
             indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
             auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
-            sr->SetOpacity(0.1f);
+            sr->SetOpacity(0.5f);
             sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
 
             m_attackIndicator->AddComponent<CircleCollider>();
@@ -278,6 +278,7 @@ void Farmer::OnInspectorGUI()
 
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
+    ImGui::DragFloat("AttackInterval", &m_attackInterval, 0.01f, 0.1f, 10.f);
     ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
     ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
     //m_hasPatrolTarget
