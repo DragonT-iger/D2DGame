@@ -4,6 +4,8 @@
 #include "YSort.h"
 #include "Player.h"
 
+#include "AttackEffect.h"
+
 void Farmer::Awake()
 {
     m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
@@ -184,12 +186,12 @@ void Farmer::DoAttack(float deltaTime)
             auto effTransform = effect->GetComponent<Transform>();
             effTransform->SetPosition(center);
             auto sr = effect->AddComponent<SpriteRenderer>();
-            sr->SetOpacity(0.3f);
-            sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
+            effect->AddComponent<SpriteRenderer>();
 
             auto collider = effect->AddComponent<CircleCollider>();
             collider->SetRadius(m_attackAreaValue);
             effect->AddComponent<AttackDamage>();
+            effect->AddComponent<AttackEffect>();
 
             m_animator->ChangeState("attack");
 
