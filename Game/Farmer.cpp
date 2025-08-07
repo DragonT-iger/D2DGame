@@ -165,18 +165,22 @@ void Farmer::DoAttack(float deltaTime)
     }
 
     if (m_attackIndicator == nullptr) {
-        m_attackIndicator = Instantiate("AttackIndicator");
-        auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
-        indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
-        auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
-        sr->SetOpacity(0.1f);
-        sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
+        m_attackIntervalTimer += deltaTime;
+        if (m_attackIntervalTimer >= m_attackInterval) {
+            m_attackIntervalTimer = 0.f;
+            m_attackIndicator = Instantiate("AttackIndicator");
+            auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
+            indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
+            auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
+            sr->SetOpacity(0.1f);
+            sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
 
-        m_attackIndicator->AddComponent<CircleCollider>();
-        auto zone = m_attackIndicator->AddComponent<AttackIndicatorZone>();
-        zone->Initialize(this);
+            m_attackIndicator->AddComponent<CircleCollider>();
+            auto zone = m_attackIndicator->AddComponent<AttackIndicatorZone>();
+            zone->Initialize(this);
 
-        m_attackTimer = 0.f;
+            m_attackTimer = 0.f;
+        }
     }
     else {
         m_attackTimer += deltaTime;
@@ -225,6 +229,9 @@ void Farmer::ChangeState(FarmerState farmerState)
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
         }
+
+        m_attackTimer = 0.f;
+        m_attackIntervalTimer = 0.f;
     }
     m_farmerState = farmerState;
 }

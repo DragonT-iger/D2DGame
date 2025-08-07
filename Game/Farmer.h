@@ -80,5 +80,7 @@ private:
     GameObject* m_attackIndicator = nullptr;
     float       m_attackDelay = 1.5f;
     float       m_attackTimer = 0.0f;
+    float       m_attackInterval = 0.5f;
+    float       m_attackIntervalTimer = 0.0f;
 };
 
