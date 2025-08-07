@@ -110,15 +110,3 @@ void AttackIndicatorZone::OnTriggerExit(Collider* other)
 
 }
 
-void AttackDamage::OnTriggerEnter(Collider* other)
-{
-	if (other->GetOwner()->GetTag() != "Player")
-		return;
-
-	if (auto player = other->GetOwner()->GetComponent<Player>())
-	{
-		player->SetHp(player->GetHp() - m_damage);
-	}
-
-	Destroy(GetOwner());
-}

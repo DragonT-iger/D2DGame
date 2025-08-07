@@ -34,7 +34,7 @@ void Farmer::Start()
     m_animator->AddClip("angryidle", angryidle, true);
 	m_animator->AddClip("walk", walk, true);
     m_animator->AddClip("angrywalk", angrywalk, true);
-	m_animator->AddClip("attack", attack, true);
+    m_animator->AddClip("attack", attack, false);
     
 
 	m_animator->SetEntryState("idle");
@@ -154,15 +154,34 @@ void Farmer::DoAttack(float deltaTime)
         ChangeState(FarmerState::Patrol);
         return;
     }
+
+    if (m_animator->GetCurState() == "attack" && !m_animator->IsAnimeEnd()) {
+        return;
+    }
+    else if(m_animator->GetCurState() == "attack"){
+        if (m_isAlreadyExitAttackZone == true) {
+            ChangeState(FarmerState::Chase);
+        }
+        else {
+            ChangeState(FarmerState::Attack);
+        }
+    }
     if (m_animator->GetCurState() != "angryidle") {
         m_animator->ChangeState("angryidle");
     }
+
+
+    // 만약 attack play 중이면 return
+
+    
+
     if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
         m_spriteRenderer->SetFlip(false);
     }
     else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
         m_spriteRenderer->SetFlip(true);
     }
+    
 
     if (m_attackIndicator == nullptr) {
         m_attackIntervalTimer += deltaTime;
@@ -193,8 +212,8 @@ void Farmer::DoAttack(float deltaTime)
             effect->AddComponent<SpriteRenderer>();
 
             auto collider = effect->AddComponent<CircleCollider>();
-            collider->SetRadius(m_attackAreaValue);
-            effect->AddComponent<AttackDamage>();
+            collider->SetRadius(m_attackAreaValue);    
+            m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
             effect->AddComponent<AttackEffect>();
 
             m_animator->ChangeState("attack");
@@ -202,12 +221,12 @@ void Farmer::DoAttack(float deltaTime)
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
             // 안나갔으면 Attack 계속
-            if (m_isAlreadyExitAttackZone == true) {
-                ChangeState(FarmerState::Chase);
-            }
-            else {
-                ChangeState(FarmerState::Attack);
-            }
+            //if (m_isAlreadyExitAttackZone == true) {
+            //    ChangeState(FarmerState::Chase);
+            //}
+            //else {
+            //    ChangeState(FarmerState::Attack);
+            //}
         }
     }
     
@@ -279,8 +298,8 @@ void Farmer::OnInspectorGUI()
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
     ImGui::DragFloat("AttackInterval", &m_attackInterval, 0.01f, 0.1f, 10.f);
-    ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
-    ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
+    //ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
+    //ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
     //m_hasPatrolTarget
 
     //ImGui::Checkbox("hasPatrolTarget", &m_hasPatrolTarget);
