@@ -97,7 +97,7 @@ void Player::OnInspectorGUI()
 
 	float weight = m_Inven->GetWeight();
 	float weightMult = 1.f + weight / m_weightDivisor;
-	float curSpd = std::max(m_baseSpd / (m_Inven->GetSpeedMultiplier()),
+	float curSpd = std::max(m_spd / (m_Inven->GetSpeedMultiplier()),
 		m_minSpd);
 
 	ImGui::Text("Cur Speed : %.1f", curSpd);
