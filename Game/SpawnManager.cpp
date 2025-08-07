@@ -18,6 +18,11 @@ void SpawnManager::Awake()
 	farmArr.push_back({ Rank_B, 15, 0.0f, 4.f, &m_farmBList });
 	farmArr.push_back({ Rank_C, 10, 0.0f, 5.f, &m_farmCList });
 
+	growArr.reserve(3);
+	growArr.push_back(&rankA);
+	growArr.push_back(&rankB);
+	growArr.push_back(&rankC);
+
 	//리스트 초기화
 	m_farmAList.clear();
 	m_farmBList.clear();
@@ -106,6 +111,24 @@ void SpawnManager::DestroyObject(GameObject* obj)
 		break;
 	}
 	curScene->Destroy(obj);
+}
+
+GrowSpeed& SpawnManager::GetGrowSpeed(FarmRank rank)
+{
+	switch (rank)
+	{
+	case FarmRank::Rank_A:
+		return rankA;
+		break;
+	case FarmRank::Rank_B:
+		return rankB;
+		break;
+	case FarmRank::Rank_C:
+		return rankC;
+		break;
+	default:
+		return rankC;
+	}
 }
 
 GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
@@ -283,4 +306,62 @@ void SpawnManager::OnInspectorGUI()
 			label = "maxRate##" + std::string("C");
 		ImGui::DragInt(label.c_str(), &farmArr[i].maxRate, 1, 0, 100);
 	}
+
+	for (int i = 0; i < growArr.size(); ++i)
+	{
+		std::string labelS;
+		std::string labelM;
+		std::string labelL;
+
+		if (i == 0)
+		{
+			labelS = "GrowSpeed A (" + std::to_string(i) + ")##S" + std::to_string(i);
+			labelM = "GrowSpeed A (" + std::to_string(i) + ")##M" + std::to_string(i);
+			labelL = "GrowSpeed A (" + std::to_string(i) + ")##L" + std::to_string(i);
+		}
+		if (i == 1)
+		{
+			labelS = "GrowSpeed B (" + std::to_string(i) + ")##S" + std::to_string(i);
+			labelM = "GrowSpeed B (" + std::to_string(i) + ")##M" + std::to_string(i);
+			labelL = "GrowSpeed B (" + std::to_string(i) + ")##L" + std::to_string(i);
+		}
+		if (i == 2)
+		{
+			labelS = "GrowSpeed C (" + std::to_string(i) + ")##S" + std::to_string(i);
+			labelM = "GrowSpeed C (" + std::to_string(i) + ")##M" + std::to_string(i);
+			labelL = "GrowSpeed C (" + std::to_string(i) + ")##L" + std::to_string(i);
+		}
+			
+
+		ImGui::DragFloat(labelS.c_str(), &growArr[i]->growSpeedS, 1.f, 0, 20);
+		ImGui::DragFloat(labelM.c_str(), &growArr[i]->growSpeedM, 1.f, 0, 20);
+		ImGui::DragFloat(labelL.c_str(), &growArr[i]->growSpeedL, 1.f, 0, 20);
+	}
+
+	if (ImGui::Button("Destroy All Crop"))
+		DestroyAllCrop();
+}
+
+void SpawnManager::DestroyAllCrop()
+{
+	for (auto& obj : m_farmAList)
+	{
+		obj->GetComponent<Crop>()->Destroy();
+		Destroy(obj);
+	}
+	for (auto& obj : m_farmBList)
+	{
+		obj->GetComponent<Crop>()->Destroy();
+		Destroy(obj);
+	}
+	for (auto& obj : m_farmCList)
+	{
+		obj->GetComponent<Crop>()->Destroy();
+		Destroy(obj);
+	}
+		
+
+	m_farmAList.clear();
+	m_farmBList.clear();
+	m_farmCList.clear();
 }

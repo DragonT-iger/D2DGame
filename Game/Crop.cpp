@@ -1,9 +1,17 @@
 #include "pch.h"
 #include "Crop.h"
+#ifdef  _DEBUG
+#include "SpawnManager.h"
+#endif //  
+
+
 
 void Crop::Awake()
 {
 	m_size = Size::Born;
+#ifdef _DEBUG
+	m_spawnManager = GameObject::Find("SpawnManager")->GetComponent<SpawnManager>();
+#endif
 }
 
 void Crop::Update(float deltaTime)
@@ -66,32 +74,23 @@ void Crop::SetCropData(
 											GameObject* eftObj
 											)
 {
+#ifdef _DEBUG
+	if (!m_spawnManager)	 m_spawnManager = GameObject::Find("SpawnManager")->GetComponent<SpawnManager>();
+#endif
+	auto s = m_spawnManager->GetGrowSpeed(rank);
+	m_growSpeed_S = s.growSpeedS;
+	m_growSpeed_M = s.growSpeedM;
+	m_growSpeed_L = s.growSpeedL;
+
 	switch (rank)
 	{
 	case FarmRank::Rank_A:
-	{
-		m_growSpeed_S = 5.f;
-		m_growSpeed_M = 7.f; //sec
-		m_growSpeed_L = 7.f; //sec
-		m_maxSize = Size::L;
-		break;
-	}
 	case FarmRank::Rank_B:
-	{
-		m_growSpeed_S = 5.f;
-		m_growSpeed_M = 7.f; //sec
-		m_growSpeed_L = 12.f; //sec
 		m_maxSize = Size::L;
 		break;
-	}
 	case FarmRank::Rank_C:
-	{
-		m_growSpeed_S = 5.f;
-		m_growSpeed_M = 12.f; //sec
-		m_growSpeed_L = 0.f; //sec //C등급은 최대 M까지
 		m_maxSize = Size::M;
 		break;
-	}
 	}
 
 	m_rank = rank;

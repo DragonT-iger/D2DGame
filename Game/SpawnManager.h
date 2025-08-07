@@ -4,6 +4,12 @@ class Crop;
 enum Crops;
 enum FarmRank;
 
+struct GrowSpeed {
+	float growSpeedS;
+	float growSpeedM;
+	float growSpeedL;
+};
+
 class SpawnManager : public MonoBehaviour
 {
 public:
@@ -12,10 +18,14 @@ public:
 
 	void DestroyObject(GameObject* obj);
 
+	GrowSpeed& GetGrowSpeed(FarmRank rank);
+
 private:
 
 #ifdef _DEBUG
 	void OnInspectorGUI() override;
+
+	void DestroyAllCrop();
 #endif // _DEBUG
 
 	bool IsInnerRect(const RECT& rect, const int& x, const int& y);
@@ -28,6 +38,12 @@ private:
 	Crops RandomCrop(UINT epProb, UINT ptProb, UINT pkProp);
 
 	void SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* eftObj);
+
+	GrowSpeed rankA = { 5, 7, 7 };
+	GrowSpeed rankB = { 5, 7, 12 };
+	GrowSpeed rankC = { 5, 12, 0 };
+
+	std::vector<GrowSpeed*> growArr;
 
 	struct FarmData {
 		FarmRank rank;
