@@ -101,18 +101,18 @@ AttackIndicatorZone::~AttackIndicatorZone()
 		m_farmer->m_attackIndicatorCount--;
 	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
 
-	if (m_farmer->m_isCommonAttackIndicatorArea)
-	{
-		m_farmer->ChangeState(Farmer::FarmerState::Attack);
-	}
-	else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone)
-	{
-		m_farmer->ChangeState(Farmer::FarmerState::Chase);
-	}
-	else
-	{
-		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
-	}
+	//if (m_farmer->m_isCommonAttackIndicatorArea)
+	//{
+	//	m_farmer->ChangeState(Farmer::FarmerState::Attack);
+	//}
+	//else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone)
+	//{
+	//	m_farmer->ChangeState(Farmer::FarmerState::Chase);
+	//}
+	//else
+	//{
+	//	//m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+	//}
 }
 
 void AttackIndicatorZone::OnTriggerEnter(Collider* other)
@@ -133,20 +133,16 @@ void AttackIndicatorZone::OnTriggerExit(Collider* other)
 	}
 	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
 
-	if (m_farmer->m_attackIndicatorCount > 0) {
-		return;
-	}
-
-	if (!m_farmer->m_isAlreadyExitAttackZone)
+	if (!m_farmer->m_isCommonAttackIndicatorArea && !m_farmer->m_isAlreadyExitAttackZone)
 	{
 		m_farmer->ChangeState(Farmer::FarmerState::Attack);
 	}
 	
-	else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
+	else if (!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
 		m_farmer->ChangeState(Farmer::FarmerState::Chase);
 	}
 
-	else {
+	else if(!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone){
 		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 	}
 

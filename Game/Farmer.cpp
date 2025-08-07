@@ -271,6 +271,7 @@ void Farmer::OnInspectorGUI()
     ImGui::DragInt("AttackIndicatorCount", &m_attackIndicatorCount);
     ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
     ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
+    ImGui::Checkbox("m_isCommonAttackIndicatorArea", &m_isCommonAttackIndicatorArea);
     //m_hasPatrolTarget
 
     //ImGui::Checkbox("hasPatrolTarget", &m_hasPatrolTarget);
