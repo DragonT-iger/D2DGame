@@ -48,7 +48,7 @@ void TitleScene::Awake()
 	m_checkBtn = Instantiate("checkBtn");
 
 	Img = m_settingWnd->AddComponent<Image>();
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("CurSlot.png"), { 900, 700 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 900, 700 });
 	Img->SetOrderInLayer(3);
 
 	auto txt = m_settingText->AddComponent<Text>();
