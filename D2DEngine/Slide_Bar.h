@@ -13,6 +13,8 @@ public:
 
 	void RegisterButton(Button* handleButton);
 
+	float GetValue() { return value; }
+
 private:
 	Image*						m_Image = nullptr;
 	Button*					 m_button = nullptr;

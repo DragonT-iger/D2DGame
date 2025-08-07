@@ -32,12 +32,6 @@ void Slide_Bar::RegisterButton(Button* handleButton)
 {
 	m_button = handleButton;
 	
-	/*if (!m_Image)
-	{
-		m_Image = GetComponent<Image>();
-		m_orignal = m_Image->GetSize();
-	}*/
-
 	m_button->AddPressEvent([this]() {
 		auto mPos = Input.GetMouseState().pos;
 		Vector2 mousePos = { static_cast<float>(mPos.x),  static_cast<float>(mPos.y) };
@@ -52,5 +46,5 @@ void Slide_Bar::RegisterButton(Button* handleButton)
 
 		value = (mousePos.x - minX) / (maxX - minX);
 		UpdateWidthRatio(value);
-		});
+		}, ButtonEvent::ButtonDown);
 }

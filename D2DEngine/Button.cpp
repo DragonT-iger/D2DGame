@@ -9,11 +9,28 @@ void Button::Start()
 	std::cout << "width : " << m_size.width << ", height : " << m_size.height << std::endl;
 }
 
-void Button::Pressed()
+void Button::Event(ButtonEvent event)
 {
-	for (const auto& event : m_events)
+	switch (event)
 	{
-		event();
+	case ButtonEvent::Highlight:
+		for (const auto& event : m_highlightEvents)
+		{
+			event();
+		}
+		break;
+	case ButtonEvent::Pressed:
+		for (const auto& event : m_pressedEvents)
+		{
+			event();
+		}
+		break;
+	case ButtonEvent::ButtonDown:
+		for (const auto& event : m_downEvents)
+		{
+			event();
+		}
+		break;
 	}
 }
 
@@ -25,17 +42,23 @@ void Button::Update(float deltaTime)
 		&& (m_pos->GetPosition().y - (m_size.height / 2) <= mouse.pos.y && m_pos->GetPosition().y + (m_size.height / 2) >= mouse.pos.y))
 	{
 		//std::cout << "pos x : " << mouse.pos.x << ", pos y : " << mouse.pos.y << std::endl;
-		if (mouse.LButtonPressed && m_curEvent != ButtonEvent::Pressed)
+		if (mouse.LButtonPressed && m_curEvent != ButtonEvent::Pressed && m_curEvent != ButtonEvent::ButtonDown)
 		{
 			std::cout << "Button Pressed" << std::endl;
 			m_curEvent = ButtonEvent::Pressed;
 			SetBitmap(m_curEvent);
-			Pressed();
+			Event(ButtonEvent::Pressed);
+		}
+		else if (mouse.LButtonPressed)
+		{
+			m_curEvent = ButtonEvent::ButtonDown;
+			Event(ButtonEvent::ButtonDown);
 		}
 		else if(!mouse.LButtonPressed && m_curEvent != ButtonEvent::Highlight)
 		{
 			m_curEvent = ButtonEvent::Highlight;
 			SetBitmap(m_curEvent);
+			Event(ButtonEvent::Highlight);
 		}
 	}
 	else
