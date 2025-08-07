@@ -156,6 +156,7 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	return obj;
 }
 
+
 bool SpawnManager::IsInnerRect(const RECT& rect, const int& x, const int& y)
 {
 	return (rect.left - 50 <= x && rect.right + 50 >= x) && (rect.top + 50 >= y && rect.bottom - 50 <= y);	// 경계에 자꾸 생성돼서 차이를 좀 줘야할듯
@@ -266,4 +267,20 @@ void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject*
 		obj->SetCropData(rank, type, *m_cropSprites.at(type), nullptr);
 	else
 		obj->SetCropData(rank, type, *m_cropSprites.at(type), eftObj);
+}
+
+void SpawnManager::OnInspectorGUI()
+{
+	//작물 최대 개수
+	for (int i = 0; i < farmArr.size(); ++i)
+	{
+		std::string label;
+		if( i == 0)
+			label = "maxRate##" + std::string("A");
+		if( i == 1)
+			label = "maxRate##" + std::string("B");
+		if (i == 2)
+			label = "maxRate##" + std::string("C");
+		ImGui::DragInt(label.c_str(), &farmArr[i].maxRate, 1, 0, 100);
+	}
 }

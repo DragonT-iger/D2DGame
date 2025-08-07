@@ -13,6 +13,11 @@ public:
 	void DestroyObject(GameObject* obj);
 
 private:
+
+#ifdef _DEBUG
+	void OnInspectorGUI() override;
+#endif // _DEBUG
+
 	bool IsInnerRect(const RECT& rect, const int& x, const int& y);
 	bool CheckRange(const Vector2& pos, FarmRank rank);
 
