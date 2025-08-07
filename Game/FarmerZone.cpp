@@ -133,11 +133,13 @@ void AttackIndicatorZone::OnTriggerExit(Collider* other)
 	}
 	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
 
-	if (m_farmer->m_isCommonAttackIndicatorArea)
+	if (m_farmer->m_attackIndicatorCount > 0) {
+		return;
+	}
+
+	if (!m_farmer->m_isAlreadyExitAttackZone)
 	{
-		if (m_farmer->GetComponent<Animator>()->GetCurState() != "attack") {
-			//m_farmer->ChangeState(Farmer::FarmerState::Attack); ¿ÖµÊ???
-		}
+		m_farmer->ChangeState(Farmer::FarmerState::Attack);
 	}
 	
 	else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {

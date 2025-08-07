@@ -65,8 +65,8 @@ void Farmer::Start()
 
     m_attackPattern.SetOffsets({
      {0.f, 0.f},
-     {m_attackAreaValue, 0.f},
-     {-m_attackAreaValue, 0.f},
+     //{m_attackAreaValue, 0.f},
+     //{-m_attackAreaValue, 0.f},
      {0.f, m_attackAreaValue},
      {0.f, -m_attackAreaValue}
         });
