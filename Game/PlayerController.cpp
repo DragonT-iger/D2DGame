@@ -26,8 +26,11 @@ void PlayerController::Update(float deltaTime)
 		Vector2 dir{ (float)x,(float)y };
 		dir.Normalize();
 
-		float weight = std::min(m_inven->GetWeight(), 450.f);
-		float moveSpd = std::max(m_Player->m_spd - weight, 50.f);
+		float weight = m_inven->GetWeight();
+		float weightMult = 1.f + weight / m_Player->m_weightDivisor;
+		float moveSpd = std::max(
+			m_Player->m_baseSpd / (m_inven->GetSpeedMultiplier()),
+			m_Player->m_minSpd);
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }

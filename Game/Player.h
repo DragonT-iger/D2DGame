@@ -76,6 +76,11 @@ private:
 
 	float m_elapsedTime = 0.f;
 
+
+	float   m_baseSpd = 500.f;   // 기본 이동속도
+	float   m_minSpd = 50.f;    // 최저 속도
+	float   m_weightDivisor = 300.f;   // weightMult = 1 + w / Divisor
+
 	static int invincible_Count;
 
 	State		state		= State::Alive;

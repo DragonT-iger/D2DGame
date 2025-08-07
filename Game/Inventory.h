@@ -22,6 +22,7 @@ public:
 
 	float GetWeight();
 
+	float GetSpeedMultiplier() const;
 private:
 	std::unordered_map<Crops, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_itemSprite;
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>		m_SlotSprites;
