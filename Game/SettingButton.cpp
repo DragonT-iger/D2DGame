@@ -32,18 +32,11 @@ void SettingButton::Start()
 		m_cancleBtn->SetActive(true);
 		m_checkBtn->SetActive(true);
 
-		m_bgmSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(curBgm_Volume);
-		m_sfxSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(curSfx_Volume);
-		m_uiSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(curUI_Volume);
+		m_bgmSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(SoundManager::Instance().GetVolume_BGM());
+		m_sfxSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(SoundManager::Instance().GetVolume_SFX());
+		m_uiSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(SoundManager::Instance().GetVolume_UI());
 
 		m_button->SetActive(false);
 		m_startBtn->SetActive(false);
 		}, ButtonEvent::Pressed);
-}
-
-void SettingButton::SetVolume(const Volumes& volumes)
-{
-	curBgm_Volume = volumes.bgm;
-	curSfx_Volume = volumes.sfx;
-	curUI_Volume = volumes.ui;
 }

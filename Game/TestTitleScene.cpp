@@ -139,6 +139,12 @@ void TitleScene::Awake()
 
 #pragma endregion
 
+	SoundManager::Instance().SetVolume_BGM(1.f);
+	SoundManager::Instance().SetVolume_SFX(1.f);
+	SoundManager::Instance().SetVolume_UI(1.f);
+
+	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
+
 	m_Title = Instantiate("title");
 	auto text = m_Title->AddComponent<Text>();
 

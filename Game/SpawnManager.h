@@ -20,6 +20,7 @@ private:
 
 	Vector2 CreateSpawnPoint(const RECT& outRect, const RECT& inRect, FarmRank rank);
 	Crops SetCropType(FarmRank rank);
+	Crops RandomCrop(UINT epProb, UINT ptProb, UINT pkProp);
 
 	void SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* eftObj);
 

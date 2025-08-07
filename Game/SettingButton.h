@@ -28,8 +28,4 @@ private:
 
 	Button* m_startBtn;
 	Button* m_button;
-
-	float curBgm_Volume = 1.0f;
-	float curSfx_Volume = 1.0f;
-	float curUI_Volume = 1.0f;
 };

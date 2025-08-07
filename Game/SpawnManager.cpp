@@ -216,25 +216,48 @@ Vector2 SpawnManager::CreateSpawnPoint(const RECT& outRect, const RECT& inRect, 
 
 Crops SpawnManager::SetCropType(FarmRank rank)
 {
-	int p = Random::Instance().Range(0, 9);
+	Crops c;
 
-	switch (p)
+	switch (rank)
 	{
-	case 0:
-	case 1:
-	case 2:
-	case 3:
-	case 5:
-	case 6:
-	case 7:
-	case 8:
-	case 9:
+	case Rank_A:	
+		c = RandomCrop(34, 33, 33);
+		break;
+	case Rank_B:
+		c = RandomCrop(34, 33, 33);
+		break;
+	case Rank_C:
+		c = RandomCrop(34, 33, 33);
 		break;
 	}
 
-	Crops crop = static_cast<Crops>(p % 3);
+	if (c == Nothing) std::cerr << "랜덤 작물 확률 잘못됐음" << std::endl;
 
-	return  crop;
+	return  c;
+}
+
+Crops SpawnManager::RandomCrop(UINT epProb, UINT ptProb, UINT pkProp)		//매개변수의 합이 100이어야함
+{
+	UINT random;
+
+	UINT ep = 0;
+	UINT pt = 0;
+	UINT pk = 0;
+
+	ep = epProb;
+	pt = ep + ptProb;
+	pk = pt + pkProp;
+
+	random = Random::Instance().Range(0, 99);
+
+	if (random <= ep)
+		return Crops::Eggplant;
+	if (random > ep && random <= pt)
+		return Crops::Potato;
+	if (random > pt && random <= pk)
+		return Crops::Pumpkin;
+
+	return Crops::Nothing;
 }
 
 void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* eftObj)
@@ -242,5 +265,5 @@ void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject*
 	if (rank == Rank_C)
 		obj->SetCropData(rank, type, *m_cropSprites.at(type), nullptr);
 	else
-		obj->SetCropData(rank, type, *m_cropSprites.at(type), eftObj);		//3단계 애니메이션 나오면 추가
+		obj->SetCropData(rank, type, *m_cropSprites.at(type), eftObj);
 }

@@ -40,6 +40,7 @@ void Crop::Update(float deltaTime)
 			m_size = L;
 			m_elapsedTime = 0.f;
 			m_eftObj->SetActive(true);
+			m_eftObj->GetComponent<SpriteRenderer>()->SetOrderInLayer(static_cast<int>(-GetComponent<Transform>()->GetPosition().y));
 			m_SpriteRenderer->SetBitmap(m_GameSprites[static_cast<size_t>(L)]);
 		}
 		else

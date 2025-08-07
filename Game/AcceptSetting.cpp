@@ -44,9 +44,5 @@ void AcceptSettingBtn::Start()
 		SoundManager::Instance().SetVolume_BGM(bgm);
 		SoundManager::Instance().SetVolume_SFX(sfx);
 		SoundManager::Instance().SetVolume_UI(ui);
-
-		Volumes v = { bgm, sfx, ui };
-
-		m_settingbutton->GetOwner()->GetComponent<SettingButton>()->SetVolume(v);
 		}, ButtonEvent::Pressed);
 }
