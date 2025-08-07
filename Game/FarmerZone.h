@@ -39,6 +39,7 @@ class AttackZone : public FarmerZone {
 
 class AttackIndicatorZone : public MonoBehaviour {
 public:
+    ~AttackIndicatorZone();
     void Initialize(Farmer* farmer) { m_farmer = farmer; }
 
     void OnTriggerEnter(Collider* other) override;
@@ -46,5 +47,6 @@ public:
 
 private:
     Farmer* m_farmer = nullptr;   // 반드시 private 마지막에!
+    bool m_isPlayerInside = false;
 };
 

@@ -42,6 +42,7 @@ void AttackPattern::CreateIndicators(Farmer* owner, const Vector2& origin, float
 }
 void AttackPattern::ClearIndicators()
 {
+
     for (auto* indicator : m_indicators)
     {
         Destroy(indicator);

@@ -92,17 +92,10 @@ void PatrolZone::OnTriggerExit(Collider* other)
 
 }
 
-void AttackIndicatorZone::OnTriggerEnter(Collider* other)
+AttackIndicatorZone::~AttackIndicatorZone()
 {
-	if (other->GetOwner()->GetTag() != "Player") return;
-
-	m_farmer->m_attackIndicatorCount++;
-	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
-}
-
-void AttackIndicatorZone::OnTriggerExit(Collider* other)
-{
-	if (other->GetOwner()->GetTag() != "Player") return;
+	if (!m_isPlayerInside || !m_farmer)
+		return;
 
 	if (m_farmer->m_attackIndicatorCount > 0)
 		m_farmer->m_attackIndicatorCount--;
@@ -111,7 +104,40 @@ void AttackIndicatorZone::OnTriggerExit(Collider* other)
 	if (m_farmer->m_isCommonAttackIndicatorArea)
 	{
 		m_farmer->ChangeState(Farmer::FarmerState::Attack);
-		return;
+	}
+	else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone)
+	{
+		m_farmer->ChangeState(Farmer::FarmerState::Chase);
+	}
+	else
+	{
+		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+	}
+}
+
+void AttackIndicatorZone::OnTriggerEnter(Collider* other)
+{
+	if (other->GetOwner()->GetTag() != "Player") return;
+
+	m_isPlayerInside = true;
+	m_farmer->m_attackIndicatorCount++;
+	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
+}
+
+void AttackIndicatorZone::OnTriggerExit(Collider* other)
+{
+	if (other->GetOwner()->GetTag() != "Player") return;
+	m_isPlayerInside = false;
+	if (m_farmer->m_attackIndicatorCount > 0) {
+		m_farmer->m_attackIndicatorCount--;
+	}
+	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
+
+	if (m_farmer->m_isCommonAttackIndicatorArea)
+	{
+		if (m_farmer->GetComponent<Animator>()->GetCurState() != "attack") {
+			//m_farmer->ChangeState(Farmer::FarmerState::Attack); ¿ÖµÊ???
+		}
 	}
 	
 	else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
