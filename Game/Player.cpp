@@ -32,11 +32,11 @@ void Player::Update(float deltaTime)
 		m_elapsedTime = 0.0f;
 	}
 
-	float weight = m_Inven->GetWeight();
+	//float weight = m_Inven->GetWeight();
 
-	if (weight >= 450.f) weight = 450.f;
+	//if (weight >= 450.f) weight = 450.f;
 
-	m_spd = 500.0f - weight;
+	//m_spd = 500.0f - weight;
 }
 
 void Player::OnTriggerEnter(Collider* other)
@@ -87,6 +87,13 @@ void Player::FeedBaby(float bop)
 		m_fullness = 1000.f;
 	else
 		m_fullness += bop;
+}
+
+void Player::OnInspectorGUI()
+{
+
+	ImGui::DragInt("HP", &m_hp, 1);
+	ImGui::DragFloat("Speed", &m_spd, 0.3f, 0.1f);
 }
 
 //void Player::SetState(State ste)

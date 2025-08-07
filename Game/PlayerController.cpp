@@ -14,7 +14,7 @@ void PlayerController::Awake()
 void PlayerController::Start()
 {
 	m_inven = GameObject::Find("Inventory")->GetComponent<Inventory>();
-	p_Spd = &(m_Player->m_spd);
+	//p_Spd = &(m_Player->m_spd);
 }
 
 void PlayerController::Update(float deltaTime)
@@ -25,6 +25,9 @@ void PlayerController::Update(float deltaTime)
 		int y = Input.GetAxisRaw("Vertical");
 		Vector2 dir{ (float)x,(float)y };
 		dir.Normalize();
+
+		float weight = std::min(m_inven->GetWeight(), 450.f);
+		float moveSpd = std::max(m_Player->m_spd - weight, 50.f);
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
@@ -74,7 +77,7 @@ void PlayerController::Update(float deltaTime)
 			{
 				m_Player->action = Action::Idle;
 			}
-			m_transform->Translate(dir * (*p_Spd) * deltaTime);
+			m_transform->Translate(dir * moveSpd * deltaTime);
 			break;
 			//case Action::Hit:
 			//	if (m_animator->GetCurState() != "hit")

@@ -183,7 +183,10 @@ void Farmer::DoAttack(float deltaTime)
             Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
             Vector2 diff = playerPos - center;
             if (diff.SqrMagnitude() <= m_attackAreaValue * m_attackAreaValue) {
-                // TODO: apply damage to player
+                Player* player = m_player->GetComponent<Player>();
+
+                player->SetHp(player->GetHp() - 1);
+               
             }
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
