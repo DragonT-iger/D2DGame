@@ -155,8 +155,7 @@ void Farmer::DoChase(float deltaTime)
 void Farmer::DoAttack(float deltaTime)
 {
     if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
-        Destroy(m_attackIndicator);
-        m_attackIndicator = nullptr;
+        m_attackPattern.ClearIndicators();
         ChangeState(FarmerState::Patrol);
         return;
     }
@@ -189,40 +188,21 @@ void Farmer::DoAttack(float deltaTime)
     }
     
 
-    if (m_attackIndicator == nullptr) {
+    if (!m_attackPattern.HasIndicators()) {
         m_attackIntervalTimer += deltaTime;
         if (m_attackIntervalTimer >= m_attackInterval) {
             m_attackIntervalTimer = 0.f;
-            m_attackIndicator = Instantiate("AttackIndicator");
-            auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
-            indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
-            auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
-            sr->SetOpacity(0.5f);
-            sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
-
-            m_attackIndicator->AddComponent<CircleCollider>();
-            auto zone = m_attackIndicator->AddComponent<AttackIndicatorZone>();
-            zone->Initialize(this);
-
+            m_attackPattern.CreateIndicators(this, m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
+            
             m_attackTimer = 0.f;
         }
     }
     else {
         m_attackTimer += deltaTime;
         if (m_attackTimer >= m_attackDelay) {
-            Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
-            m_attackPattern.Execute(center, m_attackAreaValue);
+            m_attackPattern.Execute(m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
             m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
             m_animator->ChangeState("attack");
-            Destroy(m_attackIndicator);
-            m_attackIndicator = nullptr;
-            // 안나갔으면 Attack 계속
-            //if (m_isAlreadyExitAttackZone == true) {
-            //    ChangeState(FarmerState::Chase);
-            //}
-            //else {
-            //    ChangeState(FarmerState::Attack);
-            //}
         }
     }
     
@@ -231,19 +211,13 @@ void Farmer::DoAttack(float deltaTime)
 void Farmer::ChangeState(FarmerState farmerState)
 {
     if (m_farmerState == FarmerState::Attack && farmerState != FarmerState::Attack) {
-        if (m_attackIndicator) {
-            Destroy(m_attackIndicator);
-            m_attackIndicator = nullptr;
-        }
+        m_attackPattern.ClearIndicators();
     }
     if (m_animator->GetCurState() == "patrol") {
         m_hasPatrolTarget = false;
     }
     if (farmerState == FarmerState::Attack) {
-        if (m_attackIndicator) {
-            Destroy(m_attackIndicator);
-            m_attackIndicator = nullptr;
-        }
+        m_attackPattern.ClearIndicators();
 
         m_attackTimer = 0.f;
         m_attackIntervalTimer = 0.f;
