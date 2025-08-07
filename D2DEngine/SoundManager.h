@@ -22,6 +22,11 @@ public:
 	void SetVolume_SFX(float volume);
 	void SetVolume_UI(float volume);
 
+	float GetVolume_Main() { return m_Volume_Main; }
+	float GetVolume_BGM() { return m_Volume_BGM; }
+	float GetVolume_SFX() { return m_Volume_SFX; }
+	float GetVolume_UI() { return m_Volume_UI; }
+
 	void SetDirty(); // dirty = true;
 
 	void ConvertBGMSource(const std::unordered_map<std::string, std::filesystem::path>& container);

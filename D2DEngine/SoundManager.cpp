@@ -141,7 +141,10 @@ void SoundManager::BGM_Shot(const std::string& fileName, FMOD::ChannelGroup* Cha
 
 	if (it != L_BGM.end())
 	{
-		m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
+		if (!ChannelGroup)
+			m_coreSystem->playSound(it->second, m_bgmGroup, false, &pChannel);
+		else
+			m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
 	}
 }
 
@@ -184,7 +187,7 @@ void SoundManager::SetVolume_Main(float volume)
 
 void SoundManager::SetVolume_BGM(float volume)
 {
-	if (m_Dirty_BGM == false) return;
+	//if (m_Dirty_BGM == false) return;
 	if (volume < 0) { volume = 0; }
 	else if (volume > 1.0f) { volume = 1.0f; }
 	m_Volume_BGM = m_Volume_Main * volume;
@@ -196,7 +199,7 @@ void SoundManager::SetVolume_BGM(float volume)
 
 void SoundManager::SetVolume_SFX(float volume)
 {
-	if (m_Dirty_SFX == false) return;
+	//if (m_Dirty_SFX == false) return;
 	if (volume < 0) { volume = 0; }
 	else if (volume > 1.0f) { volume = 1.0f; }
 	m_Volume_SFX = m_Volume_Main * volume;
@@ -208,7 +211,7 @@ void SoundManager::SetVolume_SFX(float volume)
 
 void SoundManager::SetVolume_UI(float volume)
 {
-	if (m_Dirty_UI == false) return;
+	//if (m_Dirty_UI == false) return;
 	if (volume < 0) { volume = 0; }
 	else if (volume > 1.0f) { volume = 1.0f; }
 	m_Volume_UI = m_Volume_Main * volume;

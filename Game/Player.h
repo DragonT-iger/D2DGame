@@ -21,7 +21,7 @@ enum class Visibilty
 };
 
 class Inventory;
-
+class Baby;
 
 class Player : public MonoBehaviour
 {
@@ -87,5 +87,6 @@ private:
 
 	BoxCollider* m_boxCol = nullptr;
 	Inventory* m_Inven = nullptr;
+	Baby* m_baby = nullptr;
 };
 

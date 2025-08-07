@@ -21,6 +21,8 @@ enum FarmRank
 	Rank_C = 2,
 };
 
+class SpawnManager;
+
 class Crop : public MonoBehaviour
 {
 public:
@@ -58,7 +60,9 @@ protected:
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_GameSprites;
 	std::shared_ptr<AnimationClip>										   m_largeClip = nullptr;
 
-	GameObject* m_steal_message;
+#ifdef _DEBUG
+	SpawnManager* m_spawnManager = nullptr;
+#endif
 	GameObject* m_eftObj;
 };
 

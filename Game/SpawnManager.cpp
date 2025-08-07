@@ -18,6 +18,11 @@ void SpawnManager::Awake()
 	farmArr.push_back({ Rank_B, 15, 0.0f, 4.f, &m_farmBList });
 	farmArr.push_back({ Rank_C, 10, 0.0f, 5.f, &m_farmCList });
 
+	growArr.reserve(3);
+	growArr.push_back(&rankA);
+	growArr.push_back(&rankB);
+	growArr.push_back(&rankC);
+
 	//리스트 초기화
 	m_farmAList.clear();
 	m_farmBList.clear();
@@ -108,6 +113,24 @@ void SpawnManager::DestroyObject(GameObject* obj)
 	curScene->Destroy(obj);
 }
 
+GrowSpeed& SpawnManager::GetGrowSpeed(FarmRank rank)
+{
+	switch (rank)
+	{
+	case FarmRank::Rank_A:
+		return rankA;
+		break;
+	case FarmRank::Rank_B:
+		return rankB;
+		break;
+	case FarmRank::Rank_C:
+		return rankC;
+		break;
+	default:
+		return rankC;
+	}
+}
+
 GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 {
 	Vector2 pos = { 0, 0 };
@@ -155,6 +178,7 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 
 	return obj;
 }
+
 
 bool SpawnManager::IsInnerRect(const RECT& rect, const int& x, const int& y)
 {
@@ -216,25 +240,48 @@ Vector2 SpawnManager::CreateSpawnPoint(const RECT& outRect, const RECT& inRect, 
 
 Crops SpawnManager::SetCropType(FarmRank rank)
 {
-	int p = Random::Instance().Range(0, 9);
+	Crops c;
 
-	switch (p)
+	switch (rank)
 	{
-	case 0:
-	case 1:
-	case 2:
-	case 3:
-	case 5:
-	case 6:
-	case 7:
-	case 8:
-	case 9:
+	case Rank_A:	
+		c = RandomCrop(34, 33, 33);
+		break;
+	case Rank_B:
+		c = RandomCrop(34, 33, 33);
+		break;
+	case Rank_C:
+		c = RandomCrop(34, 33, 33);
 		break;
 	}
 
-	Crops crop = static_cast<Crops>(p % 3);
+	if (c == Nothing) std::cerr << "랜덤 작물 확률 잘못됐음" << std::endl;
 
-	return  crop;
+	return  c;
+}
+
+Crops SpawnManager::RandomCrop(UINT epProb, UINT ptProb, UINT pkProp)		//매개변수의 합이 100이어야함
+{
+	UINT random;
+
+	UINT ep = 0;
+	UINT pt = 0;
+	UINT pk = 0;
+
+	ep = epProb;
+	pt = ep + ptProb;
+	pk = pt + pkProp;
+
+	random = Random::Instance().Range(0, 99);
+
+	if (random <= ep)
+		return Crops::Eggplant;
+	if (random > ep && random <= pt)
+		return Crops::Potato;
+	if (random > pt && random <= pk)
+		return Crops::Pumpkin;
+
+	return Crops::Nothing;
 }
 
 void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* eftObj)
@@ -242,5 +289,79 @@ void SpawnManager::SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject*
 	if (rank == Rank_C)
 		obj->SetCropData(rank, type, *m_cropSprites.at(type), nullptr);
 	else
-		obj->SetCropData(rank, type, *m_cropSprites.at(type), eftObj);		//3단계 애니메이션 나오면 추가
+		obj->SetCropData(rank, type, *m_cropSprites.at(type), eftObj);
+}
+
+void SpawnManager::OnInspectorGUI()
+{
+	//작물 최대 개수
+	for (int i = 0; i < farmArr.size(); ++i)
+	{
+		std::string label;
+		if( i == 0)
+			label = "maxRate##" + std::string("A");
+		if( i == 1)
+			label = "maxRate##" + std::string("B");
+		if (i == 2)
+			label = "maxRate##" + std::string("C");
+		ImGui::DragInt(label.c_str(), &farmArr[i].maxRate, 1, 0, 100);
+	}
+
+	for (int i = 0; i < growArr.size(); ++i)
+	{
+		std::string labelS;
+		std::string labelM;
+		std::string labelL;
+
+		if (i == 0)
+		{
+			labelS = "GrowSpeed A (" + std::to_string(i) + ")##S" + std::to_string(i);
+			labelM = "GrowSpeed A (" + std::to_string(i) + ")##M" + std::to_string(i);
+			labelL = "GrowSpeed A (" + std::to_string(i) + ")##L" + std::to_string(i);
+		}
+		if (i == 1)
+		{
+			labelS = "GrowSpeed B (" + std::to_string(i) + ")##S" + std::to_string(i);
+			labelM = "GrowSpeed B (" + std::to_string(i) + ")##M" + std::to_string(i);
+			labelL = "GrowSpeed B (" + std::to_string(i) + ")##L" + std::to_string(i);
+		}
+		if (i == 2)
+		{
+			labelS = "GrowSpeed C (" + std::to_string(i) + ")##S" + std::to_string(i);
+			labelM = "GrowSpeed C (" + std::to_string(i) + ")##M" + std::to_string(i);
+			labelL = "GrowSpeed C (" + std::to_string(i) + ")##L" + std::to_string(i);
+		}
+			
+
+		ImGui::DragFloat(labelS.c_str(), &growArr[i]->growSpeedS, 1.f, 0, 20);
+		ImGui::DragFloat(labelM.c_str(), &growArr[i]->growSpeedM, 1.f, 0, 20);
+		ImGui::DragFloat(labelL.c_str(), &growArr[i]->growSpeedL, 1.f, 0, 20);
+	}
+
+	if (ImGui::Button("Destroy All Crop"))
+		DestroyAllCrop();
+}
+
+void SpawnManager::DestroyAllCrop()
+{
+	for (auto& obj : m_farmAList)
+	{
+		obj->GetComponent<Crop>()->Destroy();
+		Destroy(obj);
+	}
+	for (auto& obj : m_farmBList)
+	{
+		obj->GetComponent<Crop>()->Destroy();
+		Destroy(obj);
+	}
+	for (auto& obj : m_farmCList)
+	{
+		obj->GetComponent<Crop>()->Destroy();
+		Destroy(obj);
+	}
+		
+
+	m_farmAList.clear();
+	m_farmBList.clear();
+	m_farmCList.clear();
 }

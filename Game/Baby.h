@@ -11,6 +11,8 @@ public:
 	};
 
 	void ChangeThink(Thought t);
+	int QuestSystem(float deltaTime);
+
 	void OnInspectorGUI()             override;
 private:
 	void Awake() override;
@@ -29,5 +31,10 @@ private:
 	
 	
 	Thought m_thoughtState = Thought::None;
+
+
+
+	static float deltaCount;
+	int m_questTime = 0;
 };
 

@@ -160,32 +160,33 @@ void Scene::Render()
         D2DRenderer::Instance().DrawBitmap(info.m_bitmap.Get(), info.m_destRect, info.m_srcRect, info.opacity);
 	}
 
-#ifdef _DEBUG
-    for (const auto& info : m_colliderQ)
+    if (SceneManager::Instance().GetDebugMode())
     {
-		if (SceneManager::Instance().GetDebugMode() && info.m_collider)
+		for (const auto& info : m_colliderQ)
 		{
-            Vector2 s = info.m_transform->GetScale();
-            Vector2 p = info.m_transform->GetPosition();
-			D2D1::Matrix3x2F renderTM = GetRenderTM();
-            D2D1::Matrix3x2F worldTM;
-            if (info.m_transform->GetParent()) {
-                Vector2 v = info.m_transform->GetParent()->GetPosition();
-                worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x) * D2D1::Matrix3x2F::Translation({ p.x, p.y }) * D2D1::Matrix3x2F::Translation(v.x, v.y);
-            }
-            else
-            {
-                worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x)
-                    * D2D1::Matrix3x2F::Translation({ p.x, p.y });
-            }
-            
-			D2D1::Matrix3x2F mWV = renderTM * worldTM * viewTM;
-			D2DRenderer::Instance().SetTransform(mWV);
-			info.m_collider->DrawCollider();
+			if (info.m_collider)
+			{
+				Vector2 s = info.m_transform->GetScale();
+				Vector2 p = info.m_transform->GetPosition();
+				D2D1::Matrix3x2F renderTM = GetRenderTM();
+				D2D1::Matrix3x2F worldTM;
+				if (info.m_transform->GetParent()) {
+					Vector2 v = info.m_transform->GetParent()->GetPosition();
+					worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x) * D2D1::Matrix3x2F::Translation({ p.x, p.y }) * D2D1::Matrix3x2F::Translation(v.x, v.y);
+				}
+				else
+				{
+					worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x)
+						* D2D1::Matrix3x2F::Translation({ p.x, p.y });
+				}
+
+				D2D1::Matrix3x2F mWV = renderTM * worldTM * viewTM;
+				D2DRenderer::Instance().SetTransform(mWV);
+				info.m_collider->DrawCollider();
+			}
 		}
     }
-#endif
-
+    
 #ifdef _DEBUG
     //±×¸®µå Ãâ·Â
 	if (SceneManager::Instance().GetDebugMode() && m_isGridOn)
@@ -239,22 +240,27 @@ void Scene::Render()
             {
 				D2DRenderer::Instance().SetFont(info.m_font.data(), info.fontSize);
 				D2DRenderer::Instance().DrawMessage(info.m_text.data(), info.m_layoutRect, info.m_color);
-				D2DRenderer::Instance().DrawRectangle(info.m_layoutRect.left, info.m_layoutRect.top, info.m_layoutRect.right, info.m_layoutRect.bottom, D2D1::ColorF::Red);
+                if(SceneManager::Instance().GetDebugMode())
+				    D2DRenderer::Instance().DrawRectangle(info.m_layoutRect.left, info.m_layoutRect.top, info.m_layoutRect.right, info.m_layoutRect.bottom, D2D1::ColorF::Red);
             }
         }
         else if (info.m_text.data())
         {
             D2DRenderer::Instance().SetFont(info.m_font.data(), info.fontSize);
             D2DRenderer::Instance().DrawMessage(info.m_text.data(), info.m_layoutRect, info.m_color);
-            D2DRenderer::Instance().DrawRectangle(info.m_layoutRect.left, info.m_layoutRect.top, info.m_layoutRect.right, info.m_layoutRect.bottom, D2D1::ColorF::Red);
+            if (SceneManager::Instance().GetDebugMode())
+                D2DRenderer::Instance().DrawRectangle(info.m_layoutRect.left, info.m_layoutRect.top, info.m_layoutRect.right, info.m_layoutRect.bottom, D2D1::ColorF::Red);
         }
     }
 
-    D2DRenderer::Instance().SetFont(L"¸¼Àº°íµñ", 15.0f);
-    std::wstring fps = L"fps : " + std::to_wstring(m_fps) + L" / " + std::to_wstring(static_cast<int>(m_deltatime));
-    D2D1_RECT_F layout = { 0, 0, 150, 50 };
-    D2DRenderer::Instance().DrawMessage(fps.c_str(), layout, D2D1::ColorF::Blue);
-
+    if (SceneManager::Instance().GetDebugMode())
+    {
+		D2DRenderer::Instance().SetFont(L"¸¼Àº°íµñ", 15.0f);
+		std::wstring fps = L"fps : " + std::to_wstring(m_fps) + L" / " + std::to_wstring(static_cast<int>(m_deltatime));
+		D2D1_RECT_F layout = { 0, 0, 150, 50 };
+		D2DRenderer::Instance().DrawMessage(fps.c_str(), layout, D2D1::ColorF::Blue);
+    }
+    
 	m_renderQ.clear();
     m_colliderQ.clear();
     m_UIRenderQ.clear();

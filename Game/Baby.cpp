@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Baby.h"
 
+float Baby::deltaCount = 0;
+
 void Baby::Awake()
 {
 
@@ -22,7 +24,7 @@ void Baby::Awake()
 
 	m_ItemUI->GetComponent<Transform>()->SetParent(GetOwner()->GetComponent<Transform>());
 
-
+	m_questTime = 10;
 }
 
 void Baby::Update(float deltaTime)
@@ -38,6 +40,8 @@ void Baby::Update(float deltaTime)
 		m_ItemUI->GetComponent<Transform>()->SetPosition({ -400.400f, 400.400f });
 		m_babySpriteRenderer->SetFlip(true);
 	}
+
+	QuestSystem(deltaTime);
 }
 
 void Baby::ChangeThink(Thought t)
@@ -78,4 +82,21 @@ void Baby::OnInspectorGUI()
 	{
 		ChangeThink(static_cast<Thought>(cur));
 	}
+}
+
+int Baby::QuestSystem(float deltaTime)
+{
+	bool sucess = false;
+
+	deltaCount += deltaTime;
+
+	if (m_questTime < deltaCount)
+	{
+		int index = Random::Instance().Range(1, 3);
+		ChangeThink(static_cast<Thought>(index));
+		deltaCount = 0;
+	}
+
+	if (sucess)	return 10;
+	else return 0;
 }

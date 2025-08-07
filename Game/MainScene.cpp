@@ -130,40 +130,41 @@ void MainScene::Awake()
 	m_SpawnManager->AddComponent<SpawnManager>();
 
 	m_inventory = Instantiate("Inventory");
-	m_inventory->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventoryBG.png"), { 1200, 300 });
+	m_inventory->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Main_Panel.png"), { 900, 200 });
 	m_inventory->AddComponent<Inventory>();
 	m_inventory->GetComponent<Transform>()->SetPosition({ 960, 930 });
 
 	m_slot1BG = Instantiate("Slot1BG");
-	m_slot1BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventorySlot.png"), { 350, 250 });
-	m_slot1BG->GetComponent<Transform>()->SetPosition({ 550, 930 });
+	auto Img = m_slot1BG->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 100, 100 });
+	m_slot1BG->GetComponent<Transform>()->SetPosition({ 1110, 930 });
 
 	m_slot2BG = Instantiate("Slot2BG");
-	m_slot2BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventorySlot.png"), { 350, 250 });
-	m_slot2BG->GetComponent<Transform>()->SetPosition({ 950, 930 });
+	m_slot2BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 100, 100 });
+	m_slot2BG->GetComponent<Transform>()->SetPosition({ 1220, 930 });
 
 	m_slot3BG = Instantiate("Slot3BG");
-	m_slot3BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("inventorySlot.png"), { 350, 250 });
-	m_slot3BG->GetComponent<Transform>()->SetPosition({ 1350, 930 });
+	m_slot3BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 100, 100 });
+	m_slot3BG->GetComponent<Transform>()->SetPosition({ 1330, 930 });
 
 	m_slot1 = Instantiate("Slot1");
 	m_slot1->AddComponent<Image>();
 	m_slot1->AddComponent<Slot>();
-	m_slot1->GetComponent<Transform>()->SetPosition({ 550, 930 });
+	m_slot1->GetComponent<Transform>()->SetPosition({ 1110, 930 });
 	m_slot1->GetComponent<Transform>()->SetParent(m_slot1BG->GetComponent<Transform>());
 	m_slot1->AddComponent<Text>();
 
 	m_slot2 = Instantiate("Slot2");
 	m_slot2->AddComponent<Image>();
 	m_slot2->AddComponent<Slot>();
-	m_slot2->GetComponent<Transform>()->SetPosition({ 950, 930 });
+	m_slot2->GetComponent<Transform>()->SetPosition({ 1220, 930 });
 	m_slot2->GetComponent<Transform>()->SetParent(m_slot2BG->GetComponent<Transform>());
 	m_slot2->AddComponent<Text>();
 
 	m_slot3 = Instantiate("Slot3");
 	m_slot3->AddComponent<Image>();
 	m_slot3->AddComponent<Slot>();
-	m_slot3->GetComponent<Transform>()->SetPosition({ 1350, 930 });
+	m_slot3->GetComponent<Transform>()->SetPosition({ 1330, 930 });
 	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
 	m_slot3->AddComponent<Text>();
 

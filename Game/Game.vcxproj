@@ -140,6 +140,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AcceptSetting.cpp" />
     <ClCompile Include="ArtTestView.cpp" />
     <ClCompile Include="AttackEffect.cpp" />
     <ClCompile Include="AttackPattern.cpp" />
@@ -157,7 +158,6 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObjectFindTest.cpp" />
-    <ClCompile Include="HSTestScene.cpp" />
     <ClCompile Include="HungryGauge.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventorySlot.cpp" />
@@ -169,18 +169,20 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="PlayerSound.cpp" />
     <ClCompile Include="Potato.cpp" />
     <ClCompile Include="Pumpkin.cpp" />
+    <ClCompile Include="QuitSetting.cpp" />
+    <ClCompile Include="SettingButton.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
     <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="StealMessage.cpp" />
     <ClCompile Include="TestTitleScene.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="UITest.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="PlayerController_Sample.cpp" />
     <ClCompile Include="UI_Score.cpp" />
     <ClCompile Include="YSort.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AcceptSetting.h" />
     <ClInclude Include="ArtTestView.h" />
     <ClInclude Include="AttackEffect.h" />
     <ClInclude Include="AttackPattern.h" />
@@ -199,7 +201,6 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="Game.h" />
     <ClInclude Include="ExampleScene.h" />
     <ClInclude Include="GameObjectFindTest.h" />
-    <ClInclude Include="HSTestScene.h" />
     <ClInclude Include="HungryGauge.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventorySlot.h" />
@@ -209,12 +210,13 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="PlayerSound.h" />
     <ClInclude Include="Potato.h" />
     <ClInclude Include="Pumpkin.h" />
+    <ClInclude Include="QuitSetting.h" />
+    <ClInclude Include="SettingButton.h" />
     <ClInclude Include="SpawnManager.h" />
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="StealMessage.h" />
     <ClInclude Include="TestTitleScene.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="UITest.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerController_Sample.h" />
     <ClInclude Include="UI_Score.h" />

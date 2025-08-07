@@ -63,6 +63,7 @@ SlotData Slot::ThrowAll()
 void Slot::SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
 {
 	auto slotSize = GetComponent<Transform>()->GetParent()->GetComponent<Image>()->GetSize();
+	slotSize = { slotSize.width - 30, slotSize.height - 30 };
 	m_image->SetActive(true);
 	m_image->SetBitmap(sprite, slotSize);
 }
@@ -79,6 +80,6 @@ void Slot::SetText()
 {
 	std::wstring ws_Count = std::to_wstring(m_data.count);
 
-	m_text->SetText(ws_Count, {50,50}, L"Maplestory", D2D1::ColorF::Black);
+	m_text->SetText(ws_Count, {20,20}, L"Maplestory");
 	m_text->SetFontSize(15.0f);
 }
