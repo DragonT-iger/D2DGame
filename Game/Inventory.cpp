@@ -173,5 +173,31 @@ float Inventory::GetWeight()
 	return weight;
 }
 
+float Inventory::GetSpeedMultiplier() const
+{
+    std::size_t potato   = 0;
+    std::size_t eggplant = 0;
+    std::size_t pumpkin  = 0;
+
+    for (const auto& slot : m_slots)
+    {
+        const auto& data = slot->GetData();
+        if (data.isEmpty) continue;
+
+        switch (data.type)
+        {
+        case Potato:   potato   += data.count; break;
+        case Eggplant: eggplant += data.count; break;
+        case Pumpkin:  pumpkin  += data.count; break;
+        default: break;
+        }
+    }
+
+    double mult = 1.0;
+    mult *= std::pow(1.01, static_cast<double>(potato));   
+    mult *= std::pow(1.02, static_cast<double>(eggplant));  
+    mult *= std::pow(1.03, static_cast<double>(pumpkin));  
+    return static_cast<float>(mult);
+}
 
 

@@ -95,8 +95,11 @@ void Player::OnInspectorGUI()
 	ImGui::DragInt("HP", &m_hp, 1);
 	ImGui::DragFloat("Speed", &m_spd, 0.3f, 0.1f);
 
-	float weight = std::min(m_Inven->GetWeight(), 450.f); 
-	float curSpd = std::max(m_spd - weight, 50.f);         
+	float weight = m_Inven->GetWeight();
+	float weightMult = 1.f + weight / m_weightDivisor;
+	float curSpd = std::max(m_baseSpd / (m_Inven->GetSpeedMultiplier()),
+		m_minSpd);
+
 	ImGui::Text("Cur Speed : %.1f", curSpd);
 }
 
