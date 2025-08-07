@@ -63,7 +63,13 @@ void Farmer::Start()
     auto attackZone = attackObject->AddComponent<AttackZone>();
     attackZone->Initalize(this, m_attackAreaValue);
 
-
+    m_attackPattern.SetOffsets({
+     {0.f, 0.f},
+     {m_attackAreaValue, 0.f},
+     {-m_attackAreaValue, 0.f},
+     {0.f, m_attackAreaValue},
+     {0.f, -m_attackAreaValue}
+        });
 }
 
 void Farmer::Update(float deltaTime)
@@ -205,19 +211,9 @@ void Farmer::DoAttack(float deltaTime)
         m_attackTimer += deltaTime;
         if (m_attackTimer >= m_attackDelay) {
             Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
-            auto effect = Instantiate("AttackEffect");
-            auto effTransform = effect->GetComponent<Transform>();
-            effTransform->SetPosition(center);
-            auto sr = effect->AddComponent<SpriteRenderer>();
-            effect->AddComponent<SpriteRenderer>();
-
-            auto collider = effect->AddComponent<CircleCollider>();
-            collider->SetRadius(m_attackAreaValue);    
+            m_attackPattern.Execute(center, m_attackAreaValue);
             m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
-            effect->AddComponent<AttackEffect>();
-
             m_animator->ChangeState("attack");
-
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
             // 안나갔으면 Attack 계속

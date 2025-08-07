@@ -1,4 +1,5 @@
 #pragma once
+#include "AttackPattern.h"
 class Farmer : public MonoBehaviour
 {
 
@@ -82,5 +83,7 @@ private:
     float       m_attackTimer = 0.0f;
     float       m_attackInterval = 0.5f;
     float       m_attackIntervalTimer = 0.0f;
+
+    AttackPattern m_attackPattern;
 };
 
