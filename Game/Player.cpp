@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Player.h"
+#include "Baby.h"
 #include "Inventory.h"
 #include "GameManager.h"
 
@@ -10,6 +11,7 @@ class Inventory;
 void Player::Awake()
 {
 	m_boxCol = GetComponent<BoxCollider>();
+	m_baby = GetComponent<Baby>();
 
 	m_fullness = 1000.0f;
 	m_elapsedTime = 0.0f;
