@@ -179,15 +179,20 @@ void Farmer::DoAttack(float deltaTime)
     else {
         m_attackTimer += deltaTime;
         if (m_attackTimer >= m_attackDelay) {
-            Vector2 playerPos = m_player->GetComponent<Transform>()->GetPosition();
             Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
-            Vector2 diff = playerPos - center;
-            if (diff.SqrMagnitude() <= m_attackAreaValue * m_attackAreaValue) {
-                Player* player = m_player->GetComponent<Player>();
+            auto effect = Instantiate("AttackEffect");
+            auto effTransform = effect->GetComponent<Transform>();
+            effTransform->SetPosition(center);
+            auto sr = effect->AddComponent<SpriteRenderer>();
+            sr->SetOpacity(0.3f);
+            sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
 
-                player->SetHp(player->GetHp() - 1);
-               
-            }
+            auto collider = effect->AddComponent<CircleCollider>();
+            collider->SetRadius(m_attackAreaValue);
+            effect->AddComponent<AttackDamage>();
+
+            m_animator->ChangeState("attack");
+
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
             // 안나갔으면 Attack 계속

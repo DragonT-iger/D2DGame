@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "FarmerZone.h"
 #include "Farmer.h"
+#include "Player.h"
 
 void FarmerZone::Awake()
 {
@@ -107,4 +108,17 @@ void AttackIndicatorZone::OnTriggerExit(Collider* other)
 		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 	}
 
+}
+
+void AttackDamage::OnTriggerEnter(Collider* other)
+{
+	if (other->GetOwner()->GetTag() != "Player")
+		return;
+
+	if (auto player = other->GetOwner()->GetComponent<Player>())
+	{
+		player->SetHp(player->GetHp() - m_damage);
+	}
+
+	Destroy(GetOwner());
 }

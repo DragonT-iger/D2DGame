@@ -46,3 +46,14 @@ public:
 private:
     Farmer* m_farmer = nullptr;   // 반드시 private 마지막에!
 };
+
+class AttackDamage : public MonoBehaviour
+{
+public:
+    void Initialize(int damage) { m_damage = damage; }
+
+    void OnTriggerEnter(Collider* other) override;
+
+private:
+    int m_damage = 1;
+};
