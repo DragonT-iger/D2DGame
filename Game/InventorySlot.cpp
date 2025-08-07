@@ -7,8 +7,6 @@ void Slot::Start()
 {
 	m_image = GetComponent<Image>();
 	m_image->SetActive(false);
-	m_text = GetComponent<Text>();
-	m_text->SetOrderLayer(3);
 }
 
 void Slot::Update(float deltaTime)
@@ -17,6 +15,12 @@ void Slot::Update(float deltaTime)
 		SetEmpty();
 
 	SetText();
+}
+
+void Slot::RegisterText(Text* text)
+{
+	m_text = text;
+	m_text->SetOrderLayer(3);
 }
 
 void Slot::AddItem(Crops type, Size count, Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
@@ -63,7 +67,7 @@ SlotData Slot::ThrowAll()
 void Slot::SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
 {
 	auto slotSize = GetComponent<Transform>()->GetParent()->GetComponent<Image>()->GetSize();
-	slotSize = { slotSize.width - 30, slotSize.height - 30 };
+	slotSize = { slotSize.width - 60, slotSize.height - 60 };
 	m_image->SetActive(true);
 	m_image->SetBitmap(sprite, slotSize);
 }

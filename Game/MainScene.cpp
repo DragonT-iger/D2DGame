@@ -50,11 +50,7 @@ void MainScene::Awake()
 
 	playerSR->SetOrderInLayer(1);
 
-	m_hungryGauge = Instantiate("hungryGauge");
-	m_hungryGauge->AddComponent<Image>();
-	m_hungryGauge->AddComponent<Slide_Bar>();
-	m_hungryGauge->AddComponent<HungryGauge>();
-	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 700, 800 });
+	
 	
 //end player-----
 
@@ -130,43 +126,52 @@ void MainScene::Awake()
 	m_SpawnManager->AddComponent<SpawnManager>();
 
 	m_inventory = Instantiate("Inventory");
-	m_inventory->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Main_Panel.png"), { 900, 200 });
+	m_inventory->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Main_Panel.png"), { 1030, 250 });
 	m_inventory->AddComponent<Inventory>();
 	m_inventory->GetComponent<Transform>()->SetPosition({ 960, 930 });
 
 	m_slot1BG = Instantiate("Slot1BG");
 	auto Img = m_slot1BG->AddComponent<Image>();
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 100, 100 });
-	m_slot1BG->GetComponent<Transform>()->SetPosition({ 1110, 930 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 160, 160 });
+	m_slot1BG->GetComponent<Transform>()->SetPosition({ 1010, 930 });
 
 	m_slot2BG = Instantiate("Slot2BG");
-	m_slot2BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 100, 100 });
-	m_slot2BG->GetComponent<Transform>()->SetPosition({ 1220, 930 });
+	m_slot2BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 160, 160 });
+	m_slot2BG->GetComponent<Transform>()->SetPosition({ 1190, 930 });
 
 	m_slot3BG = Instantiate("Slot3BG");
-	m_slot3BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 100, 100 });
-	m_slot3BG->GetComponent<Transform>()->SetPosition({ 1330, 930 });
+	m_slot3BG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Frame.png"), { 160, 160 });
+	m_slot3BG->GetComponent<Transform>()->SetPosition({ 1370, 930 });
 
 	m_slot1 = Instantiate("Slot1");
+	m_slot1Text = Instantiate("Slot1Text");
 	m_slot1->AddComponent<Image>();
-	m_slot1->AddComponent<Slot>();
-	m_slot1->GetComponent<Transform>()->SetPosition({ 1110, 930 });
+	auto slot = m_slot1->AddComponent<Slot>();
+	m_slot1->GetComponent<Transform>()->SetPosition({ 1010, 930 });
 	m_slot1->GetComponent<Transform>()->SetParent(m_slot1BG->GetComponent<Transform>());
-	m_slot1->AddComponent<Text>();
+	auto txt = m_slot1Text->AddComponent<Text>();
+	m_slot1Text->GetComponent<Transform>()->SetPosition({ 1045, 960 });
+	slot->RegisterText(txt);
 
 	m_slot2 = Instantiate("Slot2");
+	m_slot2Text = Instantiate("Slot2Text");
 	m_slot2->AddComponent<Image>();
-	m_slot2->AddComponent<Slot>();
-	m_slot2->GetComponent<Transform>()->SetPosition({ 1220, 930 });
+	slot = m_slot2->AddComponent<Slot>();
+	m_slot2->GetComponent<Transform>()->SetPosition({ 1190, 930 });
 	m_slot2->GetComponent<Transform>()->SetParent(m_slot2BG->GetComponent<Transform>());
-	m_slot2->AddComponent<Text>();
+	txt = m_slot2Text->AddComponent<Text>();
+	m_slot2Text->GetComponent<Transform>()->SetPosition({ 1225, 960 });
+	slot->RegisterText(txt);
 
 	m_slot3 = Instantiate("Slot3");
+	m_slot3Text = Instantiate("Slot3Text");
 	m_slot3->AddComponent<Image>();
-	m_slot3->AddComponent<Slot>();
-	m_slot3->GetComponent<Transform>()->SetPosition({ 1330, 930 });
+	slot = m_slot3->AddComponent<Slot>();
+	m_slot3->GetComponent<Transform>()->SetPosition({ 1370, 930 });
 	m_slot3->GetComponent<Transform>()->SetParent(m_slot3BG->GetComponent<Transform>());
-	m_slot3->AddComponent<Text>();
+	txt = m_slot3Text->AddComponent<Text>();
+	m_slot3Text->GetComponent<Transform>()->SetPosition({ 1405, 960 });
+	slot->RegisterText(txt);
 
 	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
@@ -178,6 +183,40 @@ void MainScene::Awake()
 	sr->SetOrderInLayer(-200000);
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
+#pragma endregion
+
+#pragma region UI
+
+	m_profile = Instantiate("playerProfile");
+	m_profileBG = Instantiate("playerProfileBG");
+	m_babyprofile = Instantiate("babyProfile");
+	m_babyprofileBG = Instantiate("babyProfileBG");
+
+	m_hungryBG = Instantiate("hungryBG");
+	m_hungryGauge = Instantiate("hungryGauge");
+	m_hungryImage = Instantiate("hungryImg");
+
+	m_hp1 = Instantiate("hp1");
+	m_hp2 = Instantiate("hp2");
+	m_hp3 = Instantiate("hp3");
+
+	m_profileBG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Paper_Frame.png"), { 110, 110 });
+	m_babyprofileBG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Paper_Frame.png"), { 110, 110 });
+	m_profileBG->GetComponent<Transform>()->SetPosition({ 550, 875 });
+	m_babyprofileBG->GetComponent<Transform>()->SetPosition({ 550, 985 });
+
+	m_hp1->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Heart.png"), { 72, 65 });
+	m_hp1->GetComponent<Transform>()->SetPosition({ 685, 980 });
+	m_hp2->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Heart.png"), { 72, 65 });
+	m_hp2->GetComponent<Transform>()->SetPosition({ 770, 980 });
+	m_hp3->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Heart.png"), { 72, 65 });
+	m_hp3->GetComponent<Transform>()->SetPosition({ 855, 980 });
+
+	m_hungryGauge->AddComponent<Image>();
+	m_hungryGauge->AddComponent<Slide_Bar>();
+	m_hungryGauge->AddComponent<HungryGauge>();
+	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 770, 880 });
+
 #pragma endregion
 
 	player->GetComponent<PlayerController>()->SetSpawnManager(m_SpawnManager->GetComponent<SpawnManager>());
