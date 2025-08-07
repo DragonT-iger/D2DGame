@@ -7,7 +7,7 @@ void Inventory::Awake()
 	m_itemSprite.emplace(Potato, ResourceManager::Instance().LoadTexture("potato_item.png"));
 	m_itemSprite.emplace(Pumpkin, ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
 	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("Icon_Frame.png"));
-	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("CurSlot.png"));
+	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("Icon_Frame_Selected.png"));
 }
 
 void Inventory::Start()
