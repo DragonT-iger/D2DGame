@@ -28,5 +28,8 @@ private:
 	SpawnManager* m_SpawnManager = nullptr;
 	Inventory* m_inven = nullptr;
 
+	float m_throwTime = 0.2f;
+	float m_throwelapsedTime = 0.0f;
+
 	//float* p_Spd = nullptr;
 };

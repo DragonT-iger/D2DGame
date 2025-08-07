@@ -42,8 +42,16 @@ void PlayerController::Update(float deltaTime)
 		if (Input.GetKeyPressed(Keycode::C))
 		{
 			m_inven->ThrowItem();
+			m_throwelapsedTime = 0;
 		}
-
+		else if (Input.GetKeyDown(Keycode::C))
+		{
+			if (m_throwelapsedTime >= m_throwTime)
+			{
+				m_inven->ThrowItem();
+				m_throwelapsedTime = 0;
+			}
+		}
 
 		switch (static_cast<int>(m_Player->action))
 		{
@@ -103,8 +111,7 @@ void PlayerController::Update(float deltaTime)
 		//작물과 충돌중일 때 Z키를 누르면 Action -> Steal로 전환
 	}
 
-	
-	
+	m_throwelapsedTime += deltaTime;
 }
 
 
