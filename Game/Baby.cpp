@@ -94,7 +94,7 @@ int Baby::QuestSystem(float deltaTime)
 	{
 		int index = Random::Instance().Range(1, 3);
 		ChangeThink(static_cast<Thought>(index));
-
+		deltaCount = 0;
 	}
 
 	if (sucess)	return 10;
