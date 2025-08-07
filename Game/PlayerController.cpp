@@ -29,7 +29,7 @@ void PlayerController::Update(float deltaTime)
 		float weight = m_inven->GetWeight();
 		float weightMult = 1.f + weight / m_Player->m_weightDivisor;
 		float moveSpd = std::max(
-			m_Player->m_baseSpd / (m_inven->GetSpeedMultiplier()),
+			m_Player->m_spd / (m_inven->GetSpeedMultiplier()),
 			m_Player->m_minSpd);
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }

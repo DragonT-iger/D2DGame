@@ -194,10 +194,24 @@ float Inventory::GetSpeedMultiplier() const
     }
 
     double mult = 1.0;
-    mult *= std::pow(1.01, static_cast<double>(potato));   
-    mult *= std::pow(1.02, static_cast<double>(eggplant));  
-    mult *= std::pow(1.03, static_cast<double>(pumpkin));  
-    return static_cast<float>(mult);
+	mult *= std::pow(1.0 + m_potatoBonus, static_cast<double>(potato));
+	mult *= std::pow(1.0 + m_eggplantBonus, static_cast<double>(eggplant));
+	mult *= std::pow(1.0 + m_pumpkinBonus, static_cast<double>(pumpkin));
+	return static_cast<float>(mult);
+}
+
+void Inventory::OnInspectorGUI()
+{
+	ImGui::Separator();
+	ImGui::Text("Speed Bonus per Item");
+
+	float potatoPerc = static_cast<float>(m_potatoBonus * 100.0);
+	float eggplantPerc = static_cast<float>(m_eggplantBonus * 100.0);
+	float pumpkinPerc = static_cast<float>(m_pumpkinBonus * 100.0);
+
+	if (ImGui::DragFloat("Potato  (%)", &potatoPerc, 0.001f, 0.0f, 100.0f)) m_potatoBonus = potatoPerc / 100.0;
+	if (ImGui::DragFloat("Eggplant(%)", &eggplantPerc, 0.001f, 0.0f, 100.0f)) m_eggplantBonus = eggplantPerc / 100.0;
+	if (ImGui::DragFloat("Pumpkin (%)", &pumpkinPerc, 0.001f, 0.0f, 100.0f)) m_pumpkinBonus = pumpkinPerc / 100.0;
 }
 
 
