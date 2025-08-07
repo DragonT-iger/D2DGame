@@ -168,6 +168,9 @@
     <ClCompile Include="UI_Score.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="EndSceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="UI_Score.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EndSceneManager.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
