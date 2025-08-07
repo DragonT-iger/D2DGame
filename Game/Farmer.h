@@ -1,4 +1,5 @@
 #pragma once
+#include "AttackPattern.h"
 class Farmer : public MonoBehaviour
 {
 
@@ -40,6 +41,9 @@ public:
     bool m_isAlreadyExitAttackZone = true;
     bool m_isAlreadyExitChaseZone = true;
     bool m_hasPatrolTarget = false;
+    bool m_isCommonAttackIndicatorArea = false;
+    int  m_attackIndicatorCount = 0;
+
 
 private:
 
@@ -77,10 +81,14 @@ private:
     GameObject* attackObject;  float m_attackAreaValue = 200.0f;
 
 
-    GameObject* m_attackIndicator = nullptr;
+    //GameObject* m_attackIndicator = nullptr;
     float       m_attackDelay = 1.5f;
     float       m_attackTimer = 0.0f;
     float       m_attackInterval = 0.5f;
     float       m_attackIntervalTimer = 0.0f;
+
+    
+
+    AttackPattern m_attackPattern;
 };
 
