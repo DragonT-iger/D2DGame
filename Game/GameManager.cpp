@@ -19,8 +19,6 @@ void GameManager::Init()
 	m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
 	m_inventory = SceneManager::Instance().GetActiveScene()->FindGameObject("Inventory")->GetComponent<Inventory>();
 
-
-
 }
 
 void GameManager::OnInspectorGUI()
