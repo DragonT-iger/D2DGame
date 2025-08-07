@@ -46,3 +46,4 @@ public:
 private:
     Farmer* m_farmer = nullptr;   // 반드시 private 마지막에!
 };
+

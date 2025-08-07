@@ -28,5 +28,5 @@ private:
 	SpawnManager* m_SpawnManager = nullptr;
 	Inventory* m_inven = nullptr;
 
-	float* p_Spd = nullptr;
+	//float* p_Spd = nullptr;
 };

@@ -186,6 +186,9 @@
     <ClCompile Include="AcceptSetting.cpp">
       <Filter>Scripts\ButtonTest\Setting\Check</Filter>
     </ClCompile>
+    <ClCompile Include="AttackEffect.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -298,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="AcceptSetting.h">
       <Filter>Scripts\ButtonTest\Setting\Check</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackEffect.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

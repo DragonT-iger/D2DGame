@@ -34,6 +34,12 @@ public:
 	void OnTriggerStay(Collider* other)  override;
 	void OnTriggerExit(Collider* other)  override;
 
+
+
+
+	//Getter Setter
+
+	
 	//void SetState(State ste);
 	//void SetAction(Action act);
 	//void SetVisible(Visibilty vib);
@@ -45,11 +51,20 @@ public:
 
 	float GetFullness() { return m_fullness; }
 
+	int GetHp() { return m_hp; }
+	void SetHp(int hp) { m_hp = hp; }
+
+
+
+
 	void FeedBaby(float bop);
 
 	friend class PlayerController;
 	friend class PlayerAnimator;
 	friend class PlayerSound;
+
+	void OnInspectorGUI() override;
+
 
 private:
 	int     m_hp			= 3;

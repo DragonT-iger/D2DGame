@@ -4,6 +4,8 @@
 #include "YSort.h"
 #include "Player.h"
 
+#include "AttackEffect.h"
+
 void Farmer::Awake()
 {
     m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
@@ -32,7 +34,7 @@ void Farmer::Start()
     m_animator->AddClip("angryidle", angryidle, true);
 	m_animator->AddClip("walk", walk, true);
     m_animator->AddClip("angrywalk", angrywalk, true);
-	m_animator->AddClip("attack", attack, true);
+    m_animator->AddClip("attack", attack, false);
     
 
 	m_animator->SetEntryState("idle");
@@ -152,48 +154,79 @@ void Farmer::DoAttack(float deltaTime)
         ChangeState(FarmerState::Patrol);
         return;
     }
+
+    if (m_animator->GetCurState() == "attack" && !m_animator->IsAnimeEnd()) {
+        return;
+    }
+    else if(m_animator->GetCurState() == "attack"){
+        if (m_isAlreadyExitAttackZone == true) {
+            ChangeState(FarmerState::Chase);
+        }
+        else {
+            ChangeState(FarmerState::Attack);
+        }
+    }
     if (m_animator->GetCurState() != "angryidle") {
         m_animator->ChangeState("angryidle");
     }
+
+
+    // 만약 attack play 중이면 return
+
+    
+
     if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
         m_spriteRenderer->SetFlip(false);
     }
     else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
         m_spriteRenderer->SetFlip(true);
     }
+    
 
     if (m_attackIndicator == nullptr) {
-        m_attackIndicator = Instantiate("AttackIndicator");
-        auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
-        indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
-        auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
-        sr->SetOpacity(0.1f);
-        sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
+        m_attackIntervalTimer += deltaTime;
+        if (m_attackIntervalTimer >= m_attackInterval) {
+            m_attackIntervalTimer = 0.f;
+            m_attackIndicator = Instantiate("AttackIndicator");
+            auto indicatorTransform = m_attackIndicator->GetComponent<Transform>();
+            indicatorTransform->SetPosition(m_player->GetComponent<Transform>()->GetPosition());
+            auto sr = m_attackIndicator->AddComponent<SpriteRenderer>();
+            sr->SetOpacity(0.5f);
+            sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
 
-        m_attackIndicator->AddComponent<CircleCollider>();
-        auto zone = m_attackIndicator->AddComponent<AttackIndicatorZone>();
-        zone->Initialize(this);
+            m_attackIndicator->AddComponent<CircleCollider>();
+            auto zone = m_attackIndicator->AddComponent<AttackIndicatorZone>();
+            zone->Initialize(this);
 
-        m_attackTimer = 0.f;
+            m_attackTimer = 0.f;
+        }
     }
     else {
         m_attackTimer += deltaTime;
         if (m_attackTimer >= m_attackDelay) {
-            Vector2 playerPos = m_player->GetComponent<Transform>()->GetPosition();
             Vector2 center = m_attackIndicator->GetComponent<Transform>()->GetPosition();
-            Vector2 diff = playerPos - center;
-            if (diff.SqrMagnitude() <= m_attackAreaValue * m_attackAreaValue) {
-                // TODO: apply damage to player
-            }
+            auto effect = Instantiate("AttackEffect");
+            auto effTransform = effect->GetComponent<Transform>();
+            effTransform->SetPosition(center);
+            auto sr = effect->AddComponent<SpriteRenderer>();
+            effect->AddComponent<SpriteRenderer>();
+
+            auto collider = effect->AddComponent<CircleCollider>();
+            collider->SetRadius(m_attackAreaValue);    
+            m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
+            effect->AddComponent<AttackEffect>();
+
+            m_animator->ChangeState("attack");
+
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
             // 안나갔으면 Attack 계속
-            if (m_isAlreadyExitAttackZone == true) {
-                ChangeState(FarmerState::Chase);
-            }
-            else {
-                ChangeState(FarmerState::Attack);
-            }
+            //if (m_isAlreadyExitAttackZone == true) {
+            //    ChangeState(FarmerState::Chase);
+            //}
+            //else {
+            //    ChangeState(FarmerState::Attack);
+            //}
         }
     }
     
@@ -215,6 +248,9 @@ void Farmer::ChangeState(FarmerState farmerState)
             Destroy(m_attackIndicator);
             m_attackIndicator = nullptr;
         }
+
+        m_attackTimer = 0.f;
+        m_attackIntervalTimer = 0.f;
     }
     m_farmerState = farmerState;
 }
@@ -261,8 +297,9 @@ void Farmer::OnInspectorGUI()
 
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
-    ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
-    ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
+    ImGui::DragFloat("AttackInterval", &m_attackInterval, 0.01f, 0.1f, 10.f);
+    //ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
+    //ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
     //m_hasPatrolTarget
 
     //ImGui::Checkbox("hasPatrolTarget", &m_hasPatrolTarget);

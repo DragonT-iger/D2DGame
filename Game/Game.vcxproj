@@ -142,6 +142,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
   <ItemGroup>
     <ClCompile Include="AcceptSetting.cpp" />
     <ClCompile Include="ArtTestView.cpp" />
+    <ClCompile Include="AttackEffect.cpp" />
     <ClCompile Include="Baby.cpp" />
     <ClCompile Include="Bush.cpp" />
     <ClCompile Include="CinemachineCamera.cpp" />
@@ -182,6 +183,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
   <ItemGroup>
     <ClInclude Include="AcceptSetting.h" />
     <ClInclude Include="ArtTestView.h" />
+    <ClInclude Include="AttackEffect.h" />
     <ClInclude Include="Baby.h" />
     <ClInclude Include="Bush.h" />
     <ClInclude Include="CinemachineCamera.h" />

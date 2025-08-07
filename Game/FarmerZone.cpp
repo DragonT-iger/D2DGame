@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "FarmerZone.h"
 #include "Farmer.h"
+#include "Player.h"
 
 void FarmerZone::Awake()
 {
@@ -108,3 +109,4 @@ void AttackIndicatorZone::OnTriggerExit(Collider* other)
 	}
 
 }
+

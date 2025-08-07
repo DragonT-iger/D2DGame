@@ -44,6 +44,8 @@ void MainScene::Awake()
 	player->AddComponent<PlayerSound>();
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
+
+	//player->GetComponent<Transform>()->SetPosition({ 500.f , 500.f });
 	player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
