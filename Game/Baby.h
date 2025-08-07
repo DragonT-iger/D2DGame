@@ -11,7 +11,14 @@ public:
 	};
 
 	void ChangeThink(Thought t);
-	int QuestSystem(float deltaTime);
+
+	void QuestSuggestions();
+	void QuestinProgress(float deltaTime);
+
+	int QuestSuccess();
+	void QusetFalse();
+
+	void SetExecutionTime(float time);
 
 	void OnInspectorGUI()             override;
 private:

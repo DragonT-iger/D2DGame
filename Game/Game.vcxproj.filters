@@ -186,6 +186,9 @@
     <ClCompile Include="AttackEffect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="AttackPattern.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="Baby.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -300,6 +303,9 @@
       <Filter>Scripts\ButtonTest\Setting\Check</Filter>
     </ClInclude>
     <ClInclude Include="AttackEffect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackPattern.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Baby.h">

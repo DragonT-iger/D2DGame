@@ -41,7 +41,6 @@ void Baby::Update(float deltaTime)
 		m_babySpriteRenderer->SetFlip(true);
 	}
 
-	QuestSystem(deltaTime);
 }
 
 void Baby::ChangeThink(Thought t)
@@ -71,6 +70,7 @@ void Baby::ChangeThink(Thought t)
 	
 }
 
+
 void Baby::OnInspectorGUI()
 {
 	static const char* kThoughtNames[] =
@@ -84,19 +84,34 @@ void Baby::OnInspectorGUI()
 	}
 }
 
-int Baby::QuestSystem(float deltaTime)
+void Baby::QuestSuggestions()
 {
-	bool sucess = false;
+	int index = Random::Instance().Range(1, 3);
+	ChangeThink(static_cast<Thought>(index));
+}
 
+void Baby::QuestinProgress(float deltaTime)
+{
 	deltaCount += deltaTime;
 
 	if (m_questTime < deltaCount)
 	{
-		int index = Random::Instance().Range(1, 3);
-		ChangeThink(static_cast<Thought>(index));
+		
 		deltaCount = 0;
 	}
+}
 
-	if (sucess)	return 10;
-	else return 0;
+int Baby::QuestSuccess()
+{
+	return 0;
+}
+
+void Baby::QusetFalse()
+{
+
+}
+
+void Baby::SetExecutionTime(float time)
+{
+	deltaCount = time;
 }
