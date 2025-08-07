@@ -1,16 +1,12 @@
 #pragma once
 
-class TitleScene : public Scene {
+class QuitSettingBtn : public MonoBehaviour
+{
 public:
 	void Awake() override;
-
 	void Start() override;
 
 private:
-	GameObject* m_startButton;
-	GameObject* m_settingButton;
-	GameObject* m_quitButton;
-	GameObject* m_Title;
 	GameObject* m_settingWnd;
 		GameObject* m_settingText;
 		GameObject* m_bgmText;
@@ -21,4 +17,9 @@ private:
 		GameObject* m_uiSlider;
 		GameObject* m_cancleBtn;
 		GameObject* m_checkBtn;
+
+	Button* m_startBtn;
+	Button* m_settingbutton;
+
+	Button* m_button;
 };

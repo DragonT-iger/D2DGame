@@ -11,5 +11,5 @@ void StartButton::Start()
 {
 	m_button = GetComponent<Button>();
 
-	m_button->AddPressEvent([]() {SceneManager::Instance().LoadScene(std::make_unique<MainScene>()); }, ButtonEvent::Pressed);
+	m_button->AddEvent([]() {SceneManager::Instance().LoadScene(std::make_unique<MainScene>()); }, ButtonEvent::Pressed);
 }

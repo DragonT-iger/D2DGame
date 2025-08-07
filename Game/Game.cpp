@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Game.h"
 #include "ExampleScene.h"
-#include "HSTestScene.h"
 #include "MainScene.h"
 #include "TestTitleScene.h"
 #include "DTtestScene.h"
@@ -46,7 +45,6 @@ bool Game::Initialize()
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
     SceneManager::Instance().LoadScene(std::make_unique<MainScene>());
     //SceneManager::Instance().LoadScene(L"ExampleScene");
-    //SceneManager::Instance().LoadScene(L"HSTestScene");TestTitleScene
     SceneManager::Instance().LoadScene(std::make_unique<TitleScene>());
     //SceneManager::Instance().LoadScene(L"DTtestScene");
 	return true;

@@ -1,16 +1,20 @@
 #pragma once
 
-class TitleScene : public Scene {
+struct Volumes {
+	float bgm;
+	float sfx;
+	float ui;
+};
+
+class SettingButton : public MonoBehaviour
+{
 public:
 	void Awake() override;
+	void Start()	 override;
 
-	void Start() override;
+	void SetVolume(const Volumes& volumes);
 
 private:
-	GameObject* m_startButton;
-	GameObject* m_settingButton;
-	GameObject* m_quitButton;
-	GameObject* m_Title;
 	GameObject* m_settingWnd;
 		GameObject* m_settingText;
 		GameObject* m_bgmText;
@@ -21,4 +25,11 @@ private:
 		GameObject* m_uiSlider;
 		GameObject* m_cancleBtn;
 		GameObject* m_checkBtn;
+
+	Button* m_startBtn;
+	Button* m_button;
+
+	float curBgm_Volume = 1.0f;
+	float curSfx_Volume = 1.0f;
+	float curUI_Volume = 1.0f;
 };

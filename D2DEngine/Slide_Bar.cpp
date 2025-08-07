@@ -32,9 +32,10 @@ void Slide_Bar::RegisterButton(Button* handleButton)
 {
 	m_button = handleButton;
 	
-	m_button->AddPressEvent([this]() {
+	m_button->AddEvent([this]() {
 		auto mPos = Input.GetMouseState().pos;
 		Vector2 mousePos = { static_cast<float>(mPos.x),  static_cast<float>(mPos.y) };
+		std::cout << mousePos.x << std::endl;
 		D2D1_RECT_F barRect = m_Image->GetRenderInfo().m_destRect;
 
 		// 이동 가능한 최소/최대 X

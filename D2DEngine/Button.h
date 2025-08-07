@@ -25,7 +25,7 @@ public:
 		m_sprites[static_cast<int>(event)] = sprite;
 	}
 
-	void AddPressEvent(std::function<void()> event, ButtonEvent btnevent)
+	void AddEvent(std::function<void()> event, ButtonEvent btnevent)
 	{
 		switch (btnevent)
 		{
