@@ -92,12 +92,26 @@ void PatrolZone::OnTriggerExit(Collider* other)
 
 }
 
+void AttackIndicatorZone::OnTriggerEnter(Collider* other)
+{
+	if (other->GetOwner()->GetTag() != "Player") return;
+
+	m_farmer->m_attackIndicatorCount++;
+	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
+}
+
 void AttackIndicatorZone::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() != "Player") return;
 
-	if (!m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
+	if (m_farmer->m_attackIndicatorCount > 0)
+		m_farmer->m_attackIndicatorCount--;
+	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
+
+	if (m_farmer->m_isCommonAttackIndicatorArea)
+	{
 		m_farmer->ChangeState(Farmer::FarmerState::Attack);
+		return;
 	}
 	
 	else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {

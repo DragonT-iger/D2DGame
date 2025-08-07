@@ -41,6 +41,7 @@ class AttackIndicatorZone : public MonoBehaviour {
 public:
     void Initialize(Farmer* farmer) { m_farmer = farmer; }
 
+    void OnTriggerEnter(Collider* other) override;
     void OnTriggerExit(Collider* other) override;
 
 private:
