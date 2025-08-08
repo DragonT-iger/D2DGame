@@ -309,6 +309,7 @@ void Farmer::OnInspectorGUI()
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
     ImGui::DragFloat("AttackInterval", &m_attackInterval, 0.01f, 0.1f, 10.f);
+    ImGui::DragFloat("AttackDelay", &m_attackDelay, 0.01f, 0.1f, 10.f);
 
 
     //디버그용 

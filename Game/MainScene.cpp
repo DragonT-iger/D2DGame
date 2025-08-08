@@ -51,6 +51,16 @@ void MainScene::Awake()
 
 	playerSR->SetOrderInLayer(1);
 
+	m_farmerHouse = Instantiate("House");
+	m_farmerHouse->SetTag("House");
+	auto sr = m_farmerHouse->AddComponent<SpriteRenderer>();
+	sr->SetBitmap(ResourceManager::Instance().LoadTexture("farmer_house_test_1.png"));
+	auto box = m_farmerHouse->AddComponent<BoxCollider>();
+	m_farmerHouse->AddComponent<YSort>(140);
+	m_farmerHouse->GetComponent<Transform>()->SetPosition({ 0, 0 });
+	m_farmerHouse->GetComponent<Transform>()->SetScale({ 0.6, 0.6 });
+	box->SetSize({ 300, 270 });
+	box->SetOffset({ 0, -160 });
 	
 	
 //end player-----
@@ -96,11 +106,53 @@ void MainScene::Awake()
 
 //begin Bush
 
-	bush = Instantiate("Bush");
-	bush->AddComponent<Bush>();
-	bush->AddComponent<SpriteRenderer>();
-	bush->AddComponent<BoxCollider>();
-	bush->GetComponent<Transform>()->SetPosition(Vector2{ -100,0 });
+#pragma region bush
+
+	bush1 = Instantiate("Bush1");
+	bush1->AddComponent<Bush>();
+	bush1->AddComponent<SpriteRenderer>();
+	bush1->AddComponent<BoxCollider>();
+
+	bush2 = Instantiate("Bush2");
+	bush2->AddComponent<Bush>();
+	bush2->AddComponent<SpriteRenderer>();
+	bush2->AddComponent<BoxCollider>();
+
+	bush3 = Instantiate("Bush3");
+	bush3->AddComponent<Bush>();
+	bush3->AddComponent<SpriteRenderer>();
+	bush3->AddComponent<BoxCollider>();
+
+	bush4 = Instantiate("Bush4");
+	bush4->AddComponent<Bush>();
+	bush4->AddComponent<SpriteRenderer>();
+	bush4->AddComponent<BoxCollider>();
+
+	bush5 = Instantiate("Bush5");
+	bush5->AddComponent<Bush>();
+	bush5->AddComponent<SpriteRenderer>();
+	bush5->AddComponent<BoxCollider>();
+
+	bush6 = Instantiate("Bush6");
+	bush6->AddComponent<Bush>();
+	bush6->AddComponent<SpriteRenderer>();
+	bush6->AddComponent<BoxCollider>();
+
+	bush1->GetComponent<Transform>()->SetPosition(Vector2{ -1000, 1800 });
+	bush2->GetComponent<Transform>()->SetPosition(Vector2{ 1000, 1800 });
+	bush3->GetComponent<Transform>()->SetPosition(Vector2{ 0, 1000 });
+	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, -1000 });
+	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -2000, 50 });
+	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 2000, 50 });
+
+	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+
+#pragma endregion
 
 //end Bush
 
@@ -176,15 +228,35 @@ void MainScene::Awake()
 
 	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
+	
+#pragma endregion
+
 	m_background = Instantiate("background");
 
-	auto sr = m_background->AddComponent<SpriteRenderer>();
+	sr = m_background->AddComponent<SpriteRenderer>();
 
-	sr->SetBitmap(ResourceManager::Instance().LoadTexture("Test_back_02.png"));
+	sr->SetBitmap(ResourceManager::Instance().LoadTexture("background_test_1.png"));
 	sr->SetOrderInLayer(-200000);
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
-#pragma endregion
+
+#ifdef _DEBUG
+	//디버그용
+	m_areaBox1 = Instantiate("debugBox1");
+	m_areaBox2 = Instantiate("debugBox2");
+	m_areaBox3 = Instantiate("debugBox3");
+	m_areaBoxHouse = Instantiate("HouseBox");
+
+	auto col = m_areaBox1->AddComponent<BoxCollider>();
+	col->SetSize({ 2140, 1440 });
+	col = m_areaBox2->AddComponent<BoxCollider>();
+	col->SetSize({ 4160, 2660 });
+	col = m_areaBox3->AddComponent<BoxCollider>();
+	col->SetSize({ 6420, 4220 });
+	col = m_areaBoxHouse->AddComponent<BoxCollider>();
+	col->SetSize({ 470, 355 });
+#endif
+
 
 #pragma region UI
 
@@ -213,10 +285,13 @@ void MainScene::Awake()
 	m_hp3->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Heart.png"), { 72, 65 });
 	m_hp3->GetComponent<Transform>()->SetPosition({ 855, 980 });
 
+	m_hungryBG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gauge_frame.png"), { 300, 90 });
+	m_hungryBG->GetComponent<Transform>()->SetPosition({ 770, 880 });
+
 	m_hungryGauge->AddComponent<Image>();
 	m_hungryGauge->AddComponent<Slide_Bar>();
 	m_hungryGauge->AddComponent<HungryGauge>();
-	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 770, 880 });
+	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 803, 879 });
 
 #pragma endregion
 
@@ -249,12 +324,13 @@ void MainScene::Awake()
 	ui_score = Instantiate("UI_Score");
 	ui_score->AddComponent<UI_Score>();
 	ui_score->AddComponent<Text>();
-	ui_score->AddComponent<Image>();
-	ui_score->GetComponent<Transform>()->SetPosition(Vector2{ 1770,25 });
+	ui_score->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Sign_Panel.png"), { 270, 108 });
+	ui_score->GetComponent<Transform>()->SetPosition(Vector2{ 1755, 100 });
 
 #pragma endregion
 
 	GameManager::Instance().Init(); //player랑 inventory 연결.
+	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();
 }
 

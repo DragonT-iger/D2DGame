@@ -15,12 +15,16 @@ void Player::Awake()
 
 	m_fullness = 1000.0f;
 	m_elapsedTime = 0.0f;
+
+	m_hpUI.push_back(GameObject::Find("hp1"));
+	m_hpUI.push_back(GameObject::Find("hp2"));
+	m_hpUI.push_back(GameObject::Find("hp3"));
 }
 
 void Player::Start()
 {
 	m_Inven = GameObject::Find("Inventory")->GetComponent<Inventory>();
-	m_boxCol->SetSize({ Vector2(150.f,150.f) });
+	m_boxCol->SetSize({ Vector2(130.f,130.f) });
 }
 
 void Player::Update(float deltaTime)
@@ -28,9 +32,9 @@ void Player::Update(float deltaTime)
 	//m_spd = 500.0f - m_Inven->GetWeight();	//버그 버전
 	m_elapsedTime += deltaTime;
 
-	if (2.0f <= m_elapsedTime)
+	if (0.1f <= m_elapsedTime)
 	{
-		m_fullness -= 20.0f;
+		m_fullness -= 1.0f;
 		m_elapsedTime = 0.0f;
 	}
 

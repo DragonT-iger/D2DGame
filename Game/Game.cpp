@@ -102,9 +102,6 @@ void Game::LifeCycle(float deltaTime)
 
     InputManager::Instance().EndFrame();
 
-
-
-
     D2DRenderer::Instance().RenderEnd(false);
 
     ImGuiManager::Instance().EndFrame(D2DRenderer::Instance().GetD3DRenderTargetView());

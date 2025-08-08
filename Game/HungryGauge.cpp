@@ -7,7 +7,7 @@ void HungryGauge::Awake()
 	m_gauge = GetComponent<Slide_Bar>();
 	m_player = SceneManager::Instance().GetActiveScene()->GetPlayer()->GetComponent<Player>();
 	auto img = GetComponent<Image>();
-	img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 250, 30 });
+	img->SetBitmap(ResourceManager::Instance().LoadTexture("guage_fill.png"), { 198, 35 });
 	img->SetOrderInLayer(3);
 }
 
