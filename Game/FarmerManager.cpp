@@ -5,16 +5,10 @@
 void FarmerManager::Awake()
 {
     std::vector<Vector2> positions = {
-        {-1000.f,  1000.f}
-        //,
-        /*{    0.f,  1000.f},
-        { 1000.f,  1000.f},
-        {-1000.f,     0.f},
-        {    0.f,     0.f},
-        { 1000.f,     0.f},
-        {-1000.f, -1000.f},
-        {    0.f, -1000.f},
-        { 1000.f, -1000.f}*/
+        { -1100.f,  780.f },
+        {  1100.f,  780.f },
+        { -1100.f, -750.f },
+        {  1100.f, -750.f }
     };
 
     m_farmers.reserve(positions.size());

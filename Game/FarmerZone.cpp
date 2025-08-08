@@ -66,6 +66,7 @@ void AlertZone::OnTriggerEnter(Collider* other)
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 		}
 		m_farmer->m_hasPatrolTarget = false;
+		m_farmer->m_isAlreadyExitAlertZone = false;
 	}
 }
 
@@ -73,6 +74,7 @@ void AlertZone::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
 
+		m_farmer->m_isAlreadyExitAlertZone = true;
 		if (m_farmer->GetFarmerState() == Farmer::FarmerState::Attack)
 			return;
 
@@ -101,18 +103,37 @@ AttackIndicatorZone::~AttackIndicatorZone()
 		m_farmer->m_attackIndicatorCount--;
 	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
 
-	//if (m_farmer->m_isCommonAttackIndicatorArea)
+	//if (!m_farmer->m_isCommonAttackIndicatorArea && !m_farmer->m_isAlreadyExitAttackZone)
 	//{
 	//	m_farmer->ChangeState(Farmer::FarmerState::Attack);
 	//}
-	//else if (m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone)
-	//{
+	//
+	//else if (!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
 	//	m_farmer->ChangeState(Farmer::FarmerState::Chase);
 	//}
-	//else
-	//{
-	//	//m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+
+	//else if(!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone){
+	//	m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 	//}
+
+	if (!m_farmer)
+		return;
+
+	if (m_isPlayerInside)
+	{
+			auto playerObj = SceneManager::Instance().GetActiveScene()->GetPlayer();
+			if (playerObj)
+			{
+				auto player = playerObj->GetComponent<Player>();
+				if (player)
+					player->SetHp(player->GetHp() - 1);
+			}
+			m_farmer->m_hasDamagedPlayer = true;
+
+		if (m_farmer->m_attackIndicatorCount > 0)
+			m_farmer->m_attackIndicatorCount--;
+		m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
+	}
 }
 
 void AttackIndicatorZone::OnTriggerEnter(Collider* other)
@@ -133,18 +154,20 @@ void AttackIndicatorZone::OnTriggerExit(Collider* other)
 	}
 	m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
 
-	if (!m_farmer->m_isCommonAttackIndicatorArea && !m_farmer->m_isAlreadyExitAttackZone)
-	{
-		m_farmer->ChangeState(Farmer::FarmerState::Attack);
-	}
-	
-	else if (!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
-		m_farmer->ChangeState(Farmer::FarmerState::Chase);
-	}
+	//if (!m_farmer->m_isCommonAttackIndicatorArea && !m_farmer->m_isAlreadyExitAttackZone)
+	//{
+	//	m_farmer->ChangeState(Farmer::FarmerState::Attack);
+	//}
+	//
+	//else if (!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone && !m_farmer->m_isAlreadyExitChaseZone) {
+	//	m_farmer->ChangeState(Farmer::FarmerState::Chase);
+	//}
 
-	else if(!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone){
-		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
-	}
+	//else if(!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone){
+	//	m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+	//}
 
+
+	// 이거 주석 풀면 중간에 공격 풀림
 }
 

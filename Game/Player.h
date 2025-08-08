@@ -45,7 +45,8 @@ public:
 	//void SetVisible(Visibilty vib);
 	//
 	//State GetState() { return state; }
-	//Action GetAction() { return action; }
+	
+	Action GetAction() { return action; }
 
 	Visibilty GetVisible() { return visibilty; };
 

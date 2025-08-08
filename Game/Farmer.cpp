@@ -62,14 +62,7 @@ void Farmer::Start()
     attackObject->GetComponent<Transform>()->SetParent(m_transform);
     auto attackZone = attackObject->AddComponent<AttackZone>();
     attackZone->Initalize(this, m_attackAreaValue);
-
-    m_attackPattern.SetOffsets({
-     {0.f, 0.f},
-     //{m_attackAreaValue, 0.f},
-     //{-m_attackAreaValue, 0.f},
-     {0.f, m_attackAreaValue},
-     {0.f, -m_attackAreaValue}
-        });
+    m_hasDamagedPlayer = false;
 }
 
 void Farmer::Update(float deltaTime)
@@ -154,21 +147,26 @@ void Farmer::DoChase(float deltaTime)
 
 void Farmer::DoAttack(float deltaTime)
 {
-    if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
+   /* if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
         m_attackPattern.ClearIndicators();
         ChangeState(FarmerState::Patrol);
         return;
-    }
+    }*/
 
     if (m_animator->GetCurState() == "attack" && !m_animator->IsAnimeEnd()) {
         return;
     }
     else if(m_animator->GetCurState() == "attack"){
-        if (m_isAlreadyExitAttackZone == true) {
-            ChangeState(FarmerState::Chase);
+        if (m_isAlreadyExitAttackZone == false) {
+            ChangeState(FarmerState::Attack);
+        }
+        else if(m_isAlreadyExitAlertZone == true){
+
+            ChangeState(FarmerState::Patrol);
         }
         else {
-            ChangeState(FarmerState::Attack);
+            ChangeState(FarmerState::Chase);
+            std::cout << "change to chase" << std::endl;
         }
     }
     if (m_animator->GetCurState() != "angryidle") {
@@ -180,18 +178,22 @@ void Farmer::DoAttack(float deltaTime)
 
     
 
-    if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
-        m_spriteRenderer->SetFlip(false);
-    }
-    else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
-        m_spriteRenderer->SetFlip(true);
-    }
+    //if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
+    //    m_spriteRenderer->SetFlip(false);
+    //}
+    //else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
+    //    m_spriteRenderer->SetFlip(true);
+    //}
     
 
     if (!m_attackPattern.HasIndicators()) {
         m_attackIntervalTimer += deltaTime;
         if (m_attackIntervalTimer >= m_attackInterval) {
             m_attackIntervalTimer = 0.f;
+
+
+            m_attackPattern.SetOffsets(GenerateRandomAttackOffsets(250));
+
             m_attackPattern.CreateIndicators(this, m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
             
             m_attackTimer = 0.f;
@@ -201,7 +203,7 @@ void Farmer::DoAttack(float deltaTime)
         m_attackTimer += deltaTime;
         if (m_attackTimer >= m_attackDelay) {
             m_attackPattern.Execute(m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
-            m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
+            //m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
             m_animator->ChangeState("attack");
         }
     }
@@ -217,7 +219,15 @@ void Farmer::ChangeState(FarmerState farmerState)
         m_hasPatrolTarget = false;
     }
     if (farmerState == FarmerState::Attack) {
+
         m_attackPattern.ClearIndicators();
+
+        if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
+             m_spriteRenderer->SetFlip(false);
+        }
+        else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
+            m_spriteRenderer->SetFlip(true);
+        }
 
         m_attackTimer = 0.f;
         m_attackIntervalTimer = 0.f;
@@ -226,6 +236,39 @@ void Farmer::ChangeState(FarmerState farmerState)
 }
 
 
+
+std::vector<Vector2> Farmer::GenerateRandomAttackOffsets(float r)
+{
+    int pattern = Random::Instance().Range(0, 4);
+    std::vector<Vector2> offsets;
+
+    switch (pattern)
+    {
+    case 0: offsets = { {0,0}, { r,0}, { -r,0} };                      break;
+    case 1: offsets = { {0,0}, {0, r}, {0,-r} };                       break;
+    case 2: 
+        r = 150;
+        offsets = { {  r, 0.f },
+                    { -0.5f * r,  0.8660254f * r },
+                    { -0.5f * r, -0.8660254f * r } }; 
+        break;
+    case 3:
+        offsets = { {0,0}, { r,0}, {-r,0}, {0, r}, {0,-r} };
+        {
+            float angle = DirectX::XM_2PI *
+                (Random::Instance().Range(0, 10001) / 10000.f);
+            float c = std::cos(angle), s = std::sin(angle);
+            for (auto& o : offsets)
+            {
+                float x = o.x, y = o.y;
+                o.x = x * c - y * s;
+                o.y = x * s + y * c;
+            }
+        }
+        break;
+    }
+    return offsets;
+}
 
 void Farmer::OnTriggerExit(Collider* other)
 {
@@ -264,14 +307,18 @@ void Farmer::OnInspectorGUI()
     ImGui::Text("AI   : %s", ToString(m_farmerState));
     ImGui::Text("Anim : %s", curAnim.c_str());
     ImGui::Separator();
-
+    
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
     ImGui::DragFloat("AttackInterval", &m_attackInterval, 0.01f, 0.1f, 10.f);
-    ImGui::DragInt("AttackIndicatorCount", &m_attackIndicatorCount);
-    ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
-    ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
-    ImGui::Checkbox("m_isCommonAttackIndicatorArea", &m_isCommonAttackIndicatorArea);
+
+
+    //디버그용 
+    //ImGui::DragInt("AttackIndicatorCount", &m_attackIndicatorCount);
+    //ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
+    //ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
+    //ImGui::Checkbox("m_isCommonAttackIndicatorArea", &m_isCommonAttackIndicatorArea);
+    //ImGui::Checkbox("m_isAlreadyExitAlertZone", &m_isAlreadyExitAlertZone);
     //m_hasPatrolTarget
 
     //ImGui::Checkbox("hasPatrolTarget", &m_hasPatrolTarget);

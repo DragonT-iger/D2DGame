@@ -1,7 +1,8 @@
 #include "pch.h"
+#include "Player.h"
 #include "Baby.h"
 
-float Baby::deltaCount = 0;
+float Baby::m_QExeCount = 0;
 
 void Baby::Awake()
 {
@@ -26,7 +27,7 @@ void Baby::Awake()
 
 	m_ItemUI->GetComponent<Transform>()->SetParent(GetOwner()->GetComponent<Transform>());
 
-	m_questTime = 10;
+	m_player = GetComponent<Player>();
 }
 
 void Baby::Update(float deltaTime)
@@ -42,6 +43,8 @@ void Baby::Update(float deltaTime)
 		m_ItemUI->GetComponent<Transform>()->SetPosition({ -375.400f, 365.400f });
 		m_babySpriteRenderer->SetFlip(true);
 	}
+
+	QuestinProgress(deltaTime);
 
 }
 
@@ -88,19 +91,46 @@ void Baby::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "SubMissionArea")
 	{
+		std::cout << "Baby Colliding" << std::endl;
+
 		QuestSuggestions();
 	}
 }
 
+//void Baby::SetExecutionTime(float time)
+//{
+//	m_QExeTime = 30.0f;
+//}
+
 void Baby::QuestSuggestions()
 {
-	int index = Random::Instance().Range(1, 4);
-	ChangeThink(static_cast<Thought>(index));
+	if (m_QuestInProgress == false && m_QExeTime < m_QExeCount) //퀘스트 진행중이 아니고, 퀘스트 주기 또한 진행중이 아니면.
+	{
+		int index = Random::Instance().Range(1, 4);
+		ChangeThink(static_cast<Thought>(index));
+
+		m_QuestInProgress = true;
+	}	
 }
 
 void Baby::QuestinProgress(float deltaTime)
 {
-	
+	if (m_QuestInProgress == false) return;
+
+	m_QExeCount += deltaTime;
+
+	if (m_QExeTime < m_QExeCount || m_player->GetAction() == Action::Hit)
+	{
+		QusetFalse();
+		m_QExeCount = 0;
+		m_QuestInProgress = false;
+	}
+	else
+	{
+		QuestSuccess();
+		m_QExeCount = 0;
+		m_QuestInProgress = false;
+	}
 }
 
 int Baby::QuestSuccess()
@@ -113,7 +143,4 @@ void Baby::QusetFalse()
 
 }
 
-void Baby::SetExecutionTime(float time)
-{
-}
 

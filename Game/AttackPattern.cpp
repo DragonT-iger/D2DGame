@@ -33,6 +33,8 @@ void AttackPattern::CreateIndicators(Farmer* owner, const Vector2& origin, float
         }
 
         indicator->AddComponent<CircleCollider>();
+
+        indicator->GetComponent<Transform>()->SetScale(m_effectScale);
         auto zone = indicator->AddComponent<AttackIndicatorZone>();
         if (zone)
             zone->Initialize(owner);
@@ -58,6 +60,7 @@ void AttackPattern::Execute(const Vector2& origin, float radius)
         {
             Vector2 pos = indicator->GetComponent<Transform>()->GetPosition();
             GameObject* effect = Instantiate("AttackEffect");
+            effect->GetComponent<Transform>()->SetScale(m_effectScale);
             if (!effect) continue;
             auto effTransform = effect->GetComponent<Transform>();
             if (effTransform)
