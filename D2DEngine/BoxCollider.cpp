@@ -7,7 +7,7 @@ void BoxCollider::Awake()
 {
 	Collider::Awake();
 
-	if (size.x == 0 && size.y == 0)
+	if (size.x == 1 && size.y == 1)
 	{
 		if(auto sr = GetComponent<SpriteRenderer>())
 			size = { sr->GetSize().width, sr->GetSize().height };
