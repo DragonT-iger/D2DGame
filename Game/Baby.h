@@ -1,4 +1,7 @@
 #pragma once
+
+class Player;
+
 class Baby : public MonoBehaviour
 {
 public:
@@ -27,6 +30,7 @@ private:
 
 	void OnTriggerExit(Collider* other) override;
 
+	Player* m_player;
 	//parent
 	SpriteRenderer* m_parentSpriteRenderer;
 
@@ -39,7 +43,8 @@ private:
 	
 	Thought m_thoughtState = Thought::None;
 
-	static float deltaCount;
-	int m_questTime = 0;
+	bool m_QuestInProgress = false;
+	static float m_QExeCount;
+	float m_QExeTime = 30;
 };
 
