@@ -126,7 +126,11 @@ AttackIndicatorZone::~AttackIndicatorZone()
 			{
 				auto player = playerObj->GetComponent<Player>();
 				if (player)
+				{
 					player->SetHp(player->GetHp() - 1);
+					player->SetAction(Action::Hit);
+				}
+					
 			}
 			m_farmer->m_hasDamagedPlayer = true;
 

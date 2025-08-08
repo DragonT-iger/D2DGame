@@ -46,7 +46,7 @@ void MainScene::Awake()
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
 
-	//player->GetComponent<Transform>()->SetPosition({ 500.f , 500.f });
+	player->GetComponent<Transform>()->SetPosition({ 3560.0f , 0 });
 	player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);

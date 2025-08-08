@@ -55,21 +55,21 @@ void PlayerController::Update(float deltaTime)
 			}
 		}
 
-		switch (static_cast<int>(m_Player->action))
+		/*switch (static_cast<int>(m_Player->action))
 		{
 		case 0:
-			//std::cout << "Idle" << std::endl;
+			std::cout << "Idle" << std::endl;
 			break;
 		case 1:
-			//std::cout << "Walk" << std::endl;
+			std::cout << "Walk" << std::endl;
 			break;
 		case 2:
-			//std::cout << "Hit" << std::endl;
+			std::cout << "Hit" << std::endl;
 			break;
 		case 3:
-			//std::cout << "Steal" << std::endl;
+			std::cout << "Steal" << std::endl;
 			break;
-		}
+		}*/
 
 		switch (m_Player->action)
 		{
@@ -96,17 +96,17 @@ void PlayerController::Update(float deltaTime)
 			if (!canMoveLeft && curDir.x < 0) curDir.x = 0;
 			m_transform->Translate(curDir * moveSpd * deltaTime);
 			break;
-			//case Action::Hit:
-			//	if (m_animator->GetCurState() != "hit")
-			//	{
-			//		//m_animator->ChangeState("hit");
-			//	}
-			//	if (m_animator->IsAnimeEnd())
-			//	{
-			//		m_Player->action = Action::Idle;
-			//	}
-			//	break;
-			// 
+			case Action::Hit:
+				if (m_animator->GetCurState() != "hit")
+				{
+					m_animator->ChangeState("hit");
+				}
+				if (m_animator->IsAnimeEnd())
+				{
+					m_Player->action = Action::Idle;
+				}
+				break;
+			 
 		case Action::Steal:
 			if (m_animator->IsAnimeEnd())
 			{
@@ -115,6 +115,13 @@ void PlayerController::Update(float deltaTime)
 			break;
 		}
 		//작물과 충돌중일 때 Z키를 누르면 Action -> Steal로 전환
+	}
+	else
+	{
+		if (m_animator->GetCurState() != "dead")
+		{
+			m_animator->ChangeState("dead");
+		}
 	}
 
 	m_throwelapsedTime += deltaTime;
