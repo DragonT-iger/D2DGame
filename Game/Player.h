@@ -54,9 +54,6 @@ public:
 	int GetHp() { return m_hp; }
 	void SetHp(int hp) { m_hp = hp; }
 
-
-
-
 	void FeedBaby(float bop);
 
 	friend class PlayerController;

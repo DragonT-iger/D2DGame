@@ -25,6 +25,8 @@ class MainScene : public Scene
 
 	GameObject* m_farmerManager = nullptr;
 
+	GameObject* m_farmerHouse = nullptr;
+
 	GameObject* m_Timer;
 
 	GameObject* m_inventory = nullptr;

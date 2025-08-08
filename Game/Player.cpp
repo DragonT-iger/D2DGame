@@ -28,9 +28,9 @@ void Player::Update(float deltaTime)
 	//m_spd = 500.0f - m_Inven->GetWeight();	//버그 버전
 	m_elapsedTime += deltaTime;
 
-	if (2.0f <= m_elapsedTime)
+	if (0.1f <= m_elapsedTime)
 	{
-		m_fullness -= 20.0f;
+		m_fullness -= 1.0f;
 		m_elapsedTime = 0.0f;
 	}
 

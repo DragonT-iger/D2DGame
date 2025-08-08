@@ -23,8 +23,8 @@ void PlayerController::Update(float deltaTime)
 	{
 		int x = Input.GetAxisRaw("Horizontal");
 		int y = Input.GetAxisRaw("Vertical");
-		Vector2 dir{ (float)x,(float)y };
-		dir.Normalize();
+		curDir = { (float)x,(float)y };
+		curDir.Normalize();
 
 		float weight = m_inven->GetWeight();
 		float weightMult = 1.f + weight / m_Player->m_weightDivisor;
@@ -72,7 +72,7 @@ void PlayerController::Update(float deltaTime)
 		switch (m_Player->action)
 		{
 		case Action::Idle:
-			if (dir != Vector2{ 0.f,0.f })
+			if (curDir != Vector2{ 0.f,0.f })
 			{
 				m_Player->action = Action::Walk;
 				break;
@@ -84,11 +84,11 @@ void PlayerController::Update(float deltaTime)
 			}
 			break;
 		case Action::Walk:
-			if (dir == Vector2{ 0,0 })
+			if (curDir == Vector2{ 0,0 })
 			{
 				m_Player->action = Action::Idle;
 			}
-			m_transform->Translate(dir * moveSpd * deltaTime);
+			m_transform->Translate(curDir * moveSpd * deltaTime);
 			break;
 			//case Action::Hit:
 			//	if (m_animator->GetCurState() != "hit")
@@ -114,9 +114,17 @@ void PlayerController::Update(float deltaTime)
 	m_throwelapsedTime += deltaTime;
 }
 
+void PlayerController::OnTriggerEnter(Collider* other)
+{
+
+}
 
 void PlayerController::OnTriggerStay(Collider* other)
 {
+	if (other->GetOwner()->GetTag() == "House")
+	{
+
+	}
 	if (other->GetOwner()->GetTag() == "crop")
 	{
 		if (Input.GetKeyDown(Keycode::Z))

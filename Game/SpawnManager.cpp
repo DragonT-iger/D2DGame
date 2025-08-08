@@ -338,6 +338,19 @@ void SpawnManager::OnInspectorGUI()
 		ImGui::DragFloat(labelL.c_str(), &growArr[i]->growSpeedL, 1.f, 0, 20);
 	}
 
+	for (int i = 0; i < farmArr.size(); ++i)
+	{
+		std::string label;
+		if(i == 0)
+			label = "Spawn Time A##" + std::to_string(i);
+		if (i == 1)
+			label = "Spawn Time B##" + std::to_string(i);
+		if (i == 2)
+			label = "Spawn Time C##" + std::to_string(i);
+
+		ImGui::DragFloat(label.c_str(), &farmArr[i].spawnTime, 0.5f, 0.0f, 15.0f, "%.2f");
+	}
+
 	if (ImGui::Button("Destroy All Crop"))
 		DestroyAllCrop();
 }
@@ -359,6 +372,7 @@ void SpawnManager::DestroyAllCrop()
 		obj->GetComponent<Crop>()->Destroy();
 		Destroy(obj);
 	}
+	
 		
 
 	m_farmAList.clear();

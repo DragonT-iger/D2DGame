@@ -12,7 +12,7 @@ public:
 	void Start()                         override;
 	void Update(float deltaTime)         override;
 
-	//void OnTriggerEnter(Collider* other) override;
+	void OnTriggerEnter(Collider* other) override;
 	void OnTriggerStay(Collider* other)  override;
 	//void OnTriggerExit(Collider* other)  override;
 
@@ -27,6 +27,8 @@ private:
 
 	SpawnManager* m_SpawnManager = nullptr;
 	Inventory* m_inven = nullptr;
+
+	Vector2 curDir;
 
 	float m_throwTime = 0.2f;
 	float m_throwelapsedTime = 0.0f;
