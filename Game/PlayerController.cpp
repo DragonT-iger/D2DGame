@@ -129,17 +129,27 @@ void PlayerController::OnTriggerStay(Collider* other)
 {
 	auto otherObj = other->GetOwner();
 
-	if (otherObj->GetTag() == "House")
+	if (otherObj->GetTag() == "House" || otherObj->GetTag() == "OutRange")
 	{
 		auto myPos = GetComponent<Transform>()->GetPosition();
 		auto otherPos = otherObj->GetComponent<Transform>()->GetPosition();
 		auto collider = otherObj->GetComponent<BoxCollider>();
 		auto offset = collider->GetOffset();
+		auto mycol = GetComponent<BoxCollider>();
+
+		float halfW_my = mycol->GetSize().x * 0.5f;
+		float halfH_my = mycol->GetSize().y * 0.5f;
+
+		float halfW_ot = collider->GetSize().x * 0.5f;
+		float halfH_ot = collider->GetSize().y * 0.5f;
 
 		float dx = (otherPos.x + offset.x * 0.5f) - myPos.x;
 		float dy = (otherPos.y + offset.y * 0.5f) - myPos.y;
 
-		if (std::abs(dx) > std::abs(dy))
+		float overlapX = (halfW_my + halfW_ot) - std::abs(dx);
+		float overlapY = (halfH_my + halfH_ot) - std::abs(dy);
+
+		if (overlapX < overlapY)
 		{
 			if (dx > 0)	canMoveRight = false;
 			else canMoveLeft = false;

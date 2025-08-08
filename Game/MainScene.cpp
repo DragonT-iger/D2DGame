@@ -329,6 +329,34 @@ void MainScene::Awake()
 
 #pragma endregion
 
+#pragma region OutRange
+
+	m_outRangeUp = Instantiate("outRangeUp");
+	m_outRangeDown = Instantiate("outRangeDown");
+	m_outRangeRight = Instantiate("outRangeRight");
+	m_outRangeLeft = Instantiate("outRangeLeft");
+
+	m_outRangeUp->SetTag("OutRange");
+	m_outRangeDown->SetTag("OutRange");
+	m_outRangeRight->SetTag("OutRange");
+	m_outRangeLeft->SetTag("OutRange");
+
+	box = m_outRangeUp->AddComponent<BoxCollider>();
+	box->SetSize({ 7680 , 100 });
+	box = m_outRangeDown->AddComponent<BoxCollider>();
+	box->SetSize({ 7680 , 100 });
+	box = m_outRangeRight->AddComponent<BoxCollider>();
+	box->SetSize({ 100 , 4320 });
+	box = m_outRangeLeft->AddComponent<BoxCollider>();
+	box->SetSize({ 100 , 4320 });
+
+	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 2200 });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -2200 });
+	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3845, 0 });
+	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3845, 0 });
+
+#pragma endregion
+
 	GameManager::Instance().Init(); //player랑 inventory 연결.
 	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();

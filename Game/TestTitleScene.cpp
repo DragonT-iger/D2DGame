@@ -146,12 +146,11 @@ void TitleScene::Awake()
 	SoundManager::Instance().BGM_Shot("1.mp3");
 
 	m_Title = Instantiate("title");
-	auto text = m_Title->AddComponent<Text>();
+	auto img = m_Title->AddComponent<Image>();
+	img->SetBitmap(ResourceManager::Instance().LoadTexture("Title.png"), { 1920, 1080 });
+	img->SetOrderInLayer(-10000);
 
-	text->SetText(L"몰래몰래팜", { 400, 100 }, L"Maplestory", D2D1::ColorF::Black);
-	text->SetFontSize(50);
-
-	m_Title->GetComponent<Transform>()->SetPosition({ 960, 440 });
+	m_Title->GetComponent<Transform>()->SetPosition({ 960, 540 });
 
 	// 일단은 Awake에서 씬을 초기화하는 걸로
 	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)

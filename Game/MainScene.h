@@ -68,6 +68,11 @@ class MainScene : public Scene
 	GameObject* m_areaBoxHouse = nullptr;
 #endif
 
+	GameObject* m_outRangeUp = nullptr;
+	GameObject* m_outRangeDown = nullptr;
+	GameObject* m_outRangeRight = nullptr;
+	GameObject* m_outRangeLeft = nullptr;
+
 	GameObject* m_SpawnManager = nullptr;
 };
 
