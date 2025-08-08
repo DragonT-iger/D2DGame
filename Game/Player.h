@@ -53,7 +53,16 @@ public:
 	float GetFullness() { return m_fullness; }
 
 	int GetHp() { return m_hp; }
-	void SetHp(int hp) { m_hp = hp; }
+	void SetHp(int hp) { 
+		int minusHp = m_hp - hp;
+
+		m_hp = hp; 
+
+		for (int i = 0; i < minusHp; i++)
+		{
+			m_hpUI[hp + i]->SetActive(false);
+		}
+	}
 
 	void FeedBaby(float bop);
 
@@ -69,6 +78,8 @@ private:
 	float   m_spd			= 500.0f;
 	//float m_starv_level   = 500.0f;
 	int		m_ivc_T		    = 15;						//fps ±‚¡ÿ
+
+	std::vector<GameObject*> m_hpUI;
 
 	float	m_fullness;
 
