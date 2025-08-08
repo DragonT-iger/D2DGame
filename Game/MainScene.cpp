@@ -242,8 +242,8 @@ void MainScene::Awake()
 	ui_score = Instantiate("UI_Score");
 	ui_score->AddComponent<UI_Score>();
 	ui_score->AddComponent<Text>();
-	ui_score->AddComponent<Image>();
-	ui_score->GetComponent<Transform>()->SetPosition(Vector2{ 1770,25 });
+	ui_score->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Main_Panel.png"), { 270, 70 });
+	ui_score->GetComponent<Transform>()->SetPosition(Vector2{ 1755,60 });
 
 #pragma endregion
 
