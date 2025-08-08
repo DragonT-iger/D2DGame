@@ -55,9 +55,7 @@ public:
 private:
 
     FarmerState m_farmerState = FarmerState::Patrol;
-#ifdef _DEBUG
     void OnInspectorGUI() override;
-#endif // _DEBUG
     const char* ToString(FarmerState   s) const;
     
     //component

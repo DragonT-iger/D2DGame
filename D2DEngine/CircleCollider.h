@@ -15,9 +15,7 @@ public:
 
 	ColliderInfo GetColliderInfo() override;
 
-#ifdef _DEBUG
 	void OnInspectorGUI() override;
-#endif // _DEBUG
 
 
 private:

@@ -187,7 +187,6 @@ void Scene::Render()
 		}
     }
     
-#ifdef _DEBUG
     //그리드 출력
 	if (SceneManager::Instance().GetDebugMode() && m_isGridOn)
 	{
@@ -228,7 +227,6 @@ void Scene::Render()
 			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
 		}
 	}
-#endif
 
     //ui render
     D2DRenderer::Instance().SetTransform(D2D1::Matrix3x2F::Identity());

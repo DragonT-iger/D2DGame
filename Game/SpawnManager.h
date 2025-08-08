@@ -22,11 +22,9 @@ public:
 
 private:
 
-#ifdef _DEBUG
 	void OnInspectorGUI() override;
 
 	void DestroyAllCrop();
-#endif // _DEBUG
 
 	bool IsInnerRect(const RECT& rect, const int& x, const int& y);
 	bool CheckRange(const Vector2& pos, FarmRank rank);

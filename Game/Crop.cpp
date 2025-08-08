@@ -1,17 +1,13 @@
 #include "pch.h"
 #include "Crop.h"
-#ifdef  _DEBUG
 #include "SpawnManager.h"
-#endif //  
 
 
 
 void Crop::Awake()
 {
 	m_size = Size::Born;
-#ifdef _DEBUG
 	m_spawnManager = GameObject::Find("SpawnManager")->GetComponent<SpawnManager>();
-#endif
 }
 
 void Crop::Update(float deltaTime)
@@ -74,9 +70,8 @@ void Crop::SetCropData(
 											GameObject* eftObj
 											)
 {
-#ifdef _DEBUG
 	if (!m_spawnManager)	 m_spawnManager = GameObject::Find("SpawnManager")->GetComponent<SpawnManager>();
-#endif
+
 	auto s = m_spawnManager->GetGrowSpeed(rank);
 	m_growSpeed_S = s.growSpeedS;
 	m_growSpeed_M = s.growSpeedM;

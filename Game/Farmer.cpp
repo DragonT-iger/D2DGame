@@ -286,7 +286,6 @@ void Farmer::OnTriggerExit(Collider* other)
 
 
 
-#ifdef _DEBUG
 
 const char* Farmer::ToString(FarmerState s) const
 {
@@ -338,4 +337,3 @@ void Farmer::OnInspectorGUI()
     }
 }
 
-#endif
