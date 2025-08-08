@@ -53,14 +53,18 @@ public:
 	float GetFullness() { return m_fullness; }
 
 	int GetHp() { return m_hp; }
+
 	void SetHp(int hp) { 
 		int minusHp = m_hp - hp;
 
 		m_hp = hp; 
 
-		for (int i = 0; i < minusHp; i++)
+		if (m_hp > -1)
 		{
-			m_hpUI[hp + i]->SetActive(false);
+			for (int i = 0; i < minusHp; i++)
+			{
+				m_hpUI[hp + i]->SetActive(false);
+			}
 		}
 	}
 
