@@ -88,6 +88,10 @@ void PlayerController::Update(float deltaTime)
 			{
 				m_Player->action = Action::Idle;
 			}
+			if (!canMoveUp && curDir.y > 0) curDir.y = 0;
+			if (!canMoveDown && curDir.y < 0) curDir.y = 0;
+			if (!canMoveRight && curDir.x > 0) curDir.x = 0;
+			if (!canMoveLeft && curDir.x < 0) curDir.x = 0;
 			m_transform->Translate(curDir * moveSpd * deltaTime);
 			break;
 			//case Action::Hit:
@@ -121,10 +125,30 @@ void PlayerController::OnTriggerEnter(Collider* other)
 
 void PlayerController::OnTriggerStay(Collider* other)
 {
-	if (other->GetOwner()->GetTag() == "House")
-	{
+	auto otherObj = other->GetOwner();
 
+	if (otherObj->GetTag() == "House")
+	{
+		auto myPos = GetComponent<Transform>()->GetPosition();
+		auto otherPos = otherObj->GetComponent<Transform>()->GetPosition();
+		auto collider = otherObj->GetComponent<BoxCollider>();
+		auto offset = collider->GetOffset();
+
+		float dx = (otherPos.x + offset.x * 0.5f) - myPos.x;
+		float dy = (otherPos.y + offset.y * 0.5f) - myPos.y;
+
+		if (std::abs(dx) > std::abs(dy))
+		{
+			if (dx > 0)	canMoveRight = false;
+			else canMoveLeft = false;
+		}
+		else
+		{
+			if (dy > 0)	canMoveUp = false;
+			else			canMoveDown = false;
+		}
 	}
+
 	if (other->GetOwner()->GetTag() == "crop")
 	{
 		if (Input.GetKeyDown(Keycode::Z))
@@ -142,4 +166,12 @@ void PlayerController::OnTriggerStay(Collider* other)
 
 		}
 	}
+}
+
+void PlayerController::OnTriggerExit(Collider* other)
+{
+	canMoveUp = true;
+	canMoveDown = true;
+	canMoveRight = true;
+	canMoveLeft = true;
 }

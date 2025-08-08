@@ -14,7 +14,7 @@ public:
 
 	void OnTriggerEnter(Collider* other) override;
 	void OnTriggerStay(Collider* other)  override;
-	//void OnTriggerExit(Collider* other)  override;
+	void OnTriggerExit(Collider* other)  override;
 
 	void SetSpawnManager(SpawnManager* spm_ptr) { m_SpawnManager = spm_ptr; }
 
@@ -29,6 +29,11 @@ private:
 	Inventory* m_inven = nullptr;
 
 	Vector2 curDir;
+
+	bool canMoveUp = true;
+	bool canMoveDown = true;
+	bool canMoveLeft = true;
+	bool canMoveRight = true;
 
 	float m_throwTime = 0.2f;
 	float m_throwelapsedTime = 0.0f;
