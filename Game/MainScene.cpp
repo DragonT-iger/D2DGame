@@ -351,7 +351,7 @@ void MainScene::Awake()
 	box->SetSize({ 100 , 4320 });
 
 	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 2200 });
-	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -2200 });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -2150 });
 	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3845, 0 });
 	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3845, 0 });
 
