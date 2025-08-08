@@ -2,7 +2,6 @@
 #include "pch.h"
 #include "ImGuiManager.h"
 #include "EditorWindow.h"
-#ifdef _DEBUG
 ImGuiManager& ImGuiManager::Instance()
 {
     static ImGuiManager instance;
@@ -61,4 +60,3 @@ void ImGuiManager::Shutdown()
 
     m_initialized = false;
 }
-#endif

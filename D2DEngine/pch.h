@@ -45,6 +45,7 @@
 #include <wincodec.h>
 #include <dwrite.h>
 #include <DirectXMath.h>
+#include <nlohmann/json.hpp>
 namespace WRL = Microsoft::WRL;
 inline std::wostream& cwout = std::wcout;
 
@@ -61,11 +62,9 @@ inline std::wostream& cwout = std::wcout;
 #include <fmod.hpp>
 //----Sound----end
 
-#ifdef _DEBUG
 #include <imgui.h>
 #include <imgui_impl_win32.h>
 #include <imgui_impl_dx11.h>
-#endif
 
 
 #include "MonoBehaviour.h"
@@ -96,9 +95,7 @@ inline std::wostream& cwout = std::wcout;
 #include "SoundManager.h"
 #include "Random.h"
 
-#ifdef _DEBUG
 #include "ImGuiManager.h"
-#endif // _DEBUG
 
 
 

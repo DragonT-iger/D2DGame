@@ -52,11 +52,6 @@ void Player::OnTriggerEnter(Collider* other)
 		visibilty = Visibilty::Hide;
 	}
 
-	if (other->GetOwner()->GetTag() == "SubMissionArea")
-	{
-		int bob = GameManager::Instance().ReceiveScore(m_Inven->SubMissonItem());
-		FeedBaby(bob);
-	}
 }
 
 void Player::OnTriggerStay(Collider* other)

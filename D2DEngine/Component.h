@@ -15,9 +15,7 @@ public:
 	Component() = default;
     virtual ~Component() = default;
 
-#ifdef _DEBUG
     virtual void OnInspectorGUI() {}
-#endif // 
 
     void Destroy(GameObject* gameObject);
 

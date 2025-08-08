@@ -31,6 +31,8 @@ public:
 
 	int GetTotalScore() { return totalscore; }
 
+	void AddScore(int num);
+
 	enum class EndReason
 	{
 		None,

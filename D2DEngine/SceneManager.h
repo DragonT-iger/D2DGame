@@ -37,8 +37,13 @@ private:
 	SceneManager(SceneManager&&) = delete;
 	SceneManager& operator=(SceneManager&&) = delete;
 
-    bool                                                                              m_debugMode = true;
-    Scene*                                                                                m_active = nullptr;
+#ifdef _DEBUG
+    bool                        m_debugMode = true;
+#else
+    bool                         m_debugMode = false;
+#endif
+
+    Scene*                       m_active = nullptr;
   
     std::unique_ptr<Scene>       m_activeKeep;
     std::unique_ptr<Scene>       m_pendingScene;

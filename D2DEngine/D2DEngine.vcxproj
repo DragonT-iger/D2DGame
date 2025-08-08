@@ -116,8 +116,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)..\ThirdParty\fmod\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalOptions>/VERBOSE /showIncludes %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)..\ThirdParty\fmod\api\core\inc;$(SolutionDir)..\ThirdParty\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -138,7 +138,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)..\ThirdParty\fmod\api\core\inc;$(SolutionDir)..\ThirdParty\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -22,6 +22,12 @@ void Camera::Awake()
     SetScreenSize();
 }
 
+void Camera::Update(float deltaTime) {
+    if (InputManager::Instance().GetKeyPressed(Keycode::PageUp) && InputManager::Instance().GetKeyPressed(Keycode::PageDown)) {
+        SceneManager::Instance().SetDebugMode(!SceneManager::Instance().GetDebugMode());
+    }
+}
+
 void Camera::LateUpdate(float deltaTime)
 {
     auto* tr = GetComponent<Transform>();

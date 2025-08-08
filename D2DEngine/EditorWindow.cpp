@@ -5,9 +5,11 @@
 #include "../Game/EndingScene.h"
 //#include "../Game/
 
-#ifdef _DEBUG
 void EditorWindow::Draw(float deltaTime)
 {
+    if (SceneManager::Instance().GetDebugMode() == false) {
+        return;
+    }
     DrawDebug();
     DrawHierarchy();
     DrawInspector();
@@ -153,5 +155,3 @@ void EditorWindow::DrawInspector()
 
     ImGui::End();
 }
-
-#endif

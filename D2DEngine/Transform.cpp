@@ -35,7 +35,6 @@ void Transform::RemoveChild(Transform* child)
 		m_children.end()
 	);
 }
-#ifdef _DEBUG
 void Transform::OnInspectorGUI()
 {
 	Vector2 pos = m_position;
@@ -47,7 +46,6 @@ void Transform::OnInspectorGUI()
 	if (ImGui::DragFloat2("Scale", &scl.x, 0.01f))  SetScale(scl);
 }
 
-#endif
 void Transform::SetDirty()
 {
 

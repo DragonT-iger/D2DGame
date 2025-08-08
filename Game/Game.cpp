@@ -6,9 +6,8 @@
 #include "DTtestScene.h"
 #include "ArtTestView.h"
 
-#ifdef _DEBUG
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-#endif
+
 
 bool Game::Initialize()
 {
@@ -38,9 +37,8 @@ bool Game::Initialize()
     // 맨 처음 씬 만들고 로드하는법 수정됨 아래와 같이
     
     //ImGui 초기화
-#ifdef _DEBUG
 	ImGuiManager::Instance().Initialize(static_cast<HWND>(GetHandle()), D2DRenderer::Instance().GetD3DDevice(), D2DRenderer::Instance().GetD3DContext());
-#endif
+
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
     SceneManager::Instance().LoadScene(std::make_unique<MainScene>());
@@ -83,9 +81,7 @@ void Game::LifeCycle(float deltaTime)
 
 	D2DRenderer::Instance().RenderBegin();
 
-#ifdef _DEBUG
     ImGuiManager::Instance().BeginFrame(deltaTime);
-#endif // _DEBUG
 
 
 
@@ -108,9 +104,7 @@ void Game::LifeCycle(float deltaTime)
 
     D2DRenderer::Instance().RenderEnd(false);
 
-#ifdef _DEBUG
     ImGuiManager::Instance().EndFrame(D2DRenderer::Instance().GetD3DRenderTargetView());
-#endif
 
     D2DRenderer::Instance().Present();
 }
@@ -118,9 +112,7 @@ void Game::LifeCycle(float deltaTime)
 void Game::Release()
 {
     m_timer = nullptr;
-#ifdef _DEBUG
 	ImGuiManager::Instance().Shutdown();
-#endif
     
     __super::Destroy();
 }
@@ -134,12 +126,10 @@ void Game::UpdateTime()
 
 bool Game::OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-#ifdef _DEBUG
     if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
     {
         return true; // ImGui가 메시지를 처리했으면 true 반환
     }
-#endif
     InputManager::Instance().OnHandleMessage({ hwnd, msg , wParam, lParam, 0 , {0, 0} });
 
     return false;

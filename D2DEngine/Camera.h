@@ -17,6 +17,7 @@ public:
 
     const D2D1::Matrix3x2F& GetViewTM() const { return m_viewTM; }
 
+    void Update(float deltaTime) override;
     void LateUpdate(float deltaTime) override;
 
     void SetScreenSize();
