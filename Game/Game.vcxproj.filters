@@ -192,6 +192,9 @@
     <ClCompile Include="Baby.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="SubMissionArea.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -310,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="Baby.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SubMissionArea.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

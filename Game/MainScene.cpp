@@ -17,6 +17,7 @@
 #include "HungryGauge.h"
 #include "Baby.h"
 #include "UI_Score.h"
+#include "SubMissionArea.h"
 
 void MainScene::Awake()
 {
@@ -228,6 +229,12 @@ void MainScene::Awake()
 
 	SubMissionArea1->SetTag("SubMissionArea");
 	SubMissionArea2->SetTag("SubMissionArea");
+
+	SubMissionArea1->AddComponent<SubMissionArea>();
+	SubMissionArea2->AddComponent<SubMissionArea>();
+
+	auto sub_box1 = SubMissionArea1->AddComponent<BoxCollider>();
+	auto sub_box2 = SubMissionArea2->AddComponent<BoxCollider>();
 
 	auto SAM1_T = SubMissionArea1->GetComponent<Transform>();
 	auto SAM2_T = SubMissionArea2->GetComponent<Transform>();

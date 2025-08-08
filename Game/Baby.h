@@ -25,6 +25,7 @@ private:
 	void Awake() override;
 	void Update(float deltaTime) override;
 
+	void OnTriggerExit(Collider* other) override;
 
 	//parent
 	SpriteRenderer* m_parentSpriteRenderer;
@@ -36,10 +37,7 @@ private:
 	GameObject* m_ItemUI;
 	SpriteRenderer* m_ItemUISpriteRenderer;
 	
-	
 	Thought m_thoughtState = Thought::None;
-
-
 
 	static float deltaCount;
 	int m_questTime = 0;

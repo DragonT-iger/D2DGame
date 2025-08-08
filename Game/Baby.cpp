@@ -66,8 +66,6 @@ void Baby::ChangeThink(Thought t)
 
 	m_babySpriteRenderer->SetActive(true);
 	m_thoughtState = t;
-
-	
 }
 
 
@@ -84,21 +82,23 @@ void Baby::OnInspectorGUI()
 	}
 }
 
+void Baby::OnTriggerExit(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "SubMissionArea")
+	{
+		QuestSuggestions();
+	}
+}
+
 void Baby::QuestSuggestions()
 {
-	int index = Random::Instance().Range(1, 3);
+	int index = Random::Instance().Range(1, 4);
 	ChangeThink(static_cast<Thought>(index));
 }
 
 void Baby::QuestinProgress(float deltaTime)
 {
-	deltaCount += deltaTime;
-
-	if (m_questTime < deltaCount)
-	{
-		
-		deltaCount = 0;
-	}
+	
 }
 
 int Baby::QuestSuccess()
@@ -113,5 +113,5 @@ void Baby::QusetFalse()
 
 void Baby::SetExecutionTime(float time)
 {
-	deltaCount = time;
 }
+
