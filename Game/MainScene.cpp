@@ -180,7 +180,7 @@ void MainScene::Awake()
 
 	auto sr = m_background->AddComponent<SpriteRenderer>();
 
-	sr->SetBitmap(ResourceManager::Instance().LoadTexture("Test_back_02.png"));
+	sr->SetBitmap(ResourceManager::Instance().LoadTexture("background_test_1.png"));
 	sr->SetOrderInLayer(-200000);
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });

@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Player.h"
 #include "Baby.h"
+#include "GameManager.h"
+#include "Inventory.h"
+
 
 float Baby::m_QExeCount = 0;
 
@@ -15,7 +18,7 @@ void Baby::Awake()
 
 	tr->SetParent(GetOwner()->GetComponent<Transform>());
 	m_babySpriteRenderer = m_babyThinkUI->AddComponent<SpriteRenderer>();
-	
+
 	m_babySpriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BabyThink.png"));
 	m_babySpriteRenderer->SetActive(false);
 
@@ -26,14 +29,16 @@ void Baby::Awake()
 	m_ItemUI->GetComponent<Transform>()->SetParent(GetOwner()->GetComponent<Transform>());
 
 	m_player = GetComponent<Player>();
+
+	m_inven_ptr = GameObject::Find("Inventory")->GetComponent<Inventory>();
 }
 
 void Baby::Update(float deltaTime)
 {
-	
+
 	if (m_parentSpriteRenderer->IsFlip()) {
 		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ 345.400f, 312.600f });
-		m_ItemUI->GetComponent<Transform>()->SetPosition({ 400.400f, 400.400f });	
+		m_ItemUI->GetComponent<Transform>()->SetPosition({ 400.400f, 400.400f });
 		m_babySpriteRenderer->SetFlip(false);
 	}
 	else {
@@ -43,8 +48,8 @@ void Baby::Update(float deltaTime)
 	}
 
 	QuestinProgress(deltaTime);
-
 }
+
 
 void Baby::ChangeThink(Thought t)
 {
@@ -54,7 +59,7 @@ void Baby::ChangeThink(Thought t)
 		m_thoughtState = t;
 		return;
 	}
-	else if (t == Thought::Pumpkin) {
+	if (t == Thought::Pumpkin) {
 		m_ItemUISpriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
 		m_ItemUISpriteRenderer->SetSize(250.f, 250.f);
 	}
@@ -71,6 +76,31 @@ void Baby::ChangeThink(Thought t)
 	m_thoughtState = t;
 }
 
+void Baby::OnTriggerEnter(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "SubMissionArea")
+	{
+		int bob = GameManager::Instance().ReceiveScore(QuestDataCollector(m_inven_ptr->SubMissonItem()));
+		m_player->FeedBaby(bob);
+
+		if (m_QuestInProgress == true)
+		{
+			QuestExamine();
+		}
+	}
+}
+
+void Baby::OnTriggerExit(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "SubMissionArea")
+	{
+		if (0 <= m_QExeCount && m_QuestInProgress == false)
+		{
+			QuestSuggestions();
+			m_QuestInProgress = true;
+		}
+	}
+}
 
 void Baby::OnInspectorGUI()
 {
@@ -85,60 +115,96 @@ void Baby::OnInspectorGUI()
 	}
 }
 
-void Baby::OnTriggerExit(Collider* other)
-{
-	if (other->GetOwner()->GetTag() == "SubMissionArea")
-	{
-		std::cout << "Baby Colliding" << std::endl;
-
-		QuestSuggestions();
-	}
-}
-
-//void Baby::SetExecutionTime(float time)
-//{
-//	m_QExeTime = 30.0f;
-//}
 
 void Baby::QuestSuggestions()
 {
-	if (m_QuestInProgress == false && m_QExeTime < m_QExeCount) //퀘스트 진행중이 아니고, 퀘스트 주기 또한 진행중이 아니면.
-	{
-		int index = Random::Instance().Range(1, 4);
-		ChangeThink(static_cast<Thought>(index));
+	int index = Random::Instance().Range(1, 4);
+	ChangeThink(static_cast<Thought>(index));
 
-		m_QuestInProgress = true;
-	}	
+	m_QuestInProgress = true;
 }
 
 void Baby::QuestinProgress(float deltaTime)
 {
-	if (m_QuestInProgress == false) return;
-
-	m_QExeCount += deltaTime;
-
-	if (m_QExeTime < m_QExeCount || m_player->GetAction() == Action::Hit)
+	if (m_QuestInProgress == true) // 퀘스트 진행중일 때만 카운트
 	{
-		QusetFalse();
-		m_QExeCount = 0;
-		m_QuestInProgress = false;
+		m_QExeCount += deltaTime;
 	}
-	else
+
+	if (m_player->GetAction() == Action::Hit) //Hit failed
 	{
-		QuestSuccess();
+		m_QExeCount -= 30;
+		m_QuestInProgress = false;
+
+		QuestFailed();
+		return;
+	}
+
+	if (m_QExeTime < m_QExeCount) //time Out
+	{
 		m_QExeCount = 0;
 		m_QuestInProgress = false;
+
+		QuestFailed();
 	}
 }
 
-int Baby::QuestSuccess()
+void Baby::QuestSuccess()
 {
-	return 0;
+	std::cout << "QuestSuccess" << std::endl;
+	ChangeThink(Thought::None);
+
+	temp_ep = 0;
+	temp_pt = 0;
+	temp_pk = 0;
+
+	m_QExeCount -= 30;
 }
 
-void Baby::QusetFalse()
+void Baby::QuestFailed()
 {
+	std::cout << "QuestFailed" << std::endl;
+	ChangeThink(Thought::None);
+}
 
+const std::vector<SlotData>& Baby::QuestDataCollector(const std::vector<SlotData>& data)
+{
+	for (auto& m : data)
+	{
+		switch (m.type)
+		{
+		case 0:
+			temp_ep = m.count;
+			std::cout << "temp_ep : " << temp_ep << std::endl;
+			break;
+		case 1:
+			temp_pt = m.count;
+			std::cout << "temp_pt : " << temp_pt << std::endl;
+			break;
+		case 2:
+			temp_pk = m.count;
+			std::cout << "temp_pk : " << temp_pk << std::endl;
+			break;
+		}
+	}
+	return data;
+}
+
+void Baby::QuestExamine()
+{
+	switch (m_thoughtState)
+	{
+	case Eggplant:
+		if (0 < temp_ep) QuestSuccess(); return;
+		break;
+	case Potato:
+		if (0 < temp_pt) QuestSuccess(); return;
+		break;
+	case Pumpkin:
+		if (0 < temp_pk) QuestSuccess(); return;
+		break;
+	default: return;
+	}
 }
 
 

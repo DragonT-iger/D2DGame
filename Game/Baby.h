@@ -1,6 +1,8 @@
 #pragma once
-
+#include "InventorySlot.h"
 class Player;
+class Inventory;
+class SlotData;
 
 class Baby : public MonoBehaviour
 {
@@ -18,16 +20,19 @@ public:
 	void QuestSuggestions();
 	void QuestinProgress(float deltaTime);
 
-	int QuestSuccess();
-	void QusetFalse();
+	void QuestSuccess();
+	void QuestFailed();
 
-	void SetExecutionTime(float time);
+	void QuestExamine();
+
+	const std::vector<SlotData>& QuestDataCollector(const std::vector<SlotData>& data);
 
 	void OnInspectorGUI()             override;
 private:
 	void Awake() override;
 	void Update(float deltaTime) override;
 
+	void OnTriggerEnter(Collider* other) override;
 	void OnTriggerExit(Collider* other) override;
 
 	Player* m_player;
@@ -43,8 +48,19 @@ private:
 	
 	Thought m_thoughtState = Thought::None;
 
-	bool m_QuestInProgress = false;
+
+	//QuestSystem
+	Inventory* m_inven_ptr = nullptr;
+
 	static float m_QExeCount;
+
+	bool m_QuestInProgress = false;
+
+	bool m_QuestisTimeOut = false;
 	float m_QExeTime = 30;
+
+	int temp_ep = 0;
+	int temp_pt = 0;
+	int temp_pk = 0;
 };
 

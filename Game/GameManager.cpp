@@ -72,3 +72,8 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 
 }
 
+void GameManager::AddScore(int num)
+{
+	totalscore += num;
+}
+
