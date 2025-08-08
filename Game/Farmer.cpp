@@ -191,7 +191,6 @@ void Farmer::DoAttack(float deltaTime)
         if (m_attackIntervalTimer >= m_attackInterval) {
             m_attackIntervalTimer = 0.f;
 
-
             m_attackPattern.SetOffsets(GenerateRandomAttackOffsets(250));
 
             m_attackPattern.CreateIndicators(this, m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);

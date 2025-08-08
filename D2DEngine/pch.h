@@ -45,6 +45,7 @@
 #include <wincodec.h>
 #include <dwrite.h>
 #include <DirectXMath.h>
+#include <nlohmann/json.hpp>
 namespace WRL = Microsoft::WRL;
 inline std::wostream& cwout = std::wcout;
 
