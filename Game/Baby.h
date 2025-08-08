@@ -57,7 +57,7 @@ private:
 	bool m_QuestInProgress = false;
 
 	bool m_QuestisTimeOut = false;
-	float m_QExeTime = 30;
+	float m_QExeTime = 8;
 
 	int temp_ep = 0;
 	int temp_pt = 0;

@@ -135,7 +135,7 @@ void Baby::QuestinProgress(float deltaTime)
 
 	if (m_player->GetAction() == Action::Hit) //Hit failed
 	{
-		m_QExeCount -= 30;
+		m_QExeCount -= m_QExeTime;
 		m_QuestInProgress = false;
 
 		QuestFailed();

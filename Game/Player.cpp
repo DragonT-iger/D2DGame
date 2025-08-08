@@ -43,6 +43,11 @@ void Player::Update(float deltaTime)
 	//if (weight >= 450.f) weight = 450.f;
 
 	//m_spd = 500.0f - weight;
+
+	if (m_hp <= 0 && state != State::Dead)
+	{
+		state = State::Dead;
+	}
 }
 
 void Player::OnTriggerEnter(Collider* other)
@@ -109,10 +114,10 @@ void Player::OnInspectorGUI()
 //	state = ste;
 //}
 //
-//void Player::SetAction(Action act)
-//{
-//	action = act;
-//}
+void Player::SetAction(Action act)
+{
+	action = act;
+}
 //
 //void Player::SetVisible(Visibilty vib)
 //{

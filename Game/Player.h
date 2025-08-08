@@ -41,7 +41,7 @@ public:
 
 	
 	//void SetState(State ste);
-	//void SetAction(Action act);
+	void SetAction(Action act);
 	//void SetVisible(Visibilty vib);
 	//
 	//State GetState() { return state; }

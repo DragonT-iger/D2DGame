@@ -25,7 +25,7 @@ void Farmer::Start()
     m_boxCollider->SetSize({ 140.0f , 400.0f });
 
 	auto idle = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "idle");
-    auto angryidle = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "angryidle");
+    auto angryidle = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "angryidle"); 
     auto walk = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "walk");
     auto angrywalk = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "angrywalk");
 	auto attack = ResourceManager::Instance().LoadAnimationClip("farmer_final.json", "attack");
