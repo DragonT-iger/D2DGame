@@ -75,8 +75,11 @@ int InputManager::GetAxisRaw(const std::string& axis)
 {
 	if (axis == "Vertical")
 	{
-		bool up = m_keyDown[static_cast<UINT>(Keycode::UP)] || m_keyDown[static_cast<UINT>(Keycode::W)];
-		bool down = m_keyDown[static_cast<UINT>(Keycode::DOWN)] || m_keyDown[static_cast<UINT>(Keycode::S)];
+		//bool up = m_keyDown[static_cast<UINT>(Keycode::UP)] || m_keyDown[static_cast<UINT>(Keycode::W)];
+		//bool down = m_keyDown[static_cast<UINT>(Keycode::DOWN)] || m_keyDown[static_cast<UINT>(Keycode::S)];
+
+		bool up = m_keyDown[static_cast<UINT>(Keycode::UP)];
+		bool down = m_keyDown[static_cast<UINT>(Keycode::DOWN)];
 
 		if (up && !down) return 1;
 		if (!up && down) return -1;
@@ -84,8 +87,11 @@ int InputManager::GetAxisRaw(const std::string& axis)
 	}
 	else if (axis == "Horizontal")
 	{
-		bool right = m_keyDown[static_cast<UINT>(Keycode::RIGHT)] || m_keyDown[static_cast<UINT>(Keycode::D)];
-		bool left = m_keyDown[static_cast<UINT>(Keycode::LEFT)] || m_keyDown[static_cast<UINT>(Keycode::A)];
+		//bool right = m_keyDown[static_cast<UINT>(Keycode::RIGHT)] || m_keyDown[static_cast<UINT>(Keycode::D)];
+		//bool left = m_keyDown[static_cast<UINT>(Keycode::LEFT)] || m_keyDown[static_cast<UINT>(Keycode::A)];
+
+		bool right = m_keyDown[static_cast<UINT>(Keycode::RIGHT)];
+		bool left = m_keyDown[static_cast<UINT>(Keycode::LEFT)];
 
 		if (right && !left) return 1;
 		if (!right && left) return -1;

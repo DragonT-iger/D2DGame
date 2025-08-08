@@ -166,7 +166,6 @@ void Farmer::DoAttack(float deltaTime)
         }
         else {
             ChangeState(FarmerState::Chase);
-            std::cout << "change to chase" << std::endl;
         }
     }
     if (m_animator->GetCurState() != "angryidle") {
