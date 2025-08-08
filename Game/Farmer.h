@@ -67,7 +67,7 @@ private:
     BoxCollider* m_boxCollider = nullptr;
 
     Vector2 m_direction = Vector2::zero;
-    float   m_speed = 350.f;
+    float   m_speed = 250.f;
 
 
     GameObject* m_player;
@@ -82,14 +82,14 @@ private:
     
 
 
-    GameObject* patrolObject;  float m_patrolAreaValue = 550.0f;
-    GameObject* chaseObject;  float m_chaseAreaValue = 1000.0f;
-    GameObject* alertObject;   float m_alertAreaValue = 750.0f;
-    GameObject* attackObject;  float m_attackAreaValue = 600.0f;
+    GameObject* patrolObject;  float m_patrolAreaValue = 600.0f;
+    GameObject* chaseObject;  float m_chaseAreaValue = 1100.0f;
+    GameObject* alertObject;   float m_alertAreaValue = 700.0f;
+    GameObject* attackObject;  float m_attackAreaValue = 450.0f;
 
 
     //GameObject* m_attackIndicator = nullptr;
-    float       m_attackDelay = 1.5f;
+    float       m_attackDelay = 1.0f;
     float       m_attackTimer = 0.0f;   
     float       m_attackInterval = 0.5f;
     float       m_attackIntervalTimer = 0.0f;

@@ -31,6 +31,7 @@ void PlayerController::Update(float deltaTime)
 		float moveSpd = std::max(
 			m_Player->m_spd / (m_inven->GetSpeedMultiplier()),
 			m_Player->m_minSpd);
+		//std::cout << moveSpd << std::endl;
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }

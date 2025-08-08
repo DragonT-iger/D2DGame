@@ -106,9 +106,6 @@ void Game::LifeCycle(float deltaTime)
 
     InputManager::Instance().EndFrame();
 
-
-
-
     D2DRenderer::Instance().RenderEnd(false);
 
 #ifdef _DEBUG

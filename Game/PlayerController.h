@@ -35,7 +35,7 @@ private:
 	bool canMoveLeft = true;
 	bool canMoveRight = true;
 
-	float m_throwTime = 0.2f;
+	float m_throwTime = 0.1f;
 	float m_throwelapsedTime = 0.0f;
 
 	//float* p_Spd = nullptr;

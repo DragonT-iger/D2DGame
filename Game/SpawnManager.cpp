@@ -11,7 +11,7 @@ void SpawnManager::Awake()
 	farm_A = { -1070, 720, 1070, -720 };
 	farm_B = { -2130, 1330, 2130, -1330};
 	farm_C = { -3210, 2110, 3210, -2110 };
-	Home = {-50, 50, 50, -50};
+	Home = {-235, 127, 235, -127};
 	
 	farmArr.reserve(3);
 	farmArr.push_back({ Rank_A, 20, 0.0f, 3.f, &m_farmAList });

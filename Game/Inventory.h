@@ -27,7 +27,6 @@ public:
 	void OnInspectorGUI() override;
 	
 private:
-	std::unordered_map<Crops, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>	m_itemSprite;
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>>		m_SlotSprites;
 	std::vector<Slot*>	m_slots;
 	Image*				m_bgImage;
@@ -36,7 +35,7 @@ private:
 	int m_curSlotNum;
 	int maxSlotNum = 2;
 
-	double m_potatoBonus = 0.01;  
-	double m_eggplantBonus = 0.02; 
-	double m_pumpkinBonus = 0.03;  
+	double m_potatoBonus = 0.005;  
+	double m_eggplantBonus = 0.01; 
+	double m_pumpkinBonus = 0.015;  
 };

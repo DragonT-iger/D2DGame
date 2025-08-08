@@ -3,9 +3,6 @@
 
 void Inventory::Awake()
 {
-	m_itemSprite.emplace(Eggplant, ResourceManager::Instance().LoadTexture("eggplant_item.png"));
-	m_itemSprite.emplace(Potato, ResourceManager::Instance().LoadTexture("potato_item.png"));
-	m_itemSprite.emplace(Pumpkin, ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
 	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("Icon_Frame.png"));
 	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("Icon_Frame_Selected.png"));
 }
@@ -19,6 +16,10 @@ void Inventory::Start()
 	m_slots.push_back(slot1);
 	m_slots.push_back(slot2);
 	m_slots.push_back(slot3);
+
+	m_slots[Potato]->SetSprite(ResourceManager::Instance().LoadTexture("potato_item.png"));
+	m_slots[Eggplant]->SetSprite(ResourceManager::Instance().LoadTexture("eggplant_item.png"));
+	m_slots[Pumpkin]->SetSprite(ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
 
 	m_curSlotNum = 0;
 	m_curSlot = m_slots[m_curSlotNum];
@@ -73,20 +74,9 @@ void Inventory::Update(float deltaTime)
 
 void Inventory::AddCrop(Crops type, Size size)
 {
-	for (auto& slot : m_slots)
-	{
-		const auto& data = slot->GetData();
-		if (data.isEmpty || data.type == type)
-		{
-			if (data.isEmpty)
-				slot->AddItem(type, size, m_itemSprite[type]);
-			else
-				slot->AddItem(type, size);
+	auto data = m_slots[type]->GetData();
 
-			slot->SetText();
-			break;
-		}
-	}
+	m_slots[type]->AddItem(type, size);
 }
 
 void Inventory::ChangeSlot()

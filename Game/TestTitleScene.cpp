@@ -143,7 +143,7 @@ void TitleScene::Awake()
 	SoundManager::Instance().SetVolume_SFX(1.f);
 	SoundManager::Instance().SetVolume_UI(1.f);
 
-	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
+	SoundManager::Instance().BGM_Shot("1.mp3");
 
 	m_Title = Instantiate("title");
 	auto text = m_Title->AddComponent<Text>();
