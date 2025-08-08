@@ -115,6 +115,25 @@ AttackIndicatorZone::~AttackIndicatorZone()
 	//else if(!m_farmer->m_isCommonAttackIndicatorArea && m_farmer->m_isAlreadyExitAttackZone){
 	//	m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 	//}
+
+	if (!m_farmer)
+		return;
+
+	if (m_isPlayerInside)
+	{
+			auto playerObj = SceneManager::Instance().GetActiveScene()->GetPlayer();
+			if (playerObj)
+			{
+				auto player = playerObj->GetComponent<Player>();
+				if (player)
+					player->SetHp(player->GetHp() - 1);
+			}
+			m_farmer->m_hasDamagedPlayer = true;
+
+		if (m_farmer->m_attackIndicatorCount > 0)
+			m_farmer->m_attackIndicatorCount--;
+		m_farmer->m_isCommonAttackIndicatorArea = (m_farmer->m_attackIndicatorCount > 0);
+	}
 }
 
 void AttackIndicatorZone::OnTriggerEnter(Collider* other)

@@ -62,14 +62,7 @@ void Farmer::Start()
     attackObject->GetComponent<Transform>()->SetParent(m_transform);
     auto attackZone = attackObject->AddComponent<AttackZone>();
     attackZone->Initalize(this, m_attackAreaValue);
-
-    m_attackPattern.SetOffsets({
-     {0.f, 0.f},
-     //{m_attackAreaValue, 0.f},
-     //{-m_attackAreaValue, 0.f},
-     {0.f, m_attackAreaValue},
-     {0.f, -m_attackAreaValue}
-        });
+    m_hasDamagedPlayer = false;
 }
 
 void Farmer::Update(float deltaTime)
@@ -197,6 +190,10 @@ void Farmer::DoAttack(float deltaTime)
         m_attackIntervalTimer += deltaTime;
         if (m_attackIntervalTimer >= m_attackInterval) {
             m_attackIntervalTimer = 0.f;
+
+
+            m_attackPattern.SetOffsets(GenerateRandomAttackOffsets(250));
+
             m_attackPattern.CreateIndicators(this, m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
             
             m_attackTimer = 0.f;
@@ -206,7 +203,7 @@ void Farmer::DoAttack(float deltaTime)
         m_attackTimer += deltaTime;
         if (m_attackTimer >= m_attackDelay) {
             m_attackPattern.Execute(m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
-            m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
+            //m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
             m_animator->ChangeState("attack");
         }
     }
@@ -239,6 +236,39 @@ void Farmer::ChangeState(FarmerState farmerState)
 }
 
 
+
+std::vector<Vector2> Farmer::GenerateRandomAttackOffsets(float r)
+{
+    int pattern = Random::Instance().Range(0, 4);
+    std::vector<Vector2> offsets;
+
+    switch (pattern)
+    {
+    case 0: offsets = { {0,0}, { r,0}, { -r,0} };                      break;
+    case 1: offsets = { {0,0}, {0, r}, {0,-r} };                       break;
+    case 2: 
+        r = 150;
+        offsets = { {  r, 0.f },
+                    { -0.5f * r,  0.8660254f * r },
+                    { -0.5f * r, -0.8660254f * r } }; 
+        break;
+    case 3:
+        offsets = { {0,0}, { r,0}, {-r,0}, {0, r}, {0,-r} };
+        {
+            float angle = DirectX::XM_2PI *
+                (Random::Instance().Range(0, 10001) / 10000.f);
+            float c = std::cos(angle), s = std::sin(angle);
+            for (auto& o : offsets)
+            {
+                float x = o.x, y = o.y;
+                o.x = x * c - y * s;
+                o.y = x * s + y * c;
+            }
+        }
+        break;
+    }
+    return offsets;
+}
 
 void Farmer::OnTriggerExit(Collider* other)
 {

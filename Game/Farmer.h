@@ -26,6 +26,8 @@ public:
 
     void ChangeState(FarmerState farmerState);
 
+
+
    
 
 	//애니메이션
@@ -33,6 +35,9 @@ public:
 
 
 	//AI
+    std::vector<Vector2> GenerateRandomAttackOffsets(float radius);
+
+
 
     void OnTriggerExit(Collider* other) override;
 
@@ -44,6 +49,7 @@ public:
     bool m_hasPatrolTarget = false;
     bool m_isCommonAttackIndicatorArea = false;
     int  m_attackIndicatorCount = 0;
+    bool m_hasDamagedPlayer = false;
 
 
 private:
@@ -76,15 +82,15 @@ private:
     
 
 
-    GameObject* patrolObject;  float m_patrolAreaValue = 350.0f;
-    GameObject* chaseObject;  float m_chaseAreaValue = 650.0f;
-    GameObject* alertObject;   float m_alertAreaValue = 450.0f;
-    GameObject* attackObject;  float m_attackAreaValue = 200.0f;
+    GameObject* patrolObject;  float m_patrolAreaValue = 550.0f;
+    GameObject* chaseObject;  float m_chaseAreaValue = 1000.0f;
+    GameObject* alertObject;   float m_alertAreaValue = 750.0f;
+    GameObject* attackObject;  float m_attackAreaValue = 600.0f;
 
 
     //GameObject* m_attackIndicator = nullptr;
     float       m_attackDelay = 1.5f;
-    float       m_attackTimer = 0.0f;
+    float       m_attackTimer = 0.0f;   
     float       m_attackInterval = 0.5f;
     float       m_attackIntervalTimer = 0.0f;
 
