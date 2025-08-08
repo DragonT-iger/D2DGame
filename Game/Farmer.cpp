@@ -154,21 +154,26 @@ void Farmer::DoChase(float deltaTime)
 
 void Farmer::DoAttack(float deltaTime)
 {
-    if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
+   /* if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
         m_attackPattern.ClearIndicators();
         ChangeState(FarmerState::Patrol);
         return;
-    }
+    }*/
 
     if (m_animator->GetCurState() == "attack" && !m_animator->IsAnimeEnd()) {
         return;
     }
     else if(m_animator->GetCurState() == "attack"){
-        if (m_isAlreadyExitAttackZone == true) {
-            ChangeState(FarmerState::Chase);
+        if (m_isAlreadyExitAttackZone == false) {
+            ChangeState(FarmerState::Attack);
+        }
+        else if(m_isAlreadyExitAlertZone == true){
+
+            ChangeState(FarmerState::Patrol);
         }
         else {
-            ChangeState(FarmerState::Attack);
+            ChangeState(FarmerState::Chase);
+            std::cout << "change to chase" << std::endl;
         }
     }
     if (m_animator->GetCurState() != "angryidle") {
@@ -180,12 +185,12 @@ void Farmer::DoAttack(float deltaTime)
 
     
 
-    if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
-        m_spriteRenderer->SetFlip(false);
-    }
-    else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
-        m_spriteRenderer->SetFlip(true);
-    }
+    //if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
+    //    m_spriteRenderer->SetFlip(false);
+    //}
+    //else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
+    //    m_spriteRenderer->SetFlip(true);
+    //}
     
 
     if (!m_attackPattern.HasIndicators()) {
@@ -217,7 +222,15 @@ void Farmer::ChangeState(FarmerState farmerState)
         m_hasPatrolTarget = false;
     }
     if (farmerState == FarmerState::Attack) {
+
         m_attackPattern.ClearIndicators();
+
+        if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x > 0) {
+             m_spriteRenderer->SetFlip(false);
+        }
+        else if (m_player->GetComponent<Transform>()->GetPosition().x - m_transform->GetPosition().x < 0) {
+            m_spriteRenderer->SetFlip(true);
+        }
 
         m_attackTimer = 0.f;
         m_attackIntervalTimer = 0.f;
@@ -264,14 +277,18 @@ void Farmer::OnInspectorGUI()
     ImGui::Text("AI   : %s", ToString(m_farmerState));
     ImGui::Text("Anim : %s", curAnim.c_str());
     ImGui::Separator();
-
+    
     ImGui::DragFloat("Move Speed", &m_speed, 1.f);
     ImGui::DragFloat("Patrol Bias", &m_patrolBiasExp, 0.1f, 0.1f, 20.f);
     ImGui::DragFloat("AttackInterval", &m_attackInterval, 0.01f, 0.1f, 10.f);
-    ImGui::DragInt("AttackIndicatorCount", &m_attackIndicatorCount);
-    ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
-    ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
-    ImGui::Checkbox("m_isCommonAttackIndicatorArea", &m_isCommonAttackIndicatorArea);
+
+
+    //디버그용 
+    //ImGui::DragInt("AttackIndicatorCount", &m_attackIndicatorCount);
+    //ImGui::Checkbox("m_isAlreadyExitChaseZone", &m_isAlreadyExitChaseZone);
+    //ImGui::Checkbox("m_isAlreadyExitAttackZone", &m_isAlreadyExitAttackZone);
+    //ImGui::Checkbox("m_isCommonAttackIndicatorArea", &m_isCommonAttackIndicatorArea);
+    //ImGui::Checkbox("m_isAlreadyExitAlertZone", &m_isAlreadyExitAlertZone);
     //m_hasPatrolTarget
 
     //ImGui::Checkbox("hasPatrolTarget", &m_hasPatrolTarget);
