@@ -83,6 +83,6 @@ void Slot::SetText()
 {
 	std::wstring ws_Count = std::to_wstring(m_data.count);
 
-	m_text->SetText(ws_Count, {20,20}, L"Maplestory");
+	m_text->SetText(ws_Count, {30,30}, L"Maplestory");
 	m_text->SetFontSize(15.0f);
 }
