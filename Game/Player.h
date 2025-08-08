@@ -94,6 +94,8 @@ private:
 
 	static int invincible_Count;
 
+	std::array<size_t, 3> maxCount = { 40, 30, 15 };//감자, 가지, 호박 순
+
 	State		state		= State::Alive;
 	Action		action		= Action::Idle;
 	Visibilty	visibilty	= Visibilty::Visible;

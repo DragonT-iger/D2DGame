@@ -36,6 +36,12 @@ void Slot::AddItem(Crops type, Size count)
 		m_data.count += 1;
 	else
 		m_data.count += static_cast<size_t>(count) * 3;
+
+	if (m_data.count > m_maxCount)
+	{
+		m_data.count = m_maxCount;
+		//떨구는 사운드 여기서 재생할듯
+	}
 }
 
 void Slot::ThrowItem()

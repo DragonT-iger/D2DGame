@@ -14,6 +14,7 @@ void PlayerController::Awake()
 void PlayerController::Start()
 {
 	m_inven = GameObject::Find("Inventory")->GetComponent<Inventory>();
+	m_inven->SetMaxCount(m_Player->maxCount);
 	//p_Spd = &(m_Player->m_spd);
 }
 

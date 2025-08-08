@@ -10,11 +10,15 @@ public:
 	void Awake() override;
 	void Start() override;
 
+	void SetMaxCount(std::array<size_t, 3> maxCounts);
+
 	void Update(float deltaTime) override;
 
 	void AddCrop(Crops type, Size size);
 
 	void ChangeSlot();
+
+	size_t GetCropCount(Crops type);
 
 	void ThrowItem();
 

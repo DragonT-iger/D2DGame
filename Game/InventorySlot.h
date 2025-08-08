@@ -22,6 +22,8 @@ public:
 
 	void ThrowItem();
 	SlotData ThrowAll();
+
+	void SetMaxCount(size_t maxCount) { m_maxCount = maxCount; }
 	
 	void SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite);
 
@@ -35,4 +37,6 @@ private:
 	Image* m_image;
 
 	Text* m_text;
+
+	size_t m_maxCount = 0;
 };

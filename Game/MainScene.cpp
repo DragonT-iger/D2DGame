@@ -145,6 +145,12 @@ void MainScene::Awake()
 	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -2000, 50 });
 	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 2000, 50 });
 
+	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 
 #pragma endregion
 
@@ -279,10 +285,13 @@ void MainScene::Awake()
 	m_hp3->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Heart.png"), { 72, 65 });
 	m_hp3->GetComponent<Transform>()->SetPosition({ 855, 980 });
 
+	m_hungryBG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("gauge_frame.png"), { 300, 90 });
+	m_hungryBG->GetComponent<Transform>()->SetPosition({ 770, 880 });
+
 	m_hungryGauge->AddComponent<Image>();
 	m_hungryGauge->AddComponent<Slide_Bar>();
 	m_hungryGauge->AddComponent<HungryGauge>();
-	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 770, 880 });
+	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 803, 879 });
 
 #pragma endregion
 
@@ -315,8 +324,8 @@ void MainScene::Awake()
 	ui_score = Instantiate("UI_Score");
 	ui_score->AddComponent<UI_Score>();
 	ui_score->AddComponent<Text>();
-	ui_score->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Main_Panel.png"), { 270, 70 });
-	ui_score->GetComponent<Transform>()->SetPosition(Vector2{ 1755,60 });
+	ui_score->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Sign_Panel.png"), { 270, 108 });
+	ui_score->GetComponent<Transform>()->SetPosition(Vector2{ 1755, 100 });
 
 #pragma endregion
 
