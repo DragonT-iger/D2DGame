@@ -23,9 +23,7 @@ public:
 
 	virtual ColliderInfo GetColliderInfo() = 0;
 
-#ifdef _DEBUG
 	virtual void OnInspectorGUI();
-#endif // _DEBUG
 
 
 protected:

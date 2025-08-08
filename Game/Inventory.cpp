@@ -3,15 +3,9 @@
 
 void Inventory::Awake()
 {
-	m_itemSprite.emplace(Eggplant, ResourceManager::Instance().LoadTexture("eggplant_item.png"));
-	m_itemSprite.emplace(Potato, ResourceManager::Instance().LoadTexture("potato_item.png"));
-	m_itemSprite.emplace(Pumpkin, ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
 	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("Icon_Frame.png"));
 	m_SlotSprites.push_back(ResourceManager::Instance().LoadTexture("Icon_Frame_Selected.png"));
-}
 
-void Inventory::Start()
-{
 	auto slot1 = GameObject::Find("Slot1")->GetComponent<Slot>();
 	auto slot2 = GameObject::Find("Slot2")->GetComponent<Slot>();
 	auto slot3 = GameObject::Find("Slot3")->GetComponent<Slot>();
@@ -19,12 +13,27 @@ void Inventory::Start()
 	m_slots.push_back(slot1);
 	m_slots.push_back(slot2);
 	m_slots.push_back(slot3);
+}
+
+void Inventory::Start()
+{
+	m_slots[Potato]->SetSprite(ResourceManager::Instance().LoadTexture("potato_item.png"));
+	m_slots[Eggplant]->SetSprite(ResourceManager::Instance().LoadTexture("eggplant_item.png"));
+	m_slots[Pumpkin]->SetSprite(ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
 
 	m_curSlotNum = 0;
 	m_curSlot = m_slots[m_curSlotNum];
 	m_bgImage = m_curSlot->GetOwner()->GetComponent<Transform>()->GetParent()->GetOwner()->GetComponent<Image>();
 	D2D1_SIZE_F size = m_bgImage->GetSize();
 	m_bgImage->SetBitmap(m_SlotSprites[1], size);
+}
+
+void Inventory::SetMaxCount(std::array<size_t, 3> maxCounts)
+{
+	for (int i = 0; i < m_slots.size(); i++)
+	{
+		m_slots[i]->SetMaxCount(maxCounts[i]);
+	}
 }
 
 void Inventory::Update(float deltaTime)
@@ -73,20 +82,9 @@ void Inventory::Update(float deltaTime)
 
 void Inventory::AddCrop(Crops type, Size size)
 {
-	for (auto& slot : m_slots)
-	{
-		const auto& data = slot->GetData();
-		if (data.isEmpty || data.type == type)
-		{
-			if (data.isEmpty)
-				slot->AddItem(type, size, m_itemSprite[type]);
-			else
-				slot->AddItem(type, size);
+	auto data = m_slots[type]->GetData();
 
-			slot->SetText();
-			break;
-		}
-	}
+	m_slots[type]->AddItem(type, size);
 }
 
 void Inventory::ChangeSlot()
@@ -101,6 +99,13 @@ void Inventory::ChangeSlot()
 	m_curSlot = m_slots[m_curSlotNum];
 	m_bgImage = m_curSlot->GetOwner()->GetComponent<Transform>()->GetParent()->GetOwner()->GetComponent<Image>();
 	m_bgImage->SetBitmap(m_SlotSprites[1], size);
+}
+
+size_t Inventory::GetCropCount(Crops type)
+{
+	auto count = m_slots[type]->GetData().count;
+
+	return count;
 }
 
 void Inventory::ThrowItem()

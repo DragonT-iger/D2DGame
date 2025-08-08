@@ -176,8 +176,7 @@ void Scene::Render()
 				}
 				else
 				{
-					worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x)
-						* D2D1::Matrix3x2F::Translation({ p.x, p.y });
+					worldTM = D2D1::Matrix3x2F::Scale(s.x, s.x) * D2D1::Matrix3x2F::Translation({ p.x, p.y });
 				}
 
 				D2D1::Matrix3x2F mWV = renderTM * worldTM * viewTM;
@@ -187,7 +186,6 @@ void Scene::Render()
 		}
     }
     
-#ifdef _DEBUG
     //그리드 출력
 	if (SceneManager::Instance().GetDebugMode() && m_isGridOn)
 	{
@@ -228,7 +226,6 @@ void Scene::Render()
 			D2DRenderer::Instance().DrawLine(startX, y, endX, y, D2D1::ColorF::Black);
 		}
 	}
-#endif
 
     //ui render
     D2DRenderer::Instance().SetTransform(D2D1::Matrix3x2F::Identity());

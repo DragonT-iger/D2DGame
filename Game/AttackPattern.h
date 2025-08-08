@@ -14,4 +14,5 @@ public:
 private:
     std::vector<Vector2> m_offsets;
     std::vector<GameObject*> m_indicators;
+    Vector2 m_effectScale = { 0.4f, 0.4f };
 };

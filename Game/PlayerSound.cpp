@@ -7,11 +7,11 @@ void PlayerSound::Awake()
 	m_player = GetComponent<Player>();
 
 	//필요한 사운드 벡터에 넣기
-	m_walkSounds.push_back("mole_walk1.mp3");
-	m_walkSounds.push_back("mole_walk2.mp3");
-	m_walkSounds.push_back("mole_walk3.mp3");
-	m_walkSounds.push_back("mole_walk4.mp3");
-	m_walkSounds.push_back("mole_walk5.mp3");
+	m_walkSounds.push_back("1.mp3");
+	m_walkSounds.push_back("2.mp3");
+	m_walkSounds.push_back("3.mp3");
+	m_walkSounds.push_back("4.mp3");
+	m_walkSounds.push_back("5.mp3");
 
 	SoundManager::Instance().GetCoreSystem()->createChannelGroup("walk", &m_walkGroup);
 	SoundManager::Instance().AddSFXGroup(m_walkGroup);

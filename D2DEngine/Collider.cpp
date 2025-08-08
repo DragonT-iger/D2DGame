@@ -3,7 +3,6 @@
 
 
 
-#ifdef _DEBUG
 void Collider::OnInspectorGUI() {
 
 
@@ -15,6 +14,5 @@ void Collider::OnInspectorGUI() {
 		SetOffset({ offset[0] , offset[1] });
 	}
 }
-#endif // _DEBUG
 
 

@@ -22,11 +22,9 @@ public:
 
 private:
 
-#ifdef _DEBUG
 	void OnInspectorGUI() override;
 
 	void DestroyAllCrop();
-#endif // _DEBUG
 
 	bool IsInnerRect(const RECT& rect, const int& x, const int& y);
 	bool CheckRange(const Vector2& pos, FarmRank rank);
@@ -39,9 +37,9 @@ private:
 
 	void SetCropData(Crop* obj, Crops type, FarmRank rank, GameObject* eftObj);
 
-	GrowSpeed rankA = { 5, 7, 7 };
-	GrowSpeed rankB = { 5, 7, 12 };
-	GrowSpeed rankC = { 5, 12, 0 };
+	GrowSpeed rankA = { 3, 4, 7 };
+	GrowSpeed rankB = { 5, 7, 10 };
+	GrowSpeed rankC = { 8, 12, 0 };
 
 	std::vector<GrowSpeed*> growArr;
 

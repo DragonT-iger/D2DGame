@@ -12,7 +12,13 @@ class MainScene : public Scene
 
 	GameObject*				crop		= nullptr;
 	GameObject*				message		= nullptr;
-	GameObject*				bush = nullptr;
+
+	GameObject*				bush1 = nullptr;
+	GameObject*				bush2 = nullptr;
+	GameObject*				bush3 = nullptr;
+	GameObject*				bush4 = nullptr;
+	GameObject*				bush5 = nullptr;
+	GameObject*				bush6 = nullptr;
 
 	GameObject*				SubMissionArea1 = nullptr;
 	GameObject*				SubMissionArea2 = nullptr;
@@ -24,6 +30,8 @@ class MainScene : public Scene
 	//Farmer
 
 	GameObject* m_farmerManager = nullptr;
+
+	GameObject* m_farmerHouse = nullptr;
 
 	GameObject* m_Timer;
 
@@ -52,6 +60,13 @@ class MainScene : public Scene
 		GameObject* m_hp3 = nullptr;
 
 	GameObject* m_background = nullptr;
+#ifdef _DEBUG
+	//디버그용
+	GameObject* m_areaBox1 = nullptr;
+	GameObject* m_areaBox2 = nullptr;
+	GameObject* m_areaBox3 = nullptr;
+	GameObject* m_areaBoxHouse = nullptr;
+#endif
 
 	GameObject* m_SpawnManager = nullptr;
 };

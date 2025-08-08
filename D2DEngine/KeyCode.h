@@ -6,6 +6,8 @@ enum class Keycode
 
 	//방향키, 스페이스바
 	SPACE = 0x20,
+	PageUp = 0x21,   
+	PageDown = 0x22,   
 	LEFT = 0x25,
 	UP = 0x26,
 	RIGHT = 0x27,

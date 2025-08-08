@@ -53,10 +53,20 @@ public:
 	float GetFullness() { return m_fullness; }
 
 	int GetHp() { return m_hp; }
-	void SetHp(int hp) { m_hp = hp; }
 
+	void SetHp(int hp) { 
+		int minusHp = m_hp - hp;
 
+		m_hp = hp; 
 
+		if (m_hp > -1)
+		{
+			for (int i = 0; i < minusHp; i++)
+			{
+				m_hpUI[hp + i]->SetActive(false);
+			}
+		}
+	}
 
 	void FeedBaby(float bop);
 
@@ -73,6 +83,8 @@ private:
 	//float m_starv_level   = 500.0f;
 	int		m_ivc_T		    = 15;						//fps 기준
 
+	std::vector<GameObject*> m_hpUI;
+
 	float	m_fullness;
 
 	float m_elapsedTime = 0.f;
@@ -81,6 +93,8 @@ private:
 	float   m_weightDivisor = 300.f;  
 
 	static int invincible_Count;
+
+	std::array<size_t, 3> maxCount = { 40, 30, 15 };//감자, 가지, 호박 순
 
 	State		state		= State::Alive;
 	Action		action		= Action::Idle;

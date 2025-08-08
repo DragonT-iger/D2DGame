@@ -1,5 +1,4 @@
 #pragma once
-#ifdef _DEBUG
 class EditorWindow;
 class ImGuiManager
 {
@@ -29,4 +28,3 @@ private:
 
     std::unique_ptr<EditorWindow> m_imGuiWindow = std::make_unique<EditorWindow>();
 };
-#endif

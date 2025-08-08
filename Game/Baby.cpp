@@ -18,13 +18,15 @@ void Baby::Awake()
 
 	tr->SetParent(GetOwner()->GetComponent<Transform>());
 	m_babySpriteRenderer = m_babyThinkUI->AddComponent<SpriteRenderer>();
-
-	m_babySpriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BabyThink.png"));
+	
+	m_babySpriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("chat_bubble.png"));
 	m_babySpriteRenderer->SetActive(false);
+	m_babySpriteRenderer->SetOrderInLayer(10000);
 
 	m_ItemUI = Instantiate("ItemUI");
 
 	m_ItemUISpriteRenderer = m_ItemUI->AddComponent<SpriteRenderer>();
+	m_ItemUISpriteRenderer->SetOrderInLayer(10001);
 
 	m_ItemUI->GetComponent<Transform>()->SetParent(GetOwner()->GetComponent<Transform>());
 
@@ -37,13 +39,13 @@ void Baby::Update(float deltaTime)
 {
 
 	if (m_parentSpriteRenderer->IsFlip()) {
-		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ 345.400f, 312.600f });
-		m_ItemUI->GetComponent<Transform>()->SetPosition({ 400.400f, 400.400f });
+		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ 375.400f, 330.600f });
+		m_ItemUI->GetComponent<Transform>()->SetPosition({ 370.400f, 365.400f });	
 		m_babySpriteRenderer->SetFlip(false);
 	}
 	else {
-		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ -357.800f, 312.600f });
-		m_ItemUI->GetComponent<Transform>()->SetPosition({ -400.400f, 400.400f });
+		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ -375.800f, 330.600f });
+		m_ItemUI->GetComponent<Transform>()->SetPosition({ -375.400f, 365.400f });
 		m_babySpriteRenderer->SetFlip(true);
 	}
 

@@ -1,8 +1,8 @@
 #pragma once
 
 enum Crops {
-	Eggplant = 0,
-	Potato = 1,
+	Potato = 0,
+	Eggplant = 1,
 	Pumpkin = 2,
 	Nothing
 };
@@ -60,9 +60,8 @@ protected:
 	std::vector<Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_GameSprites;
 	std::shared_ptr<AnimationClip>										   m_largeClip = nullptr;
 
-#ifdef _DEBUG
 	SpawnManager* m_spawnManager = nullptr;
-#endif
+
 	GameObject* m_eftObj;
 };
 

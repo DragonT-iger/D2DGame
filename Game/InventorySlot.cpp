@@ -3,11 +3,12 @@
 #include "InventorySlot.h"
 
 
-void Slot::Start()
+void Slot::Awake()
 {
 	m_image = GetComponent<Image>();
 	m_image->SetActive(false);
 }
+
 
 void Slot::Update(float deltaTime)
 {
@@ -23,24 +24,24 @@ void Slot::RegisterText(Text* text)
 	m_text->SetOrderLayer(3);
 }
 
-void Slot::AddItem(Crops type, Size count, Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
+void Slot::AddItem(Crops type, Size count)
 {
 	if (m_data.isEmpty)
 	{
-		SetSprite(sprite);
-		m_data.type = type;
 		m_data.isEmpty = false;
-	}
-	if (m_data.type != type)//디버그용
-	{
-		std::cout << "현재 아이템 타입과 일치하지 않음" << std::endl;
-		return;
+		m_data.type = type;
 	}
 		
 	if (count == S)
 		m_data.count += 1;
 	else
 		m_data.count += static_cast<size_t>(count) * 3;
+
+	if (m_data.count > m_maxCount)
+	{
+		m_data.count = m_maxCount;
+		//떨구는 사운드 여기서 재생할듯
+	}
 }
 
 void Slot::ThrowItem()
@@ -74,8 +75,6 @@ void Slot::SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
 
 void Slot::SetEmpty()
 {
-	m_image->SetActive(false);
-
 	m_data.isEmpty = true;
 	m_data.type = Nothing;
 }

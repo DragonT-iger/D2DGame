@@ -58,9 +58,8 @@ public:
 	void RemoveChild(Transform* child);
 
 	void SetSpriteSize(const D2D1_SIZE_F& size) { m_spriteSize = size; SetDirty(); }
-#ifdef _DEBUG
+
 	void OnInspectorGUI() override;
-#endif // _DEBUG
 
 private:
 	void SetDirty();

@@ -10,8 +10,8 @@ void UI_Score::Awake()
 
 void UI_Score::Update(float deltaTime)
 {
-	std::wstring score_text = std::to_wstring(GameManager::Instance().GetTotalScore());
+	std::wstring score_text = L"Score : " + std::to_wstring(GameManager::Instance().GetTotalScore());
 
-	m_Text->SetText(score_text, { 300,50 }, L"Maplestory", D2D1::ColorF::Black);
-	m_Text->SetFontSize(15.0f);
+	m_Text->SetText(score_text, { 260,50 }, L"Maplestory");
+	m_Text->SetFontSize(40.0f);
 }

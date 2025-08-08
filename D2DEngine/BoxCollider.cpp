@@ -7,8 +7,11 @@ void BoxCollider::Awake()
 {
 	Collider::Awake();
 
-	if (auto sr = GetComponent<SpriteRenderer>())
-		size = { sr->GetSize().width, sr->GetSize().height };
+	if (size.x == 1 && size.y == 1)
+	{
+		if(auto sr = GetComponent<SpriteRenderer>())
+			size = { sr->GetSize().width, sr->GetSize().height };
+	}
 }
 
 bool BoxCollider::IsCollide(const Collider* other) const
@@ -75,7 +78,6 @@ void BoxCollider::DrawCollider()
 {
 	D2DRenderer::Instance().DrawRectangle((- size.x / 2) + m_offset.x, (-size.y / 2) - m_offset.y, (size.x / 2)+ m_offset.x, (size.y / 2) - m_offset.y, D2D1::ColorF(1.f, 0.f, 0.f));
 }
-#ifdef _DEBUG
 void BoxCollider::OnInspectorGUI()
 {
 
@@ -89,4 +91,3 @@ void BoxCollider::OnInspectorGUI()
 
 	__super::OnInspectorGUI();
 }
-#endif

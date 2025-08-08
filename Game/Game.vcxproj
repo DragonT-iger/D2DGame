@@ -105,14 +105,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)..\D2DEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)..\D2DEngine;$(SolutionDir)..\ThirdParty\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64;$(SolutionDir)..\ThirdParty\fmod\api\studio\lib\x64;$(SolutionDir)\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ImGUIDX11D.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ImGUIDX11D.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.dll" "$(OutDir)"</Command>
@@ -126,13 +126,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\D2DEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\D2DEngine;$(SolutionDir)..\ThirdParty\include;$(SolutionDir)..\ThirdParty\ImGUIDX11;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64;$(SolutionDir)..\ThirdParty\fmod\api\studio\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64;$(SolutionDir)..\ThirdParty\fmod\api\studio\lib\x64;$(SolutionDir)..\ThirdParty\ImGUIDX11;$(SolutionDir)\x64\Release\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ImGUIDX11R.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.dll" "$(OutDir)"
