@@ -4,6 +4,7 @@
 #include "PlayerController.h"
 #include "Inventory.h"
 #include "ThrownCrop.h"
+#include "YSort.h"
 
 void PlayerController::Awake()
 {
@@ -27,6 +28,8 @@ void PlayerController::Update(float deltaTime)
 		int y = Input.GetAxisRaw("Vertical");
 		curDir = { (float)x,(float)y };
 		curDir.Normalize();
+
+		std::cout << "curDir" << curDir.x << " " << curDir.y << std::endl;
 
 		if (m_boostTimer > 0.f)
 			m_boostTimer -= deltaTime;
@@ -55,12 +58,7 @@ void PlayerController::Update(float deltaTime)
 		{
 			m_inven->ChangeSlot();
 		}
-		if (Input.GetKeyPressed(Keycode::C))
-		{
-			m_inven->ThrowItem();
-			m_throwelapsedTime = 0;
-		}
-		else if (Input.GetKeyDown(Keycode::C))
+		if (Input.GetKeyDown(Keycode::C))
 		{
 			Crops type = m_inven->ThrowItem();
 			if (type != Crops::Nothing)
@@ -70,7 +68,7 @@ void PlayerController::Update(float deltaTime)
 				ApplyThrowBoost(type);
 			}
 		}
-		else if (Input.GetKeyDown(Keycode::C))
+		else if (Input.GetKeyPressed(Keycode::C))
 		{
 			if (m_throwelapsedTime >= m_throwTime)
 			{
@@ -229,16 +227,24 @@ void PlayerController::SpawnThrownCrop(Crops type)
 {
 	GameObject* obj = Instantiate("thrownCrop");
 	auto sr = obj->AddComponent<SpriteRenderer>();
-	sr->SetOrderInLayer(-20000);
+	auto ys = obj->AddComponent<YSort>();
+	ys->SetStatic(false);
+	ys->SetOffset(50);
+	
 	auto thrown = obj->AddComponent<ThrownCrop>();
 	auto tr = obj->GetComponent<Transform>();
 	tr->SetPosition(m_transform->GetPosition());
 	tr->SetScale({ 0.2f, 0.2f });
 
-	Vector2 dir = curDir;
+	Vector2 dir = -curDir;
+	if (dir.x == 0.0f) {
+		dir.x = 1.0f;
+	}
+	dir.y = 0;
 
 	dir.Normalize();
-	thrown->SetVelocity(dir * 400.f + Vector2{ 0.f,300.f });
+	thrown->SetVelocity(dir * 300.f + Vector2{ 0.f,450.f });
+	obj->GetComponent<Transform>()->Translate(Vector2{ 0, 50 });
 
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite;
 	switch (type)

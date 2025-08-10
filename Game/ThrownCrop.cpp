@@ -9,7 +9,6 @@ void ThrownCrop::Awake()
 void ThrownCrop::Update(float deltaTime)
 {
     m_velocity.y += m_gravity * deltaTime;
-    m_velocity.x = -m_velocity.x;
     if (m_transform)
     {
         m_transform->Translate(m_velocity * deltaTime);

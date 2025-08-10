@@ -21,6 +21,7 @@ public:
 	Vector2 operator*(float rhs) const;
 	friend Vector2 operator*(float lhs, const Vector2& rhs); //  (float) * (Vector2) 일때 처리
 	Vector2 operator/(float rhs) const; // 나누기는 순서 반대로 나누는건 굳이 지원 안해줌
+	Vector2 operator-() const;
 
 
 	Vector2& operator+=(const Vector2& rhs);

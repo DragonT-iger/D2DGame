@@ -13,6 +13,8 @@ public:
     void Start() override;
     void Update(float deltaTime) override;
 
+    void SetOffset(int offset) { m_offset = offset; }
+
 private:
     void Apply();
 
