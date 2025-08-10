@@ -241,7 +241,7 @@ void MainScene::Awake()
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
 #ifdef _DEBUG
-	//디버그용
+	//?�버그용
 	m_areaBox1 = Instantiate("debugBox1");
 	m_areaBox2 = Instantiate("debugBox2");
 	m_areaBox3 = Instantiate("debugBox3");
@@ -357,7 +357,7 @@ void MainScene::Awake()
 
 #pragma endregion
 
-	GameManager::Instance().Init(); //player랑 inventory 연결.
+	GameManager::Instance().Init(); //player??inventory ?�결.
 	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();
 }

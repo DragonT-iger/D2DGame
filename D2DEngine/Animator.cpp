@@ -16,7 +16,9 @@ void Animator::Update(float deltaTime)
 
 	if (m_sRenderer->GetRenderInfo().m_bitmap == nullptr) return;
 
-	if (m_curFrame->duration <= m_duration)
+
+
+	if (m_curFrame->duration  <= m_duration )
 	{
 		++m_curFrame;
 		if (m_curFrame == m_frameDatas.end() && m_curAnimeLoop)
@@ -33,8 +35,13 @@ void Animator::Update(float deltaTime)
 		m_sRenderer->SetSrcRect(m_curFrame->ToRectF());
 		m_duration = 0.0f;
 	}
-	else
-		m_duration += deltaTime;
+	else {
+		if (m_animationSpeed > 0.0f) {
+			m_duration += deltaTime * m_animationSpeed;
+		}
+
+	}
+		
 }
 
 void Animator::ChangeState(const std::string& name)

@@ -34,6 +34,11 @@ void PlayerController::Update(float deltaTime)
 			m_Player->m_minSpd);
 		//std::cout << moveSpd << std::endl;
 
+		if (m_Player->action == Action::Walk)
+			m_animator->SetSpeed(moveSpd / m_Player->m_spd);
+		else
+			m_animator->SetSpeed(1.f);
+
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
 
