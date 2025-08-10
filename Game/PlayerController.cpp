@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PlayerController.h"
 #include "Inventory.h"
+#include "ThrownCrop.h"
 
 void PlayerController::Awake()
 {
@@ -27,12 +28,20 @@ void PlayerController::Update(float deltaTime)
 		curDir = { (float)x,(float)y };
 		curDir.Normalize();
 
+		if (m_boostTimer > 0.f)
+			m_boostTimer -= deltaTime;
+		else
+			m_speedBoost = 0.f;
+
 		float weight = m_inven->GetWeight();
 		float weightMult = 1.f + weight / m_Player->m_weightDivisor;
 		float moveSpd = std::max(
 			m_Player->m_spd / (m_inven->GetSpeedMultiplier()),
 			m_Player->m_minSpd);
 		//std::cout << moveSpd << std::endl;
+
+		if (m_boostTimer > 0.f)
+			moveSpd += m_speedBoost;
 
 		if (m_Player->action == Action::Walk)
 			m_animator->SetSpeed(moveSpd / m_Player->m_spd);
@@ -53,10 +62,25 @@ void PlayerController::Update(float deltaTime)
 		}
 		else if (Input.GetKeyDown(Keycode::C))
 		{
+			Crops type = m_inven->ThrowItem();
+			if (type != Crops::Nothing)
+			{
+				m_throwelapsedTime = 0;
+				SpawnThrownCrop(type);
+				ApplyThrowBoost(type);
+			}
+		}
+		else if (Input.GetKeyDown(Keycode::C))
+		{
 			if (m_throwelapsedTime >= m_throwTime)
 			{
-				m_inven->ThrowItem();
-				m_throwelapsedTime = 0;
+				Crops type = m_inven->ThrowItem();
+				if (type != Crops::Nothing)
+				{
+					m_throwelapsedTime = 0;
+					SpawnThrownCrop(type);
+					ApplyThrowBoost(type);
+				}
 			}
 		}
 
@@ -198,4 +222,58 @@ void PlayerController::OnTriggerExit(Collider* other)
 	canMoveDown = true;
 	canMoveRight = true;
 	canMoveLeft = true;
+}
+
+
+void PlayerController::SpawnThrownCrop(Crops type)
+{
+	GameObject* obj = Instantiate("thrownCrop");
+	auto sr = obj->AddComponent<SpriteRenderer>();
+	sr->SetOrderInLayer(-20000);
+	auto thrown = obj->AddComponent<ThrownCrop>();
+	auto tr = obj->GetComponent<Transform>();
+	tr->SetPosition(m_transform->GetPosition());
+	tr->SetScale({ 0.2f, 0.2f });
+
+	Vector2 dir = curDir;
+
+	dir.Normalize();
+	thrown->SetVelocity(dir * 400.f + Vector2{ 0.f,300.f });
+
+	Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite;
+	switch (type)
+	{
+	case Potato:
+		sprite = ResourceManager::Instance().LoadTexture("potato_item.png");
+		break;
+	case Eggplant:
+		sprite = ResourceManager::Instance().LoadTexture("eggplant_item.png");
+		break;
+	case Pumpkin:
+		sprite = ResourceManager::Instance().LoadTexture("pumpkin_item.png");
+		break;
+	default:
+		break;
+	}
+	sr->SetBitmap(sprite);
+}
+
+void PlayerController::ApplyThrowBoost(Crops type)
+{
+	switch (type)
+	{
+	case Potato:
+		m_speedBoost = 50.f;
+		break;
+	case Eggplant:
+		m_speedBoost = 80.f;
+		break;
+	case Pumpkin:
+		m_speedBoost = 100.f;
+		break;
+	default:
+		m_speedBoost = 0.f;
+		break;
+	}
+	m_boostTimer = 0.2f;
 }

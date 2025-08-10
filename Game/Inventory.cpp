@@ -108,9 +108,16 @@ size_t Inventory::GetCropCount(Crops type)
 	return count;
 }
 
-void Inventory::ThrowItem()
+Crops Inventory::ThrowItem()
 {
+	auto data = m_curSlot->GetData();
+
+	if (data.isEmpty)
+		return Crops::Nothing;
+
 	m_curSlot->ThrowItem();
+
+	return data.type;
 }
 
 std::vector<SlotData> Inventory::SubMissonItem()

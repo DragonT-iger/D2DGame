@@ -195,6 +195,9 @@
     <ClCompile Include="SubMissionArea.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="ThrownCrop.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="SubMissionArea.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrownCrop.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

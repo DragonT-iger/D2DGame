@@ -3,6 +3,8 @@
 class Player;
 class SpawnManager;
 class Inventory;
+enum Crops;
+
 
 class PlayerController : public MonoBehaviour
 {
@@ -37,6 +39,12 @@ private:
 
 	float m_throwTime = 0.1f;
 	float m_throwelapsedTime = 0.0f;
+
+	float m_speedBoost = 0.0f;
+	float m_boostTimer = 0.0f;
+
+	void SpawnThrownCrop(Crops type);
+	void ApplyThrowBoost(Crops type);
 
 	//float* p_Spd = nullptr;
 };
