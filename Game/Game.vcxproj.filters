@@ -70,6 +70,12 @@
     <Filter Include="Scripts\ButtonTest\Setting\Check">
       <UniqueIdentifier>{5a76c527-eb8f-497d-9c92-69e00bfe427f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\EscBtn">
+      <UniqueIdentifier>{94c2b36a-39c0-4a7b-8988-144041b5476b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\ButtonTest\TitleBtn">
+      <UniqueIdentifier>{2541ef50-4445-4182-aab9-91db37f065a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -195,6 +201,12 @@
     <ClCompile Include="SubMissionArea.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="EscBtn.cpp">
+      <Filter>Scripts\EscBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBtn.cpp">
+      <Filter>Scripts\ButtonTest\TitleBtn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -316,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="SubMissionArea.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="EscBtn.h">
+      <Filter>Scripts\EscBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBtn.h">
+      <Filter>Scripts\ButtonTest\TitleBtn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

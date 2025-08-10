@@ -14,8 +14,9 @@ void SettingButton::Awake()
 	m_uiSlider = GameObject::Find("uiSlider");
 	m_cancleBtn = GameObject::Find("cancleBtn");
 	m_checkBtn = GameObject::Find("checkBtn");
-
-	m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
+	
+	if(GameObject::Find("startBtn"))
+		m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
 }
 
 void SettingButton::Start()
@@ -37,6 +38,7 @@ void SettingButton::Start()
 		m_uiSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(SoundManager::Instance().GetVolume_UI());
 
 		m_button->SetActive(false);
-		m_startBtn->SetActive(false);
+		if(m_startBtn)
+			m_startBtn->SetActive(false);
 		}, ButtonEvent::Pressed);
 }

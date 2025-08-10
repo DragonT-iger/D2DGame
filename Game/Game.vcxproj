@@ -153,6 +153,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="Eggplant.cpp" />
     <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="EndSceneManager.cpp" />
+    <ClCompile Include="EscBtn.cpp" />
     <ClCompile Include="Farmer.cpp" />
     <ClCompile Include="FarmerManager.cpp" />
     <ClCompile Include="FarmerZone.cpp" />
@@ -180,6 +181,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="PlayerController_Sample.cpp" />
+    <ClCompile Include="TitleBtn.cpp" />
     <ClCompile Include="UI_Score.cpp" />
     <ClCompile Include="YSort.cpp" />
   </ItemGroup>
@@ -196,6 +198,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="Eggplant.h" />
     <ClInclude Include="EndingScene.h" />
     <ClInclude Include="EndSceneManager.h" />
+    <ClInclude Include="EscBtn.h" />
     <ClInclude Include="Farmer.h" />
     <ClInclude Include="FarmerManager.h" />
     <ClInclude Include="FarmerZone.h" />
@@ -222,6 +225,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="Timer.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerController_Sample.h" />
+    <ClInclude Include="TitleBtn.h" />
     <ClInclude Include="UI_Score.h" />
     <ClInclude Include="YSort.h" />
   </ItemGroup>

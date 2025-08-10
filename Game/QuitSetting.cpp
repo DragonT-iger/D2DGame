@@ -16,7 +16,8 @@ void QuitSettingBtn::Awake()
 	m_cancleBtn = GameObject::Find("cancleBtn");
 
 	m_settingbutton = GameObject::Find("settingBtn")->GetComponent<Button>();
-	m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
+	if(GameObject::Find("startBtn"))
+		m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
 }
 
 void QuitSettingBtn::Start()
@@ -34,6 +35,7 @@ void QuitSettingBtn::Start()
 		m_checkBtn->SetActive(false);
 
 		m_settingbutton->SetActive(true);
-		m_startBtn->SetActive(true);
+		if(m_startBtn)
+			m_startBtn->SetActive(true);
 		}, ButtonEvent::Pressed);
 }

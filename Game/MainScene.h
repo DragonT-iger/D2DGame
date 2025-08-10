@@ -35,6 +35,8 @@ class MainScene : public Scene
 
 	GameObject* m_Timer;
 
+#pragma region Inventory UI
+
 	GameObject* m_inventory = nullptr;
 		GameObject* m_slot1BG = nullptr;
 		GameObject* m_slot2BG = nullptr;
@@ -59,6 +61,8 @@ class MainScene : public Scene
 		GameObject* m_hp2 = nullptr;
 		GameObject* m_hp3 = nullptr;
 
+#pragma endregion
+
 	GameObject* m_background = nullptr;
 #ifdef _DEBUG
 	//디버그용
@@ -74,5 +78,27 @@ class MainScene : public Scene
 	GameObject* m_outRangeLeft = nullptr;
 
 	GameObject* m_SpawnManager = nullptr;
+
+#pragma region ESC
+
+	GameObject* m_Esc = nullptr;
+		GameObject* m_EscBG = nullptr;
+		
+			GameObject* m_TitleBtn = nullptr;
+			GameObject* m_SettingBtn = nullptr;
+				GameObject* m_settingWnd = nullptr;
+				GameObject* m_settingText = nullptr;
+				GameObject* m_bgmText = nullptr;
+				GameObject* m_bgmSlider = nullptr;
+				GameObject* m_sfxText = nullptr;
+				GameObject* m_sfxSlider = nullptr;
+				GameObject* m_uiText = nullptr;
+				GameObject* m_uiSlider = nullptr;
+				GameObject* m_cancleBtn = nullptr;
+				GameObject* m_checkBtn = nullptr;
+
+
+#pragma endregion
+
 };
 

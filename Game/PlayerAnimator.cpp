@@ -13,15 +13,15 @@ void PlayerAnimator::ActionAnime()
 		}
 		break;
 	case Action::Walk:
-		if (m_animator->GetCurState() != "walk")
+		if (m_animator->GetCurState() != "run")
 		{
-			m_animator->ChangeState("walk");
+			m_animator->ChangeState("run");
 		}
 		break;
 	case Action::Hit:
-		if (m_animator->GetCurState() != "hit")
+		if (m_animator->GetCurState() != "damaged")
 		{
-			m_animator->ChangeState("hit");
+			m_animator->ChangeState("damaged");
 		}
 		break;
 	case Action::Steal:
@@ -58,14 +58,14 @@ void PlayerAnimator::Awake()
 void PlayerAnimator::Start()
 {
 	auto moleIdle = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "idle");
-	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "walk");
-	auto moleHit = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "hit");
+	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "run");
+	auto moleHit = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "damaged");
 	auto moleSteal = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "steal");
 	auto moleDead = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "dead");
 
 	m_animator->AddClip("idle", moleIdle, true);
-	m_animator->AddClip("walk", molewalk, true);
-	m_animator->AddClip("hit", moleHit, false);
+	m_animator->AddClip("run", molewalk, true);
+	m_animator->AddClip("damaged", moleHit, false);
 	m_animator->AddClip("steal", moleSteal, false);
 	m_animator->AddClip("dead", moleDead, false);
 
