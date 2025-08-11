@@ -105,7 +105,11 @@ void Player::OnTriggerStay(Collider* other)
 		{
 			SetAction(Action::Hit);
 		}
+
+		
+		
 		SetHp(GetHp() - 1);
+		
 	}
 
 
@@ -134,6 +138,31 @@ void Player::OnTriggerExit(Collider* other)
 	}
 
 }
+
+void Player::SetHp(int hp)
+{
+	if (m_isHittable)
+	{
+		int minusHp = m_hp - hp;
+
+		if(GameManager::Instance().GetGameState() != GameManager::GameState::Tutorial){
+			m_hp = hp;
+		}
+
+		m_isHittable = false;
+		m_invincible_Count = 0;
+
+		if (m_hp > -1 && state != State::Starve && GameManager::Instance().GetGameState() != GameManager::GameState::Tutorial)
+		{
+			for (int i = 0; i < minusHp; i++)
+			{
+				m_hpUI[hp + i]->SetActive(false);
+			}
+		}
+	}
+
+}
+
 
 void Player::FeedBaby(float bop)
 {
