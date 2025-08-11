@@ -6,6 +6,8 @@ class MainScene : public Scene
 
 	Camera*					main_Cam	= nullptr;
 
+	GameObject*				gameManager = nullptr;
+
 	GameObject*				player		= nullptr;
 	Transform*				player_T	= nullptr;
 	SpriteRenderer*			player_S	= nullptr;
@@ -19,6 +21,10 @@ class MainScene : public Scene
 	GameObject*				bush4 = nullptr;
 	GameObject*				bush5 = nullptr;
 	GameObject*				bush6 = nullptr;
+	GameObject*				bush7 = nullptr;
+	GameObject*				bush8 = nullptr;
+	GameObject*				bush9 = nullptr;
+	GameObject*				bush10 = nullptr;
 
 	GameObject*				SubMissionArea1 = nullptr;
 	GameObject*				SubMissionArea2 = nullptr;

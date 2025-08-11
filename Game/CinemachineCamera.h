@@ -8,6 +8,8 @@ public:
 
 	void   SetPlayer(GameObject* player) { this->m_player = player; }
 
+    void SetCameraZoom(float scale) { m_currentZoom = scale; m_targetZoom = scale; }
+
 private:
 
 	GameObject* m_player = nullptr; // 플레이어 오브젝트

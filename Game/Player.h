@@ -3,7 +3,8 @@
 enum class State
 {
 	Alive,
-	Dead,
+	Starve,
+	Killed
 };
 
 enum class Action
@@ -35,38 +36,40 @@ public:
 	void OnTriggerExit(Collider* other)  override;
 
 
-
-
 	//Getter Setter
 
-	
 	//void SetState(State ste);
 	void SetAction(Action act);
 	//void SetVisible(Visibilty vib);
-	//
-	//State GetState() { return state; }
-	
+	State GetState() { return state; }
 	Action GetAction() { return action; }
-
 	Visibilty GetVisible() { return visibilty; };
 
 	float GetFullness() { return m_fullness; }
 
 	int GetHp() { return m_hp; }
-
-	void SetHp(int hp) { 
-		int minusHp = m_hp - hp;
-
-		m_hp = hp; 
-
-		if (m_hp > -1)
+	void SetHp(int hp) {
+		if (m_isHittable)
 		{
-			for (int i = 0; i < minusHp; i++)
+			int minusHp = m_hp - hp;
+
+			m_hp = hp;
+
+			m_isHittable = false;
+			m_invincible_Count = 0;
+
+			if (m_hp > -1 && state != State::Starve)
 			{
-				m_hpUI[hp + i]->SetActive(false);
+				for (int i = 0; i < minusHp; i++)
+				{
+					m_hpUI[hp + i]->SetActive(false);
+				}
 			}
 		}
+		
 	}
+	bool GetHittable() { return m_isHittable; }
+
 
 	void FeedBaby(float bop);
 
@@ -92,7 +95,8 @@ private:
 	float   m_minSpd = 50.f;   
 	float   m_weightDivisor = 300.f;  
 
-	static int invincible_Count;
+	float m_invincible_Count;
+	bool m_isHittable = true;
 
 	std::array<size_t, 3> maxCount = { 100, 60, 15 };//감자, 가지, 호박 순
 
@@ -100,6 +104,9 @@ private:
 	Action		action		= Action::Idle;
 	Visibilty	visibilty	= Visibilty::Visible;
 
+	//Animator* m_animtor = nullptr;
+	PlayerAnimator* m_P_animator = nullptr;
+	SpriteRenderer* m_P_spriteRen = nullptr;
 	BoxCollider* m_boxCol = nullptr;
 	Inventory* m_Inven = nullptr;
 	Baby* m_baby = nullptr;

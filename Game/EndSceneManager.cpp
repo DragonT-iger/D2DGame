@@ -21,17 +21,17 @@ void EndSceneManager::Start()
 		break;
 
 	case GameManager::EndReason::BabyStarved:
-		m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BabyStarved.png"));
+		m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BadEnding2.png"));
 
 		break;
 
 	case GameManager::EndReason::PlayerDead:
-		m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("PlayerDead.png"));
+		m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BadEnding1.png"));
 
 		break;
 
 	case GameManager::EndReason::Happy:
-		m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("Happy.png"));
+		m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("HappyEnd.png"));
 		break;
 
 	default:

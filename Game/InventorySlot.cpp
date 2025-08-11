@@ -83,8 +83,6 @@ void Slot::AddItem(Crops type, Size count)
 		m_data.count = m_maxCount;
 
 		m_fullImage->SetActive(true);
-		//떨구는 사운드 여기서 재생할듯
-		SoundManager::Instance().SFX_Shot("22.mp3");
 	}
 }
 
@@ -104,6 +102,9 @@ void Slot::ThrowItem()
 
 SlotData Slot::ThrowAll()
 {
+	if (m_fullImage->IsActive())
+		m_fullImage->SetActive(false);
+
 	auto data = m_data;
 
 	m_data.count = 0;

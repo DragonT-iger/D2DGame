@@ -5,16 +5,21 @@ public:
 	void Awake()                         override;
 	void Start()                         override;
 	void Update(float deltaTime)         override;
-	/*void OnTriggerEnter(Collider* other) override;
-	void OnTriggerStay(Collider* other)  override;
-	void OnTriggerExit(Collider* other)  override;*/
+	void OnTriggerEnter(Collider* other) override;
+	//void OnTriggerStay(Collider* other)  override;
+	void OnTriggerExit(Collider* other)  override;
 
 	void ActionAnime();
-	void UpdateVisible();
+
+	void DeathAnime();
+	bool IsDeathAnimeFinished();
 
 private:
 	Player* m_Player = nullptr;
 	Animator* m_animator = nullptr;
 	SpriteRenderer* m_spriteRenderer = nullptr;
+
+	float Timer = 0;
+	int curValue = 0;
 };
 

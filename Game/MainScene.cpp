@@ -144,19 +144,48 @@ void MainScene::Awake()
 	bush6->AddComponent<SpriteRenderer>();
 	bush6->AddComponent<BoxCollider>();
 
-	bush1->GetComponent<Transform>()->SetPosition(Vector2{ -1000, 1800 });
-	bush2->GetComponent<Transform>()->SetPosition(Vector2{ 1000, 1800 });
-	bush3->GetComponent<Transform>()->SetPosition(Vector2{ 0, 1000 });
-	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, -1000 });
-	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -2000, 50 });
-	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 2000, 50 });
+	bush7 = Instantiate("Bush7");
+	bush7->AddComponent<Bush>();
+	bush7->AddComponent<SpriteRenderer>();
+	bush7->AddComponent<BoxCollider>();
 
-	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
-	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
-	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
-	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
-	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
-	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush8 = Instantiate("Bush8");
+	bush8->AddComponent<Bush>();
+	bush8->AddComponent<SpriteRenderer>();
+	bush8->AddComponent<BoxCollider>();
+
+	bush9 = Instantiate("Bush9");
+	bush9->AddComponent<Bush>();
+	bush9->AddComponent<SpriteRenderer>();
+	bush9->AddComponent<BoxCollider>();
+
+	bush10 = Instantiate("Bush10");
+	bush10->AddComponent<Bush>();
+	bush10->AddComponent<SpriteRenderer>();
+	bush10->AddComponent<BoxCollider>();
+
+
+	bush1->GetComponent<Transform>()->SetPosition(Vector2{ -1900,  500 });
+	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -1900, -500 });
+	bush3->GetComponent<Transform>()->SetPosition(Vector2{ 1900,  500 });
+	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 1900, -500 });
+	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -1000, 1800 });
+	bush6->GetComponent<Transform>()->SetPosition(Vector2{ -1000, -1800 });
+	bush7->GetComponent<Transform>()->SetPosition(Vector2{ 1000, 1800 });
+	bush8->GetComponent<Transform>()->SetPosition(Vector2{ 1000, -1800 });
+	bush9->GetComponent<Transform>()->SetPosition(Vector2{ 0, -1000 });
+	bush10->GetComponent<Transform>()->SetPosition(Vector2{ 0,  1000 });
+
+	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush7->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush8->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush9->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush10->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
 
 #pragma endregion
 
@@ -512,7 +541,8 @@ void MainScene::Awake()
 
 #pragma endregion
 
-	GameManager::Instance().Init(); //player?ž‘ inventory ?—°ê²?.
+	gameManager = Instantiate("GameManager");
+	GameManager::Instance().Init();
 	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();
 }
@@ -525,6 +555,7 @@ void MainScene::Start()
 	Camera* cam = GetCamera();
 
 	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
+	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetCameraZoom(0.6f);
 
 	Scene::Start();
 }

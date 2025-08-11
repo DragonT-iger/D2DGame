@@ -14,9 +14,9 @@ public:
 		return inst;
 	}
 
-	//void Awake()                         override; // 웬만하면 쓰지마셈 생성자 계속 불림
-	//void Start()                         override; // 이것도
-	//void Update(float deltaTime)         override;
+	//void Awake()                         override;
+	//void Start()                         override;
+	void Update(float deltaTime)         override;
 
 	void Init();
 
@@ -52,6 +52,7 @@ public:
 	GameState GetGameState() { return  m_GameState; }
 	void SetGameState(GameState state) { m_GameState = state; }
 
+
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
@@ -62,6 +63,8 @@ private:
 
 
 	Inventory* m_inventory = nullptr;
+
+	
 
 	static int ep_count;
 	static int pk_count;

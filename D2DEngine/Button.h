@@ -29,6 +29,9 @@ public:
 	{
 		switch (btnevent)
 		{
+		case ButtonEvent::Idle:
+			m_idleEvents.push_back(event);
+			break;
 		case ButtonEvent::Highlight:
 			m_highlightEvents.push_back(event);
 			break;
@@ -58,6 +61,7 @@ private:
 	D2D1_SIZE_F													m_size = { 160.f, 40.f };
 	Transform*																					m_pos;
 	ButtonEvent								m_curEvent = ButtonEvent::MaxEvent;
+	std::vector<std::function<void()>>									m_idleEvents;	//하이라이트에서 idle로 바뀔 때 한 번
 	std::vector<std::function<void()>>									m_highlightEvents;
 	std::vector<std::function<void()>>									m_pressedEvents;
 	std::vector<std::function<void()>>									m_downEvents;

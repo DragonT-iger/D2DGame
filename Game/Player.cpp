@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "Player.h"
+#include "PlayerAnimator.h"
 #include "Baby.h"
 #include "Inventory.h"
 #include "GameManager.h"
 #include "PlayerSound.h"
 
-int Player::invincible_Count = 0;
+constexpr float invincibleTime = 2.0f;
 
 class Inventory;
 
@@ -13,8 +14,11 @@ void Player::Awake()
 {
 	m_boxCol = GetComponent<BoxCollider>();
 	m_baby = GetComponent<Baby>();
+	m_P_animator = GetComponent<PlayerAnimator>();
+	m_P_spriteRen = GetComponent<SpriteRenderer>();
+	//m_animtor = GetComponent<Animator>();
 
-	m_fullness = 1000.0f;
+	m_fullness = 1500.0f;
 	m_elapsedTime = 0.0f;
 
 	m_hpUI.push_back(GameObject::Find("hp1"));
@@ -34,24 +38,54 @@ void Player::Update(float deltaTime)
 {
 	//m_spd = 500.0f - m_Inven->GetWeight();	//버그 버전
 	m_elapsedTime += deltaTime;
+	m_invincible_Count += deltaTime;
 
 	if (0.1f <= m_elapsedTime)
 	{
-		m_fullness -= 1.0f;
+		m_fullness -= 3.0f;
 		m_elapsedTime = 0.0f;
 	}
 
-	//float weight = m_Inven->GetWeight();
+	if (invincibleTime < m_invincible_Count)
+	{
+		m_isHittable = true;
+	}
 
-	//if (weight >= 450.f) weight = 450.f;
+	/*float weight = m_Inven->GetWeight();
 
-	//m_spd = 500.0f - weight;
+	if (weight >= 450.f) weight = 450.f;
 
-	if (m_hp <= 0 && state != State::Dead)
+	m_spd = 500.0f - weight;*/
+
+	if (m_hp <= 0 && state != State::Killed)
 	{
 		m_pSound->PlayDead();
-		state = State::Dead;
+		state = State::Killed;
 	}
+	else if (m_fullness <= 0 && state != State::Starve)
+	{
+		state = State::Starve;
+	}
+
+	if (state == State::Killed)
+	{
+		if (m_P_animator->IsDeathAnimeFinished())
+		{
+			std::cout << "State: Killed" << std::endl;
+			GameManager::Instance().LoadEndingScene(GameManager::EndReason::PlayerDead);
+		}
+
+	}
+
+	if (state == State::Starve)
+	{
+		std::cout << "State: Starve" << std::endl;
+		if (m_P_animator->IsDeathAnimeFinished())
+		{
+			GameManager::Instance().LoadEndingScene(GameManager::EndReason::BabyStarved);
+		}
+	}
+
 }
 
 void Player::OnTriggerEnter(Collider* other)
@@ -65,6 +99,16 @@ void Player::OnTriggerEnter(Collider* other)
 
 void Player::OnTriggerStay(Collider* other)
 {
+	if (other->GetOwner()->GetTag() == "Farmer")
+	{
+		if (m_isHittable)
+		{
+			SetAction(Action::Hit);
+		}
+		SetHp(GetHp() - 1);
+	}
+
+
 	/*if (m_hp > 0)
 	{
 		invincible_Count++;
@@ -93,15 +137,14 @@ void Player::OnTriggerExit(Collider* other)
 
 void Player::FeedBaby(float bop)
 {
-	if (m_fullness + bop >= 1000.f)
-		m_fullness = 1000.f;
+	if (m_fullness + bop >= 1500.f)
+		m_fullness = 1500.f;
 	else
 		m_fullness += bop;
 }
 
 void Player::OnInspectorGUI()
 {
-
 	ImGui::DragInt("HP", &m_hp, 1);
 	ImGui::DragFloat("Speed", &m_spd, 0.3f, 0.1f);
 
@@ -117,7 +160,7 @@ void Player::OnInspectorGUI()
 //{
 //	state = ste;
 //}
-//
+
 void Player::SetAction(Action act)
 {
 	action = act;

@@ -51,4 +51,6 @@ private:
 	void ApplyThrowBoost(Crops type);
 
 	//float* p_Spd = nullptr;
+
+	int m_deathAnimeCount = 0;
 };

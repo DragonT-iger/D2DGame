@@ -1,5 +1,7 @@
 #pragma once
 #include "AttackPattern.h"
+
+class FarmerManager;
 class Farmer : public MonoBehaviour
 {
 
@@ -25,10 +27,6 @@ public:
     void DoAttack(float deltaTime);
 
     void ChangeState(FarmerState farmerState);
-
-
-
-   
 
 	//애니메이션
     FarmerState GetFarmerState() { return m_farmerState; }
@@ -65,7 +63,7 @@ public:
 
 
 private:
-
+	FarmerManager* m_farmerManager = nullptr;
     FarmerState m_farmerState = FarmerState::Patrol;
     void OnInspectorGUI() override;
     const char* ToString(FarmerState   s) const;
@@ -99,13 +97,12 @@ private:
 
 
     //GameObject* m_attackIndicator = nullptr;
-    float       m_attackDelay = 1.0f;
+    float       m_attackDelay = 0.8f;
     float       m_attackTimer = 0.0f;   
     float       m_attackInterval = 0.5f;
     float       m_attackIntervalTimer = 0.0f;
 
     
-
     AttackPattern m_attackPattern;
 };
 

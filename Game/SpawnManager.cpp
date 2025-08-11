@@ -8,10 +8,12 @@
 void SpawnManager::Awake()
 {
 	curScene = SceneManager::Instance().GetActiveScene();
-	//구역 설정
+	
 
 	const bool isTutorial =	(GameManager::Instance().GetGameState() == GameManager::GameState::Tutorial);
 
+
+	//구역 설정
 	if (isTutorial) {
 		farm_A = { -1070, 250, 1070, -250 };
 		farm_B = { -2130, 250, 2130, -250 }; // 의미없음
@@ -46,6 +48,10 @@ void SpawnManager::Awake()
 		growArr.push_back(&rankC);
 	}
 
+	rankA = { 1, 1, 1 };
+	rankB = { 1, 1, 1 };
+	rankC = { 1, 1, 0 };
+
 	//리스트 초기화
 	m_farmAList.clear();
 	m_farmBList.clear();
@@ -75,6 +81,22 @@ void SpawnManager::Awake()
 	m_cropSprites.emplace(Pumpkin, &m_pumpkinSprite);
 	m_cropSprites.emplace(Eggplant, &m_eggplantSprite);
 	m_cropSprites.emplace(Potato, &m_potatoSprite);
+}
+
+void SpawnManager::Start()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		for (auto& farm : farmArr)
+		{
+			GameObject* obj = CreateNewCrop(farm.rank);
+			farm.farmlist->push_back(obj);
+		}
+	}
+
+	rankA = { 3, 4, 7 };
+	rankB = { 5, 7, 10 };
+	rankC = { 8, 12, 0 };
 }
 
 void SpawnManager::Update(float deltaTime)

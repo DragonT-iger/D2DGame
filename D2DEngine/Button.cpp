@@ -13,6 +13,12 @@ void Button::Event(ButtonEvent event)
 {
 	switch (event)
 	{
+	case ButtonEvent::Idle:
+		for (const auto& event : m_idleEvents)
+		{
+			event();
+		}
+		break;
 	case ButtonEvent::Highlight:
 		for (const auto& event : m_highlightEvents)
 		{
@@ -46,8 +52,8 @@ void Button::Update(float deltaTime)
 		{
 			std::cout << "Button Pressed" << std::endl;
 			m_curEvent = ButtonEvent::Pressed;
-			SetBitmap(m_curEvent);
 			Event(ButtonEvent::Pressed);
+			SetBitmap(m_curEvent);
 		}
 		else if (mouse.LButtonPressed)
 		{
@@ -57,8 +63,8 @@ void Button::Update(float deltaTime)
 		else if(!mouse.LButtonPressed && m_curEvent != ButtonEvent::Highlight)
 		{
 			m_curEvent = ButtonEvent::Highlight;
-			SetBitmap(m_curEvent);
 			Event(ButtonEvent::Highlight);
+			SetBitmap(m_curEvent);
 		}
 	}
 	else
@@ -66,6 +72,7 @@ void Button::Update(float deltaTime)
 		if (m_curEvent != ButtonEvent::Idle)
 		{
 			m_curEvent = ButtonEvent::Idle;
+			Event(ButtonEvent::Idle);
 			SetBitmap(m_curEvent);
 		}
 	}

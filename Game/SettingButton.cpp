@@ -5,6 +5,7 @@
 void SettingButton::Awake()
 {
 	m_button = GetComponent<Button>();
+	m_button->SetSize({ 305, 133 });
 	m_settingWnd = GameObject::Find("settingWnd");
 	m_settingText = GameObject::Find("settingText");
 	m_bgmText = GameObject::Find("bgmText");
@@ -45,7 +46,14 @@ void SettingButton::Start()
 			m_startBtn->SetActive(false);
 		if (m_titleBtn)
 			m_titleBtn->SetActive(false);
+		SoundManager::Instance().UI_Shot("2.mp3");
 		}, ButtonEvent::Pressed);
+
+	m_button->AddEvent([this]() { m_button->SetSize({ 305, 133 }); }, ButtonEvent::Idle);
+	m_button->AddEvent([this]() {
+		m_button->SetSize({ 331, 147 });
+		SoundManager::Instance().UI_Shot("1.mp3");
+		}, ButtonEvent::Highlight);
 }
 
 void SettingButton::SetOff()

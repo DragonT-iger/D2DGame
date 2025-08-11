@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Farmer.h"
 #include "FarmerZone.h"
+#include "FarmerManager.h"
 #include "YSort.h"
 #include "Player.h"
 
@@ -16,6 +17,8 @@ void Farmer::Awake()
     m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
     this->GetOwner()->SetTag("Farmer");
     GetOwner()->AddComponent<YSort>()->SetStatic(false);
+
+	m_farmerManager = GameObject::Find("FarmerManager")->GetComponent<FarmerManager>();
 }
 
 void Farmer::Start()
@@ -129,6 +132,7 @@ void Farmer::DoPatrol(float deltaTime)
 
 void Farmer::DoAlert(float deltaTime)
 {
+    m_farmerManager->PlayWarningSound();
 }
 
 void Farmer::DoChase(float deltaTime)
@@ -214,6 +218,8 @@ void Farmer::DoAttack(float deltaTime)
             m_attackPattern.CreateIndicators(this, m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
             
             m_attackTimer = 0.f;
+
+            SoundManager::Instance().SFX_Shot("16.mp3");
         }
     }
     else {
@@ -222,6 +228,7 @@ void Farmer::DoAttack(float deltaTime)
             m_attackPattern.Execute(m_player->GetComponent<Transform>()->GetPosition(), m_attackAreaValue);
             //m_player->GetComponent<Player>()->SetHp(m_player->GetComponent<Player>()->GetHp() - 1);
             m_animator->ChangeState("attack");
+            SoundManager::Instance().SFX_Shot("17.mp3");
         }
     }
     
