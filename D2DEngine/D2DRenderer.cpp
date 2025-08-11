@@ -255,6 +255,8 @@ void D2DRenderer::SetTransform(const D2D1_MATRIX_3X2_F tm)
 
 void D2DRenderer::RenderBegin()
 {
+
+
     m_d2dContext->BeginDraw();
     m_d2dContext->Clear(D2D1::ColorF(D2D1::ColorF::White)); // 배경을 흰색으로 초기화
 }
@@ -459,6 +461,15 @@ void D2DRenderer::ReleaseRenderTargets()
     {
         m_d2dContext->SetTarget(nullptr);
     }
+
+    if (m_d3dContext)
+    {
+        ID3D11RenderTargetView* nullViews[1] = { nullptr };
+        m_d3dContext->OMSetRenderTargets(0, nullViews, nullptr);
+        m_d3dContext->Flush();
+    }
+
+
 
     m_d3dRenderTV.Reset();
 

@@ -46,7 +46,7 @@ bool Game::Initialize()
     SceneManager::Instance().LoadScene(std::make_unique<TitleScene>());
     //SceneManager::Instance().LoadScene(L"DTtestScene");
 
-    //D2DRenderer::Instance().SetFullscreen(true);
+    D2DRenderer::Instance().SetFullscreen(true);
 
     
 	return true;
@@ -86,8 +86,6 @@ void Game::LifeCycle(float deltaTime)
 	D2DRenderer::Instance().RenderBegin();
 
     ImGuiManager::Instance().BeginFrame(deltaTime);
-
-
 
     if (scene && scene->IsActive())
     {
@@ -152,8 +150,11 @@ void Game::OnResize(int width, int height)
     /*Scene* scene = SceneManager::Instance().GetActiveScene();
     scene->OnResize(width , height);*/
 
+
+    ImGuiManager::Instance().InvalidateDeviceObjects();
     D2DRenderer::Instance().Resize(width, height);
-    ImGuiManager::Instance().OnResize();
+
+    ImGuiManager::Instance().CreateDeviceObjects();
 }
 
 void Game::OnClose()

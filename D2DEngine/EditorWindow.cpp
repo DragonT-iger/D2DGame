@@ -23,10 +23,10 @@ void EditorWindow::DrawDebug() {
         curScene->SetGridOn(m_showGrid);
     }
 
-    static bool fullscreen = false;
-    if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
-        D2DRenderer::Instance().SetBorderless(fullscreen);
-    }
+    //static bool fullscreen = false;
+    //if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
+    //    D2DRenderer::Instance().SetBorderless(fullscreen);
+    //}
 
     static const char* kSceneNames[] = { "TitleScene", "MainScene", "EndingScene" };
     static constexpr int kSceneCount = sizeof(kSceneNames) / sizeof(kSceneNames[0]);
