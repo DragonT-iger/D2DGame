@@ -34,6 +34,7 @@ class ChaseZone : public FarmerZone {
 
 class AttackZone : public FarmerZone {
     void OnTriggerEnter(Collider* other) override;
+    void OnTriggerStay(Collider* other) override;
     void OnTriggerExit(Collider* other) override;
 };
 

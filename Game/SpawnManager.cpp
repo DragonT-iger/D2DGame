@@ -3,25 +3,48 @@
 //#include "StealMessage.h"
 #include "SpawnManager.h"
 #include "YSort.h"
+#include "GameManager.h"
 
 void SpawnManager::Awake()
 {
 	curScene = SceneManager::Instance().GetActiveScene();
 	//구역 설정
-	farm_A = { -1070, 720, 1070, -720 };
-	farm_B = { -2130, 1330, 2130, -1330};
-	farm_C = { -3210, 2110, 3210, -2110 };
-	Home = {-235, 127, 235, -127};
-	
-	farmArr.reserve(3);
-	farmArr.push_back({ Rank_A, 50, 0.0f, 3.f, &m_farmAList });
-	farmArr.push_back({ Rank_B, 30, 0.0f, 4.f, &m_farmBList });
-	farmArr.push_back({ Rank_C, 20, 0.0f, 5.f, &m_farmCList });
 
-	growArr.reserve(3);
-	growArr.push_back(&rankA);
-	growArr.push_back(&rankB);
-	growArr.push_back(&rankC);
+	const bool isTutorial =	(GameManager::Instance().GetGameState() == GameManager::GameState::Tutorial);
+
+	if (isTutorial) {
+		farm_A = { -1070, 250, 1070, -250 };
+		farm_B = { -2130, 250, 2130, -250 }; // 의미없음
+		farm_C = { -3210, 250, 3210, -250 }; // 의미없음
+		Home = { -235, 127, 235, -127 };
+	}
+	else {
+		farm_A = { -1070, 720, 1070, -720 };
+		farm_B = { -2130, 1330, 2130, -1330 };
+		farm_C = { -3210, 2110, 3210, -2110 };
+		Home = { -235, 127, 235, -127 };
+	}
+	
+
+	
+	if (isTutorial) {
+		farmArr.reserve(1);
+		farmArr.push_back({ Rank_A, 50, 0.0f, 3.f, &m_farmAList });
+
+		growArr.reserve(1);
+		growArr.push_back(&rankA);
+	}
+	else {
+		farmArr.reserve(3);
+		farmArr.push_back({ Rank_A, 50, 0.0f, 3.f, &m_farmAList });
+		farmArr.push_back({ Rank_B, 30, 0.0f, 4.f, &m_farmBList });
+		farmArr.push_back({ Rank_C, 20, 0.0f, 5.f, &m_farmCList });
+
+		growArr.reserve(3);
+		growArr.push_back(&rankA);
+		growArr.push_back(&rankB);
+		growArr.push_back(&rankC);
+	}
 
 	//리스트 초기화
 	m_farmAList.clear();

@@ -27,7 +27,7 @@ void Player::Awake()
 void Player::Start()
 {
 	m_Inven = GameObject::Find("Inventory")->GetComponent<Inventory>();
-	m_boxCol->SetSize({ Vector2(130.f,130.f) });
+	m_boxCol->SetSize({ Vector2(30.f,30.f) });
 }
 
 void Player::Update(float deltaTime)

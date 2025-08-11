@@ -43,7 +43,7 @@ void TutorialScene::Awake()
 //begin player-----
 	player = Instantiate("Player");
 	auto playerSR = player->AddComponent<SpriteRenderer>();
-	player->AddComponent<BoxCollider>();
+	BoxCollider* boxcol = player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
 
 	player->AddComponent<Player>();
@@ -115,10 +115,10 @@ void TutorialScene::Awake()
 
 #pragma region bush
 
-	bush1 = Instantiate("Bush1");
-	bush1->AddComponent<Bush>();
-	bush1->AddComponent<SpriteRenderer>();
-	bush1->AddComponent<BoxCollider>();
+	//bush1 = Instantiate("Bush1");
+	//bush1->AddComponent<Bush>();
+	//bush1->AddComponent<SpriteRenderer>();
+	//bush1->AddComponent<BoxCollider>();
 
 	bush2 = Instantiate("Bush2");
 	bush2->AddComponent<Bush>();
@@ -145,19 +145,21 @@ void TutorialScene::Awake()
 	bush6->AddComponent<SpriteRenderer>();
 	bush6->AddComponent<BoxCollider>();
 
-	bush1->GetComponent<Transform>()->SetPosition(Vector2{ -1000, 1800 });
-	bush2->GetComponent<Transform>()->SetPosition(Vector2{ 1000, 1800 });
-	bush3->GetComponent<Transform>()->SetPosition(Vector2{ 0, 1000 });
-	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, -1000 });
-	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -2000, 50 });
-	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 2000, 50 });
+	//bush1->GetComponent<Transform>()->SetPosition(Vector2{ -300, 200 });
+	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -400, 200 });
+	bush3->GetComponent<Transform>()->SetPosition(Vector2{ -200, 200 });
+	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, 200 });
+	bush5->GetComponent<Transform>()->SetPosition(Vector2{ 200, 200 });
+	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 400, 200 });
 
-	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	//bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+
+	bush4->GetComponent<BoxCollider>()->SetSize({1300.f, 200.f});
 
 #pragma endregion
 
@@ -170,8 +172,12 @@ void TutorialScene::Awake()
 	SetPlayer(player); //<-- ���� ���� �˷��ְ�
 
 
-	m_farmerManager = Instantiate("FarmerManager");
-	m_farmerManager->AddComponent<FarmerManager>();
+	//m_farmerManager = Instantiate("FarmerManager");
+	//m_farmerManager->AddComponent<FarmerManager>();
+
+	GameObject* farmer = Instantiate("Farmer");
+	Farmer* fm = farmer->AddComponent<Farmer>();
+
 
 
 #pragma region SpawnManager,Inventory

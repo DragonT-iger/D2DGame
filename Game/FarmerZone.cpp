@@ -40,6 +40,21 @@ void AttackZone::OnTriggerEnter(Collider* other)
 	
 }
 
+void AttackZone::OnTriggerStay(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "Player") {
+
+		if (other->GetOwner()->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
+
+			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+			return;
+		}
+		if (Farmer::FarmerState::Attack != m_farmer->GetFarmerState()) {
+			m_farmer->ChangeState(Farmer::FarmerState::Attack);
+		}
+	}
+}
+
 void AttackZone::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
@@ -126,16 +141,17 @@ AttackIndicatorZone::~AttackIndicatorZone()
 			if (playerObj)
 			{
 				auto player = playerObj->GetComponent<Player>();
-				if (player)
-				{
-					GameManager::GameState state = GameManager::Instance().GetGameState();
+				if (player->GetVisible() != Visibilty::Hide) {
+					if (player)
+					{
+						GameManager::GameState state = GameManager::Instance().GetGameState();
 
-					if (state != GameManager::GameState::Tutorial) {
-						player->SetHp(player->GetHp() - 1);
+						if (state != GameManager::GameState::Tutorial) {
+							player->SetHp(player->GetHp() - 1);
+						}
+						player->SetAction(Action::Hit);
 					}
-					player->SetAction(Action::Hit);
 				}
-					
 			}
 			m_farmer->m_hasDamagedPlayer = true;
 
