@@ -319,21 +319,21 @@ void MainScene::Awake()
 	Img = m_babyprofileBG->AddComponent<Image>();
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Paper_Frame.png"), { 110, 110 });
 	Img->SetOrderInLayer(6);
-	m_profileBG->GetComponent<Transform>()->SetPosition({ 550, 875 });
-	m_babyprofileBG->GetComponent<Transform>()->SetPosition({ 550, 985 });
-
+	m_babyprofileBG->GetComponent<Transform>()->SetPosition({ 550, 875 });
+	m_profileBG->GetComponent<Transform>()->SetPosition({ 550, 985 });
+	
 	Img = m_profile->AddComponent<Image>();
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("mom_profile1.png"), { 80, 80 });
 	Img->SetOrderInLayer(7);
-	m_profile->GetComponent<Transform>()->SetPosition({ 550, 875 });
+	m_profile->GetComponent<Transform>()->SetPosition({ 550, 985 });
 
 	Img = m_babyprofile->AddComponent<Image>();
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("baby_profile1.png"), { 80, 80 });
 	Img->SetOrderInLayer(7);
-	m_babyprofile->GetComponent<Transform>()->SetPosition({ 550, 985 });
+	m_babyprofile->GetComponent<Transform>()->SetPosition({ 550, 875 });
 
 	Img = m_hungryImage->AddComponent<Image>();
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("hungry1.png"), { 65, 65 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("hungry1.png"), { 62, 62 });
 	Img->SetOrderInLayer(7);
 	m_hungryImage->GetComponent<Transform>()->SetPosition({ 665, 880 });
 
@@ -350,7 +350,7 @@ void MainScene::Awake()
 	m_hungryGauge->AddComponent<Image>();
 	m_hungryGauge->AddComponent<Slide_Bar>();
 	m_hungryGauge->AddComponent<HungryGauge>();
-	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 803, 879 });
+	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 805, 879 });
 
 #pragma endregion
 
