@@ -69,8 +69,7 @@ void PlayerAnimator::Start()
 	m_animator->AddClip("walk", molewalk, true);
 	m_animator->AddClip("hit", moleHit, false);
 	m_animator->AddClip("steal", moleSteal, false);
-	m_animator->AddClip("death1_1", moleDeath1, false);
-	m_animator->AddClip("death1_2", moleDeath1, false);
+	m_animator->AddClip("death1", moleDeath1, false);
 	m_animator->AddClip("death2", moleDeath2, false);
 
 	m_animator->SetEntryState("idle");
@@ -132,7 +131,7 @@ bool PlayerAnimator::IsDeathAnimeFinished()
 	const std::string& currentState = m_animator->GetCurState();
 
 	// 사망 애니메이션이 재생 중이고, 해당 애니메이션이 끝났다면 true 반환
-	if ((currentState == "death1_1" || currentState == "death2") && m_animator->IsAnimeEnd())
+	if ((currentState == "death1" || currentState == "death2") && m_animator->IsAnimeEnd())
 	{
 		return true;
 	}
