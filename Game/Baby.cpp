@@ -50,9 +50,6 @@ void Baby::Update(float deltaTime)
 	}
 
 	QuestinProgress(deltaTime);
-
-	std::cout << "m_QExeCount: " << m_QExeCount << std::endl;
-	//std::cout << "m_QuestInProgress: " << m_QuestInProgress << std::endl;
 }
 
 
@@ -86,7 +83,7 @@ void Baby::OnTriggerEnter(Collider* other)
 	if (other->GetOwner()->GetTag() == "SubMissionArea")
 	{
 		int bob = GameManager::Instance().ReceiveScore(QuestDataCollector(m_inven_ptr->SubMissonItem()));
-		m_player->FeedBaby(bob);
+		m_player->FeedBaby(bob / 10);
 
 		if (m_QuestInProgress == true)
 		{
@@ -161,6 +158,7 @@ void Baby::QuestinProgress(float deltaTime)
 void Baby::QuestSuccess()
 {
 	std::cout << "QuestSuccess" << std::endl;
+	
 	ChangeThink(Thought::None);
 
 	temp_ep = 0;
@@ -205,16 +203,32 @@ void Baby::QuestExamine()
 	switch (m_thoughtState)
 	{
 	case Eggplant:
-		if (0 < temp_ep) QuestSuccess(); return;
+		if (0 < temp_ep)
+		{
+			FeedMore(temp_ep * 0.2);
+			QuestSuccess(); return;
+		}
 		break;
 	case Potato:
-		if (0 < temp_pt) QuestSuccess(); return;
+		if (0 < temp_pt)
+		{
+			FeedMore(temp_pt * 0.2);
+			QuestSuccess(); return;
+		}
 		break;
 	case Pumpkin:
-		if (0 < temp_pk) QuestSuccess(); return;
+		if (0 < temp_pk)
+		{
+			FeedMore(temp_pk * 0.2);
+			QuestSuccess(); return;
+		}
 		break;
 	default: return;
 	}
 }
 
+void Baby::FeedMore(int bob)
+{
+	m_player->FeedBaby(bob);
+}
 
