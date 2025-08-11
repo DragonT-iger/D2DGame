@@ -7,7 +7,10 @@ void EndSceneManager::Awake()
 	m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
 
 	m_animator = GetOwner()->AddComponent<Animator>();
+}
 
+void EndSceneManager::Start()
+{
 	//auto title = ResourceManager::Instance().LoadAnimationClip("illust_animation_final_2.json", "title");
 	auto killed = ResourceManager::Instance().LoadAnimationClip("illust_animation_final_2.json", "killed");
 	auto starve = ResourceManager::Instance().LoadAnimationClip("illust_animation_final_2.json", "starve");
@@ -17,10 +20,7 @@ void EndSceneManager::Awake()
 	m_animator->AddClip("killed", killed, true);
 	m_animator->AddClip("starve", starve, true);
 	m_animator->AddClip("happy", happy, true);
-}
 
-void EndSceneManager::Start()
-{
 	switch (GameManager::Instance().GetEndReason())
 	{
 	case GameManager::EndReason::None:
