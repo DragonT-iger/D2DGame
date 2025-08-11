@@ -18,7 +18,9 @@ void Farmer::Awake()
     this->GetOwner()->SetTag("Farmer");
     GetOwner()->AddComponent<YSort>()->SetStatic(false);
 
-	m_farmerManager = GameObject::Find("FarmerManager")->GetComponent<FarmerManager>();
+    if (GameObject::Find("FarmerManager") != nullptr) {
+        m_farmerManager = GameObject::Find("FarmerManager")->GetComponent<FarmerManager>();
+    }
 }
 
 void Farmer::Start()
