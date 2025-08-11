@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "QuitSetting.h"
 #include "SettingButton.h"
 
 void SettingButton::Awake()
@@ -17,6 +18,8 @@ void SettingButton::Awake()
 	
 	if(GameObject::Find("startBtn"))
 		m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
+	if(GameObject::Find("TitleBtn"))
+		m_titleBtn = GameObject::Find("TitleBtn")->GetComponent<Button>();
 }
 
 void SettingButton::Start()
@@ -40,5 +43,15 @@ void SettingButton::Start()
 		m_button->SetActive(false);
 		if(m_startBtn)
 			m_startBtn->SetActive(false);
+		if (m_titleBtn)
+			m_titleBtn->SetActive(false);
 		}, ButtonEvent::Pressed);
+}
+
+void SettingButton::SetOff()
+{
+	if (m_cancleBtn)
+	{
+		m_cancleBtn->GetComponent<QuitSettingBtn>()->QuitSetting();
+	}
 }

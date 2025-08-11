@@ -372,18 +372,20 @@ void MainScene::Awake()
 	m_Esc->AddComponent<EscBtn>();
 
 	Img = m_EscBG->AddComponent<Image>();
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("SettingBG.png"), { 500, 500 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 500, 500 });
 	Img->SetOrderInLayer(5);
 
-	m_TitleBtn->AddComponent<Image>();
+	Img = m_TitleBtn->AddComponent<Image>();
 	auto btn = m_TitleBtn->AddComponent<Button>();
+	Img->SetOrderInLayer(6);
 	m_TitleBtn->AddComponent<TitleBtn>();
 
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
 
-	m_SettingBtn->AddComponent<Image>();
+	Img = m_SettingBtn->AddComponent<Image>();
 	btn = m_SettingBtn->AddComponent<Button>();
+	Img->SetOrderInLayer(6);
 	m_SettingBtn->AddComponent<SettingButton>();
 
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
@@ -412,25 +414,25 @@ void MainScene::Awake()
 
 	Img = m_settingWnd->AddComponent<Image>();
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 900, 700 });
-	Img->SetOrderInLayer(3);
+	Img->SetOrderInLayer(7);
 
 	txt = m_settingText->AddComponent<Text>();
-	txt->SetText(L"설정", { 200, 100 }, L"Maplestory", D2D1::ColorF::Black);
+	txt->SetText(L"Sound", { 200, 100 }, L"Maplestory", D2D1::ColorF::Black);
 	txt->SetFontSize(50);
-	txt->SetOrderLayer(4);
+	txt->SetOrderLayer(7);
 
 	//bgm setting
 	txt = m_bgmText->AddComponent<Text>();
 	txt->SetText(L"BGM Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
 	txt->SetFontSize(30);
-	txt->SetOrderLayer(4);
+	txt->SetOrderLayer(7);
 
 	Img = m_bgmSlider->AddComponent<Image>();
 	auto sb = m_bgmSlider->AddComponent<Slide_Bar>();
 	btn = m_bgmSlider->AddComponent<Button>();
 	m_bgmSlider->GetComponent<Transform>()->SetPosition({ 830, 340 });
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
-	Img->SetOrderInLayer(4);
+	Img->SetOrderInLayer(7);
 	btn->SetSize({ 500,20 });
 	sb->RegisterButton(btn);
 
@@ -438,14 +440,14 @@ void MainScene::Awake()
 	txt = m_sfxText->AddComponent<Text>();
 	txt->SetText(L"SFX Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
 	txt->SetFontSize(30);
-	txt->SetOrderLayer(4);
+	txt->SetOrderLayer(7);
 
 	Img = m_sfxSlider->AddComponent<Image>();
 	sb = m_sfxSlider->AddComponent<Slide_Bar>();
 	btn = m_sfxSlider->AddComponent<Button>();
 	m_sfxSlider->GetComponent<Transform>()->SetPosition({ 830, 440 });
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
-	Img->SetOrderInLayer(4);
+	Img->SetOrderInLayer(7);
 	btn->SetSize({ 500,20 });
 	sb->RegisterButton(btn);
 
@@ -453,14 +455,14 @@ void MainScene::Awake()
 	txt = m_uiText->AddComponent<Text>();
 	txt->SetText(L"UI Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
 	txt->SetFontSize(30);
-	txt->SetOrderLayer(4);
+	txt->SetOrderLayer(7);
 
 	Img = m_uiSlider->AddComponent<Image>();
 	sb = m_uiSlider->AddComponent<Slide_Bar>();
 	btn = m_uiSlider->AddComponent<Button>();
 	m_uiSlider->GetComponent<Transform>()->SetPosition({ 830, 540 });
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
-	Img->SetOrderInLayer(4);
+	Img->SetOrderInLayer(7);
 	btn->SetSize({ 500,20 });
 	sb->RegisterButton(btn);
 
@@ -468,7 +470,7 @@ void MainScene::Awake()
 	Img = m_cancleBtn->AddComponent<Image>();
 	btn = m_cancleBtn->AddComponent<Button>();
 	m_cancleBtn->AddComponent<QuitSettingBtn>();
-	Img->SetOrderInLayer(4);
+	Img->SetOrderInLayer(7);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
 	btn->SetSize({ 160, 100 });
@@ -476,7 +478,7 @@ void MainScene::Awake()
 	Img = m_checkBtn->AddComponent<Image>();
 	btn = m_checkBtn->AddComponent<Button>();
 	m_checkBtn->AddComponent<AcceptSettingBtn>();
-	Img->SetOrderInLayer(4);
+	Img->SetOrderInLayer(7);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
 	btn->SetSize({ 160, 100 });
