@@ -4,6 +4,7 @@
 #include "MainScene.h"
 #include "TitleScene.h"
 #include "DTtestScene.h"
+#include "ClientSceneManager.h"
 #include "ArtTestView.h"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -41,9 +42,9 @@ bool Game::Initialize()
 
 
     // 아직 씬 포인터가 생성되기 전이라 Instantiate 못씀
-    SceneManager::Instance().LoadScene(std::make_unique<MainScene>());
+    ClientSceneManager::Instance().LoadScene(std::make_unique<MainScene>());
     //SceneManager::Instance().LoadScene(L"ExampleScene");
-    SceneManager::Instance().LoadScene(std::make_unique<TitleScene>());
+    ClientSceneManager::Instance().LoadScene(std::make_unique<TitleScene>());
     //SceneManager::Instance().LoadScene(L"DTtestScene");
 
     D2DRenderer::Instance().SetFullscreen(true);
@@ -73,7 +74,7 @@ void Game::Run()
 
 void Game::LifeCycle(float deltaTime)
 {
-    SceneManager::Instance().ProcessSceneChange();
+    ClientSceneManager::Instance().ProcessSceneChange();
 
 	static float elapsedTime = 0.0f;
     static float fixedDeltaTime = 0.02f;

@@ -49,6 +49,18 @@ public:
     int  m_attackIndicatorCount = 0;
     bool m_hasDamagedPlayer = false;
 
+    float GetPatrolAreaValue() const { return m_patrolAreaValue; }
+    void  SetPatrolAreaValue(float value) { m_patrolAreaValue = value; }
+
+    float GetChaseAreaValue() const { return m_chaseAreaValue; }
+    void  SetChaseAreaValue(float value) { m_chaseAreaValue = value; }
+
+    float GetAlertAreaValue() const { return m_alertAreaValue; }
+    void  SetAlertAreaValue(float value) { m_alertAreaValue = value; }
+
+    float GetAttackAreaValue() const { return m_attackAreaValue; }
+    void  SetAttackAreaValue(float value) { m_attackAreaValue = value; }
+
 
 private:
 	FarmerManager* m_farmerManager = nullptr;

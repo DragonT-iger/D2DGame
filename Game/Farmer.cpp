@@ -70,6 +70,12 @@ void Farmer::Start()
 
 void Farmer::Update(float deltaTime)
 {
+
+    if (m_player->GetComponent<Player>()->GetHp() <= 0)
+    {
+        ChangeState(FarmerState::Patrol);
+    }
+
     switch (m_farmerState)
     {
         case FarmerState::Patrol: DoPatrol(deltaTime);  break;
@@ -131,6 +137,13 @@ void Farmer::DoAlert(float deltaTime)
 
 void Farmer::DoChase(float deltaTime)
 {
+
+    if (m_player->GetComponent<Player>()->GetHp() <= 0)
+    {
+        ChangeState(FarmerState::Patrol);
+        return;
+    }
+
     if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
         ChangeState(FarmerState::Patrol);
     }
@@ -151,11 +164,17 @@ void Farmer::DoChase(float deltaTime)
 
 void Farmer::DoAttack(float deltaTime)
 {
-   /* if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
+   if (m_player->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
         m_attackPattern.ClearIndicators();
         ChangeState(FarmerState::Patrol);
         return;
-    }*/
+    }
+
+    if (m_player->GetComponent<Player>()->GetHp() <= 0)
+    {
+        ChangeState(FarmerState::Patrol);
+        return;
+    }
 
     if (m_animator->GetCurState() == "attack" && !m_animator->IsAnimeEnd()) {
         return;

@@ -43,9 +43,9 @@ void TutorialScene::Awake()
 //begin player-----
 	player = Instantiate("Player");
 	auto playerSR = player->AddComponent<SpriteRenderer>();
-	player->AddComponent<BoxCollider>();
+	BoxCollider* boxcol = player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
-
+		
 	player->AddComponent<Player>();
 	player->AddComponent<PlayerAnimator>();
 	player->AddComponent<PlayerController>();
@@ -53,21 +53,21 @@ void TutorialScene::Awake()
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
 
-	player->GetComponent<Transform>()->SetPosition({ 3560.0f , 0 });
-	player->AddComponent<Baby>();
+	player->GetComponent<Transform>()->SetPosition({ -3560.0f , 0 });
+	//player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
 
-	m_farmerHouse = Instantiate("House");
-	m_farmerHouse->SetTag("House");
-	auto sr = m_farmerHouse->AddComponent<SpriteRenderer>();
-	sr->SetBitmap(ResourceManager::Instance().LoadTexture("farmer_house_test_1.png"));
-	auto box = m_farmerHouse->AddComponent<BoxCollider>();
-	m_farmerHouse->AddComponent<YSort>(140);
-	m_farmerHouse->GetComponent<Transform>()->SetPosition({ 0, 0 });
-	m_farmerHouse->GetComponent<Transform>()->SetScale({ 0.6, 0.6 });
-	box->SetSize({ 300, 270 });
-	box->SetOffset({ 0, -160 });
+	//m_farmerHouse = Instantiate("House");
+	//m_farmerHouse->SetTag("House");
+	//auto sr = m_farmerHouse->AddComponent<SpriteRenderer>();
+	//sr->SetBitmap(ResourceManager::Instance().LoadTexture("farmer_house_test_1.png"));
+	//auto box = m_farmerHouse->AddComponent<BoxCollider>();
+	//m_farmerHouse->AddComponent<YSort>(140);
+	//m_farmerHouse->GetComponent<Transform>()->SetPosition({ 0, 0 });
+	//m_farmerHouse->GetComponent<Transform>()->SetScale({ 0.6, 0.6 });
+	//box->SetSize({ 300, 270 });
+	//box->SetOffset({ 0, -160 });
 	
 	
 //end player-----
@@ -115,10 +115,10 @@ void TutorialScene::Awake()
 
 #pragma region bush
 
-	bush1 = Instantiate("Bush1");
-	bush1->AddComponent<Bush>();
-	bush1->AddComponent<SpriteRenderer>();
-	bush1->AddComponent<BoxCollider>();
+	//bush1 = Instantiate("Bush1");
+	//bush1->AddComponent<Bush>();
+	//bush1->AddComponent<SpriteRenderer>();
+	//bush1->AddComponent<BoxCollider>();
 
 	bush2 = Instantiate("Bush2");
 	bush2->AddComponent<Bush>();
@@ -145,19 +145,21 @@ void TutorialScene::Awake()
 	bush6->AddComponent<SpriteRenderer>();
 	bush6->AddComponent<BoxCollider>();
 
-	bush1->GetComponent<Transform>()->SetPosition(Vector2{ -1000, 1800 });
-	bush2->GetComponent<Transform>()->SetPosition(Vector2{ 1000, 1800 });
-	bush3->GetComponent<Transform>()->SetPosition(Vector2{ 0, 1000 });
-	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, -1000 });
-	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -2000, 50 });
-	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 2000, 50 });
+	//bush1->GetComponent<Transform>()->SetPosition(Vector2{ -300, 200 });
+	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -400, 200 });
+	bush3->GetComponent<Transform>()->SetPosition(Vector2{ -200, 200 });
+	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, 200 });
+	bush5->GetComponent<Transform>()->SetPosition(Vector2{ 200, 200 });
+	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 400, 200 });
 
-	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	//bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+
+	bush4->GetComponent<BoxCollider>()->SetSize({1300.f, 200.f});
 
 #pragma endregion
 
@@ -170,8 +172,12 @@ void TutorialScene::Awake()
 	SetPlayer(player); //<-- ���� ���� �˷��ְ�
 
 
-	m_farmerManager = Instantiate("FarmerManager");
-	m_farmerManager->AddComponent<FarmerManager>();
+	//m_farmerManager = Instantiate("FarmerManager");
+	//m_farmerManager->AddComponent<FarmerManager>();
+
+	GameObject* farmer = Instantiate("Farmer");
+	Farmer* fm = farmer->AddComponent<Farmer>();
+
 
 
 #pragma region SpawnManager,Inventory
@@ -245,10 +251,10 @@ void TutorialScene::Awake()
 
 	m_background = Instantiate("TutorialBackground");
 
-	sr = m_background->AddComponent<SpriteRenderer>();
+	SpriteRenderer* spriteRenderer = m_background->AddComponent<SpriteRenderer>();
 
-	sr->SetBitmap(ResourceManager::Instance().LoadTexture("TutorialBackground.png"));
-	sr->SetOrderInLayer(-200000);
+	spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("TutorialBackground.png"));
+	spriteRenderer->SetOrderInLayer(-200000);
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
@@ -353,7 +359,7 @@ void TutorialScene::Awake()
 	m_outRangeRight->SetTag("OutRange");
 	m_outRangeLeft->SetTag("OutRange");
 
-	box = m_outRangeUp->AddComponent<BoxCollider>();
+	BoxCollider* box = m_outRangeUp->AddComponent<BoxCollider>();
 	box->SetSize({ 7680 , 100 });
 	box = m_outRangeDown->AddComponent<BoxCollider>();
 	box->SetSize({ 7680 , 100 });

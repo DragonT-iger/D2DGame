@@ -13,7 +13,8 @@ public:
     // 씬 등록/활성화
     void    SetActiveScene(Scene* scene) { m_active = scene; }
     Scene*  GetActiveScene() const { return m_active; }
-    void    LoadScene(std::unique_ptr<Scene> scene);
+    // 이거 쓰지마셈 ClientSceneManager에서 LoadScene할것
+    void    LoadScene(std::unique_ptr<Scene> scene); 
     void    ProcessSceneChange();
     void    UnInitialize();
 

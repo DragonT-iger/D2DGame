@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "TitleScene.h"
 #include "TitleBtn.h"
+#include "ClientSceneManager.h"
 
 void TitleBtn::Start()
 {
 	m_button = GetComponent<Button>();
-	m_button->AddEvent([]() {SceneManager::Instance().LoadScene(std::make_unique<TitleScene>()); }, ButtonEvent::Pressed);
+	m_button->AddEvent([]() {ClientSceneManager::Instance().LoadScene(std::make_unique<TitleScene>()); }, ButtonEvent::Pressed);
 }

@@ -228,6 +228,9 @@
     <ClCompile Include="TutorialScene.cpp">
       <Filter>TutorialScene</Filter>
     </ClCompile>
+    <ClCompile Include="ClientSceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="CreditBtn.cpp">
       <Filter>Scripts\ButtonTest\Credit</Filter>
     </ClCompile>
@@ -367,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="TutorialScene.h">
       <Filter>TutorialScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSceneManager.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CreditBtn.h">
       <Filter>Scripts\ButtonTest\Credit</Filter>

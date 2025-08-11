@@ -16,7 +16,7 @@ public:
 
 	//void Awake()                         override;
 	//void Start()                         override;
-	//void Update(float deltaTime)         override;
+	void Update(float deltaTime)         override;
 
 	void Init();
 
@@ -49,6 +49,8 @@ public:
 
 	void LoadEndingScene(EndReason reason);
 	EndReason GetEndReason() { return m_endReason; }
+	GameState GetGameState() { return  m_GameState; }
+	void SetGameState(GameState state) { m_GameState = state; }
 
 
 private:
@@ -59,15 +61,18 @@ private:
 
 	GameObject* m_player = nullptr;
 
-	GameState m_GameState = GameState::Start;
 
 	Inventory* m_inventory = nullptr;
+
+	
 
 	static int ep_count;
 	static int pk_count;
 	static int pt_count;
 	static int totalscore;
 
+
+	static inline GameState m_GameState = GameState::Start;
 	static inline EndReason m_endReason = EndReason::None;
 
 	bool m_isFullscreen = false;

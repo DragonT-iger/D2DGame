@@ -6,6 +6,7 @@
 #include "PlayerAnimator.h"
 #include "CinemachineCamera.h"
 #include "InventorySlot.h"
+#include "ClientSceneManager.h"
 
 int GameManager::ep_count = 0;
 int GameManager::pt_count = 0;
@@ -14,6 +15,11 @@ int GameManager::totalscore = 0;
 
 
 
+
+void GameManager::Update(float deltaTime)
+{
+	
+}
 
 void GameManager::Init()
 {
@@ -45,8 +51,7 @@ void GameManager::SetFullScreen(bool isFull)
 void GameManager::LoadEndingScene(EndReason reason)
 {
 	m_endReason = reason;
-
-	SceneManager::Instance().LoadScene(std::make_unique<EndingScene>());
+	ClientSceneManager::Instance().LoadScene(std::unique_ptr<EndingScene>());
 }
 
 int GameManager::ReceiveScore(const std::vector<SlotData>& data)

@@ -560,7 +560,8 @@ void MainScene::Awake()
 
 #pragma endregion
 
-	GameManager::Instance().Init(); //player?ž‘ inventory ?—°ê²?.
+	gameManager = Instantiate("GameManager");
+	GameManager::Instance().Init();
 	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();
 }

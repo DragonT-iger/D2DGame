@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "Bush.h"
+#include "YSort.h"
 
 void Bush::Awake()
 {
 	m_transform = GetComponent<Transform>();
 	//m_animator = GetComponent<Animator>();
 	m_spriteRenderer = GetComponent<SpriteRenderer>();
+	GetOwner()->AddComponent<YSort>();
 
 	m_boxCol = GetComponent<BoxCollider>();
 }
@@ -24,10 +26,14 @@ void Bush::Start()
 
 void Bush::OnTriggerEnter(Collider* other)
 {
-	m_spriteRenderer->SetOpacity(0.7f);
+	if (other->GetOwner()->GetTag() == "Player"){
+		m_spriteRenderer->SetOpacity(0.7f);
+	}
 }
 
 void Bush::OnTriggerExit(Collider* other)
 {
-	m_spriteRenderer->SetOpacity(1);
+	if (other->GetOwner()->GetTag() == "Player") {
+		m_spriteRenderer->SetOpacity(1);
+	}
 }
