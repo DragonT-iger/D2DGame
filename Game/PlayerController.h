@@ -3,6 +3,8 @@
 class Player;
 class SpawnManager;
 class Inventory;
+enum Crops;
+
 
 class PlayerController : public MonoBehaviour
 {
@@ -35,8 +37,18 @@ private:
 	bool canMoveLeft = true;
 	bool canMoveRight = true;
 
+	float m_throwDelay = 0.3f;
+	float m_delay = 0.0f; // 0¿” ¿Ã∞«
+
+
 	float m_throwTime = 0.1f;
-	float m_throwelapsedTime = 0.0f;
+	float m_throwelapsedTime = 0.f;
+
+	float m_speedBoost = 200.0f;
+	float m_boostTimer = 0.8f;
+
+	void SpawnThrownCrop(Crops type);
+	void ApplyThrowBoost(Crops type);
 
 	//float* p_Spd = nullptr;
 };

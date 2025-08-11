@@ -113,9 +113,16 @@ const SlotData& Inventory::GetCurSlotData()
 	return m_curSlot->GetData();
 }
 
-void Inventory::ThrowItem()
+Crops Inventory::ThrowItem()
 {
+	auto data = m_curSlot->GetData();
+
+	if (data.isEmpty)
+		return Crops::Nothing;
+
 	m_curSlot->ThrowItem();
+
+	return data.type;
 }
 
 std::vector<SlotData> Inventory::SubMissonItem()

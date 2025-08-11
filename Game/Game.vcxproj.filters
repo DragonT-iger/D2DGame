@@ -204,6 +204,12 @@
     <ClCompile Include="SubMissionArea.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="ThrownCrop.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="OpacityDown.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="EscBtn.cpp">
       <Filter>Scripts\EscBtn</Filter>
     </ClCompile>
@@ -334,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="SubMissionArea.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrownCrop.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="OpacityDown.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="EscBtn.h">
       <Filter>Scripts\EscBtn</Filter>

@@ -10,9 +10,7 @@ int GameManager::pk_count = 0;
 int GameManager::totalscore = 0;
 
 
-void GameManager::Awake()
-{
-}
+
 
 void GameManager::Init()
 {
@@ -28,6 +26,18 @@ void GameManager::OnInspectorGUI()
 	int current = static_cast<int>(m_endReason);
 	if (ImGui::Combo("EndReason", &current, kEndReasonStr, IM_ARRAYSIZE(kEndReasonStr)))
 		m_endReason = static_cast<EndReason>(current);
+
+	bool full = m_isFullscreen;
+	if (ImGui::Checkbox("Fullscreen", &full))
+	{
+		m_isFullscreen = full;
+		SetFullScreen(m_isFullscreen);
+	}
+}
+
+void GameManager::SetFullScreen(bool isFull)
+{
+	D2DRenderer::Instance().SetFullscreen(isFull);
 }
 
 void GameManager::LoadEndingScene(EndReason reason)

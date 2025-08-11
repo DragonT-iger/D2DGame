@@ -38,6 +38,7 @@ void MainScene::Awake()
 
 
 
+
 //begin player-----
 	player = Instantiate("Player");
 	auto playerSR = player->AddComponent<SpriteRenderer>();
@@ -280,7 +281,7 @@ void MainScene::Awake()
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
 #ifdef _DEBUG
-	//ë””ë²„ê·¸ìš©
+	//?”ë²„ê·¸ìš©
 	m_areaBox1 = Instantiate("debugBox1");
 	m_areaBox2 = Instantiate("debugBox2");
 	m_areaBox3 = Instantiate("debugBox3");
@@ -396,6 +397,7 @@ void MainScene::Awake()
 
 #pragma endregion
 
+	GameManager::Instance().Init(); //player??inventory ?°ê²°.
 #pragma region	ESC
 
 	m_Esc = Instantiate("ESC");
@@ -539,7 +541,7 @@ void MainScene::Awake()
 
 #pragma endregion
 
-	GameManager::Instance().Init(); //playerëž‘ inventory ì—°ê²°.
+	GameManager::Instance().Init(); //player?ž‘ inventory ?—°ê²?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();
 }

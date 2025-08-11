@@ -20,9 +20,8 @@ public:
 
 	size_t GetCropCount(Crops type);
 
+	Crops ThrowItem();
 	const SlotData& GetCurSlotData();
-
-	void ThrowItem();
 
 	std::vector<SlotData> SubMissonItem();
 

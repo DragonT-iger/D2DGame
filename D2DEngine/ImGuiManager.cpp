@@ -50,6 +50,18 @@ void ImGuiManager::EndFrame(ID3D11RenderTargetView* mainRTV)
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
+void ImGuiManager::InvalidateDeviceObjects()
+{
+    if (!m_initialized) return;
+    ImGui_ImplDX11_InvalidateDeviceObjects();
+}
+
+void ImGuiManager::CreateDeviceObjects()
+{
+    if (!m_initialized) return;
+    ImGui_ImplDX11_CreateDeviceObjects();
+}
+
 void ImGuiManager::Shutdown()
 {
     if (!m_initialized) return;
@@ -59,4 +71,10 @@ void ImGuiManager::Shutdown()
     ImGui::DestroyContext();
 
     m_initialized = false;
+}
+
+void ImGuiManager::OnResize()
+{
+    InvalidateDeviceObjects();
+    CreateDeviceObjects();
 }
