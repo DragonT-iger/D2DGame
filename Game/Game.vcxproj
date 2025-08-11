@@ -164,6 +164,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="OpacityDown.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAnimator.cpp" />
     <ClCompile Include="PlayerController.cpp" />
@@ -207,6 +208,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="HungryGauge.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventorySlot.h" />
+    <ClInclude Include="OpacityDown.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAnimator.h" />
     <ClInclude Include="PlayerController.h" />

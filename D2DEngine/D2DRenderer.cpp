@@ -2,6 +2,14 @@
 #include "D2DRenderer.h"
 
 
+
+void D2DRenderer::SetFullscreen(bool enable) {
+    m_swapChain->SetFullscreenState(enable, nullptr);
+    //if (enable) {
+    //    
+    //}
+}
+
 void D2DRenderer::Initialize(HWND hwnd)
 {
     m_hwnd = hwnd;
@@ -291,6 +299,8 @@ void D2DRenderer::CreateDeviceAndSwapChain(HWND hwnd)
     hr = dxgiFactory->CreateSwapChainForHwnd(
         d3dDevice.Get(), hwnd, &scDesc, nullptr, nullptr, &swapChain);
 
+    DX::ThrowIfFailed(hr);
+    hr = dxgiFactory->MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER);
     DX::ThrowIfFailed(hr);
 
     // 3. ID2D1Factory4 »ý¼º

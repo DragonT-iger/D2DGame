@@ -33,6 +33,7 @@ void MainScene::Awake()
 
 
 
+
 //begin player-----
 	player = Instantiate("Player");
 	auto playerSR = player->AddComponent<SpriteRenderer>();

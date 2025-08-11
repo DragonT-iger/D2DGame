@@ -126,6 +126,13 @@ void Game::UpdateTime()
 
 bool Game::OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+
+    if (msg == WM_SYSKEYDOWN && wParam == VK_RETURN && (lParam & (1 << 29)))
+    {
+        return true;
+    }
+
+
     if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
     {
         return true; // ImGui가 메시지를 처리했으면 true 반환

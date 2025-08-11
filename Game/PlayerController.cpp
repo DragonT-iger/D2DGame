@@ -5,6 +5,7 @@
 #include "Inventory.h"
 #include "ThrownCrop.h"
 #include "YSort.h"
+#include "OpacityDown.h"
 
 void PlayerController::Awake()
 {
@@ -237,6 +238,8 @@ void PlayerController::SpawnThrownCrop(Crops type)
 {
 	GameObject* obj = Instantiate("thrownCrop");
 	auto sr = obj->AddComponent<SpriteRenderer>();
+	obj->GetComponent<Transform>()->SetScale({ 0.3f, 0.3f });
+	obj->AddComponent<OpacityDown>();
 	auto ys = obj->AddComponent<YSort>();
 	ys->SetStatic(false);
 	ys->SetOffset(50);
