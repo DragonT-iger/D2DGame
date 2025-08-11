@@ -2,6 +2,7 @@
 #include "FarmerZone.h"
 #include "Farmer.h"
 #include "Player.h"
+#include "GameManager.h"
 
 void FarmerZone::Awake()
 {
@@ -127,7 +128,11 @@ AttackIndicatorZone::~AttackIndicatorZone()
 				auto player = playerObj->GetComponent<Player>();
 				if (player)
 				{
-					player->SetHp(player->GetHp() - 1);
+					GameManager::GameState state = GameManager::Instance().GetGameState();
+
+					if (state != GameManager::GameState::Tutorial) {
+						player->SetHp(player->GetHp() - 1);
+					}
 					player->SetAction(Action::Hit);
 				}
 					

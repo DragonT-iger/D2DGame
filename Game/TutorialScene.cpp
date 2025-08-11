@@ -53,7 +53,7 @@ void TutorialScene::Awake()
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
 
-	player->GetComponent<Transform>()->SetPosition({ 3560.0f , 0 });
+	player->GetComponent<Transform>()->SetPosition({ -3560.0f , 0 });
 	player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
@@ -61,7 +61,7 @@ void TutorialScene::Awake()
 	m_farmerHouse = Instantiate("House");
 	m_farmerHouse->SetTag("House");
 	auto sr = m_farmerHouse->AddComponent<SpriteRenderer>();
-	sr->SetBitmap(ResourceManager::Instance().LoadTexture("farmer_house_test_1.png"));
+	//sr->SetBitmap(ResourceManager::Instance().LoadTexture("farmer_house_test_1.png"));
 	auto box = m_farmerHouse->AddComponent<BoxCollider>();
 	m_farmerHouse->AddComponent<YSort>(140);
 	m_farmerHouse->GetComponent<Transform>()->SetPosition({ 0, 0 });

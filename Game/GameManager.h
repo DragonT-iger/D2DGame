@@ -49,6 +49,8 @@ public:
 
 	void LoadEndingScene(EndReason reason);
 	EndReason GetEndReason() { return m_endReason; }
+	GameState GetGameState() { return  m_GameState; }
+	void SetGameState(GameState state) { m_GameState = state; }
 
 private:
 	GameManager(const GameManager&) = delete;
@@ -58,7 +60,6 @@ private:
 
 	GameObject* m_player = nullptr;
 
-	GameState m_GameState = GameState::Start;
 
 	Inventory* m_inventory = nullptr;
 
@@ -67,6 +68,8 @@ private:
 	static int pt_count;
 	static int totalscore;
 
+
+	static inline GameState m_GameState = GameState::Start;
 	static inline EndReason m_endReason = EndReason::None;
 
 	bool m_isFullscreen = false;

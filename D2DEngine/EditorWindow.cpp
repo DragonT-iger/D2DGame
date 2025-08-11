@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "EditorWindow.h"
+#include "../Game/ClientSceneManager.h"
 #include "../Game/TitleScene.h";
 #include "../Game/MainScene.h"
 #include "../Game/EndingScene.h"
@@ -48,7 +49,7 @@ void EditorWindow::DrawDebug() {
         default: assert(false && "Invalid scene index");     return;
         }
 
-        SceneManager::Instance().LoadScene(std::move(newScene));
+        ClientSceneManager::Instance().LoadScene(std::move(newScene));
         m_selected = nullptr;
         m_componentOpen.clear();
     }
