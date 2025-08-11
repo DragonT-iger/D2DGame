@@ -17,7 +17,10 @@ void AcceptSettingBtn::Awake()
 	m_cancleBtn = GameObject::Find("cancleBtn");
 
 	m_settingbutton = GameObject::Find("settingBtn")->GetComponent<Button>();
-	m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
+	if (GameObject::Find("startBtn"))
+		m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
+	if (GameObject::Find("TitleBtn"))
+		m_titleBtn = GameObject::Find("TitleBtn")->GetComponent<Button>();
 }
 
 void AcceptSettingBtn::Start()
@@ -35,7 +38,10 @@ void AcceptSettingBtn::Start()
 		m_checkBtn->SetActive(false);
 
 		m_settingbutton->SetActive(true);
-		m_startBtn->SetActive(true);
+		if(m_startBtn)
+			m_startBtn->SetActive(true);
+		if(m_titleBtn)
+			m_titleBtn->SetActive(true);
 
 		float bgm = m_bgmSlider->GetComponent<Slide_Bar>()->GetValue();
 		float sfx = m_sfxSlider->GetComponent<Slide_Bar>()->GetValue();

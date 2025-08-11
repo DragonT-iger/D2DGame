@@ -19,6 +19,7 @@ private:
 	GameObject* m_checkBtn;
 
 	Button* m_startBtn;
+	Button* m_titleBtn;
 	Button* m_settingbutton;
 
 	Button* m_button;

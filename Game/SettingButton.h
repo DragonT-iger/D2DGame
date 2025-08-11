@@ -12,7 +12,7 @@ public:
 	void Awake() override;
 	void Start()	 override;
 
-	void SetVolume(const Volumes& volumes);
+	void SetOff();
 
 private:
 	GameObject* m_settingWnd;
@@ -27,5 +27,7 @@ private:
 		GameObject* m_checkBtn;
 
 	Button* m_startBtn;
+	Button* m_titleBtn;
+
 	Button* m_button;
 };

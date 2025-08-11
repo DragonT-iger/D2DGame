@@ -3,6 +3,7 @@
 #include "Baby.h"
 #include "Inventory.h"
 #include "GameManager.h"
+#include "PlayerSound.h"
 
 int Player::invincible_Count = 0;
 
@@ -19,6 +20,8 @@ void Player::Awake()
 	m_hpUI.push_back(GameObject::Find("hp1"));
 	m_hpUI.push_back(GameObject::Find("hp2"));
 	m_hpUI.push_back(GameObject::Find("hp3"));
+
+	m_pSound = GetComponent<PlayerSound>();
 }
 
 void Player::Start()
@@ -46,6 +49,7 @@ void Player::Update(float deltaTime)
 
 	if (m_hp <= 0 && state != State::Dead)
 	{
+		m_pSound->PlayDead();
 		state = State::Dead;
 	}
 }
@@ -54,9 +58,9 @@ void Player::OnTriggerEnter(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Bush")
 	{
+		m_pSound->PlayHide();
 		visibilty = Visibilty::Hide;
 	}
-
 }
 
 void Player::OnTriggerStay(Collider* other)

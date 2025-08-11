@@ -15,31 +15,13 @@ void PlayerSound::Awake()
 
 	SoundManager::Instance().GetCoreSystem()->createChannelGroup("walk", &m_walkGroup);
 	SoundManager::Instance().AddSFXGroup(m_walkGroup);
+
+	SoundManager::Instance().GetCoreSystem()->createChannelGroup("throw", &m_throwItemGroup);
+	SoundManager::Instance().AddSFXGroup(m_throwItemGroup);
 }
 
 void PlayerSound::Start()
 {
-}
-
-void PlayerSound::Update(float deltaTime)
-{
-	PlaySound();
-}
-
-void PlayerSound::PlaySound()
-{
-	switch (m_player->action)
-	{
-	case Action::Idle:
-		break;
-	case Action::Walk:
-		PlayWalk();
-		break;
-	case Action::Hit:
-		break;
-	case Action::Steal:
-		break;
-	}
 }
 
 void PlayerSound::PlayWalk()
@@ -61,4 +43,34 @@ void PlayerSound::PlayWalk()
 	size_t index = Random::Instance().Range(0, 4);
 	//std::cout << "·£´ý Àç»ý : " << index << std::endl;
 	SoundManager::Instance().SFX_Shot(m_walkSounds[index], m_walkGroup);
+}
+
+void PlayerSound::DropCrop()
+{
+	SoundManager::Instance().SFX_Shot("10.mp3", m_throwItemGroup);
+}
+
+void PlayerSound::GetCrop()
+{
+	SoundManager::Instance().SFX_Shot("9.mp3");
+}
+
+void PlayerSound::AlreadyMaxSlot()
+{
+	SoundManager::Instance().SFX_Shot("22.mp3");
+}
+
+void PlayerSound::PlayHit()
+{
+	SoundManager::Instance().SFX_Shot("6.mp3");
+}
+
+void PlayerSound::PlayHide()
+{
+	SoundManager::Instance().SFX_Shot("7.mp3");
+}
+
+void PlayerSound::PlayDead()
+{
+	SoundManager::Instance().SFX_Shot("8.mp3");
 }

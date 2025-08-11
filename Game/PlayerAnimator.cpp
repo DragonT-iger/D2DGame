@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "PlayerAnimator.h"
+#include "PlayerSound.h"
 
 void PlayerAnimator::ActionAnime()
 {
@@ -22,6 +23,7 @@ void PlayerAnimator::ActionAnime()
 		if (m_animator->GetCurState() != "hit")
 		{
 			m_animator->ChangeState("hit");
+			m_Player->m_pSound->PlayHit();
 		}
 		break;
 	case Action::Steal:
@@ -61,13 +63,16 @@ void PlayerAnimator::Start()
 	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "walk");
 	auto moleHit = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "hit");
 	auto moleSteal = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "steal");
-	auto moleDead = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "dead");
+	auto moleDeath1 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death1");
+	auto moleDeath2 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death2");
 
 	m_animator->AddClip("idle", moleIdle, true);
 	m_animator->AddClip("walk", molewalk, true);
 	m_animator->AddClip("hit", moleHit, false);
 	m_animator->AddClip("steal", moleSteal, false);
-	m_animator->AddClip("dead", moleDead, false);
+	m_animator->AddClip("death1_1", moleDeath1, false);
+	m_animator->AddClip("death1_2", moleDeath1, false);
+	m_animator->AddClip("death2", moleDeath2, false);
 
 	m_animator->SetEntryState("idle");
 	m_spriteRenderer->SetOpacity(1);
@@ -93,8 +98,8 @@ void PlayerAnimator::Update(float deltaTime)
 	}
 	else
 	{
-		if (m_animator->GetCurState() != "dead")
-			m_animator->ChangeState("dead");
+		if (m_animator->GetCurState() != "death2")
+			m_animator->ChangeState("death2");
 	}
 
 }

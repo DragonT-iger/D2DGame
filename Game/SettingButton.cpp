@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "QuitSetting.h"
 #include "SettingButton.h"
 
 void SettingButton::Awake()
@@ -14,8 +15,11 @@ void SettingButton::Awake()
 	m_uiSlider = GameObject::Find("uiSlider");
 	m_cancleBtn = GameObject::Find("cancleBtn");
 	m_checkBtn = GameObject::Find("checkBtn");
-
-	m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
+	
+	if(GameObject::Find("startBtn"))
+		m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
+	if(GameObject::Find("TitleBtn"))
+		m_titleBtn = GameObject::Find("TitleBtn")->GetComponent<Button>();
 }
 
 void SettingButton::Start()
@@ -37,6 +41,17 @@ void SettingButton::Start()
 		m_uiSlider->GetComponent<Slide_Bar>()->UpdateWidthRatio(SoundManager::Instance().GetVolume_UI());
 
 		m_button->SetActive(false);
-		m_startBtn->SetActive(false);
+		if(m_startBtn)
+			m_startBtn->SetActive(false);
+		if (m_titleBtn)
+			m_titleBtn->SetActive(false);
 		}, ButtonEvent::Pressed);
+}
+
+void SettingButton::SetOff()
+{
+	if (m_cancleBtn)
+	{
+		m_cancleBtn->GetComponent<QuitSettingBtn>()->QuitSetting();
+	}
 }

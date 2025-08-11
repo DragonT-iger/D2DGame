@@ -108,6 +108,11 @@ size_t Inventory::GetCropCount(Crops type)
 	return count;
 }
 
+const SlotData& Inventory::GetCurSlotData()
+{
+	return m_curSlot->GetData();
+}
+
 Crops Inventory::ThrowItem()
 {
 	auto data = m_curSlot->GetData();

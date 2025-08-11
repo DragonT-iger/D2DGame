@@ -2,6 +2,7 @@
 #include "SpawnManager.h"
 #include "Player.h"
 #include "PlayerController.h"
+#include "PlayerSound.h"
 #include "Inventory.h"
 #include "ThrownCrop.h"
 #include "YSort.h"
@@ -66,6 +67,8 @@ void PlayerController::Update(float deltaTime)
 			{
 				m_throwelapsedTime = 0;
 				std::cout << "spawn" << std::endl;
+				
+				m_Player->m_pSound->DropCrop();
 				SpawnThrownCrop(type);
 				ApplyThrowBoost(type);
 			}
@@ -79,6 +82,7 @@ void PlayerController::Update(float deltaTime)
 				if (m_throwelapsedTime >= m_throwTime)
 				{
 					Crops type = m_inven->ThrowItem();
+					m_Player->m_pSound->DropCrop();
 					if (type != Crops::Nothing)
 					{
 						m_throwelapsedTime = 0;
@@ -134,6 +138,7 @@ void PlayerController::Update(float deltaTime)
 			if (!canMoveRight && curDir.x > 0) curDir.x = 0;
 			if (!canMoveLeft && curDir.x < 0) curDir.x = 0;
 			m_transform->Translate(curDir * moveSpd * deltaTime);
+			m_Player->m_pSound->PlayWalk();
 			break;
 			case Action::Hit:
 				if (m_animator->GetCurState() != "hit")
@@ -157,9 +162,9 @@ void PlayerController::Update(float deltaTime)
 	}
 	else
 	{
-		if (m_animator->GetCurState() != "dead")
+		if (m_animator->GetCurState() != "death2")
 		{
-			m_animator->ChangeState("dead");
+			m_animator->ChangeState("death2");
 		}
 	}
 
@@ -221,6 +226,10 @@ void PlayerController::OnTriggerStay(Collider* other)
 
 			m_SpawnManager->DestroyObject(other->GetOwner());
 
+			if (m_inven->GetCropCount(crop_Type) == m_Player->maxCount[crop_Type])
+				m_Player->m_pSound->AlreadyMaxSlot();
+			else
+				m_Player->m_pSound->GetCrop();
 		}
 	}
 }

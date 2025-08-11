@@ -18,6 +18,11 @@
 #include "Baby.h"
 #include "UI_Score.h"
 #include "SubMissionArea.h"
+#include "EscBtn.h"
+#include "TitleBtn.h"
+#include "SettingButton.h"
+#include "AcceptSetting.h"
+#include "QuitSetting.h"
 
 void MainScene::Awake()
 {
@@ -156,10 +161,6 @@ void MainScene::Awake()
 #pragma endregion
 
 //end Bush
-
-
-
-
 	//Farmer
 
 	//m_player2 = Instantiate("Player2");
@@ -207,6 +208,9 @@ void MainScene::Awake()
 	m_slot1Text->GetComponent<Transform>()->SetPosition({ 1045, 960 });
 	slot->RegisterText(txt);
 
+	m_slot1Full = Instantiate("Slot1Full");
+	slot->RegisterFullImage(m_slot1Full->AddComponent<Image>());
+
 	m_slot2 = Instantiate("Slot2");
 	m_slot2Text = Instantiate("Slot2Text");
 	m_slot2->AddComponent<Image>();
@@ -217,6 +221,9 @@ void MainScene::Awake()
 	m_slot2Text->GetComponent<Transform>()->SetPosition({ 1225, 960 });
 	slot->RegisterText(txt);
 
+	m_slot2Full = Instantiate("Slot1Full");
+	slot->RegisterFullImage(m_slot2Full->AddComponent<Image>());
+
 	m_slot3 = Instantiate("Slot3");
 	m_slot3Text = Instantiate("Slot3Text");
 	m_slot3->AddComponent<Image>();
@@ -226,6 +233,9 @@ void MainScene::Awake()
 	txt = m_slot3Text->AddComponent<Text>();
 	m_slot3Text->GetComponent<Transform>()->SetPosition({ 1405, 960 });
 	slot->RegisterText(txt);
+
+	m_slot3Full = Instantiate("Slot1Full");
+	slot->RegisterFullImage(m_slot3Full->AddComponent<Image>());
 
 	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 
@@ -352,13 +362,157 @@ void MainScene::Awake()
 	box->SetSize({ 100 , 4320 });
 
 	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 2200 });
-	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -2200 });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -2150 });
 	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3845, 0 });
 	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3845, 0 });
 
 #pragma endregion
 
 	GameManager::Instance().Init(); //player??inventory ?°ê²°.
+#pragma region	ESC
+
+	m_Esc = Instantiate("ESC");
+	m_EscBG = Instantiate("EscBG");
+	m_TitleBtn = Instantiate("TitleBtn");
+	m_SettingBtn = Instantiate("settingBtn");
+	
+	m_Esc->AddComponent<EscBtn>();
+
+	Img = m_EscBG->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 500, 500 });
+	Img->SetOrderInLayer(5);
+
+	Img = m_TitleBtn->AddComponent<Image>();
+	auto btn = m_TitleBtn->AddComponent<Button>();
+	Img->SetOrderInLayer(6);
+	m_TitleBtn->AddComponent<TitleBtn>();
+
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
+
+	Img = m_SettingBtn->AddComponent<Image>();
+	btn = m_SettingBtn->AddComponent<Button>();
+	Img->SetOrderInLayer(6);
+	m_SettingBtn->AddComponent<SettingButton>();
+
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
+
+	m_EscBG->GetComponent<Transform>()->SetPosition({ 960, 540 });
+	m_TitleBtn->GetComponent<Transform>()->SetPosition({ 960, 500 });
+	m_SettingBtn->GetComponent<Transform>()->SetPosition({ 960, 600 });
+
+	m_EscBG->SetActive(false);
+	m_TitleBtn->SetActive(false);
+	m_SettingBtn->SetActive(false);
+
+
+	//Sound Setting Wnd
+	m_settingWnd = Instantiate("settingWnd");
+	m_settingText = Instantiate("settingText");
+	m_bgmText = Instantiate("bgmText");
+	m_bgmSlider = Instantiate("bgmSlider");
+	m_sfxText = Instantiate("sfxText");
+	m_sfxSlider = Instantiate("sfxSlider");
+	m_uiText = Instantiate("uiText");
+	m_uiSlider = Instantiate("uiSlider");
+	m_cancleBtn = Instantiate("cancleBtn");
+	m_checkBtn = Instantiate("checkBtn");
+
+	Img = m_settingWnd->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 900, 700 });
+	Img->SetOrderInLayer(7);
+
+	txt = m_settingText->AddComponent<Text>();
+	txt->SetText(L"Sound", { 200, 100 }, L"Maplestory", D2D1::ColorF::Black);
+	txt->SetFontSize(50);
+	txt->SetOrderLayer(7);
+
+	//bgm setting
+	txt = m_bgmText->AddComponent<Text>();
+	txt->SetText(L"BGM Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
+	txt->SetFontSize(30);
+	txt->SetOrderLayer(7);
+
+	Img = m_bgmSlider->AddComponent<Image>();
+	auto sb = m_bgmSlider->AddComponent<Slide_Bar>();
+	btn = m_bgmSlider->AddComponent<Button>();
+	m_bgmSlider->GetComponent<Transform>()->SetPosition({ 830, 340 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
+	Img->SetOrderInLayer(7);
+	btn->SetSize({ 500,20 });
+	sb->RegisterButton(btn);
+
+	//sfx setting
+	txt = m_sfxText->AddComponent<Text>();
+	txt->SetText(L"SFX Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
+	txt->SetFontSize(30);
+	txt->SetOrderLayer(7);
+
+	Img = m_sfxSlider->AddComponent<Image>();
+	sb = m_sfxSlider->AddComponent<Slide_Bar>();
+	btn = m_sfxSlider->AddComponent<Button>();
+	m_sfxSlider->GetComponent<Transform>()->SetPosition({ 830, 440 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
+	Img->SetOrderInLayer(7);
+	btn->SetSize({ 500,20 });
+	sb->RegisterButton(btn);
+
+	//ui setting
+	txt = m_uiText->AddComponent<Text>();
+	txt->SetText(L"UI Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
+	txt->SetFontSize(30);
+	txt->SetOrderLayer(7);
+
+	Img = m_uiSlider->AddComponent<Image>();
+	sb = m_uiSlider->AddComponent<Slide_Bar>();
+	btn = m_uiSlider->AddComponent<Button>();
+	m_uiSlider->GetComponent<Transform>()->SetPosition({ 830, 540 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
+	Img->SetOrderInLayer(7);
+	btn->SetSize({ 500,20 });
+	sb->RegisterButton(btn);
+
+	//button setting
+	Img = m_cancleBtn->AddComponent<Image>();
+	btn = m_cancleBtn->AddComponent<Button>();
+	m_cancleBtn->AddComponent<QuitSettingBtn>();
+	Img->SetOrderInLayer(7);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
+	btn->SetSize({ 160, 100 });
+
+	Img = m_checkBtn->AddComponent<Image>();
+	btn = m_checkBtn->AddComponent<Button>();
+	m_checkBtn->AddComponent<AcceptSettingBtn>();
+	Img->SetOrderInLayer(7);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
+	btn->SetSize({ 160, 100 });
+
+	m_settingWnd->GetComponent<Transform>()->SetPosition({ 960, 435 });
+	m_settingText->GetComponent<Transform>()->SetPosition({ 960, 170 });
+	m_bgmText->GetComponent<Transform>()->SetPosition({ 660, 300 });
+	m_sfxText->GetComponent<Transform>()->SetPosition({ 660, 400 });
+	m_uiText->GetComponent<Transform>()->SetPosition({ 660, 500 });
+	m_cancleBtn->GetComponent<Transform>()->SetPosition({ 860, 700 });
+	m_checkBtn->GetComponent<Transform>()->SetPosition({ 1060, 700 });
+
+	m_settingWnd->SetActive(false);
+	m_settingText->SetActive(false);
+	m_bgmText->SetActive(false);
+	m_bgmSlider->SetActive(false);
+	m_sfxText->SetActive(false);
+	m_sfxSlider->SetActive(false);
+	m_uiText->SetActive(false);
+	m_uiSlider->SetActive(false);
+	m_cancleBtn->SetActive(false);
+	m_checkBtn->SetActive(false);
+	//Sound Setting End
+
+#pragma endregion
+
+	GameManager::Instance().Init(); //player?ž‘ inventory ?—°ê²?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();
 }

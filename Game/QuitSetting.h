@@ -6,6 +6,8 @@ public:
 	void Awake() override;
 	void Start() override;
 
+	void QuitSetting();
+
 private:
 	GameObject* m_settingWnd;
 		GameObject* m_settingText;
@@ -19,6 +21,7 @@ private:
 		GameObject* m_checkBtn;
 
 	Button* m_startBtn;
+	Button* m_titleBtn;
 	Button* m_settingbutton;
 
 	Button* m_button;
