@@ -66,7 +66,7 @@ void PlayerController::Update(float deltaTime)
 			if (type != Crops::Nothing)
 			{
 				m_throwelapsedTime = 0;
-				std::cout << "spawn" << std::endl;
+				//std::cout << "spawn" << std::endl;
 				
 				m_Player->m_pSound->DropCrop();
 				SpawnThrownCrop(type);
