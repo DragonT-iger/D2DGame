@@ -3,6 +3,8 @@
 #include "SettingButton.h"
 #include "AcceptSetting.h"
 #include "QuitSetting.h"
+#include "CreditBtn.h"
+#include "QuitBtn.h"
 #include "TitleScene.h"
 
 void TitleScene::Awake()
@@ -13,10 +15,15 @@ void TitleScene::Awake()
 #pragma region Button_Instantiate
 	m_startButton = Instantiate("startBtn");
 	m_settingButton = Instantiate("settingBtn");
-	m_creditButton = Instantiate("settingBtn");
+	m_creditButton = Instantiate("creditBtn");
 	m_quitButton = Instantiate("quitBtn");
+	m_buttonBG = Instantiate("buttonBG");
+
+	auto Img = m_buttonBG->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("TitleBtn1_farm.png"), { 1920, 1080 });
+	Img->SetOrderInLayer(-500);
 	
-	auto Img = m_startButton->AddComponent<Image>();
+	Img = m_startButton->AddComponent<Image>();
 	auto button = m_startButton->AddComponent<Button>();
 	m_startButton->AddComponent<StartButton>();
 
@@ -30,8 +37,25 @@ void TitleScene::Awake()
 	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn3_Setting.png"), ButtonEvent::Idle);
 	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn3_Setting_Select.png"), ButtonEvent::Highlight);
 
-	m_startButton->GetComponent<Transform>()->SetPosition({ 960.f, 540.f });
-	m_settingButton->GetComponent<Transform>()->SetPosition({ 960.f, 640.f });
+	Img = m_creditButton->AddComponent<Image>();
+	button = m_creditButton->AddComponent<Button>();
+	m_creditButton->AddComponent<CreditButton>();
+
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn4_Credit.png"), ButtonEvent::Idle);
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn4_Credit_Select.png"), ButtonEvent::Highlight);
+
+	Img = m_quitButton->AddComponent<Image>();
+	button = m_quitButton->AddComponent<Button>();
+	m_quitButton->AddComponent<QuitButton>();
+
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn5_Exit.png"), ButtonEvent::Idle);
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn5_Exit_Select.png"), ButtonEvent::Highlight);
+
+	m_startButton->GetComponent<Transform>()->SetPosition({ 1700.f, 520.f });
+	m_settingButton->GetComponent<Transform>()->SetPosition({ 1700.f, 680.f });
+	m_creditButton->GetComponent<Transform>()->SetPosition({ 1675.f, 820.f });
+	m_quitButton->GetComponent<Transform>()->SetPosition({ 1700.f, 960.f });
+	m_buttonBG->GetComponent<Transform>()->SetPosition({ 960, 540 });
 
 #pragma endregion
 
@@ -147,9 +171,9 @@ void TitleScene::Awake()
 	SoundManager::Instance().BGM_Shot("1.mp3");
 
 	m_Title = Instantiate("title");
-	auto img = m_Title->AddComponent<Image>();
-	img->SetBitmap(ResourceManager::Instance().LoadTexture("Title.png"), { 1920, 1080 });
-	img->SetOrderInLayer(-10000);
+	Img = m_Title->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Title.png"), { 1920, 1080 });
+	Img->SetOrderInLayer(-10000);
 
 	m_Title->GetComponent<Transform>()->SetPosition({ 960, 540 });
 

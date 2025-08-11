@@ -82,6 +82,12 @@
     <Filter Include="TutorialScene">
       <UniqueIdentifier>{b02b94dd-5bce-44b8-9f15-a62e69cd0068}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\ButtonTest\Credit">
+      <UniqueIdentifier>{fe59466f-896a-4f8b-bfc2-8098da26d69f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\ButtonTest\Quit">
+      <UniqueIdentifier>{799d4f2b-ec1a-43ea-84a8-04c2a46d1a0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -222,6 +228,12 @@
     <ClCompile Include="TutorialScene.cpp">
       <Filter>TutorialScene</Filter>
     </ClCompile>
+    <ClCompile Include="CreditBtn.cpp">
+      <Filter>Scripts\ButtonTest\Credit</Filter>
+    </ClCompile>
+    <ClCompile Include="QuitBtn.cpp">
+      <Filter>Scripts\ButtonTest\Quit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -286,9 +298,6 @@
     </ClInclude>
     <ClInclude Include="Bush.h">
       <Filter>Scripts\Bush</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSound.h">
-      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="DTtestScene.h">
       <Filter>헤더 파일</Filter>
@@ -358,6 +367,15 @@
     </ClInclude>
     <ClInclude Include="TutorialScene.h">
       <Filter>TutorialScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditBtn.h">
+      <Filter>Scripts\ButtonTest\Credit</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitBtn.h">
+      <Filter>Scripts\ButtonTest\Quit</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSound.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

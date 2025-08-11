@@ -11,6 +11,7 @@ private:
 	GameObject* m_settingButton;
 	GameObject* m_creditButton;
 	GameObject* m_quitButton;
+	GameObject* m_buttonBG;
 
 	GameObject* m_Title;
 

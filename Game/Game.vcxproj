@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -148,6 +148,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="Baby.cpp" />
     <ClCompile Include="Bush.cpp" />
     <ClCompile Include="CinemachineCamera.cpp" />
+    <ClCompile Include="CreditBtn.cpp" />
     <ClCompile Include="Crop.cpp" />
     <ClCompile Include="DTtestScene.cpp" />
     <ClCompile Include="Eggplant.cpp" />
@@ -172,6 +173,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="PlayerSound.cpp" />
     <ClCompile Include="Potato.cpp" />
     <ClCompile Include="Pumpkin.cpp" />
+    <ClCompile Include="QuitBtn.cpp" />
     <ClCompile Include="QuitSetting.cpp" />
     <ClCompile Include="SettingButton.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
@@ -196,6 +198,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="Baby.h" />
     <ClInclude Include="Bush.h" />
     <ClInclude Include="CinemachineCamera.h" />
+    <ClInclude Include="CreditBtn.h" />
     <ClInclude Include="Crop.h" />
     <ClInclude Include="DTtestScene.h" />
     <ClInclude Include="Eggplant.h" />
@@ -219,6 +222,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="PlayerSound.h" />
     <ClInclude Include="Potato.h" />
     <ClInclude Include="Pumpkin.h" />
+    <ClInclude Include="QuitBtn.h" />
     <ClInclude Include="QuitSetting.h" />
     <ClInclude Include="SettingButton.h" />
     <ClInclude Include="SpawnManager.h" />
