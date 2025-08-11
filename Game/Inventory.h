@@ -25,6 +25,10 @@ public:
 
 	std::vector<SlotData> SubMissonItem();
 
+	void UpdateBabyProfile(size_t index);
+	void UpdateProfile(size_t index);
+	void UpdateHungryImg(size_t index);
+
 	float GetWeight();
 
 	float GetSpeedMultiplier() const;
@@ -46,6 +50,10 @@ private:
 	Slot* m_curSlot;
 	int m_curSlotNum;
 	int maxSlotNum = 2;
+
+	int m_profileIndex = 0;
+	int m_babyIndex = 0;
+	int m_hungryIndex = 0;
 
 	double m_potatoBonus = 0.004;  
 	double m_eggplantBonus = 0.01; 

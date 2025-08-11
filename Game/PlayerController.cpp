@@ -154,6 +154,7 @@ void PlayerController::Update(float deltaTime)
 			}
 			if (m_animator->IsAnimeEnd())
 			{
+				m_Player->m_Inven->UpdateProfile(0);
 				m_Player->action = Action::Idle;
 			}
 			break;

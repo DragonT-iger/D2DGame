@@ -13,6 +13,21 @@ void Inventory::Awake()
 	m_slots.push_back(slot1);
 	m_slots.push_back(slot2);
 	m_slots.push_back(slot3);
+
+	m_profile = GameObject::Find("playerProfile")->GetComponent<Image>();
+	m_babyProfile = GameObject::Find("babyProfile")->GetComponent<Image>();
+	m_hungry = GameObject::Find("hungryImg")->GetComponent<Image>();
+
+	m_profiles.push_back(ResourceManager::Instance().LoadTexture("mom_profile1.png"));
+	m_profiles.push_back(ResourceManager::Instance().LoadTexture("mom_profile2.png"));
+
+	m_babyProfiles.push_back(ResourceManager::Instance().LoadTexture("baby_profile1.png"));
+	m_babyProfiles.push_back(ResourceManager::Instance().LoadTexture("baby_profile2.png"));
+	m_babyProfiles.push_back(ResourceManager::Instance().LoadTexture("baby_profile3.png"));
+
+	m_hungrys.push_back(ResourceManager::Instance().LoadTexture("hungry1.png"));
+	m_hungrys.push_back(ResourceManager::Instance().LoadTexture("hungry2.png"));
+	m_hungrys.push_back(ResourceManager::Instance().LoadTexture("hungry3.png"));
 }
 
 void Inventory::Start()
@@ -134,6 +149,33 @@ std::vector<SlotData> Inventory::SubMissonItem()
 	}
 
 	return datas;
+}
+
+void Inventory::UpdateBabyProfile(size_t index)
+{
+	if (index != m_babyIndex)
+	{
+		m_babyProfile->SetBitmap(m_babyProfiles[index], { 80, 80 });
+		m_babyIndex = index;
+	}
+}
+
+void Inventory::UpdateProfile(size_t index)
+{
+	if (index != m_profileIndex)
+	{
+		m_profile->SetBitmap(m_profiles[index], { 80, 80 });
+		m_profileIndex = index;
+	}
+}
+
+void Inventory::UpdateHungryImg(size_t index)
+{
+	if (index != m_hungryIndex)
+	{
+		m_hungry->SetBitmap(m_hungrys[index], { 65, 65 });
+		m_hungryIndex = index;
+	}
 }
 
 float Inventory::GetWeight()
