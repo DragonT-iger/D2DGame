@@ -27,12 +27,12 @@ void GameManager::OnInspectorGUI()
 	if (ImGui::Combo("EndReason", &current, kEndReasonStr, IM_ARRAYSIZE(kEndReasonStr)))
 		m_endReason = static_cast<EndReason>(current);
 
-	bool full = m_isFullscreen;
-	if (ImGui::Checkbox("Fullscreen", &full))
-	{
-		m_isFullscreen = full;
-		SetFullScreen(m_isFullscreen);
-	}
+	//bool full = m_isFullscreen;
+	//if (ImGui::Checkbox("Fullscreen", &full))
+	//{
+	//	m_isFullscreen = full;
+	//	SetFullScreen(m_isFullscreen);
+	//}
 }
 
 void GameManager::SetFullScreen(bool isFull)
