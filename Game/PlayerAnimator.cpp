@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "PlayerAnimator.h"
+#include "PlayerSound.h"
 
 void PlayerAnimator::ActionAnime()
 {
@@ -22,6 +23,7 @@ void PlayerAnimator::ActionAnime()
 		if (m_animator->GetCurState() != "hit")
 		{
 			m_animator->ChangeState("hit");
+			m_Player->m_pSound->PlayHit();
 		}
 		break;
 	case Action::Steal:
@@ -96,8 +98,8 @@ void PlayerAnimator::Update(float deltaTime)
 	}
 	else
 	{
-		if (m_animator->GetCurState() != "dead")
-			m_animator->ChangeState("dead");
+		if (m_animator->GetCurState() != "death2")
+			m_animator->ChangeState("death2");
 	}
 
 }

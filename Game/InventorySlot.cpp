@@ -31,11 +31,52 @@ void Slot::AddItem(Crops type, Size count)
 		m_data.isEmpty = false;
 		m_data.type = type;
 	}
-		
-	if (count == S)
-		m_data.count += 1;
-	else
-		m_data.count += static_cast<size_t>(count) * 3;
+	
+	switch (type)
+	{
+	case Potato:
+		switch (count)
+		{
+		case S:
+			m_data.count += 1;
+			break;
+		case M:
+			m_data.count += 5;
+			break;
+		case L:
+			m_data.count += 9;
+			break;
+		}
+		break;
+	case Eggplant:
+		switch (count)
+		{
+		case S:
+			m_data.count += 1;
+			break;
+		case M:
+			m_data.count += 3;
+			break;
+		case L:
+			m_data.count += 6;
+			break;
+		}
+		break;
+	case Pumpkin: 
+		switch (count)
+		{
+		case S:
+			m_data.count += 1;
+			break;
+		case M:
+			m_data.count += 2;
+			break;
+		case L:
+			m_data.count += 3;
+			break;
+		}
+		break;
+	}
 
 	if (m_data.count >= m_maxCount)
 	{
@@ -43,6 +84,7 @@ void Slot::AddItem(Crops type, Size count)
 
 		m_fullImage->SetActive(true);
 		//떨구는 사운드 여기서 재생할듯
+		SoundManager::Instance().SFX_Shot("22.mp3");
 	}
 }
 

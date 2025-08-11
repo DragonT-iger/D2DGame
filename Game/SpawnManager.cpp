@@ -14,9 +14,9 @@ void SpawnManager::Awake()
 	Home = {-235, 127, 235, -127};
 	
 	farmArr.reserve(3);
-	farmArr.push_back({ Rank_A, 20, 0.0f, 3.f, &m_farmAList });
-	farmArr.push_back({ Rank_B, 15, 0.0f, 4.f, &m_farmBList });
-	farmArr.push_back({ Rank_C, 10, 0.0f, 5.f, &m_farmCList });
+	farmArr.push_back({ Rank_A, 50, 0.0f, 3.f, &m_farmAList });
+	farmArr.push_back({ Rank_B, 30, 0.0f, 4.f, &m_farmBList });
+	farmArr.push_back({ Rank_C, 20, 0.0f, 5.f, &m_farmCList });
 
 	growArr.reserve(3);
 	growArr.push_back(&rankA);
@@ -245,13 +245,13 @@ Crops SpawnManager::SetCropType(FarmRank rank)
 	switch (rank)
 	{
 	case Rank_A:	
-		c = RandomCrop(34, 33, 33);
+		c = RandomCrop(40, 30, 30);
 		break;
 	case Rank_B:
-		c = RandomCrop(34, 33, 33);
+		c = RandomCrop(55, 25, 20);
 		break;
 	case Rank_C:
-		c = RandomCrop(34, 33, 33);
+		c = RandomCrop(20, 70, 10);
 		break;
 	}
 
