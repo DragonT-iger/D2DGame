@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PlayerController.h"
 #include "Inventory.h"
+#include "GameManager.h"
 
 void PlayerController::Awake()
 {
@@ -35,7 +36,8 @@ void PlayerController::Update(float deltaTime)
 		//std::cout << moveSpd << std::endl;
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
-		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
+		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Starve; return; }
+		if (Input.GetKeyDown(Keycode::M)) { m_Player->state = State::Killed; return; }
 
 		if (Input.GetKeyPressed(Keycode::X))
 		{
@@ -74,16 +76,20 @@ void PlayerController::Update(float deltaTime)
 		switch (m_Player->action)
 		{
 		case Action::Idle:
-			if (curDir != Vector2{ 0.f,0.f })
+			if (m_animator->GetCurState() != "hit")
 			{
-				m_Player->action = Action::Walk;
-				break;
+				if (curDir != Vector2{ 0.f,0.f })
+				{
+					m_Player->action = Action::Walk;
+					break;
+				}
+				else if (m_animator->GetCurState() != "idle")
+				{
+					//m_animator->ChangeState("idle");
+					m_Player->action = Action::Idle;
+				}
 			}
-			else if (m_animator->GetCurState() != "idle")
-			{
-				//m_animator->ChangeState("idle");
-				m_Player->action = Action::Idle;
-			}
+
 			break;
 		case Action::Walk:
 			if (curDir == Vector2{ 0,0 })
@@ -96,17 +102,18 @@ void PlayerController::Update(float deltaTime)
 			if (!canMoveLeft && curDir.x < 0) curDir.x = 0;
 			m_transform->Translate(curDir * moveSpd * deltaTime);
 			break;
-			case Action::Hit:
-				if (m_animator->GetCurState() != "hit")
-				{
-					m_animator->ChangeState("hit");
-				}
-				if (m_animator->IsAnimeEnd())
-				{
-					m_Player->action = Action::Idle;
-				}
-				break;
-			 
+		case Action::Hit:
+			if (m_animator->GetCurState() != "hit")
+			{
+				m_animator->ChangeState("hit");
+				m_Player->action = Action::Idle;
+			}
+			if (m_animator->IsAnimeEnd())
+			{
+				m_Player->action = Action::Idle;
+			}
+			break;
+
 		case Action::Steal:
 			if (m_animator->IsAnimeEnd())
 			{
@@ -115,13 +122,6 @@ void PlayerController::Update(float deltaTime)
 			break;
 		}
 		//작물과 충돌중일 때 Z키를 누르면 Action -> Steal로 전환
-	}
-	else
-	{
-		if (m_animator->GetCurState() != "dead")
-		{
-			m_animator->ChangeState("dead");
-		}
 	}
 
 	m_throwelapsedTime += deltaTime;

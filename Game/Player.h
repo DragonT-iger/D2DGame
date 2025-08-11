@@ -3,7 +3,8 @@
 enum class State
 {
 	Alive,
-	Dead,
+	Starve,
+	Killed
 };
 
 enum class Action
@@ -44,7 +45,7 @@ public:
 	void SetAction(Action act);
 	//void SetVisible(Visibilty vib);
 	//
-	//State GetState() { return state; }
+	State GetState() { return state; }
 	
 	Action GetAction() { return action; }
 
@@ -59,7 +60,7 @@ public:
 
 		m_hp = hp; 
 
-		if (m_hp > -1)
+		if (m_hp > -1 && state != State::Starve)
 		{
 			for (int i = 0; i < minusHp; i++)
 			{
@@ -100,6 +101,7 @@ private:
 	Action		action		= Action::Idle;
 	Visibilty	visibilty	= Visibilty::Visible;
 
+	PlayerAnimator* m_P_animator = nullptr;
 	BoxCollider* m_boxCol = nullptr;
 	Inventory* m_Inven = nullptr;
 	Baby* m_baby = nullptr;

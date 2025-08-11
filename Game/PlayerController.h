@@ -39,4 +39,6 @@ private:
 	float m_throwelapsedTime = 0.0f;
 
 	//float* p_Spd = nullptr;
+
+	int m_deathAnimeCount = 0;
 };

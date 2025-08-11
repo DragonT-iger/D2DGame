@@ -18,7 +18,7 @@ void Baby::Awake()
 
 	tr->SetParent(GetOwner()->GetComponent<Transform>());
 	m_babySpriteRenderer = m_babyThinkUI->AddComponent<SpriteRenderer>();
-	
+
 	m_babySpriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("chat_bubble.png"));
 	m_babySpriteRenderer->SetActive(false);
 	m_babySpriteRenderer->SetOrderInLayer(10000);
@@ -40,7 +40,7 @@ void Baby::Update(float deltaTime)
 
 	if (m_parentSpriteRenderer->IsFlip()) {
 		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ 375.400f, 330.600f });
-		m_ItemUI->GetComponent<Transform>()->SetPosition({ 370.400f, 365.400f });	
+		m_ItemUI->GetComponent<Transform>()->SetPosition({ 370.400f, 365.400f });
 		m_babySpriteRenderer->SetFlip(false);
 	}
 	else {
@@ -50,6 +50,9 @@ void Baby::Update(float deltaTime)
 	}
 
 	QuestinProgress(deltaTime);
+
+	std::cout << "m_QExeCount: " << m_QExeCount << std::endl;
+	//std::cout << "m_QuestInProgress: " << m_QuestInProgress << std::endl;
 }
 
 
@@ -100,6 +103,7 @@ void Baby::OnTriggerExit(Collider* other)
 		{
 			QuestSuggestions();
 			m_QuestInProgress = true;
+			m_QExeCount = 0;
 		}
 	}
 }
@@ -128,26 +132,29 @@ void Baby::QuestSuggestions()
 
 void Baby::QuestinProgress(float deltaTime)
 {
-	if (m_QuestInProgress == true) // 퀘스트 진행중일 때만 카운트
-	{
-		m_QExeCount += deltaTime;
-	}
+	//if (m_QuestInProgress == true) // 퀘스트 진행중일 때만 카운트
+	//{
+	//	m_QExeCount += deltaTime;
+	//}
+
+	m_QExeCount += deltaTime;
 
 	if (m_player->GetAction() == Action::Hit) //Hit failed
 	{
-		m_QExeCount -= m_QExeTime;
+		//m_QExeCount -= m_QExeTime;
+		if(m_QuestInProgress)
+			QuestFailed();
 		m_QuestInProgress = false;
 
-		QuestFailed();
 		return;
 	}
 
 	if (m_QExeTime < m_QExeCount) //time Out
 	{
-		m_QExeCount = 0;
+		
 		m_QuestInProgress = false;
-
 		QuestFailed();
+		m_QExeCount = 0;
 	}
 }
 
@@ -160,12 +167,13 @@ void Baby::QuestSuccess()
 	temp_pt = 0;
 	temp_pk = 0;
 
-	m_QExeCount -= 30;
+	m_QExeCount -= m_QExeTime;
 }
 
 void Baby::QuestFailed()
 {
 	std::cout << "QuestFailed" << std::endl;
+	m_QExeCount -= m_QExeTime;
 	ChangeThink(Thought::None);
 }
 

@@ -23,7 +23,7 @@ public:
 
 	void Awake()                         override;
 	//void Start()                         override;
-	//void Update(float deltaTime)         override;
+	void Update(float deltaTime)         override;
 
 	void Init();
 
@@ -46,6 +46,7 @@ public:
 	void LoadEndingScene(EndReason reason);
 	EndReason GetEndReason() { return m_endReason; }
 
+
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
@@ -64,5 +65,6 @@ private:
 	static int totalscore;
 
 	static inline EndReason m_endReason = EndReason::None;
+
 
 };

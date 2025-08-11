@@ -2,6 +2,8 @@
 #include "GameManager.h"
 #include "Inventory.h"
 #include "EndingScene.h"
+#include "Player.h"
+#include "PlayerAnimator.h"
 #include "InventorySlot.h"
 
 int GameManager::ep_count = 0;
@@ -21,6 +23,11 @@ void GameManager::Init()
 
 }
 
+void GameManager::Update(float deltaTime)
+{
+
+}
+
 void GameManager::OnInspectorGUI()
 {
 	static const char* kEndReasonStr[] = { "None", "BabyStarved", "PlayerDead", "Happy" };
@@ -33,7 +40,8 @@ void GameManager::OnInspectorGUI()
 void GameManager::LoadEndingScene(EndReason reason)
 {
 	m_endReason = reason;
-	SceneManager::Instance().LoadScene(std::unique_ptr<EndingScene>());
+	SceneManager::Instance().LoadScene(std::make_unique<EndingScene>());
+
 }
 
 int GameManager::ReceiveScore(const std::vector<SlotData>& data)

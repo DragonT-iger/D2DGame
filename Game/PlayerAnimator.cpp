@@ -48,6 +48,7 @@ void PlayerAnimator::UpdateVisible()
 
 }
 
+
 void PlayerAnimator::Awake()
 {
 	m_Player = GetComponent<Player>();
@@ -61,13 +62,16 @@ void PlayerAnimator::Start()
 	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "walk");
 	auto moleHit = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "hit");
 	auto moleSteal = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "steal");
-	auto moleDead = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "dead");
+	auto moleDeath1 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death1");
+	auto moleDeath2 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death2");
 
 	m_animator->AddClip("idle", moleIdle, true);
 	m_animator->AddClip("walk", molewalk, true);
 	m_animator->AddClip("hit", moleHit, false);
 	m_animator->AddClip("steal", moleSteal, false);
-	m_animator->AddClip("dead", moleDead, false);
+	m_animator->AddClip("death1_1", moleDeath1, false);
+	m_animator->AddClip("death1_2", moleDeath1, false);
+	m_animator->AddClip("death2", moleDeath2, false);
 
 	m_animator->SetEntryState("idle");
 	m_spriteRenderer->SetOpacity(1);
@@ -93,8 +97,43 @@ void PlayerAnimator::Update(float deltaTime)
 	}
 	else
 	{
-		if (m_animator->GetCurState() != "dead")
-			m_animator->ChangeState("dead");
+		DeathAnime();
+	}
+}
+
+void PlayerAnimator::DeathAnime()
+{
+	switch (m_Player->state)
+	{
+	case State::Killed:
+		if (m_animator->GetCurState() != "death2")
+		{
+			m_animator->ChangeState("death2");
+		}
+		break;
+	case State::Starve:
+		if (m_animator->GetCurState() != "death1")
+		{
+			m_animator->ChangeState("death1");
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+bool PlayerAnimator::IsDeathAnimeFinished()
+{
+	if (m_Player->state == State::Alive)
+	{
+		return false;
 	}
 
+	const std::string& currentState = m_animator->GetCurState();
+
+	// 사망 애니메이션이 재생 중이고, 해당 애니메이션이 끝났다면 true 반환
+	if ((currentState == "death1_1" || currentState == "death2") && m_animator->IsAnimeEnd())
+	{
+		return true;
+	}
 }
