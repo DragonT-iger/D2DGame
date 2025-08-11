@@ -160,10 +160,6 @@ void MainScene::Awake()
 #pragma endregion
 
 //end Bush
-
-
-
-
 	//Farmer
 
 	//m_player2 = Instantiate("Player2");

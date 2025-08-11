@@ -58,16 +58,19 @@ void PlayerAnimator::Awake()
 void PlayerAnimator::Start()
 {
 	auto moleIdle = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "idle");
-	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "run");
-	auto moleHit = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "damaged");
+	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "walk");
+	auto moleHit = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "hit");
 	auto moleSteal = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "steal");
-	auto moleDead = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "dead");
+	auto moleDeath1 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death1");
+	auto moleDeath2 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death2");
 
 	m_animator->AddClip("idle", moleIdle, true);
-	m_animator->AddClip("run", molewalk, true);
-	m_animator->AddClip("damaged", moleHit, false);
+	m_animator->AddClip("walk", molewalk, true);
+	m_animator->AddClip("hit", moleHit, false);
 	m_animator->AddClip("steal", moleSteal, false);
-	m_animator->AddClip("dead", moleDead, false);
+	m_animator->AddClip("death1_1", moleDeath1, false);
+	m_animator->AddClip("death1_2", moleDeath1, false);
+	m_animator->AddClip("death2", moleDeath2, false);
 
 	m_animator->SetEntryState("idle");
 	m_spriteRenderer->SetOpacity(1);

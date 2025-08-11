@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "ExampleScene.h"
 #include "MainScene.h"
-#include "TestTitleScene.h"
+#include "TitleScene.h"
 #include "DTtestScene.h"
 #include "ArtTestView.h"
 

@@ -3,7 +3,7 @@
 #include "SettingButton.h"
 #include "AcceptSetting.h"
 #include "QuitSetting.h"
-#include "TestTitleScene.h"
+#include "TitleScene.h"
 
 void TitleScene::Awake()
 {

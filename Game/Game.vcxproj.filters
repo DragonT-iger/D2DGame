@@ -76,6 +76,12 @@
     <Filter Include="Scripts\ButtonTest\TitleBtn">
       <UniqueIdentifier>{2541ef50-4445-4182-aab9-91db37f065a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TitleScene">
+      <UniqueIdentifier>{365cd02e-4140-44d9-9da0-8639e25edea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TutorialScene">
+      <UniqueIdentifier>{b02b94dd-5bce-44b8-9f15-a62e69cd0068}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -141,9 +147,6 @@
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="TestTitleScene.cpp">
-      <Filter>TestScene</Filter>
-    </ClCompile>
     <ClCompile Include="Bush.cpp">
       <Filter>Scripts\Bush</Filter>
     </ClCompile>
@@ -207,6 +210,12 @@
     <ClCompile Include="TitleBtn.cpp">
       <Filter>Scripts\ButtonTest\TitleBtn</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>TutorialScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -268,9 +277,6 @@
     </ClInclude>
     <ClInclude Include="PlayerAnimator.h">
       <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="TestTitleScene.h">
-      <Filter>TestScene</Filter>
     </ClInclude>
     <ClInclude Include="Bush.h">
       <Filter>Scripts\Bush</Filter>
@@ -334,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="TitleBtn.h">
       <Filter>Scripts\ButtonTest\TitleBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>TutorialScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
