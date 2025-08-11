@@ -83,7 +83,7 @@ void Baby::OnTriggerEnter(Collider* other)
 	if (other->GetOwner()->GetTag() == "SubMissionArea")
 	{
 		int bob = GameManager::Instance().ReceiveScore(QuestDataCollector(m_inven_ptr->SubMissonItem()));
-		m_player->FeedBaby(bob / 10);
+		m_player->FeedBaby(bob / 5);
 
 		if (m_QuestInProgress == true)
 		{

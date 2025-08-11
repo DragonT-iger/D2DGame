@@ -86,8 +86,7 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 
 	totalscore += curScore;
 
-	return curScore / 5;
-
+	return curScore;
 }
 
 void GameManager::AddScore(int num)
