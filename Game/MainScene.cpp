@@ -207,6 +207,9 @@ void MainScene::Awake()
 	m_slot1Text->GetComponent<Transform>()->SetPosition({ 1045, 960 });
 	slot->RegisterText(txt);
 
+	m_slot1Full = Instantiate("Slot1Full");
+	slot->RegisterFullImage(m_slot1Full->AddComponent<Image>());
+
 	m_slot2 = Instantiate("Slot2");
 	m_slot2Text = Instantiate("Slot2Text");
 	m_slot2->AddComponent<Image>();
@@ -217,6 +220,9 @@ void MainScene::Awake()
 	m_slot2Text->GetComponent<Transform>()->SetPosition({ 1225, 960 });
 	slot->RegisterText(txt);
 
+	m_slot2Full = Instantiate("Slot1Full");
+	slot->RegisterFullImage(m_slot2Full->AddComponent<Image>());
+
 	m_slot3 = Instantiate("Slot3");
 	m_slot3Text = Instantiate("Slot3Text");
 	m_slot3->AddComponent<Image>();
@@ -226,6 +232,9 @@ void MainScene::Awake()
 	txt = m_slot3Text->AddComponent<Text>();
 	m_slot3Text->GetComponent<Transform>()->SetPosition({ 1405, 960 });
 	slot->RegisterText(txt);
+
+	m_slot3Full = Instantiate("Slot1Full");
+	slot->RegisterFullImage(m_slot3Full->AddComponent<Image>());
 
 	//SoundManager::Instance().BGM_Shot("sample_ten.wav");
 

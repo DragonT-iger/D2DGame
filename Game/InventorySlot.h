@@ -27,6 +27,8 @@ public:
 	
 	void SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite);
 
+	void RegisterFullImage(Image* fullImage);
+
 	void SetEmpty();
 
 	void SetText();
@@ -35,6 +37,8 @@ private:
 	SlotData m_data = { true, Nothing, 0 };
 
 	Image* m_image;
+
+	Image* m_fullImage;
 
 	Text* m_text;
 

@@ -37,15 +37,20 @@ void Slot::AddItem(Crops type, Size count)
 	else
 		m_data.count += static_cast<size_t>(count) * 3;
 
-	if (m_data.count > m_maxCount)
+	if (m_data.count >= m_maxCount)
 	{
 		m_data.count = m_maxCount;
+
+		m_fullImage->SetActive(true);
 		//떨구는 사운드 여기서 재생할듯
 	}
 }
 
 void Slot::ThrowItem()
 {
+	if (m_fullImage->IsActive())
+		m_fullImage->SetActive(false);
+
 	if(m_data.count > 0)
 		m_data.count--;
 
@@ -71,6 +76,16 @@ void Slot::SetSprite(Microsoft::WRL::ComPtr<ID2D1Bitmap1> sprite)
 	slotSize = { slotSize.width - 60, slotSize.height - 60 };
 	m_image->SetActive(true);
 	m_image->SetBitmap(sprite, slotSize);
+}
+
+void Slot::RegisterFullImage(Image* fullImage)
+{
+	m_fullImage = fullImage;
+
+	m_fullImage->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Full_Text.png"), { 117, 117 });
+	m_fullImage->SetActive(false);
+
+	m_fullImage->GetOwner()->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 }
 
 void Slot::SetEmpty()

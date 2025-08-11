@@ -13,15 +13,15 @@ void PlayerAnimator::ActionAnime()
 		}
 		break;
 	case Action::Walk:
-		if (m_animator->GetCurState() != "run")
+		if (m_animator->GetCurState() != "walk")
 		{
-			m_animator->ChangeState("run");
+			m_animator->ChangeState("walk");
 		}
 		break;
 	case Action::Hit:
-		if (m_animator->GetCurState() != "damaged")
+		if (m_animator->GetCurState() != "hit")
 		{
-			m_animator->ChangeState("damaged");
+			m_animator->ChangeState("hit");
 		}
 		break;
 	case Action::Steal:
