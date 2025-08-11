@@ -26,6 +26,10 @@ Vector2 Vector2::operator/(float rhs) const
 	return Vector2(x / rhs, y / rhs);
 }
 
+Vector2 Vector2::operator-() const {
+	return Vector2{ -x, -y };
+}
+
 Vector2& Vector2::operator+=(const Vector2& rhs)
 {
 	x += rhs.x;

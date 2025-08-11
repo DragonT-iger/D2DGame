@@ -2,13 +2,6 @@
 class Inventory;
 struct SlotData;
 
-enum class GameState
-{
-	Start,
-	Pause,
-	Rage,
-	End,
-};
 
 
 class GameManager : public MonoBehaviour
@@ -21,9 +14,9 @@ public:
 		return inst;
 	}
 
-	void Awake()                         override;
+	//void Awake()                         override;
 	//void Start()                         override;
-	void Update(float deltaTime)         override;
+	//void Update(float deltaTime)         override;
 
 	void Init();
 
@@ -32,6 +25,15 @@ public:
 	int GetTotalScore() { return totalscore; }
 
 	void AddScore(int num);
+
+	enum class GameState
+	{
+		Start,
+		Tutorial,
+		Pause,
+		Rage,
+		End,
+	};
 
 	enum class EndReason
 	{
@@ -42,6 +44,8 @@ public:
 	};
 
 	void OnInspectorGUI() override;
+
+	void SetFullScreen(bool isFull);
 
 	void LoadEndingScene(EndReason reason);
 	EndReason GetEndReason() { return m_endReason; }
@@ -66,5 +70,5 @@ private:
 
 	static inline EndReason m_endReason = EndReason::None;
 
-
+	bool m_isFullscreen = false;
 };

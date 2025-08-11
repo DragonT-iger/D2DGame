@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "ExampleScene.h"
 #include "MainScene.h"
-#include "TestTitleScene.h"
+#include "TitleScene.h"
 #include "DTtestScene.h"
 #include "ArtTestView.h"
 
@@ -45,6 +45,10 @@ bool Game::Initialize()
     //SceneManager::Instance().LoadScene(L"ExampleScene");
     SceneManager::Instance().LoadScene(std::make_unique<TitleScene>());
     //SceneManager::Instance().LoadScene(L"DTtestScene");
+
+    D2DRenderer::Instance().SetFullscreen(true);
+
+    
 	return true;
 }
 
@@ -82,8 +86,6 @@ void Game::LifeCycle(float deltaTime)
 	D2DRenderer::Instance().RenderBegin();
 
     ImGuiManager::Instance().BeginFrame(deltaTime);
-
-
 
     if (scene && scene->IsActive())
     {
@@ -126,6 +128,13 @@ void Game::UpdateTime()
 
 bool Game::OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+
+    if (msg == WM_SYSKEYDOWN && wParam == VK_RETURN && (lParam & (1 << 29)))
+    {
+        return true;
+    }
+
+
     if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
     {
         return true; // ImGui가 메시지를 처리했으면 true 반환
@@ -140,6 +149,12 @@ void Game::OnResize(int width, int height)
     __super::OnResize(width, height);
     /*Scene* scene = SceneManager::Instance().GetActiveScene();
     scene->OnResize(width , height);*/
+
+
+    ImGuiManager::Instance().InvalidateDeviceObjects();
+    D2DRenderer::Instance().Resize(width, height);
+
+    ImGuiManager::Instance().CreateDeviceObjects();
 }
 
 void Game::OnClose()

@@ -43,7 +43,7 @@ bool NzWndBase::Create(const wchar_t* className, const wchar_t* windowName, int 
 	WNDCLASSEX wc = {};
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.lpszClassName = className;
-	wc.lpfnWndProc = NzWndProc; // //[CHECK] #5. 윈도우 프로시저(함수)의 포인터 등록
+	wc.lpfnWndProc = NzWndProc;
 
 
 	ATOM classId = 0;
@@ -60,11 +60,10 @@ bool NzWndBase::Create(const wchar_t* className, const wchar_t* windowName, int 
 	RECT rc = { 0, 0, width, height };
 	//AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
 	//[2025-04-22] 리사이즈/최대화 막음
-	AdjustWindowRect(&rc,
-		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX, FALSE);
+	DWORD style = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+	AdjustWindowRect(&rc, style, FALSE);
 
-	//[CHECK] AdjustWindowRect()의 의미는?
-	m_hWnd = CreateWindowEx(NULL, MAKEINTATOM(classId), L"", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+	m_hWnd = CreateWindowEx(NULL, MAKEINTATOM(classId), L"", style, CW_USEDEFAULT, CW_USEDEFAULT,
 		rc.right - rc.left, rc.bottom - rc.top, HWND(), HMENU(), HINSTANCE(), NULL);
 
 

@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "EditorWindow.h"
-#include "../Game/TestTitleScene.h";
+#include "../Game/TitleScene.h";
 #include "../Game/MainScene.h"
 #include "../Game/EndingScene.h"
-//#include "../Game/
+#include "../Game/TutorialScene.h"
 
 void EditorWindow::Draw(float deltaTime)
 {
@@ -15,6 +15,7 @@ void EditorWindow::Draw(float deltaTime)
     DrawInspector();
 }
 
+
 void EditorWindow::DrawDebug() {
     static bool m_showGrid = false;
     if (ImGui::Checkbox("Show Grid", &m_showGrid)) {
@@ -22,7 +23,12 @@ void EditorWindow::DrawDebug() {
         curScene->SetGridOn(m_showGrid);
     }
 
-    static const char* kSceneNames[] = { "TitleScene", "MainScene", "EndingScene" };
+    //static bool fullscreen = false;
+    //if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
+    //    D2DRenderer::Instance().SetBorderless(fullscreen);
+    //}
+
+    static const char* kSceneNames[] = { "TitleScene", "MainScene", "EndingScene" , "TutorialScene"};
     static constexpr int kSceneCount = sizeof(kSceneNames) / sizeof(kSceneNames[0]);
 
     static int selected = 0;
@@ -31,23 +37,23 @@ void EditorWindow::DrawDebug() {
     ImGui::SameLine();
     if (ImGui::Button("Load"))
     {
-        // 선택된 이름에 따라 실제 씬 객체 생성 → 고유포인터로 넘김
         std::unique_ptr<Scene> newScene;
 
         switch (selected)
         {
-            case 0: newScene = std::make_unique<TitleScene>();   break;
-            case 1: newScene = std::make_unique<MainScene>();      break;
-            case 2: newScene = std::make_unique<EndingScene>();  break;
-            default: assert(false && "Invalid scene index");     return;
+        case 0: newScene = std::make_unique<TitleScene>();   break;
+        case 1: newScene = std::make_unique<MainScene>();    break;
+        case 2: newScene = std::make_unique<EndingScene>();  break;
+        case 3: newScene = std::make_unique<TutorialScene>(); break;
+        default: assert(false && "Invalid scene index");     return;
         }
 
         SceneManager::Instance().LoadScene(std::move(newScene));
-
-        m_selected = nullptr;        // Hierarchy 선택 리셋
-        m_componentOpen.clear();     // Inspector 폴드 상태 리셋
+        m_selected = nullptr;
+        m_componentOpen.clear();
     }
 }
+
 
 void EditorWindow::DrawHierarchy()
 {

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "MainScene.h"
+#include "TutorialScene.h"
 #include "Player.h"
 #include "PlayerAnimator.h"
 #include "PlayerController.h"
@@ -9,11 +9,9 @@
 #include "FarmerManager.h"
 #include "InventorySlot.h"
 #include "Inventory.h"
-#include "SpawnManager.h"
 #include "PlayerSound.h"
 #include "YSort.h"
 #include "GameManager.h"
-#include "Timer.h"
 #include "HungryGauge.h"
 #include "Baby.h"
 #include "UI_Score.h"
@@ -23,8 +21,11 @@
 #include "SettingButton.h"
 #include "AcceptSetting.h"
 #include "QuitSetting.h"
+#include "Farmer.h"
+#include "SpawnManager.h"
+#include "Timer.h"
 
-void MainScene::Awake()
+void TutorialScene::Awake()
 {
 	if (!IsActive())
 		return;
@@ -144,48 +145,19 @@ void MainScene::Awake()
 	bush6->AddComponent<SpriteRenderer>();
 	bush6->AddComponent<BoxCollider>();
 
-	bush7 = Instantiate("Bush7");
-	bush7->AddComponent<Bush>();
-	bush7->AddComponent<SpriteRenderer>();
-	bush7->AddComponent<BoxCollider>();
+	bush1->GetComponent<Transform>()->SetPosition(Vector2{ -1000, 1800 });
+	bush2->GetComponent<Transform>()->SetPosition(Vector2{ 1000, 1800 });
+	bush3->GetComponent<Transform>()->SetPosition(Vector2{ 0, 1000 });
+	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, -1000 });
+	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -2000, 50 });
+	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 2000, 50 });
 
-	bush8 = Instantiate("Bush8");
-	bush8->AddComponent<Bush>();
-	bush8->AddComponent<SpriteRenderer>();
-	bush8->AddComponent<BoxCollider>();
-
-	bush9 = Instantiate("Bush9");
-	bush9->AddComponent<Bush>();
-	bush9->AddComponent<SpriteRenderer>();
-	bush9->AddComponent<BoxCollider>();
-
-	bush10 = Instantiate("Bush10");
-	bush10->AddComponent<Bush>();
-	bush10->AddComponent<SpriteRenderer>();
-	bush10->AddComponent<BoxCollider>();
-
-
-	bush1->GetComponent<Transform>()->SetPosition(Vector2{ -1900,  500 });
-	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -1900, -500 });
-	bush3->GetComponent<Transform>()->SetPosition(Vector2{ 1900,  500 });
-	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 1900, -500 });
-	bush5->GetComponent<Transform>()->SetPosition(Vector2{ -1000, 1800 });
-	bush6->GetComponent<Transform>()->SetPosition(Vector2{ -1000, -1800 });
-	bush7->GetComponent<Transform>()->SetPosition(Vector2{ 1000, 1800 });
-	bush8->GetComponent<Transform>()->SetPosition(Vector2{ 1000, -1800 });
-	bush9->GetComponent<Transform>()->SetPosition(Vector2{ 0, -1000 });
-	bush10->GetComponent<Transform>()->SetPosition(Vector2{ 0,  1000 });
-
-	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush7->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush8->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush9->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
-	bush10->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+	bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush3->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush4->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush5->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
+	bush6->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 
 #pragma endregion
 
@@ -271,11 +243,11 @@ void MainScene::Awake()
 	
 #pragma endregion
 
-	m_background = Instantiate("background");
+	m_background = Instantiate("TutorialBackground");
 
 	sr = m_background->AddComponent<SpriteRenderer>();
 
-	sr->SetBitmap(ResourceManager::Instance().LoadTexture("background_test_1.png"));
+	sr->SetBitmap(ResourceManager::Instance().LoadTexture("TutorialBackground.png"));
 	sr->SetOrderInLayer(-200000);
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
@@ -390,10 +362,10 @@ void MainScene::Awake()
 	box = m_outRangeLeft->AddComponent<BoxCollider>();
 	box->SetSize({ 100 , 4320 });
 
-	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 2200 });
-	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -2150 });
-	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3845, 0 });
-	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3845, 0 });
+	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 300.000 });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -300.000 });
+	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3580.000, 0 });
+	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3580.000, 0 });
 
 #pragma endregion
 
@@ -543,18 +515,18 @@ void MainScene::Awake()
 
 	GameManager::Instance().Init(); //player?ž‘ inventory ?—°ê²?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
+
 	Scene::Awake();
 }
 
-void MainScene::Start()
+void TutorialScene::Start()
 {
 	if (!IsActive())
 		return;
 
-	Camera* cam = GetCamera();
+    main_Cam = GetCamera();
+    main_Cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
 
-	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
-	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetCameraZoom(0.6f);
 
 	Scene::Start();
 }

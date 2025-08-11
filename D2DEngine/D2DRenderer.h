@@ -17,6 +17,7 @@ public:
 		return instance;
     }
 
+
     D2DRenderer(const D2DRenderer&) = delete;
     D2DRenderer& operator=(const D2DRenderer&) = delete;
 	D2DRenderer(D2DRenderer&&) = delete;
@@ -25,6 +26,10 @@ public:
     D2DRenderer() = default;
 
     ~D2DRenderer() { Uninitialize(); }
+
+    void SetFullscreen(bool enable);
+    void SetBorderless(bool enable);
+
 
     void Initialize(HWND hwnd);
 

@@ -4,6 +4,7 @@
 #include "EndingScene.h"
 #include "Player.h"
 #include "PlayerAnimator.h"
+#include "CinemachineCamera.h"
 #include "InventorySlot.h"
 
 int GameManager::ep_count = 0;
@@ -12,9 +13,7 @@ int GameManager::pk_count = 0;
 int GameManager::totalscore = 0;
 
 
-void GameManager::Awake()
-{
-}
+
 
 void GameManager::Init()
 {
@@ -22,12 +21,6 @@ void GameManager::Init()
 	m_inventory = SceneManager::Instance().GetActiveScene()->FindGameObject("Inventory")->GetComponent<Inventory>();
 
 }
-
-void GameManager::Update(float deltaTime)
-{
-
-}
-
 void GameManager::OnInspectorGUI()
 {
 	static const char* kEndReasonStr[] = { "None", "BabyStarved", "PlayerDead", "Happy" };
@@ -35,13 +28,25 @@ void GameManager::OnInspectorGUI()
 	int current = static_cast<int>(m_endReason);
 	if (ImGui::Combo("EndReason", &current, kEndReasonStr, IM_ARRAYSIZE(kEndReasonStr)))
 		m_endReason = static_cast<EndReason>(current);
+
+	//bool full = m_isFullscreen;
+	//if (ImGui::Checkbox("Fullscreen", &full))
+	//{
+	//	m_isFullscreen = full;
+	//	SetFullScreen(m_isFullscreen);
+	//}
+}
+
+void GameManager::SetFullScreen(bool isFull)
+{
+	D2DRenderer::Instance().SetFullscreen(isFull);
 }
 
 void GameManager::LoadEndingScene(EndReason reason)
 {
 	m_endReason = reason;
-	SceneManager::Instance().LoadScene(std::make_unique<EndingScene>());
 
+	SceneManager::Instance().LoadScene(std::make_unique<EndingScene>());
 }
 
 int GameManager::ReceiveScore(const std::vector<SlotData>& data)
@@ -71,12 +76,12 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 		}
 	}
 
-	curScore = (temp_ep * 25) + (temp_pt * 10) + (temp_pk * 50);
+	curScore = (temp_ep * 150) + (temp_pt * 70) + (temp_pk * 400);
 
 
 	totalscore += curScore;
 
-	return curScore;
+	return curScore / 5;
 
 }
 

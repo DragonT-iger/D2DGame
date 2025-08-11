@@ -1,12 +1,20 @@
 #pragma once
 
-class AcceptSettingBtn : public MonoBehaviour
-{
+class TitleScene : public Scene {
 public:
 	void Awake() override;
+
 	void Start() override;
 
 private:
+	GameObject* m_startButton;
+	GameObject* m_settingButton;
+	GameObject* m_creditButton;
+	GameObject* m_quitButton;
+	GameObject* m_buttonBG;
+
+	GameObject* m_Title;
+
 	GameObject* m_settingWnd;
 	GameObject* m_settingText;
 	GameObject* m_bgmText;
@@ -17,10 +25,4 @@ private:
 	GameObject* m_uiSlider;
 	GameObject* m_cancleBtn;
 	GameObject* m_checkBtn;
-
-	Button* m_startBtn;
-	Button* m_titleBtn;
-	Button* m_settingbutton;
-
-	Button* m_button;
 };

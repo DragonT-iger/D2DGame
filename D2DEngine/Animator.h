@@ -19,11 +19,15 @@ public:
 
 	void ChangeState(const std::string& name);
 
+	void SetSpeed(float speed) { m_animationSpeed = speed; }
+
 	const std::string& GetCurState();
 
 	void SetEntryState(const std::string& name);
 
 	bool IsAnimeEnd() { return m_isEnd; }
+
+
 
 	// 스프라이트 렌더러 비트맵 바꾸는거랑(상태 바뀔 때)
 	// 애니메이션 프레임 바꿔주는거 있어야함
@@ -36,6 +40,7 @@ private:
 	std::vector<FrameData>																			m_frameDatas;
 	std::vector<FrameData>::iterator																m_curFrame;
 	float 																										m_duration = 0.0f;
+	float m_animationSpeed = 1.f;
 
 	bool																										m_curAnimeLoop;
 	bool																														m_isEnd;

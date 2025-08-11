@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "PlayerAnimator.h"
+#include "PlayerSound.h"
 
 constexpr float blinkTime = 0.2f;
 
@@ -24,6 +25,7 @@ void PlayerAnimator::ActionAnime()
 		if (m_animator->GetCurState() != "hit")
 		{
 			m_animator->ChangeState("hit");
+			m_Player->m_pSound->PlayHit();
 		}
 		break;
 	case Action::Steal:

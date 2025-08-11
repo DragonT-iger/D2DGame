@@ -70,6 +70,24 @@
     <Filter Include="Scripts\ButtonTest\Setting\Check">
       <UniqueIdentifier>{5a76c527-eb8f-497d-9c92-69e00bfe427f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\EscBtn">
+      <UniqueIdentifier>{94c2b36a-39c0-4a7b-8988-144041b5476b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\ButtonTest\TitleBtn">
+      <UniqueIdentifier>{2541ef50-4445-4182-aab9-91db37f065a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TitleScene">
+      <UniqueIdentifier>{365cd02e-4140-44d9-9da0-8639e25edea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TutorialScene">
+      <UniqueIdentifier>{b02b94dd-5bce-44b8-9f15-a62e69cd0068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\ButtonTest\Credit">
+      <UniqueIdentifier>{fe59466f-896a-4f8b-bfc2-8098da26d69f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\ButtonTest\Quit">
+      <UniqueIdentifier>{799d4f2b-ec1a-43ea-84a8-04c2a46d1a0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -135,9 +153,6 @@
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="TestTitleScene.cpp">
-      <Filter>TestScene</Filter>
-    </ClCompile>
     <ClCompile Include="Bush.cpp">
       <Filter>Scripts\Bush</Filter>
     </ClCompile>
@@ -194,6 +209,30 @@
     </ClCompile>
     <ClCompile Include="SubMissionArea.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrownCrop.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="OpacityDown.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="EscBtn.cpp">
+      <Filter>Scripts\EscBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBtn.cpp">
+      <Filter>Scripts\ButtonTest\TitleBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>TutorialScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditBtn.cpp">
+      <Filter>Scripts\ButtonTest\Credit</Filter>
+    </ClCompile>
+    <ClCompile Include="QuitBtn.cpp">
+      <Filter>Scripts\ButtonTest\Quit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,14 +296,8 @@
     <ClInclude Include="PlayerAnimator.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="TestTitleScene.h">
-      <Filter>TestScene</Filter>
-    </ClInclude>
     <ClInclude Include="Bush.h">
       <Filter>Scripts\Bush</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSound.h">
-      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="DTtestScene.h">
       <Filter>헤더 파일</Filter>
@@ -315,6 +348,33 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="SubMissionArea.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrownCrop.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="OpacityDown.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EscBtn.h">
+      <Filter>Scripts\EscBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBtn.h">
+      <Filter>Scripts\ButtonTest\TitleBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>TutorialScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditBtn.h">
+      <Filter>Scripts\ButtonTest\Credit</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitBtn.h">
+      <Filter>Scripts\ButtonTest\Quit</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSound.h">
       <Filter>Scripts</Filter>
     </ClInclude>
   </ItemGroup>

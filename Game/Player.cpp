@@ -4,6 +4,7 @@
 #include "Baby.h"
 #include "Inventory.h"
 #include "GameManager.h"
+#include "PlayerSound.h"
 
 constexpr float invincibleTime = 2.0f;
 
@@ -17,13 +18,14 @@ void Player::Awake()
 	m_P_spriteRen = GetComponent<SpriteRenderer>();
 	//m_animtor = GetComponent<Animator>();
 
-	m_fullness = 1000.0f;
+	m_fullness = 1500.0f;
 	m_elapsedTime = 0.0f;
 
 	m_hpUI.push_back(GameObject::Find("hp1"));
 	m_hpUI.push_back(GameObject::Find("hp2"));
 	m_hpUI.push_back(GameObject::Find("hp3"));
 
+	m_pSound = GetComponent<PlayerSound>();
 }
 
 void Player::Start()
@@ -40,7 +42,7 @@ void Player::Update(float deltaTime)
 
 	if (0.1f <= m_elapsedTime)
 	{
-		m_fullness -= 1.0f;
+		m_fullness -= 3.0f;
 		m_elapsedTime = 0.0f;
 	}
 
@@ -57,6 +59,7 @@ void Player::Update(float deltaTime)
 
 	if (m_hp <= 0 && state != State::Killed)
 	{
+		m_pSound->PlayDead();
 		state = State::Killed;
 	}
 	else if (m_fullness <= 0 && state != State::Starve)
@@ -89,9 +92,9 @@ void Player::OnTriggerEnter(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Bush")
 	{
+		m_pSound->PlayHide();
 		visibilty = Visibilty::Hide;
 	}
-
 }
 
 void Player::OnTriggerStay(Collider* other)
@@ -134,8 +137,8 @@ void Player::OnTriggerExit(Collider* other)
 
 void Player::FeedBaby(float bop)
 {
-	if (m_fullness + bop >= 1000.f)
-		m_fullness = 1000.f;
+	if (m_fullness + bop >= 1500.f)
+		m_fullness = 1500.f;
 	else
 		m_fullness += bop;
 }

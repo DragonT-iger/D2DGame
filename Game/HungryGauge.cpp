@@ -13,5 +13,6 @@ void HungryGauge::Awake()
 
 void HungryGauge::Update(float deltaTime)
 {
-	m_gauge->UpdateWidthRatio(m_player->GetFullness() / 1000.f);
+	auto fullness = m_player->GetFullness() / 1500.f;
+	m_gauge->UpdateWidthRatio(fullness);
 }

@@ -2,6 +2,42 @@
 #include "D2DRenderer.h"
 
 
+
+void D2DRenderer::SetFullscreen(bool enable) {
+    m_swapChain->SetFullscreenState(enable, nullptr);
+    //if (enable) {
+    //    
+    //}
+}
+
+void D2DRenderer::SetBorderless(bool enable) {
+    if (m_hwnd == nullptr) return;
+
+    LONG style = GetWindowLong(m_hwnd, GWL_STYLE);
+    if (enable) {
+        style &= ~WS_OVERLAPPEDWINDOW;
+        style |= WS_POPUP;
+        SetWindowLong(m_hwnd, GWL_STYLE, style);
+
+        MONITORINFO mi = { sizeof(mi) };
+        if (GetMonitorInfo(MonitorFromWindow(m_hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)) {
+            SetWindowPos(m_hwnd, HWND_TOP,
+                mi.rcMonitor.left, mi.rcMonitor.top,
+                mi.rcMonitor.right - mi.rcMonitor.left,
+                mi.rcMonitor.bottom - mi.rcMonitor.top,
+                SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+        }
+    }
+    else {
+        style &= ~WS_POPUP;
+        style |= WS_OVERLAPPEDWINDOW;
+        SetWindowLong(m_hwnd, GWL_STYLE, style);
+        SetWindowPos(m_hwnd, nullptr, 0, 0, 0, 0,
+            SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+    }
+}
+
+
 void D2DRenderer::Initialize(HWND hwnd)
 {
     m_hwnd = hwnd;
@@ -45,12 +81,19 @@ void D2DRenderer::Uninitialize()
 void D2DRenderer::Resize(UINT width, UINT height)
 {
     if (nullptr == m_swapChain) return; // 초기화 전에 호출이 될 수 있음.
+
+    if (width == 0 || height == 0)
+    {
+        return;
+    }
+
     ReleaseRenderTargets();
 
     // 스왑체인 크기 조정 후 렌더 타겟 재생성
     DX::ThrowIfFailed(m_swapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0));
 
     CreateRenderTargets();
+    CreateWriteResource();
 }
 
 void D2DRenderer::DrawLine(float x1, float y1, float x2, float y2, const D2D1::ColorF& color)
@@ -212,6 +255,8 @@ void D2DRenderer::SetTransform(const D2D1_MATRIX_3X2_F tm)
 
 void D2DRenderer::RenderBegin()
 {
+
+
     m_d2dContext->BeginDraw();
     m_d2dContext->Clear(D2D1::ColorF(D2D1::ColorF::White)); // 배경을 흰색으로 초기화
 }
@@ -291,6 +336,8 @@ void D2DRenderer::CreateDeviceAndSwapChain(HWND hwnd)
     hr = dxgiFactory->CreateSwapChainForHwnd(
         d3dDevice.Get(), hwnd, &scDesc, nullptr, nullptr, &swapChain);
 
+    DX::ThrowIfFailed(hr);
+    hr = dxgiFactory->MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER);
     DX::ThrowIfFailed(hr);
 
     // 3. ID2D1Factory4 생성
@@ -414,6 +461,15 @@ void D2DRenderer::ReleaseRenderTargets()
     {
         m_d2dContext->SetTarget(nullptr);
     }
+
+    if (m_d3dContext)
+    {
+        ID3D11RenderTargetView* nullViews[1] = { nullptr };
+        m_d3dContext->OMSetRenderTargets(0, nullViews, nullptr);
+        m_d3dContext->Flush();
+    }
+
+
 
     m_d3dRenderTV.Reset();
 
