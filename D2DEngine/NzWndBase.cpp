@@ -57,15 +57,14 @@ bool NzWndBase::Create(const wchar_t* className, const wchar_t* windowName, int 
 	m_width = width;
 	m_height = height;
 
+
 	RECT rc = { 0, 0, width, height };
-	//AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
 	//[2025-04-22] 리사이즈/최대화 막음
-	DWORD style = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
-	AdjustWindowRect(&rc, style, FALSE);
+	DWORD style = WS_POPUP;
+	DWORD exStyle = WS_EX_TOPMOST;
 
-	m_hWnd = CreateWindowEx(NULL, MAKEINTATOM(classId), L"", style, CW_USEDEFAULT, CW_USEDEFAULT,
+	m_hWnd = CreateWindowEx(exStyle, MAKEINTATOM(classId), L"", style, 0, 0,
 		rc.right - rc.left, rc.bottom - rc.top, HWND(), HMENU(), HINSTANCE(), NULL);
-
 
 
 	if (NULL == m_hWnd) return false;

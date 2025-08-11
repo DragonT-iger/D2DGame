@@ -38,3 +38,4 @@ void SceneManager::UnInitialize()
 	if (m_active)
 		m_active->UnInitialize();
 }
+
