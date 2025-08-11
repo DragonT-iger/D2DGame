@@ -44,8 +44,8 @@ private:
 	float m_throwTime = 0.1f;
 	float m_throwelapsedTime = 0.f;
 
-	float m_speedBoost = 200.0f;
-	float m_boostTimer = 0.8f;
+	float m_speedBoost = 0.0f;
+	float m_boostTimer = 0.0f;
 
 	void SpawnThrownCrop(Crops type);
 	void ApplyThrowBoost(Crops type);

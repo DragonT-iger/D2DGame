@@ -45,7 +45,7 @@ void TutorialScene::Awake()
 	auto playerSR = player->AddComponent<SpriteRenderer>();
 	BoxCollider* boxcol = player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
-
+		
 	player->AddComponent<Player>();
 	player->AddComponent<PlayerAnimator>();
 	player->AddComponent<PlayerController>();
@@ -54,7 +54,7 @@ void TutorialScene::Awake()
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
 
 	player->GetComponent<Transform>()->SetPosition({ -3560.0f , 0 });
-	player->AddComponent<Baby>();
+	//player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
 

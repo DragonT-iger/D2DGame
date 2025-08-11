@@ -290,17 +290,17 @@ void PlayerController::ApplyThrowBoost(Crops type)
 	switch (type)
 	{
 	case Potato:
-		m_speedBoost = 50.f;
+		m_speedBoost = 200.f;
 		break;
 	case Eggplant:
-		m_speedBoost = 80.f;
+		m_speedBoost = 250.f;
 		break;
 	case Pumpkin:
-		m_speedBoost = 100.f;
+		m_speedBoost = 300.f;
 		break;
 	default:
 		m_speedBoost = 0.f;
 		break;
 	}
-	m_boostTimer = 0.2f;
+	m_boostTimer = 0.1f;
 }
