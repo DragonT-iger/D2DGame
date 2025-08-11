@@ -58,16 +58,16 @@ void TutorialScene::Awake()
 
 	playerSR->SetOrderInLayer(1);
 
-	m_farmerHouse = Instantiate("House");
-	m_farmerHouse->SetTag("House");
-	auto sr = m_farmerHouse->AddComponent<SpriteRenderer>();
+	//m_farmerHouse = Instantiate("House");
+	//m_farmerHouse->SetTag("House");
+	//auto sr = m_farmerHouse->AddComponent<SpriteRenderer>();
 	//sr->SetBitmap(ResourceManager::Instance().LoadTexture("farmer_house_test_1.png"));
-	auto box = m_farmerHouse->AddComponent<BoxCollider>();
-	m_farmerHouse->AddComponent<YSort>(140);
-	m_farmerHouse->GetComponent<Transform>()->SetPosition({ 0, 0 });
-	m_farmerHouse->GetComponent<Transform>()->SetScale({ 0.6, 0.6 });
-	box->SetSize({ 300, 270 });
-	box->SetOffset({ 0, -160 });
+	//auto box = m_farmerHouse->AddComponent<BoxCollider>();
+	//m_farmerHouse->AddComponent<YSort>(140);
+	//m_farmerHouse->GetComponent<Transform>()->SetPosition({ 0, 0 });
+	//m_farmerHouse->GetComponent<Transform>()->SetScale({ 0.6, 0.6 });
+	//box->SetSize({ 300, 270 });
+	//box->SetOffset({ 0, -160 });
 	
 	
 //end player-----
@@ -251,10 +251,10 @@ void TutorialScene::Awake()
 
 	m_background = Instantiate("TutorialBackground");
 
-	sr = m_background->AddComponent<SpriteRenderer>();
+	SpriteRenderer* spriteRenderer = m_background->AddComponent<SpriteRenderer>();
 
-	sr->SetBitmap(ResourceManager::Instance().LoadTexture("TutorialBackground.png"));
-	sr->SetOrderInLayer(-200000);
+	spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("TutorialBackground.png"));
+	spriteRenderer->SetOrderInLayer(-200000);
 
 	m_background->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
 
@@ -359,7 +359,7 @@ void TutorialScene::Awake()
 	m_outRangeRight->SetTag("OutRange");
 	m_outRangeLeft->SetTag("OutRange");
 
-	box = m_outRangeUp->AddComponent<BoxCollider>();
+	BoxCollider* box = m_outRangeUp->AddComponent<BoxCollider>();
 	box->SetSize({ 7680 , 100 });
 	box = m_outRangeDown->AddComponent<BoxCollider>();
 	box->SetSize({ 7680 , 100 });

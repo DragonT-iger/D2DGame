@@ -29,7 +29,7 @@ void SpawnManager::Awake()
 	
 	if (isTutorial) {
 		farmArr.reserve(1);
-		farmArr.push_back({ Rank_A, 50, 0.0f, 3.f, &m_farmAList });
+		farmArr.push_back({ Rank_A, 10, 0.0f, 3.f, &m_farmAList });
 
 		growArr.reserve(1);
 		growArr.push_back(&rankA);
