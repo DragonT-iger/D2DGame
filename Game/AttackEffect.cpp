@@ -5,9 +5,17 @@
 #include "Random.h"
 #include "GameObject.h"
 
+FMOD::ChannelGroup* AttackEffect::m_effectSoundGroup = nullptr;
+
 void AttackEffect::Awake()
 {
     m_animator = GetOwner()->AddComponent<Animator>();
+
+    if (!AttackEffect::GetChannelGroup())
+    {
+        SoundManager::Instance().GetCoreSystem()->createChannelGroup("shot", &AttackEffect::GetChannelGroup());
+        SoundManager::Instance().AddSFXGroup(AttackEffect::GetChannelGroup());
+    }
 }
 
 void AttackEffect::Start()
@@ -22,8 +30,21 @@ void AttackEffect::Start()
 
 void AttackEffect::Update(float deltaTime)
 {
-    if (m_animator && m_animator->IsAnimeEnd())
+    if (m_animator)
     {
-        Destroy(GetOwner());
+        if (m_elapsedTime >= m_soundTime)
+        {
+            bool isPlaying = false;
+            AttackEffect::GetChannelGroup()->isPlaying(&isPlaying);
+            if(!isPlaying)
+                SoundManager::Instance().SFX_Shot("18.mp3", AttackEffect::GetChannelGroup());
+            m_elapsedTime = 0.0f;
+        }
+        else
+        {
+            m_elapsedTime += deltaTime;
+        }
+        if(m_animator->IsAnimeEnd())
+            Destroy(GetOwner());
     }
 }

@@ -93,8 +93,8 @@ void Player::OnTriggerExit(Collider* other)
 
 void Player::FeedBaby(float bop)
 {
-	if (m_fullness + bop >= 3000.f)
-		m_fullness = 3000.f;
+	if (m_fullness + bop >= 1500.f)
+		m_fullness = 1500.f;
 	else
 		m_fullness += bop;
 }

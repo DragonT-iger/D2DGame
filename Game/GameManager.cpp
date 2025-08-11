@@ -73,12 +73,12 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 		}
 	}
 
-	curScore = (temp_ep * 25) + (temp_pt * 10) + (temp_pk * 50);
+	curScore = (temp_ep * 150) + (temp_pt * 70) + (temp_pk * 400);
 
 
 	totalscore += curScore;
 
-	return curScore;
+	return curScore / 5;
 
 }
 

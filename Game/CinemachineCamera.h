@@ -21,8 +21,8 @@ private:
     float        m_minZoom = 0.5f;     // 최소 scale.x
     float        m_maxZoom = 10.0f;    // 최대 scale.x
 
-	float        m_currentZoom = 1.0f; // 현재 확대·축소 배수
-    float        m_targetZoom = 1.0f;  // 목표 확대·축소 배수
+	float        m_currentZoom = 0.6f; // 현재 확대·축소 배수
+    float        m_targetZoom = 0.6f;  // 목표 확대·축소 배수
     float        m_zoomStep = 0.2f;    // 확대·축소 단계
 	float        m_damping = 5.0f;     // 부드럽게 수렴하는 정도
 
