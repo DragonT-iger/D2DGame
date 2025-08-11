@@ -5,6 +5,7 @@
 void SettingButton::Awake()
 {
 	m_button = GetComponent<Button>();
+	m_button->SetSize({ 305, 133 });
 	m_settingWnd = GameObject::Find("settingWnd");
 	m_settingText = GameObject::Find("settingText");
 	m_bgmText = GameObject::Find("bgmText");

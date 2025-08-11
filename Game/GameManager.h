@@ -14,9 +14,9 @@ public:
 		return inst;
 	}
 
-	void Awake()                         override;
+	//void Awake()                         override;
 	//void Start()                         override;
-	void Update(float deltaTime)         override;
+	//void Update(float deltaTime)         override;
 
 	void Init();
 

@@ -2,6 +2,6 @@
 class EndingScene :public Scene
 {
 	void Awake() override;
-	//void Start() override; ¾²Áö¸¶¼À
+	//void Start() override; 
 };
 

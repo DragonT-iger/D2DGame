@@ -554,6 +554,7 @@ void MainScene::Start()
 	Camera* cam = GetCamera();
 
 	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
+	cam->GetOwner()->GetComponent<CinemachineCamera>()->SetCameraZoom(0.6f);
 
 	Scene::Start();
 }

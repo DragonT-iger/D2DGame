@@ -2,6 +2,7 @@
 #include "EndingScene.h"
 #include "GameManager.h"
 #include "EndSceneManager.h"
+#include "CinemachineCamera.h"
 
 void EndingScene::Awake()
 {

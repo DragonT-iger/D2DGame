@@ -13,21 +13,22 @@ void TitleScene::Awake()
 #pragma region Button_Instantiate
 	m_startButton = Instantiate("startBtn");
 	m_settingButton = Instantiate("settingBtn");
+	m_creditButton = Instantiate("settingBtn");
 	m_quitButton = Instantiate("quitBtn");
 	
 	auto Img = m_startButton->AddComponent<Image>();
 	auto button = m_startButton->AddComponent<Button>();
 	m_startButton->AddComponent<StartButton>();
 
-	button->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
-	button->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start.png"), ButtonEvent::Idle);
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start_Select.png"), ButtonEvent::Highlight);
 
 	Img = m_settingButton->AddComponent<Image>();
 	button = m_settingButton->AddComponent<Button>();
 	m_settingButton->AddComponent<SettingButton>();
 
-	button->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
-	button->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn3_Setting.png"), ButtonEvent::Idle);
+	button->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn3_Setting_Select.png"), ButtonEvent::Highlight);
 
 	m_startButton->GetComponent<Transform>()->SetPosition({ 960.f, 540.f });
 	m_settingButton->GetComponent<Transform>()->SetPosition({ 960.f, 640.f });

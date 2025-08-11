@@ -13,6 +13,12 @@ void Button::Event(ButtonEvent event)
 {
 	switch (event)
 	{
+	case ButtonEvent::Idle:
+		for (const auto& event : m_idleEvents)
+		{
+			event();
+		}
+		break;
 	case ButtonEvent::Highlight:
 		for (const auto& event : m_highlightEvents)
 		{
@@ -67,6 +73,7 @@ void Button::Update(float deltaTime)
 		{
 			m_curEvent = ButtonEvent::Idle;
 			SetBitmap(m_curEvent);
+			Event(ButtonEvent::Idle);
 		}
 	}
 }

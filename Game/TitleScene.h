@@ -9,8 +9,11 @@ public:
 private:
 	GameObject* m_startButton;
 	GameObject* m_settingButton;
+	GameObject* m_creditButton;
 	GameObject* m_quitButton;
+
 	GameObject* m_Title;
+
 	GameObject* m_settingWnd;
 	GameObject* m_settingText;
 	GameObject* m_bgmText;
