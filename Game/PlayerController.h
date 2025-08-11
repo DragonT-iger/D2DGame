@@ -37,11 +37,15 @@ private:
 	bool canMoveLeft = true;
 	bool canMoveRight = true;
 
-	float m_throwTime = 0.1f;
-	float m_throwelapsedTime = 0.0f;
+	float m_throwDelay = 0.3f;
+	float m_delay = 0.0f; // 0¿” ¿Ã∞«
 
-	float m_speedBoost = 0.0f;
-	float m_boostTimer = 0.0f;
+
+	float m_throwTime = 0.1f;
+	float m_throwelapsedTime = 0.f;
+
+	float m_speedBoost = 50.0f;
+	float m_boostTimer = 0.5f;
 
 	void SpawnThrownCrop(Crops type);
 	void ApplyThrowBoost(Crops type);

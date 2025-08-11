@@ -29,7 +29,7 @@ void PlayerController::Update(float deltaTime)
 		curDir = { (float)x,(float)y };
 		curDir.Normalize();
 
-		std::cout << "curDir" << curDir.x << " " << curDir.y << std::endl;
+		//std::cout << "curDir" << curDir.x << " " << curDir.y << std::endl;
 
 		if (m_boostTimer > 0.f)
 			m_boostTimer -= deltaTime;
@@ -58,28 +58,39 @@ void PlayerController::Update(float deltaTime)
 		{
 			m_inven->ChangeSlot();
 		}
-		if (Input.GetKeyDown(Keycode::C))
+		if (Input.GetKeyPressed(Keycode::C))
 		{
 			Crops type = m_inven->ThrowItem();
 			if (type != Crops::Nothing)
 			{
 				m_throwelapsedTime = 0;
+				std::cout << "spawn" << std::endl;
 				SpawnThrownCrop(type);
 				ApplyThrowBoost(type);
 			}
 		}
-		else if (Input.GetKeyPressed(Keycode::C))
+		else if (Input.GetKeyDown(Keycode::C))
 		{
-			if (m_throwelapsedTime >= m_throwTime)
-			{
-				Crops type = m_inven->ThrowItem();
-				if (type != Crops::Nothing)
+			m_delay += deltaTime;
+
+			if (m_delay > m_throwDelay) {
+				m_throwelapsedTime += deltaTime;
+				if (m_throwelapsedTime >= m_throwTime)
 				{
-					m_throwelapsedTime = 0;
-					SpawnThrownCrop(type);
-					ApplyThrowBoost(type);
+					Crops type = m_inven->ThrowItem();
+					if (type != Crops::Nothing)
+					{
+						m_throwelapsedTime = 0;
+						SpawnThrownCrop(type);
+						ApplyThrowBoost(type);
+					}
 				}
 			}
+
+			
+		}
+		else {
+			m_delay = 0.f;
 		}
 
 		/*switch (static_cast<int>(m_Player->action))
@@ -151,7 +162,6 @@ void PlayerController::Update(float deltaTime)
 		}
 	}
 
-	m_throwelapsedTime += deltaTime;
 }
 
 void PlayerController::OnTriggerEnter(Collider* other)
