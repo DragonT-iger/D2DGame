@@ -47,7 +47,7 @@ private:
 	int m_curSlotNum;
 	int maxSlotNum = 2;
 
-	double m_potatoBonus = 0.002;  
-	double m_eggplantBonus = 0.005; 
-	double m_pumpkinBonus = 0.012;  
+	double m_potatoBonus = 0.004;  
+	double m_eggplantBonus = 0.01; 
+	double m_pumpkinBonus = 0.024;  
 };

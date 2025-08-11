@@ -26,10 +26,6 @@ public:
 
     void ChangeState(FarmerState farmerState);
 
-
-
-   
-
 	//애니메이션
     FarmerState GetFarmerState() { return m_farmerState; }
 

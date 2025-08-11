@@ -14,14 +14,18 @@ void SpawnManager::Awake()
 	Home = {-235, 127, 235, -127};
 	
 	farmArr.reserve(3);
-	farmArr.push_back({ Rank_A, 50, 0.0f, 3.f, &m_farmAList });
-	farmArr.push_back({ Rank_B, 30, 0.0f, 4.f, &m_farmBList });
+	farmArr.push_back({ Rank_A, 20, 0.0f, 3.f, &m_farmAList });
+	farmArr.push_back({ Rank_B, 20, 0.0f, 4.f, &m_farmBList });
 	farmArr.push_back({ Rank_C, 20, 0.0f, 5.f, &m_farmCList });
 
 	growArr.reserve(3);
 	growArr.push_back(&rankA);
 	growArr.push_back(&rankB);
 	growArr.push_back(&rankC);
+
+	rankA = { 1, 1, 1 };
+	rankB = { 1, 1, 1 };
+	rankC = { 1, 1, 0 };
 
 	//리스트 초기화
 	m_farmAList.clear();
@@ -52,6 +56,22 @@ void SpawnManager::Awake()
 	m_cropSprites.emplace(Pumpkin, &m_pumpkinSprite);
 	m_cropSprites.emplace(Eggplant, &m_eggplantSprite);
 	m_cropSprites.emplace(Potato, &m_potatoSprite);
+}
+
+void SpawnManager::Start()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		for (auto& farm : farmArr)
+		{
+			GameObject* obj = CreateNewCrop(farm.rank);
+			farm.farmlist->push_back(obj);
+		}
+	}
+
+	rankA = { 3, 4, 7 };
+	rankB = { 5, 7, 10 };
+	rankC = { 8, 12, 0 };
 }
 
 void SpawnManager::Update(float deltaTime)

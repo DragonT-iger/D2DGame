@@ -14,7 +14,7 @@ void Player::Awake()
 	m_boxCol = GetComponent<BoxCollider>();
 	m_baby = GetComponent<Baby>();
 
-	m_fullness = 1000.0f;
+	m_fullness = 1500.0f;
 	m_elapsedTime = 0.0f;
 
 	m_hpUI.push_back(GameObject::Find("hp1"));
@@ -37,7 +37,7 @@ void Player::Update(float deltaTime)
 
 	if (0.1f <= m_elapsedTime)
 	{
-		m_fullness -= 1.0f;
+		m_fullness -= 3.0f;
 		m_elapsedTime = 0.0f;
 	}
 
@@ -93,8 +93,8 @@ void Player::OnTriggerExit(Collider* other)
 
 void Player::FeedBaby(float bop)
 {
-	if (m_fullness + bop >= 1000.f)
-		m_fullness = 1000.f;
+	if (m_fullness + bop >= 3000.f)
+		m_fullness = 3000.f;
 	else
 		m_fullness += bop;
 }
