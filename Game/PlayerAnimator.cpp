@@ -107,7 +107,7 @@ void PlayerAnimator::Update(float deltaTime)
 		}
 		else
 		{
-			m_spriteRenderer->SetOpacity(1);
+			//m_spriteRenderer->SetOpacity(1);
 		}
 	}
 	else

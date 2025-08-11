@@ -148,7 +148,6 @@ void Player::OnTriggerExit(Collider* other)
 	{
 		visibilty = Visibilty::Visible;
 	}
-
 }
 
 void Player::FeedBaby(float bop)
