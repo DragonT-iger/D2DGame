@@ -3,7 +3,7 @@
 #include "../Game/TitleScene.h";
 #include "../Game/MainScene.h"
 #include "../Game/EndingScene.h"
-//#include "../Game/
+#include "../Game/TutorialScene.h"
 
 void EditorWindow::Draw(float deltaTime)
 {
@@ -28,7 +28,7 @@ void EditorWindow::DrawDebug() {
     //    D2DRenderer::Instance().SetBorderless(fullscreen);
     //}
 
-    static const char* kSceneNames[] = { "TitleScene", "MainScene", "EndingScene" };
+    static const char* kSceneNames[] = { "TitleScene", "MainScene", "EndingScene" , "TutorialScene"};
     static constexpr int kSceneCount = sizeof(kSceneNames) / sizeof(kSceneNames[0]);
 
     static int selected = 0;
@@ -44,6 +44,7 @@ void EditorWindow::DrawDebug() {
         case 0: newScene = std::make_unique<TitleScene>();   break;
         case 1: newScene = std::make_unique<MainScene>();    break;
         case 2: newScene = std::make_unique<EndingScene>();  break;
+        case 3: newScene = std::make_unique<TutorialScene>(); break;
         default: assert(false && "Invalid scene index");     return;
         }
 

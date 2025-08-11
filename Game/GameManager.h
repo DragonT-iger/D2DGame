@@ -2,13 +2,6 @@
 class Inventory;
 struct SlotData;
 
-enum class GameState
-{
-	Start,
-	Pause,
-	Rage,
-	End,
-};
 
 
 class GameManager : public MonoBehaviour
@@ -32,6 +25,15 @@ public:
 	int GetTotalScore() { return totalscore; }
 
 	void AddScore(int num);
+
+	enum class GameState
+	{
+		Start,
+		Tutorial,
+		Pause,
+		Rage,
+		End,
+	};
 
 	enum class EndReason
 	{

@@ -11,6 +11,9 @@ void FarmerManager::Awake()
         {  1100.f, -750.f }
     };
 
+
+   
+
     m_farmers.reserve(positions.size());
 
     for (const auto& pos : positions)
