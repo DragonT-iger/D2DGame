@@ -25,7 +25,7 @@ void EditorWindow::DrawDebug() {
 
     static bool fullscreen = false;
     if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
-        D2DRenderer::Instance().SetFullscreen(fullscreen);
+        D2DRenderer::Instance().SetBorderless(fullscreen);
     }
 
     static const char* kSceneNames[] = { "TitleScene", "MainScene", "EndingScene" };

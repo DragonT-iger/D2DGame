@@ -238,7 +238,6 @@ void PlayerController::SpawnThrownCrop(Crops type)
 {
 	GameObject* obj = Instantiate("thrownCrop");
 	auto sr = obj->AddComponent<SpriteRenderer>();
-	obj->GetComponent<Transform>()->SetScale({ 0.3f, 0.3f });
 	obj->AddComponent<OpacityDown>();
 	auto ys = obj->AddComponent<YSort>();
 	ys->SetStatic(false);
@@ -247,7 +246,7 @@ void PlayerController::SpawnThrownCrop(Crops type)
 	auto thrown = obj->AddComponent<ThrownCrop>();
 	auto tr = obj->GetComponent<Transform>();
 	tr->SetPosition(m_transform->GetPosition());
-	tr->SetScale({ 0.2f, 0.2f });
+	tr->SetScale({ 0.15f, 0.15f });
 
 	Vector2 dir = -curDir;
 	if (dir.x == 0.0f) {

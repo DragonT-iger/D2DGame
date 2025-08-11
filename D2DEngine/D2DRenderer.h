@@ -28,6 +28,7 @@ public:
     ~D2DRenderer() { Uninitialize(); }
 
     void SetFullscreen(bool enable);
+    void SetBorderless(bool enable);
 
 
     void Initialize(HWND hwnd);
