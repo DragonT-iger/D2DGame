@@ -48,7 +48,6 @@ public:
 	float GetFullness() { return m_fullness; }
 
 	int GetHp() { return m_hp; }
-
 	void SetHp(int hp) {
 		if (m_isHittable)
 		{
@@ -69,9 +68,10 @@ public:
 		}
 		
 	}
+	bool GetHittable() { return m_isHittable; }
+
 
 	void FeedBaby(float bop);
-	void invincibleCheck();
 
 	friend class PlayerController;
 	friend class PlayerAnimator;
@@ -104,6 +104,7 @@ private:
 	Action		action		= Action::Idle;
 	Visibilty	visibilty	= Visibilty::Visible;
 
+	//Animator* m_animtor = nullptr;
 	PlayerAnimator* m_P_animator = nullptr;
 	SpriteRenderer* m_P_spriteRen = nullptr;
 	BoxCollider* m_boxCol = nullptr;

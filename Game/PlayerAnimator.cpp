@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "PlayerAnimator.h"
 
+constexpr float blinkTime = 0.2f;
+
 void PlayerAnimator::ActionAnime()
 {
 	switch (m_Player->action)
@@ -33,22 +35,6 @@ void PlayerAnimator::ActionAnime()
 	}
 }
 
-void PlayerAnimator::UpdateVisible()
-{
-	switch (m_Player->visibilty)
-	{
-	case Visibilty::Visible:
-		m_spriteRenderer->SetOpacity(1);
-		break;
-	case Visibilty::Hide:
-		m_spriteRenderer->SetOpacity(0.3f);
-		break;
-
-	}
-
-}
-
-
 void PlayerAnimator::Awake()
 {
 	m_Player = GetComponent<Player>();
@@ -78,6 +64,8 @@ void PlayerAnimator::Start()
 
 void PlayerAnimator::Update(float deltaTime)
 {
+	Timer += deltaTime;
+	
 	if (m_Player->state == State::Alive)
 	{
 		int x = Input.GetAxisRaw("Horizontal");
@@ -92,11 +80,51 @@ void PlayerAnimator::Update(float deltaTime)
 		}
 
 		ActionAnime();
-		UpdateVisible();
+
+		if (m_Player->GetHittable() == false)
+		{
+			if (blinkTime < Timer)
+			{
+				switch (curValue)
+				{
+				case 0:
+					std::cout << "1 진입" << std::endl;
+					m_spriteRenderer->SetOpacity(0.1);
+					curValue = 1;
+					break;
+				case 1:
+					std::cout << "2 진입" << std::endl;
+					m_spriteRenderer->SetOpacity(1);
+					curValue = 0;
+					break;
+				}
+				Timer = 0;
+			}
+		}
+		else
+		{
+			m_spriteRenderer->SetOpacity(1);
+		}
 	}
 	else
 	{
 		DeathAnime();
+	}
+}
+
+void PlayerAnimator::OnTriggerEnter(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "Bush")
+	{
+		m_spriteRenderer->SetOpacity(0.3f);
+	}
+}
+
+void PlayerAnimator::OnTriggerExit(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "Bush")
+	{
+		m_spriteRenderer->SetOpacity(1);
 	}
 }
 

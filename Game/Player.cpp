@@ -15,6 +15,7 @@ void Player::Awake()
 	m_baby = GetComponent<Baby>();
 	m_P_animator = GetComponent<PlayerAnimator>();
 	m_P_spriteRen = GetComponent<SpriteRenderer>();
+	//m_animtor = GetComponent<Animator>();
 
 	m_fullness = 1000.0f;
 	m_elapsedTime = 0.0f;
@@ -67,8 +68,6 @@ void Player::Update(float deltaTime)
 	{
 		if (m_P_animator->IsDeathAnimeFinished())
 		{
-
-
 			std::cout << "State: Killed" << std::endl;
 			GameManager::Instance().LoadEndingScene(GameManager::EndReason::PlayerDead);
 		}
@@ -99,6 +98,10 @@ void Player::OnTriggerStay(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Farmer")
 	{
+		if (m_isHittable)
+		{
+			SetAction(Action::Hit);
+		}
 		SetHp(GetHp() - 1);
 	}
 
