@@ -32,9 +32,9 @@ void Inventory::Awake()
 
 void Inventory::Start()
 {
-	m_slots[Potato]->SetSprite(ResourceManager::Instance().LoadTexture("potato_item.png"));
-	m_slots[Eggplant]->SetSprite(ResourceManager::Instance().LoadTexture("eggplant_item.png"));
-	m_slots[Pumpkin]->SetSprite(ResourceManager::Instance().LoadTexture("pumpkin_item.png"));
+	m_slots[Potato]->SetSprite(ResourceManager::Instance().LoadTexture("potato3_item_Whiteline.png"));
+	m_slots[Eggplant]->SetSprite(ResourceManager::Instance().LoadTexture("eggplant3_item_Whiteline.png"));
+	m_slots[Pumpkin]->SetSprite(ResourceManager::Instance().LoadTexture("pumpkin3_item_Whiteline.png"));
 
 	m_curSlotNum = 0;
 	m_curSlot = m_slots[m_curSlotNum];
