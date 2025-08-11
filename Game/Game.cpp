@@ -47,7 +47,7 @@ bool Game::Initialize()
     ClientSceneManager::Instance().LoadScene(std::make_unique<TitleScene>());
     //SceneManager::Instance().LoadScene(L"DTtestScene");
 
-    D2DRenderer::Instance().SetFullscreen(true);
+    //D2DRenderer::Instance().SetFullscreen(true);
 
     
 	return true;
