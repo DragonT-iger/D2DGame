@@ -14,9 +14,9 @@ public:
 		return inst;
 	}
 
-	//void Awake()                         override; // 웬만하면 쓰지마셈 생성자 계속 불림
-	//void Start()                         override; // 이것도
-	//void Update(float deltaTime)         override;
+	void Awake()                         override;
+	//void Start()                         override;
+	void Update(float deltaTime)         override;
 
 	void Init();
 
@@ -49,6 +49,7 @@ public:
 
 	void LoadEndingScene(EndReason reason);
 	EndReason GetEndReason() { return m_endReason; }
+
 
 private:
 	GameManager(const GameManager&) = delete;

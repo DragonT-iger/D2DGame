@@ -7,6 +7,7 @@
 #include "ThrownCrop.h"
 #include "YSort.h"
 #include "OpacityDown.h"
+#include "GameManager.h"
 
 void PlayerController::Awake()
 {
@@ -54,7 +55,8 @@ void PlayerController::Update(float deltaTime)
 			m_animator->SetSpeed(1.f);
 
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
-		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Dead; return; }
+		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Starve; return; }
+		if (Input.GetKeyDown(Keycode::M)) { m_Player->state = State::Killed; return; }
 
 		if (Input.GetKeyPressed(Keycode::X))
 		{
@@ -117,16 +119,20 @@ void PlayerController::Update(float deltaTime)
 		switch (m_Player->action)
 		{
 		case Action::Idle:
-			if (curDir != Vector2{ 0.f,0.f })
+			if (m_animator->GetCurState() != "hit")
 			{
-				m_Player->action = Action::Walk;
-				break;
+				if (curDir != Vector2{ 0.f,0.f })
+				{
+					m_Player->action = Action::Walk;
+					break;
+				}
+				else if (m_animator->GetCurState() != "idle")
+				{
+					//m_animator->ChangeState("idle");
+					m_Player->action = Action::Idle;
+				}
 			}
-			else if (m_animator->GetCurState() != "idle")
-			{
-				//m_animator->ChangeState("idle");
-				m_Player->action = Action::Idle;
-			}
+
 			break;
 		case Action::Walk:
 			if (curDir == Vector2{ 0,0 })
@@ -140,17 +146,18 @@ void PlayerController::Update(float deltaTime)
 			m_transform->Translate(curDir * moveSpd * deltaTime);
 			m_Player->m_pSound->PlayWalk();
 			break;
-			case Action::Hit:
-				if (m_animator->GetCurState() != "hit")
-				{
-					m_animator->ChangeState("hit");
-				}
-				if (m_animator->IsAnimeEnd())
-				{
-					m_Player->action = Action::Idle;
-				}
-				break;
-			 
+		case Action::Hit:
+			if (m_animator->GetCurState() != "hit")
+			{
+				m_animator->ChangeState("hit");
+				m_Player->action = Action::Idle;
+			}
+			if (m_animator->IsAnimeEnd())
+			{
+				m_Player->action = Action::Idle;
+			}
+			break;
+
 		case Action::Steal:
 			if (m_animator->IsAnimeEnd())
 			{
@@ -158,14 +165,7 @@ void PlayerController::Update(float deltaTime)
 			}
 			break;
 		}
-		//ÀÛ¹°°ú Ãæµ¹ÁßÀÏ ¶§ ZÅ°¸¦ ´©¸£¸é Action -> Steal·Î ÀüÈ¯
-	}
-	else
-	{
-		if (m_animator->GetCurState() != "death2")
-		{
-			m_animator->ChangeState("death2");
-		}
+		//ï¿½Û¹ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ZÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Action -> Stealï¿½ï¿½ ï¿½ï¿½È¯
 	}
 
 }

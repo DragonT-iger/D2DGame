@@ -25,6 +25,8 @@ public:
 
 	void QuestExamine();
 
+	void FeedMore(int bob);
+
 	const std::vector<SlotData>& QuestDataCollector(const std::vector<SlotData>& data);
 
 	void OnInspectorGUI()             override;

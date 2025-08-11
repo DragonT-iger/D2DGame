@@ -18,7 +18,7 @@ void Baby::Awake()
 
 	tr->SetParent(GetOwner()->GetComponent<Transform>());
 	m_babySpriteRenderer = m_babyThinkUI->AddComponent<SpriteRenderer>();
-	
+
 	m_babySpriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("chat_bubble.png"));
 	m_babySpriteRenderer->SetActive(false);
 	m_babySpriteRenderer->SetOrderInLayer(10000);
@@ -40,7 +40,7 @@ void Baby::Update(float deltaTime)
 
 	if (m_parentSpriteRenderer->IsFlip()) {
 		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ 375.400f, 330.600f });
-		m_ItemUI->GetComponent<Transform>()->SetPosition({ 370.400f, 365.400f });	
+		m_ItemUI->GetComponent<Transform>()->SetPosition({ 370.400f, 365.400f });
 		m_babySpriteRenderer->SetFlip(false);
 	}
 	else {
@@ -83,7 +83,7 @@ void Baby::OnTriggerEnter(Collider* other)
 	if (other->GetOwner()->GetTag() == "SubMissionArea")
 	{
 		int bob = GameManager::Instance().ReceiveScore(QuestDataCollector(m_inven_ptr->SubMissonItem()));
-		m_player->FeedBaby(bob);
+		m_player->FeedBaby(bob / 10);
 
 		if (m_QuestInProgress == true)
 		{
@@ -100,6 +100,7 @@ void Baby::OnTriggerExit(Collider* other)
 		{
 			QuestSuggestions();
 			m_QuestInProgress = true;
+			m_QExeCount = 0;
 		}
 	}
 }
@@ -128,44 +129,49 @@ void Baby::QuestSuggestions()
 
 void Baby::QuestinProgress(float deltaTime)
 {
-	if (m_QuestInProgress == true) // 퀘스트 진행중일 때만 카운트
-	{
-		m_QExeCount += deltaTime;
-	}
+	//if (m_QuestInProgress == true) // 퀘스트 진행중일 때만 카운트
+	//{
+	//	m_QExeCount += deltaTime;
+	//}
+
+	m_QExeCount += deltaTime;
 
 	if (m_player->GetAction() == Action::Hit) //Hit failed
 	{
-		m_QExeCount -= m_QExeTime;
+		//m_QExeCount -= m_QExeTime;
+		if(m_QuestInProgress)
+			QuestFailed();
 		m_QuestInProgress = false;
 
-		QuestFailed();
 		return;
 	}
 
 	if (m_QExeTime < m_QExeCount) //time Out
 	{
-		m_QExeCount = 0;
+		
 		m_QuestInProgress = false;
-
 		QuestFailed();
+		m_QExeCount = 0;
 	}
 }
 
 void Baby::QuestSuccess()
 {
 	std::cout << "QuestSuccess" << std::endl;
+	
 	ChangeThink(Thought::None);
 
 	temp_ep = 0;
 	temp_pt = 0;
 	temp_pk = 0;
 
-	m_QExeCount -= 30;
+	m_QExeCount -= m_QExeTime;
 }
 
 void Baby::QuestFailed()
 {
 	std::cout << "QuestFailed" << std::endl;
+	m_QExeCount -= m_QExeTime;
 	ChangeThink(Thought::None);
 }
 
@@ -197,16 +203,32 @@ void Baby::QuestExamine()
 	switch (m_thoughtState)
 	{
 	case Eggplant:
-		if (0 < temp_ep) QuestSuccess(); return;
+		if (0 < temp_ep)
+		{
+			FeedMore(temp_ep * 0.2);
+			QuestSuccess(); return;
+		}
 		break;
 	case Potato:
-		if (0 < temp_pt) QuestSuccess(); return;
+		if (0 < temp_pt)
+		{
+			FeedMore(temp_pt * 0.2);
+			QuestSuccess(); return;
+		}
 		break;
 	case Pumpkin:
-		if (0 < temp_pk) QuestSuccess(); return;
+		if (0 < temp_pk)
+		{
+			FeedMore(temp_pk * 0.2);
+			QuestSuccess(); return;
+		}
 		break;
 	default: return;
 	}
 }
 
+void Baby::FeedMore(int bob)
+{
+	m_player->FeedBaby(bob);
+}
 

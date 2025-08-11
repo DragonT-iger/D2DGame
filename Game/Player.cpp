@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Player.h"
+#include "PlayerAnimator.h"
 #include "Baby.h"
 #include "Inventory.h"
 #include "GameManager.h"
@@ -13,6 +14,7 @@ void Player::Awake()
 {
 	m_boxCol = GetComponent<BoxCollider>();
 	m_baby = GetComponent<Baby>();
+	m_P_animator = GetComponent<PlayerAnimator>();
 
 	m_fullness = 1500.0f;
 	m_elapsedTime = 0.0f;
@@ -41,17 +43,43 @@ void Player::Update(float deltaTime)
 		m_elapsedTime = 0.0f;
 	}
 
-	//float weight = m_Inven->GetWeight();
+	/*float weight = m_Inven->GetWeight();
 
-	//if (weight >= 450.f) weight = 450.f;
+	if (weight >= 450.f) weight = 450.f;
 
-	//m_spd = 500.0f - weight;
+	m_spd = 500.0f - weight;*/
 
-	if (m_hp <= 0 && state != State::Dead)
+	if (m_hp <= 0 && state != State::Killed)
 	{
 		m_pSound->PlayDead();
-		state = State::Dead;
+		state = State::Killed;
 	}
+	else if(m_fullness <= 0 &&state != State::Starve)
+	{
+		state = State::Starve;
+	}
+
+	if (state == State::Killed)
+	{
+		if (m_P_animator->IsDeathAnimeFinished())
+		{
+
+
+			std::cout << "State: Killed" << std::endl;
+			GameManager::Instance().LoadEndingScene(GameManager::EndReason::PlayerDead);
+		}
+
+	}
+
+	if (state == State::Starve)
+	{
+		std::cout << "State: Starve" << std::endl;
+		if (m_P_animator->IsDeathAnimeFinished())
+		{
+			GameManager::Instance().LoadEndingScene(GameManager::EndReason::BabyStarved);
+		}
+	}
+		
 }
 
 void Player::OnTriggerEnter(Collider* other)
@@ -117,7 +145,7 @@ void Player::OnInspectorGUI()
 //{
 //	state = ste;
 //}
-//
+
 void Player::SetAction(Action act)
 {
 	action = act;

@@ -6,6 +6,8 @@ class MainScene : public Scene
 
 	Camera*					main_Cam	= nullptr;
 
+	GameObject*				gameManager = nullptr;
+
 	GameObject*				player		= nullptr;
 	Transform*				player_T	= nullptr;
 	SpriteRenderer*			player_S	= nullptr;

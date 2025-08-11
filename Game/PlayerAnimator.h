@@ -12,9 +12,13 @@ public:
 	void ActionAnime();
 	void UpdateVisible();
 
+	void DeathAnime();
+	bool IsDeathAnimeFinished();
+
 private:
 	Player* m_Player = nullptr;
 	Animator* m_animator = nullptr;
 	SpriteRenderer* m_spriteRenderer = nullptr;
+
 };
 
