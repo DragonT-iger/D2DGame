@@ -12,6 +12,9 @@ public:
     void BeginFrame(float deltaTime);
     void EndFrame(ID3D11RenderTargetView* mainRTV);
 
+
+    void OnResize();
+
     void Shutdown();
 
 private:

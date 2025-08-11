@@ -147,6 +147,9 @@ void Game::OnResize(int width, int height)
     __super::OnResize(width, height);
     /*Scene* scene = SceneManager::Instance().GetActiveScene();
     scene->OnResize(width , height);*/
+
+    D2DRenderer::Instance().Resize(width, height);
+    ImGuiManager::Instance().OnResize();
 }
 
 void Game::OnClose()

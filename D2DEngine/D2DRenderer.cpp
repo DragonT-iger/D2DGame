@@ -59,6 +59,7 @@ void D2DRenderer::Resize(UINT width, UINT height)
     DX::ThrowIfFailed(m_swapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0));
 
     CreateRenderTargets();
+    CreateWriteResource();
 }
 
 void D2DRenderer::DrawLine(float x1, float y1, float x2, float y2, const D2D1::ColorF& color)
