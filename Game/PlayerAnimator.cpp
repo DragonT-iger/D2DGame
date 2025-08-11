@@ -46,12 +46,12 @@ void PlayerAnimator::Awake()
 
 void PlayerAnimator::Start()
 {
-	auto moleIdle = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "idle");
-	auto molewalk = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "walk");
-	auto moleHit = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "hit");
-	auto moleSteal = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "steal");
-	auto moleDeath1 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death1");
-	auto moleDeath2 = ResourceManager::Instance().LoadAnimationClip("mole_final.json", "death2");
+	auto moleIdle = ResourceManager::Instance().LoadAnimationClip    ("mole_final.json", "idle");
+	auto molewalk = ResourceManager::Instance().LoadAnimationClip	 ("mole_final.json", "walk");
+	auto moleHit = ResourceManager::Instance().LoadAnimationClip	 ("mole_final.json", "hit");
+	auto moleSteal = ResourceManager::Instance().LoadAnimationClip	 ("mole_final.json", "steal");
+	auto moleDeath1 = ResourceManager::Instance().LoadAnimationClip	 ("mole_final.json", "death1");
+	auto moleDeath2 = ResourceManager::Instance().LoadAnimationClip  ("mole_final.json", "death2");
 
 	m_animator->AddClip("idle", moleIdle, true);
 	m_animator->AddClip("walk", molewalk, true);

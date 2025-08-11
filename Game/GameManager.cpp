@@ -15,6 +15,11 @@ int GameManager::totalscore = 0;
 
 
 
+void GameManager::Update(float deltaTime)
+{
+	
+}
+
 void GameManager::Init()
 {
 	m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();

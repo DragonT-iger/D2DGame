@@ -16,7 +16,7 @@ public:
 
 	//void Awake()                         override;
 	//void Start()                         override;
-	//void Update(float deltaTime)         override;
+	void Update(float deltaTime)         override;
 
 	void Init();
 
@@ -62,6 +62,8 @@ private:
 	GameState m_GameState = GameState::Start;
 
 	Inventory* m_inventory = nullptr;
+
+	
 
 	static int ep_count;
 	static int pk_count;
