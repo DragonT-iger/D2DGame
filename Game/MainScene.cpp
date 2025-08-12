@@ -188,8 +188,38 @@ void MainScene::Awake()
 	bush10->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
 
 
-	GameObject* tree1 = Instantiate("Tree");
-	tree1->AddComponent<Tree>();
+	GameObject* tree1_1 = Instantiate("Tree");
+	tree1_1->AddComponent<Tree>(1500, -130, 0);
+
+	GameObject* tree1_2 = Instantiate("Tree");
+	tree1_2->AddComponent<Tree>(900, -1000, 0);
+
+	GameObject* tree1_3 = Instantiate("Tree");
+	tree1_3->AddComponent<Tree>(400, 900, 0);
+
+	GameObject* tree2_1 = Instantiate("Tree");
+	tree2_1->AddComponent<Tree>(1700, 1000, 1);
+
+	GameObject* tree2_2 = Instantiate("Tree");
+	tree2_2->AddComponent<Tree>(-750, 1100, 1);
+
+	GameObject* tree2_3 = Instantiate("Tree");
+	tree2_3->AddComponent<Tree>(-1750, -100, 1);
+
+	GameObject* tree3_1 = Instantiate("Tree");
+	tree3_1->AddComponent<Tree>(2700, -700, 2);
+
+	GameObject* tree4_1 = Instantiate("Tree");
+	tree4_1->AddComponent<Tree>(2500, 1450, 3);
+
+	GameObject* tree3_2 = Instantiate("Tree");
+	tree3_2->AddComponent<Tree>(1900, -1650, 2);
+
+	GameObject* tree4_2 = Instantiate("Tree");
+	tree4_2->AddComponent<Tree>(-2700, -1600, 3);
+
+	GameObject* tree3_3 = Instantiate("Tree");
+	tree3_3->AddComponent<Tree>(-2700, 1300, 2);
 
 #pragma endregion
 

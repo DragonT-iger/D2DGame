@@ -13,6 +13,9 @@ public:
 protected:
     Farmer* m_farmer = nullptr;   // 이벤트를 보낼 대상
     float m_circleColliderRadius = 0.0f;    
+
+    static FMOD::ChannelGroup* m_farmerBgmGroup;
+    static FMOD::ChannelGroup* m_WarningBgmGroup;
 };
     
 
@@ -23,6 +26,7 @@ class PatrolZone : public FarmerZone {
 
 class AlertZone : public FarmerZone {
     void OnTriggerEnter(Collider* other) override;
+	void OnTriggerStay(Collider* other) override;
     void OnTriggerExit(Collider* other) override;
 };
 
