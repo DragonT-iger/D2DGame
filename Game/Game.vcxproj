@@ -188,6 +188,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="PlayerController_Sample.cpp" />
     <ClCompile Include="TitleBtn.cpp" />
+    <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TutorialEndTrigger.cpp" />
     <ClCompile Include="TutorialHint.cpp" />
     <ClCompile Include="TutorialHintTrigger.cpp" />
@@ -242,6 +243,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerController_Sample.h" />
     <ClInclude Include="TitleBtn.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="TutorialEndTrigger.h" />
     <ClInclude Include="TutorialHint.h" />
     <ClInclude Include="TutorialHintTrigger.h" />
