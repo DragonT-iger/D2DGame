@@ -18,6 +18,7 @@
 #include "SubMissionArea.h"
 #include "EscBtn.h"
 #include "TitleBtn.h"
+#include "SkipButton.h"
 #include "SettingButton.h"
 #include "AcceptSetting.h"
 #include "QuitSetting.h"
@@ -291,10 +292,29 @@ void TutorialScene::Awake()
 	m_hp2 = Instantiate("hp2");
 	m_hp3 = Instantiate("hp3");
 
-	m_profileBG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Paper_Frame.png"), { 110, 110 });
-	m_babyprofileBG->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Paper_Frame.png"), { 110, 110 });
-	m_profileBG->GetComponent<Transform>()->SetPosition({ 550, 875 });
-	m_babyprofileBG->GetComponent<Transform>()->SetPosition({ 550, 985 });
+	Img = m_profileBG->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Paper_Frame.png"), { 110, 110 });
+	Img->SetOrderInLayer(6);
+	Img = m_babyprofileBG->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Paper_Frame.png"), { 110, 110 });
+	Img->SetOrderInLayer(6);
+	m_babyprofileBG->GetComponent<Transform>()->SetPosition({ 550, 875 });
+	m_profileBG->GetComponent<Transform>()->SetPosition({ 550, 985 });
+
+	Img = m_profile->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("mom_profile1.png"), { 80, 80 });
+	Img->SetOrderInLayer(7);
+	m_profile->GetComponent<Transform>()->SetPosition({ 550, 985 });
+
+	Img = m_babyprofile->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("baby_profile1.png"), { 80, 80 });
+	Img->SetOrderInLayer(7);
+	m_babyprofile->GetComponent<Transform>()->SetPosition({ 550, 875 });
+
+	Img = m_hungryImage->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("hungry1.png"), { 62, 62 });
+	Img->SetOrderInLayer(7);
+	m_hungryImage->GetComponent<Transform>()->SetPosition({ 665, 880 });
 
 	m_hp1->AddComponent<Image>()->SetBitmap(ResourceManager::Instance().LoadTexture("Icon_Heart.png"), { 72, 65 });
 	m_hp1->GetComponent<Transform>()->SetPosition({ 685, 980 });
@@ -309,7 +329,7 @@ void TutorialScene::Awake()
 	m_hungryGauge->AddComponent<Image>();
 	m_hungryGauge->AddComponent<Slide_Bar>();
 	m_hungryGauge->AddComponent<HungryGauge>();
-	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 803, 879 });
+	m_hungryGauge->GetComponent<Transform>()->SetPosition({ 805, 879 });
 
 #pragma endregion
 
@@ -406,8 +426,8 @@ void TutorialScene::Awake()
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
 
 	m_EscBG->GetComponent<Transform>()->SetPosition({ 960, 540 });
-	m_TitleBtn->GetComponent<Transform>()->SetPosition({ 960, 500 });
-	m_SettingBtn->GetComponent<Transform>()->SetPosition({ 960, 600 });
+	m_TitleBtn->GetComponent<Transform>()->SetPosition({ 960, 440 });
+	m_SettingBtn->GetComponent<Transform>()->SetPosition({ 960, 630 });
 
 	m_EscBG->SetActive(false);
 	m_TitleBtn->SetActive(false);
@@ -519,6 +539,16 @@ void TutorialScene::Awake()
 
 #pragma endregion
 
+	m_skipBtn = Instantiate("skipBtn");
+	Img = m_skipBtn->AddComponent<Image>();
+	btn = m_skipBtn->AddComponent<Button>();
+	m_skipBtn->AddComponent<SkipButton>();
+
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start_Select.png"), ButtonEvent::Highlight);
+
+	m_skipBtn->GetComponent<Transform>()->SetPosition({ 1760, 220 });
+
 	GameManager::Instance().Init(); //player?ž‘ inventory ?—°ê²?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
 
@@ -532,7 +562,7 @@ void TutorialScene::Start()
 
     main_Cam = GetCamera();
     main_Cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
-
+	main_Cam->GetOwner()->GetComponent<CinemachineCamera>()->SetCameraZoom(0.75f);
 
 	Scene::Start();
 }

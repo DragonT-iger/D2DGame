@@ -171,11 +171,19 @@ void TitleScene::Awake()
 	SoundManager::Instance().BGM_Shot("1.mp3");
 
 	m_Title = Instantiate("title");
-	Img = m_Title->AddComponent<Image>();
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Title.png"), { 1920, 1080 });
-	Img->SetOrderInLayer(-10000);
+	auto sp = m_Title->AddComponent<SpriteRenderer>();
+	auto anim = m_Title->AddComponent<Animator>();
+	auto clip = ResourceManager::Instance().LoadAnimationClip("illust_animation_final_2.json", "title");
+	anim->AddClip("title", clip);
+	sp->SetOrderInLayer(-10000);
 
-	m_Title->GetComponent<Transform>()->SetPosition({ 960, 540 });
+	m_Title->GetComponent<Transform>()->SetPosition({ 0, 0 });
+
+	m_TitleLogo = Instantiate("titleLogo");
+	Img = m_TitleLogo->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Title_Logo.png"), { 713, 451 });
+
+	m_TitleLogo->GetComponent<Transform>()->SetPosition({ 960, 230 });
 
 	// 일단은 Awake에서 씬을 초기화하는 걸로
 	// 씬은 게임오브젝트 초기화만 담당함	(인스펙터 생각하셈)

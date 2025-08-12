@@ -58,13 +58,24 @@ bool NzWndBase::Create(const wchar_t* className, const wchar_t* windowName, int 
 	m_height = height;
 
 
-	RECT rc = { 0, 0, width, height };
 	//[2025-04-22] 리사이즈/최대화 막음
+#ifdef _DEBUG
+	RECT rc = { 0, 0, width, height };
+	DWORD style = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+	AdjustWindowRect(&rc, style, FALSE);
+	m_hWnd = CreateWindowEx(NULL, MAKEINTATOM(classId), L"", style, CW_USEDEFAULT, CW_USEDEFAULT,
+		rc.right - rc.left, rc.bottom - rc.top, HWND(), HMENU(), HINSTANCE(), NULL);
+
+#else
+
+	// release는 전체화면 고정
+	RECT rc = { 0, 0, width, height };
 	DWORD style = WS_POPUP;
 	DWORD exStyle = WS_EX_TOPMOST;
 
 	m_hWnd = CreateWindowEx(exStyle, MAKEINTATOM(classId), L"", style, 0, 0,
 		rc.right - rc.left, rc.bottom - rc.top, HWND(), HMENU(), HINSTANCE(), NULL);
+#endif
 
 
 

@@ -45,7 +45,7 @@ public:
 	Action GetAction() { return action; }
 	Visibilty GetVisible() { return visibilty; };
 
-	float GetFullness() { return m_fullness; }
+	int GetFullness() { return m_fullness; }
 
 	int GetHp() { return m_hp; }
 	void SetHp(int hp);
@@ -69,7 +69,7 @@ private:
 
 	std::vector<GameObject*> m_hpUI;
 
-	UINT	m_fullness;
+	int		m_fullness;
 	UINT	m_maxFullness = 1500;
 
 	float m_elapsedTime = 0.f;

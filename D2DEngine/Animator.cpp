@@ -17,7 +17,6 @@ void Animator::Update(float deltaTime)
 	if (m_sRenderer->GetRenderInfo().m_bitmap == nullptr) return;
 
 
-
 	if (m_curFrame->duration  <= m_duration )
 	{
 		++m_curFrame;

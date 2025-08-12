@@ -106,5 +106,7 @@ class TutorialScene : public Scene
 
 #pragma endregion
 
+	GameObject* m_skipBtn = nullptr;
+
 };
 

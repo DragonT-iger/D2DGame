@@ -48,14 +48,14 @@ void Button::Update(float deltaTime)
 		&& (m_pos->GetPosition().y - (m_size.height / 2) <= mouse.pos.y && m_pos->GetPosition().y + (m_size.height / 2) >= mouse.pos.y))
 	{
 		//std::cout << "pos x : " << mouse.pos.x << ", pos y : " << mouse.pos.y << std::endl;
-		if (mouse.LButtonPressed && m_curEvent != ButtonEvent::Pressed && m_curEvent != ButtonEvent::ButtonDown)
+		if (mouse.LButtonPressed && m_curEvent == ButtonEvent::Highlight)
 		{
 			std::cout << "Button Pressed" << std::endl;
 			m_curEvent = ButtonEvent::Pressed;
 			Event(ButtonEvent::Pressed);
 			SetBitmap(m_curEvent);
 		}
-		else if (mouse.LButtonPressed)
+		else if (mouse.LButtonPressed && (m_curEvent == ButtonEvent::Pressed || m_curEvent == ButtonEvent::ButtonDown))
 		{
 			m_curEvent = ButtonEvent::ButtonDown;
 			Event(ButtonEvent::ButtonDown);
