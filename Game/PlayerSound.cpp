@@ -90,9 +90,11 @@ void PlayerSound::PlayHungry30()
 
 bool PlayerSound::PlayGameOver()
 {
+	static bool alreadyPlaying = false;
+
 	if (m_GameOverGroup)
 	{
-		bool isPlaying;
+		bool isPlaying = false;
 		FMOD_RESULT result = m_GameOverGroup->isPlaying(&isPlaying);
 		if (result != FMOD_OK || isPlaying)
 		{
@@ -104,13 +106,40 @@ bool PlayerSound::PlayGameOver()
 		}
 		else
 		{
-			SoundManager::Instance().SFX_Shot("23.mp3", m_GameOverGroup);
-			return isPlaying;
+			if (!alreadyPlaying)
+			{
+				SoundManager::Instance().SFX_Shot("23.mp3", m_GameOverGroup);
+				alreadyPlaying = true;
+			}
+			return false;
 		}
 	}
 }
 
 bool PlayerSound::PlayClear()
 {
-	return false;
+	static bool alreadyPlaying = false;
+
+	if (m_GameOverGroup)
+	{
+		bool isPlaying = false;
+		FMOD_RESULT result = m_GameOverGroup->isPlaying(&isPlaying);
+		if (result != FMOD_OK || isPlaying)
+		{
+			if (result != FMOD_OK)
+			{
+				std::cerr << "FMOD ลอมü" << isPlaying << std::endl;
+			}
+			return isPlaying;
+		}
+		else
+		{
+			if (!alreadyPlaying)
+			{
+				SoundManager::Instance().SFX_Shot("24.mp3", m_GameOverGroup);
+				alreadyPlaying = true;
+			}
+			return false;
+		}
+	}
 }

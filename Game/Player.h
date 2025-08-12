@@ -53,6 +53,7 @@ public:
 
 	void PlaySubmisson();
 
+	bool PlayClear();
 
 	void FeedBaby(float bop);
 
