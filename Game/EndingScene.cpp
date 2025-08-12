@@ -39,7 +39,7 @@ void EndingScene::Awake()
 	}
 	else if (minuate != 0)
 	{
-		time  = L"Time: " + std::to_wstring(minuate) + L"m " + std::to_wstring(second) + L"s";
+		time  = L"Time: " + std::to_wstring(minuate) + L"m " + std::to_wstring(second - 3) + L"s";
 	}
 	else
 	{
