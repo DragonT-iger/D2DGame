@@ -6,6 +6,7 @@ void Tree::Awake()
 {
 	Transform* tr = GetOwner()->GetComponent<Transform>();
 	tr->SetPosition({ m_x, m_y });
+	tr->Translate({ 0 , 200 });
 
 	tr->SetScale({ 0.5f, 0.5f });
 	m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
