@@ -21,7 +21,7 @@ void EndingScene::Awake()
 	txt->SetText(score, { 600, 200 }, L"Maplestory");
 	txt->SetFontSize(70);
 
-	totalScore->GetComponent<Transform>()->SetPosition({ 1585, 855 });
+	totalScore->GetComponent<Transform>()->SetPosition({ 1100, 935 });
 	
 	m_restart = Instantiate("restart");
 	m_restart->AddComponent<Image>();

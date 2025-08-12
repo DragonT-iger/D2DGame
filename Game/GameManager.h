@@ -59,7 +59,7 @@ public:
 	GameState GetGameState() { return  m_GameState; }
 	void SetGameState(GameState state) { m_GameState = state; }
 
-
+	void RegisterCountText(Text* text) { m_text = text; }
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
@@ -69,12 +69,14 @@ private:
 	static inline GameObject* m_player = nullptr;
 	
 	Inventory* m_inventory = nullptr;
+	Text* m_text = nullptr;
 
 	static int ep_count;
 	static int pk_count;
 	static int pt_count;
 	static int totalscore;
 
+	int countThree = 2;
 
 	static inline GameState m_GameState = GameState::Start;
 	static inline EndReason m_endReason = EndReason::None;
