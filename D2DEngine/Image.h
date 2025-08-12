@@ -13,6 +13,8 @@ public:
 		m_slider = GetComponent<Slide_Bar>();
 	}
 
+	void OnInspectorGUI() override;
+
 	void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap, D2D1_SIZE_F size) { 
 		m_renderInfo.m_bitmap = bitmap;
 		if (!bitmap) return;
