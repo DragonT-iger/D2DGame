@@ -30,6 +30,7 @@ public:
 
 	enum class GameState
 	{
+		Title,
 		Start,
 		Tutorial,
 		Pause,
@@ -60,6 +61,7 @@ public:
 	void SetGameState(GameState state) { m_GameState = state; }
 
 	void RegisterCountText(Text* text) { m_text = text; }
+	void ResetTotalScore() { totalscore = 0; }
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
