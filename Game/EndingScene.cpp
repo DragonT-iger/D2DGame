@@ -15,14 +15,48 @@ void EndingScene::Awake()
 	GameObject* endSceneManager = Instantiate("EndSceneManager");
 	endSceneManager->AddComponent<EndSceneManager>();
 
+
+
+
 	GameObject* totalScore = Instantiate("Score");
 	auto txt = totalScore->AddComponent<Text>();
 	std::wstring score = L"Score : " + std::to_wstring(gm->GetTotalScore());
 	txt->SetText(score, { 600, 200 }, L"Maplestory");
 	txt->SetFontSize(70);
+	totalScore->GetComponent<Transform>()->SetPosition({ 1172, 935 });
 
-	totalScore->GetComponent<Transform>()->SetPosition({ 1585, 855 });
+
+
+	GameObject* aliveTime = Instantiate("AliveTime");
+	auto timetxt = aliveTime->AddComponent<Text>();
+	int minuate = gm->GetAliveTime() / 60;
+	int second = gm->GetAliveTime() % 60;
+
+	std::wstring time;
+
+	if (minuate >= 3)
+	{
+		time = L"";
+	}
+	else if (minuate != 0)
+	{
+		time  = L"Time: " + std::to_wstring(minuate) + L"m " + std::to_wstring(second) + L"s";
+	}
+	else
+	{
+		time = L"Time: " + std::to_wstring(second) + L"s";
+	}
 	
+	timetxt->SetText(time, { 600, 200 }, L"Maplestory");
+	timetxt->SetFontSize(70);
+	aliveTime->GetComponent<Transform>()->SetPosition({ 1180, 865 });
+	
+
+
+
+
+
+
 	m_restart = Instantiate("restart");
 	m_restart->AddComponent<Image>();
 	auto btn = m_restart->AddComponent<Button>();
