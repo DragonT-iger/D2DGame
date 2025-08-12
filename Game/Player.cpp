@@ -40,7 +40,7 @@ void Player::Update(float deltaTime)
 	m_elapsedTime += deltaTime;
 	m_invincible_Count += deltaTime;
 
-	if (0.1f <= m_elapsedTime)
+	if (0.3f <= m_elapsedTime)
 	{
 		if (m_fullness <= m_maxFullness && m_fullness >= (m_maxFullness / 3) * 2)
 		{
@@ -132,12 +132,8 @@ void Player::OnTriggerStay(Collider* other)
 		if (m_isHittable)
 		{
 			SetAction(Action::Hit);
+			SetHp(GetHp() - 1);
 		}
-
-		
-		
-		SetHp(GetHp() - 1);
-		
 	}
 
 	/*if (m_hp > 0)

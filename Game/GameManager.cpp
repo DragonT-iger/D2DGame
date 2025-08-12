@@ -3,6 +3,7 @@
 #include "Inventory.h"
 #include "EndingScene.h"
 #include "Player.h"
+#include "PlayerController.h"
 #include "PlayerAnimator.h"
 #include "CinemachineCamera.h"
 #include "InventorySlot.h"
@@ -18,14 +19,16 @@ int GameManager::totalscore = 0;
 
 void GameManager::Update(float deltaTime)
 {
-	
+	inGameTime += deltaTime;
+
+	CountThree();
+	CheckHappyEnd();
 }
 
 void GameManager::Init()
 {
 	m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
 	m_inventory = SceneManager::Instance().GetActiveScene()->FindGameObject("Inventory")->GetComponent<Inventory>();
-
 }
 void GameManager::OnInspectorGUI()
 {
@@ -92,5 +95,28 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 void GameManager::AddScore(int num)
 {
 	totalscore += num;
+}
+
+void GameManager::CheckHappyEnd()
+{
+	if (EndTime < inGameTime)
+	{
+		LoadEndingScene(EndReason::Happy);
+	}
+}
+
+void GameManager::CountThree()
+{
+	if (m_GameState != GameState::Main) return;
+	//Á¤Áö
+	if (inGameTime > StartStopTime && m_player)
+	{
+		auto p_Component = m_player->GetComponent<Player>();
+		auto p_Controller = m_player->GetComponent<PlayerController>();
+
+		p_Component->SetActive(true);
+		p_Controller->SetActive(true);
+		return;
+	}
 }
 

@@ -1,8 +1,10 @@
 #pragma once
+
+constexpr float EndTime = 183;
+constexpr float StartStopTime = 0.0f; //게임 시작시 정지 시간
+
 class Inventory;
 struct SlotData;
-
-
 
 class GameManager : public MonoBehaviour
 {
@@ -31,6 +33,7 @@ public:
 		Start,
 		Tutorial,
 		Pause,
+		Main,
 		Rage,
 		End,
 	};
@@ -48,6 +51,10 @@ public:
 	void SetFullScreen(bool isFull);
 
 	void LoadEndingScene(EndReason reason);
+
+	void CheckHappyEnd();
+	void CountThree();
+
 	EndReason GetEndReason() { return m_endReason; }
 	GameState GetGameState() { return  m_GameState; }
 	void SetGameState(GameState state) { m_GameState = state; }
@@ -59,12 +66,9 @@ private:
 	GameManager(GameManager&&) = delete;
 	GameManager& operator=(GameManager&&) = delete;
 
-	GameObject* m_player = nullptr;
-
-
-	Inventory* m_inventory = nullptr;
-
+	static inline GameObject* m_player = nullptr;
 	
+	Inventory* m_inventory = nullptr;
 
 	static int ep_count;
 	static int pk_count;
@@ -76,4 +80,6 @@ private:
 	static inline EndReason m_endReason = EndReason::None;
 
 	bool m_isFullscreen = false;
+
+	float inGameTime = 0.0f;
 };
