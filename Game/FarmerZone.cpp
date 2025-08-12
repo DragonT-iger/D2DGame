@@ -192,16 +192,16 @@ AttackIndicatorZone::~AttackIndicatorZone()
 				{
 					if (player->GetVisible() != Visibilty::Hide)
 						{
-							GameManager::GameState state = GameManager::Instance().GetGameState();
-
-							if (state != GameManager::GameState::Tutorial) {
-								player->SetHp(player->GetHp() - 1);
-							}
-
 							if (player->GetHittable())
 							{
+								player->SetHp(player->GetHp() - 1);
 								player->SetAction(Action::Hit);
 							}
+
+							/*if (player->GetHittable())
+							{
+								player->SetAction(Action::Hit);
+							}*/
 						}
 
 				}

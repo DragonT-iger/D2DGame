@@ -37,6 +37,7 @@ void Baby::Awake()
 
 void Baby::Update(float deltaTime)
 {
+	//std::cout << "Äù½ºÆ® ½Ã°£: " << m_QExeCount << std::endl;
 
 	if (m_parentSpriteRenderer->IsFlip()) {
 		m_babyThinkUI->GetComponent<Transform>()->SetPosition({ 375.400f, 330.600f });
@@ -82,6 +83,10 @@ void Baby::OnTriggerEnter(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "SubMissionArea")
 	{
+		/*std::cout << "temp_ep: " << temp_ep << std::endl;
+		std::cout << "temp_pt: " << temp_pt << std::endl;
+		std::cout << "temp_pk: " << temp_pk << std::endl;*/
+
 		int bob = GameManager::Instance().ReceiveScore(QuestDataCollector(m_inven_ptr->SubMissonItem()));
 		m_player->FeedBaby(bob / 5);
 
@@ -126,8 +131,6 @@ void Baby::QuestSuggestions()
 {
 	int index = Random::Instance().Range(1, 4);
 	ChangeThink(static_cast<Thought>(index));
-
-	m_QuestInProgress = true;
 }
 
 void Baby::QuestinProgress(float deltaTime)
@@ -151,10 +154,9 @@ void Baby::QuestinProgress(float deltaTime)
 
 	if (m_QExeTime < m_QExeCount) //time Out
 	{
-		
+		if (m_QuestInProgress)
+			QuestFailed();
 		m_QuestInProgress = false;
-		QuestFailed();
-		m_QExeCount = 0;
 	}
 }
 
@@ -185,16 +187,16 @@ const std::vector<SlotData>& Baby::QuestDataCollector(const std::vector<SlotData
 		switch (m.type)
 		{
 		case 0:
-			temp_ep = m.count;
-			std::cout << "temp_ep : " << temp_ep << std::endl;
+			temp_pt = m.count;
+			//std::cout << "temp_ep : " << temp_ep << std::endl;
 			break;
 		case 1:
-			temp_pt = m.count;
-			std::cout << "temp_pt : " << temp_pt << std::endl;
+			temp_ep = m.count;
+			//std::cout << "temp_pt : " << temp_pt << std::endl;
 			break;
 		case 2:
 			temp_pk = m.count;
-			std::cout << "temp_pk : " << temp_pk << std::endl;
+			//std::cout << "temp_pk : " << temp_pk << std::endl;
 			break;
 		}
 	}
@@ -206,6 +208,7 @@ void Baby::QuestExamine()
 	switch (m_thoughtState)
 	{
 	case Eggplant:
+		//std::cout << "EggPlant: " << temp_ep << std::endl;
 		if (0 < temp_ep)
 		{
 			FeedMore(temp_ep * 0.2);
@@ -213,6 +216,7 @@ void Baby::QuestExamine()
 		}
 		break;
 	case Potato:
+		//std::cout << "Potato: " << temp_pt << std::endl;
 		if (0 < temp_pt)
 		{
 			FeedMore(temp_pt * 0.2);
@@ -220,13 +224,13 @@ void Baby::QuestExamine()
 		}
 		break;
 	case Pumpkin:
+		//std::cout << "Pumpkin: " << temp_pk << std::endl;
 		if (0 < temp_pk)
 		{
 			FeedMore(temp_pk * 0.2);
 			QuestSuccess(); return;
 		}
 		break;
-	default: return;
 	}
 }
 
