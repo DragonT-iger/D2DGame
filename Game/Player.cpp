@@ -58,6 +58,7 @@ void Player::Update(float deltaTime)
 		}
 
 		m_fullness -= 2.5;
+		//m_fullness -= 10;
 		m_elapsedTime = 0;
 		if (m_fullness <= 0)
 		{
@@ -93,15 +94,17 @@ void Player::Update(float deltaTime)
 
 	m_spd = 500.0f - weight;*/
 
-	if (m_hp <= 0 && state != State::Killed)
+	if (m_hp <= 0 && state != State::Killed && state != State::Starve)
 	{
 		m_pSound->PlayDead();
 		m_pSound->PlayGameOver();
 		state = State::Killed;
 	}
-	else if (m_fullness <= 0 && state != State::Starve)
+	else if (m_fullness <= 0 && state != State::Starve && state != State::Killed)
 	{
 		if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState()) {
+			m_pSound->PlayDead();
+			m_pSound->PlayGameOver();
 			state = State::Starve;
 		}
 	}

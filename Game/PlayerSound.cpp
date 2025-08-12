@@ -50,6 +50,16 @@ void PlayerSound::PlayWalk()
 
 void PlayerSound::DropCrop()
 {
+	//bool isPlaying;
+	//FMOD_RESULT result = m_throwItemGroup->isPlaying(&isPlaying);
+	//if (result != FMOD_OK || isPlaying)
+	//{
+	//	if (result != FMOD_OK)
+	//	{
+	//		std::cerr << "FMOD ลอมü" << isPlaying << std::endl;
+	//	}
+	//	return;
+	//}
 	SoundManager::Instance().SFX_Shot("10.mp3", m_throwItemGroup);
 }
 
