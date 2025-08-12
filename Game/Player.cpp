@@ -88,6 +88,7 @@ void Player::Update(float deltaTime)
 	if (m_hp <= 0 && state != State::Killed)
 	{
 		m_pSound->PlayDead();
+		m_pSound->PlayGameOver();
 		state = State::Killed;
 	}
 	else if (m_fullness <= 0 && state != State::Starve)
@@ -97,18 +98,17 @@ void Player::Update(float deltaTime)
 
 	if (state == State::Killed)
 	{
-		if (m_P_animator->IsDeathAnimeFinished())
+		if (m_P_animator->IsDeathAnimeFinished() && !m_pSound->PlayGameOver())
 		{
 			std::cout << "State: Killed" << std::endl;
 			GameManager::Instance().LoadEndingScene(GameManager::EndReason::PlayerDead);
 		}
-
 	}
 
 	if (state == State::Starve)
 	{
 		std::cout << "State: Starve" << std::endl;
-		if (m_P_animator->IsDeathAnimeFinished())
+		if (m_P_animator->IsDeathAnimeFinished() && !m_pSound->PlayGameOver())
 		{
 			GameManager::Instance().LoadEndingScene(GameManager::EndReason::BabyStarved);
 		}
@@ -190,6 +190,10 @@ void Player::PlaySubmisson()
 	m_pSound->PlaySubmission();
 }
 
+bool Player::PlayClear()
+{
+	return m_pSound->PlayClear();
+}
 
 void Player::FeedBaby(float bop)
 {

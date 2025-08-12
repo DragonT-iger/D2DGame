@@ -101,7 +101,10 @@ void GameManager::CheckHappyEnd()
 {
 	if (EndTime < inGameTime)
 	{
-		LoadEndingScene(EndReason::Happy);
+		m_player->GetComponent<Player>()->PlayClear();
+
+		if(!m_player->GetComponent<Player>()->PlayClear())
+			LoadEndingScene(EndReason::Happy);
 	}
 }
 
