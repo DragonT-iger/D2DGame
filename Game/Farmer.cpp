@@ -333,7 +333,8 @@ void Farmer::PlayChaseZoneSound()
 
 void Farmer::StopSound()
 {
-    m_farmerManager->WarningSoundStop();
+    if(m_farmerManager)
+        m_farmerManager->WarningSoundStop();
 }
 
 void Farmer::OnInspectorGUI()

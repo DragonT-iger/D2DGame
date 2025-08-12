@@ -101,7 +101,10 @@ void GameManager::CheckHappyEnd()
 {
 	if (EndTime < inGameTime)
 	{
-		LoadEndingScene(EndReason::Happy);
+		m_player->GetComponent<Player>()->PlayClear();
+
+		if(!m_player->GetComponent<Player>()->PlayClear())
+			LoadEndingScene(EndReason::Happy);
 	}
 }
 
@@ -109,7 +112,7 @@ void GameManager::CountThree()
 {
 	if (m_GameState != GameState::Main) return;
 	//Á¤Áö
-	if (inGameTime > StartStopTime && m_player)
+	if (inGameTime > StartStopTime/* && m_player*/)
 	{
 		auto p_Component = m_player->GetComponent<Player>();
 		auto p_Controller = m_player->GetComponent<PlayerController>();

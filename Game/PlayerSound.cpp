@@ -18,6 +18,9 @@ void PlayerSound::Awake()
 
 	SoundManager::Instance().GetCoreSystem()->createChannelGroup("throw", &m_throwItemGroup);
 	SoundManager::Instance().AddSFXGroup(m_throwItemGroup);
+
+	SoundManager::Instance().GetCoreSystem()->createChannelGroup("gameover", &m_GameOverGroup);
+	SoundManager::Instance().AddSFXGroup(m_GameOverGroup);
 }
 
 void PlayerSound::Start()
@@ -83,4 +86,60 @@ void PlayerSound::PlaySubmission()
 void PlayerSound::PlayHungry30()
 {
 	SoundManager::Instance().SFX_Shot("20.mp3");
+}
+
+bool PlayerSound::PlayGameOver()
+{
+	static bool alreadyPlaying = false;
+
+	if (m_GameOverGroup)
+	{
+		bool isPlaying = false;
+		FMOD_RESULT result = m_GameOverGroup->isPlaying(&isPlaying);
+		if (result != FMOD_OK || isPlaying)
+		{
+			if (result != FMOD_OK)
+			{
+				std::cerr << "FMOD ลอมü" << isPlaying << std::endl;
+			}
+			return isPlaying;
+		}
+		else
+		{
+			if (!alreadyPlaying)
+			{
+				SoundManager::Instance().SFX_Shot("23.mp3", m_GameOverGroup);
+				alreadyPlaying = true;
+			}
+			return false;
+		}
+	}
+}
+
+bool PlayerSound::PlayClear()
+{
+	static bool alreadyPlaying = false;
+
+	if (m_GameOverGroup)
+	{
+		bool isPlaying = false;
+		FMOD_RESULT result = m_GameOverGroup->isPlaying(&isPlaying);
+		if (result != FMOD_OK || isPlaying)
+		{
+			if (result != FMOD_OK)
+			{
+				std::cerr << "FMOD ลอมü" << isPlaying << std::endl;
+			}
+			return isPlaying;
+		}
+		else
+		{
+			if (!alreadyPlaying)
+			{
+				SoundManager::Instance().SFX_Shot("24.mp3", m_GameOverGroup);
+				alreadyPlaying = true;
+			}
+			return false;
+		}
+	}
 }

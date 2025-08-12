@@ -4,9 +4,22 @@
 #include "Player.h"
 #include "GameManager.h"
 
+FMOD::ChannelGroup* FarmerZone::m_farmerBgmGroup = nullptr;
+FMOD::ChannelGroup* FarmerZone::m_WarningBgmGroup = nullptr;
+
 void FarmerZone::Awake()
 {
 	GetOwner()->AddComponent<CircleCollider>()->SetRadius(m_circleColliderRadius);
+	if (!m_farmerBgmGroup)
+	{
+		SoundManager::Instance().GetCoreSystem()->createChannelGroup("farmerbgm", &m_farmerBgmGroup);
+		SoundManager::Instance().AddBGMGroup(m_farmerBgmGroup);
+	}
+	if(!m_WarningBgmGroup)
+	{
+		SoundManager::Instance().GetCoreSystem()->createChannelGroup("farmerbgm", &m_WarningBgmGroup);
+		SoundManager::Instance().AddBGMGroup(m_WarningBgmGroup);
+	}
 }
 
 void ChaseZone::OnTriggerEnter(Collider* other)
@@ -24,6 +37,10 @@ void ChaseZone::OnTriggerExit(Collider* other)
 	{
 		m_farmer->m_isAlreadyExitChaseZone = true; 
 		m_farmer->StopSound();
+		bool isPlaying = false;
+		m_farmerBgmGroup->isPlaying(&isPlaying);
+		if(!isPlaying)
+			SoundManager::Instance().BGM_Shot("2.mp3", m_farmerBgmGroup);
 		//if (m_farmer->GetFarmerState() != Farmer::FarmerState::Attack)
 		//	m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 	}
@@ -50,6 +67,10 @@ void AttackZone::OnTriggerStay(Collider* other)
 		if (other->GetOwner()->GetComponent<Player>()->GetVisible() == Visibilty::Hide) {
 
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+			bool isPlaying = false;
+			m_farmerBgmGroup->isPlaying(&isPlaying);
+			if (!isPlaying)
+				SoundManager::Instance().BGM_Shot("2.mp3", m_farmerBgmGroup);
 			return;
 		}
 		if (Farmer::FarmerState::Attack != m_farmer->GetFarmerState()) {
@@ -70,6 +91,10 @@ void AttackZone::OnTriggerExit(Collider* other)
 		}
 		else {
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+			bool isPlaying = false;
+			m_farmerBgmGroup->isPlaying(&isPlaying);
+			if (!isPlaying)
+				SoundManager::Instance().BGM_Shot("2.mp3", m_farmerBgmGroup);
 		}
 		m_farmer->m_hasPatrolTarget = false;
 	}
@@ -83,12 +108,25 @@ void AlertZone::OnTriggerEnter(Collider* other)
 		}
 		else {
 			m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+			bool isPlaying = false;
+			m_farmerBgmGroup->isPlaying(&isPlaying);
+			if (!isPlaying)
+				SoundManager::Instance().BGM_Shot("2.mp3", m_farmerBgmGroup);
 		}
 		m_farmer->m_hasPatrolTarget = false;
 		m_farmer->m_isAlreadyExitAlertZone = false;
-
-		SoundManager::Instance().BGM_Shot("3.mp3");
 	}
+}
+
+void AlertZone::OnTriggerStay(Collider* other)
+{
+	if (other->GetOwner()->GetTag() == "Player")
+	{
+		bool isPlaying = false;
+		m_WarningBgmGroup->isPlaying(&isPlaying);
+		if (!isPlaying)
+			SoundManager::Instance().BGM_Shot("3.mp3", m_WarningBgmGroup);
+	}	
 }
 
 void AlertZone::OnTriggerExit(Collider* other)
@@ -100,7 +138,10 @@ void AlertZone::OnTriggerExit(Collider* other)
 			return;
 
 		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
-		SoundManager::Instance().BGM_Shot("2.mp3");
+		bool isPlaying = false;
+		m_farmerBgmGroup->isPlaying(&isPlaying);
+		if (!isPlaying)
+			SoundManager::Instance().BGM_Shot("2.mp3", m_farmerBgmGroup);
 	}
 }
 
@@ -151,16 +192,16 @@ AttackIndicatorZone::~AttackIndicatorZone()
 				{
 					if (player->GetVisible() != Visibilty::Hide)
 						{
-							GameManager::GameState state = GameManager::Instance().GetGameState();
-
-							if (state != GameManager::GameState::Tutorial) {
-								player->SetHp(player->GetHp() - 1);
-							}
-
 							if (player->GetHittable())
 							{
+								player->SetHp(player->GetHp() - 1);
 								player->SetAction(Action::Hit);
 							}
+
+							/*if (player->GetHittable())
+							{
+								player->SetAction(Action::Hit);
+							}*/
 						}
 
 				}

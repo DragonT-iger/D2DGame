@@ -36,6 +36,14 @@ void Player::Start()
 
 void Player::Update(float deltaTime)
 {
+	/*if (m_isHittable == true)
+	{
+		std::cout << "hitable" << std::endl;
+	}
+	else
+	{
+		std::cout << "un hit" << std::endl;
+	}*/
 	//m_spd = 500.0f - m_Inven->GetWeight();	//버그 버전
 	m_elapsedTime += deltaTime;
 	m_invincible_Count += deltaTime;
@@ -88,6 +96,7 @@ void Player::Update(float deltaTime)
 	if (m_hp <= 0 && state != State::Killed)
 	{
 		m_pSound->PlayDead();
+		m_pSound->PlayGameOver();
 		state = State::Killed;
 	}
 	else if (m_fullness <= 0 && state != State::Starve)
@@ -99,18 +108,17 @@ void Player::Update(float deltaTime)
 
 	if (state == State::Killed)
 	{
-		if (m_P_animator->IsDeathAnimeFinished())
+		if (m_P_animator->IsDeathAnimeFinished() && !m_pSound->PlayGameOver())
 		{
 			std::cout << "State: Killed" << std::endl;
 			GameManager::Instance().LoadEndingScene(GameManager::EndReason::PlayerDead);
 		}
-
 	}
 
 	if (state == State::Starve)
 	{
 		std::cout << "State: Starve" << std::endl;
-		if (m_P_animator->IsDeathAnimeFinished())
+		if (m_P_animator->IsDeathAnimeFinished() && !m_pSound->PlayGameOver())
 		{
 			if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState()) {
 				GameManager::Instance().LoadEndingScene(GameManager::EndReason::BabyStarved);
@@ -194,6 +202,10 @@ void Player::PlaySubmisson()
 	m_pSound->PlaySubmission();
 }
 
+bool Player::PlayClear()
+{
+	return m_pSound->PlayClear();
+}
 
 void Player::FeedBaby(float bop)
 {
