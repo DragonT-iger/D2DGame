@@ -17,7 +17,7 @@ void SpawnManager::Awake()
 	if (isTutorial) {
 		farm_A = { -1070, 250, 1070, -250 };
 		farm_B = { -2130, 250, 2130, -250 }; // 의미없음
-		farm_C = { -3210, 250, 3210, -250 }; // 의미없음
+		farm_C = { -2130, 250, 2130, -250 };
 		Home = { -235, 127, 235, -127 };
 	}
 	else {
@@ -30,11 +30,15 @@ void SpawnManager::Awake()
 
 	
 	if (isTutorial) {
-		farmArr.reserve(1);
-		farmArr.push_back({ Rank_A, 10, 0.0f, 3.f, &m_farmAList });
+		farmArr.reserve(2);
+		farmArr.push_back({ Rank_A, 4, 0.0f, 3.f, &m_farmAList });
+		farmArr.push_back({ Rank_B, 5, 0.0f, 4.f, &m_farmBList });
+		//farmArr.push_back({ Rank_C, 5, 0.0f, 4.f, &m_farmCList });
 
-		growArr.reserve(1);
+		growArr.reserve(2);
 		growArr.push_back(&rankA);
+		growArr.push_back(&rankB);
+		//growArr.push_back(&rankC);
 	}
 	else {
 		farmArr.reserve(3);
@@ -85,12 +89,27 @@ void SpawnManager::Awake()
 
 void SpawnManager::Start()
 {
-	for (int i = 0; i < 10; i++)
-	{
-		for (auto& farm : farmArr)
+
+	const bool isTutorial = (GameManager::Instance().GetGameState() == GameManager::GameState::Tutorial);
+
+	if (isTutorial) {
+		for (int i = 0; i < 2; i++)
 		{
-			GameObject* obj = CreateNewCrop(farm.rank);
-			farm.farmlist->push_back(obj);
+			for (auto& farm : farmArr)
+			{
+				GameObject* obj = CreateNewCrop(farm.rank);
+				farm.farmlist->push_back(obj);
+			}
+		}
+	}
+	else {
+		for (int i = 0; i < 10; i++)
+		{
+			for (auto& farm : farmArr)
+			{
+				GameObject* obj = CreateNewCrop(farm.rank);
+				farm.farmlist->push_back(obj);
+			}
 		}
 	}
 
