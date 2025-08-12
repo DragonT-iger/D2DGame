@@ -81,7 +81,9 @@ void Player::Update(float deltaTime)
 	}
 	else if (m_fullness <= 0 && state != State::Starve)
 	{
-		state = State::Starve;
+		if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState()) {
+			state = State::Starve;
+		}
 	}
 
 	if (state == State::Killed)
@@ -99,7 +101,9 @@ void Player::Update(float deltaTime)
 		std::cout << "State: Starve" << std::endl;
 		if (m_P_animator->IsDeathAnimeFinished())
 		{
-			GameManager::Instance().LoadEndingScene(GameManager::EndReason::BabyStarved);
+			if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState()) {
+				GameManager::Instance().LoadEndingScene(GameManager::EndReason::BabyStarved);
+			}
 		}
 	}
 

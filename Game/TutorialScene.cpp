@@ -37,6 +37,18 @@ void TutorialScene::Awake()
 	m_Timer = Instantiate("SceneTimer");
 	m_Timer->AddComponent<Timer>();
 
+	GameObject* tutorialHint = Instantiate("TutorialHint");
+	auto bg = tutorialHint->AddComponent<Image>();
+	bg->SetBitmap(ResourceManager::Instance().LoadTexture("tutorial_hint.png"), { 300, 100 }); 
+	bg->SetOrderInLayer(10);
+
+	auto text = tutorialHint->AddComponent<Text>();
+	text->SetText(L"방향키로 이동하세요!", { 500, 500 }, L"Maplestory" ,D2D1::ColorF::Black);
+	text->SetFontSize(30);
+	text->SetOrderLayer(7);
+
+	tutorialHint->GetComponent<Transform>()->SetPosition({ 300.0f, 300.0f });
+	//tutorialHint->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
 
 
 
