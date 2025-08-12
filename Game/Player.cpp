@@ -59,7 +59,7 @@ void Player::Update(float deltaTime)
 			m_Inven->UpdateHungryImg(0);
 		}
 
-		m_fullness -= 2.5;
+		m_fullness -= m_decreaseFull;
 		//m_fullness -= 10;
 		m_elapsedTime = 0;
 		if (m_fullness <= 0)

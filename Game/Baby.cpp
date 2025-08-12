@@ -88,7 +88,7 @@ void Baby::OnTriggerEnter(Collider* other)
 		std::cout << "temp_pk: " << temp_pk << std::endl;*/
 
 		int bob = GameManager::Instance().ReceiveScore(QuestDataCollector(m_inven_ptr->SubMissonItem()));
-		m_player->FeedBaby(bob / 5);
+		m_player->FeedBaby(bob * 0.15f);
 
 		if (bob > 0)
 		{

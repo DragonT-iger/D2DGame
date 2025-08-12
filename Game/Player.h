@@ -60,6 +60,8 @@ public:
 
 	void FeedBaby(float bop);
 
+	void SetDecreaseFull(float num) { m_decreaseFull = num; }
+
 	friend class PlayerController;
 	friend class PlayerAnimator;
 	friend class PlayerSound;
@@ -76,6 +78,7 @@ private:
 	std::vector<GameObject*> m_hpUI;
 
 	int		m_fullness;
+	int		m_decreaseFull = 2.5f;
 	UINT	m_maxFullness = 1500;
 
 	float m_elapsedTime = 0.f;

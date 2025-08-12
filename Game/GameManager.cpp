@@ -21,6 +21,11 @@ void GameManager::Update(float deltaTime)
 {
 	inGameTime += deltaTime;
 
+	if (inGameTime >= 60.0f && inGameTime <= 60.1f)
+	{
+		m_player->GetComponent<Player>()->SetDecreaseFull(3.f);
+	}
+		
 	CountThree();
 	if(m_GameState == GameState::Main)
 	CheckHappyEnd();
