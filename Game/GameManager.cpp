@@ -22,11 +22,13 @@ void GameManager::Update(float deltaTime)
 	inGameTime += deltaTime;
 
 	CountThree();
+	if(m_GameState == GameState::Main)
 	CheckHappyEnd();
 }
 
 void GameManager::Init()
 {
+	totalscore = 0;
 	m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
 	m_inventory = SceneManager::Instance().GetActiveScene()->FindGameObject("Inventory")->GetComponent<Inventory>();
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-constexpr float EndTime = 183;
+constexpr float EndTime = 13;
 constexpr float StartStopTime = 3.0f; //게임 시작시 정지 시간
 
 class Inventory;
@@ -60,8 +60,13 @@ public:
 	GameState GetGameState() { return  m_GameState; }
 	void SetGameState(GameState state) { m_GameState = state; }
 
-	void RegisterCountText(Text* text) { m_text = text; }
+	
+	int GetAliveTime() { return (int)inGameTime; }
+
+
 	void ResetTotalScore() { totalscore = 0; }
+	void RegisterCountText(Text* text) { m_text = text; }
+	
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
@@ -85,5 +90,5 @@ private:
 
 	bool m_isFullscreen = false;
 
-	float inGameTime = 0.0f;
+	static inline float inGameTime = 0.0f;
 };
