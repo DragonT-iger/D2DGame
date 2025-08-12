@@ -16,6 +16,8 @@ private:
 	GameObject* m_Title;
 	GameObject* m_TitleLogo;
 
+	GameObject* m_credit;
+
 	GameObject* m_settingWnd;
 	GameObject* m_settingText;
 	GameObject* m_bgmText;

@@ -5,6 +5,7 @@
 #include "Inventory.h"
 #include "GameManager.h"
 #include "PlayerSound.h"
+#include "PlayerEffect.h"
 
 constexpr float invincibleTime = 2.0f;
 
@@ -26,6 +27,7 @@ void Player::Awake()
 	m_hpUI.push_back(GameObject::Find("hp3"));
 
 	m_pSound = GetComponent<PlayerSound>();
+	m_pEffect = GameObject::Find("playerEffect")->GetComponent<PlayerEffect>();
 }
 
 void Player::Start()
@@ -198,6 +200,11 @@ void Player::SetHp(int hp)
 		}
 	}
 
+}
+
+void Player::SubMissonEffect()
+{
+	m_pEffect->SubMissonEffect();
 }
 
 void Player::PlaySubmisson()

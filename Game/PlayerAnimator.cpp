@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PlayerAnimator.h"
 #include "PlayerSound.h"
+#include "PlayerEffect.h"
 #include "Inventory.h"
 
 constexpr float blinkTime = 0.2f;
@@ -26,6 +27,7 @@ void PlayerAnimator::ActionAnime()
 		if (m_animator->GetCurState() != "hit")
 		{
 			m_animator->ChangeState("hit");
+			m_Player->m_pEffect->HitEffect();
 			m_Player->m_Inven->UpdateProfile(1);
 			m_Player->m_pSound->PlayHit();
 		}

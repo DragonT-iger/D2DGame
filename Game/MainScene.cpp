@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PlayerAnimator.h"
 #include "PlayerController.h"
+#include "PlayerEffect.h"
 #include "CinemachineCamera.h"
 #include "Crop.h"
 #include "Bush.h"
@@ -49,12 +50,20 @@ void MainScene::Awake()
 	
 	player->AddComponent<PlayerSound>();
 	player->AddComponent<YSort>()->SetStatic(false);
+	player_T = player->GetComponent<Transform>();
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
 
 	player->GetComponent<Transform>()->SetPosition({ 3560.0f , 0 });
 	player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
+
+
+	playerEffect = Instantiate("playerEffect");
+	playerEffect->AddComponent<SpriteRenderer>();
+	playerEffect->AddComponent<Animator>();
+	playerEffect->AddComponent<PlayerEffect>();
+	playerEffect->GetComponent<Transform>()->SetParent(player_T);
 
 	m_farmerHouse = Instantiate("House");
 	m_farmerHouse->SetTag("House");

@@ -23,6 +23,7 @@ enum class Visibilty
 
 class Inventory;
 class Baby;
+class PlayerEffect;
 
 class Player : public MonoBehaviour
 {
@@ -50,6 +51,8 @@ public:
 	int GetHp() { return m_hp; }
 	void SetHp(int hp);
 	bool GetHittable() { return m_isHittable; }
+
+	void SubMissonEffect();
 
 	void PlaySubmisson();
 
@@ -99,5 +102,6 @@ private:
 	Baby* m_baby = nullptr;
 
 	PlayerSound* m_pSound;
+	PlayerEffect* m_pEffect;
 };
 

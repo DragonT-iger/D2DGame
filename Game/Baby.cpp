@@ -91,7 +91,10 @@ void Baby::OnTriggerEnter(Collider* other)
 		m_player->FeedBaby(bob / 5);
 
 		if (bob > 0)
+		{
 			m_player->PlaySubmisson();
+			m_player->SubMissonEffect();
+		}
 
 		if (m_QuestInProgress == true)
 		{

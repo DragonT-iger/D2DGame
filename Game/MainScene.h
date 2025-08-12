@@ -12,6 +12,8 @@ class MainScene : public Scene
 	Transform*				player_T	= nullptr;
 	SpriteRenderer*			player_S	= nullptr;
 
+	GameObject*				playerEffect = nullptr;
+
 	GameObject*				crop		= nullptr;
 	GameObject*				message		= nullptr;
 

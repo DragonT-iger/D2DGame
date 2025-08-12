@@ -164,6 +164,11 @@ void TitleScene::Awake()
 
 #pragma endregion
 
+	m_credit = Instantiate("credit");
+	Img = m_credit->AddComponent<Image>();
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 800, 800 });
+	Img->SetOrderInLayer(20);
+
 	SoundManager::Instance().SetVolume_BGM(1.f);
 	SoundManager::Instance().SetVolume_SFX(1.f);
 	SoundManager::Instance().SetVolume_UI(1.f);

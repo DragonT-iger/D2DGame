@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PlayerAnimator.h"
 #include "PlayerController.h"
+#include "PlayerEffect.h"
 #include "CinemachineCamera.h"
 #include "Crop.h"
 #include "Bush.h"
@@ -146,10 +147,16 @@ void TutorialScene::Awake()
 	player->AddComponent<PlayerController>();
 	player->AddComponent<PlayerSound>();
 	player->AddComponent<YSort>()->SetStatic(false);
-	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
-
+	player_T = player->GetComponent<Transform>();
+	player_T->SetScale({ 0.35f, 0.35f });
 	player->GetComponent<Transform>()->SetPosition({ -3560.0f , 0 });
 	//player->AddComponent<Baby>();
+
+	playerEffect = Instantiate("playerEffect");
+	playerEffect->AddComponent<SpriteRenderer>();
+	playerEffect->AddComponent<Animator>();
+	playerEffect->AddComponent<PlayerEffect>();
+	playerEffect->GetComponent<Transform>()->SetParent(player_T);
 
 	playerSR->SetOrderInLayer(1);
 
@@ -157,6 +164,7 @@ void TutorialScene::Awake()
 	player->SetTag("Player"); //<<- �̰� ���ְ�
 
 	SetPlayer(player); //<-- ���� ���� �˷��ְ�
+
 
 	//m_farmerHouse = Instantiate("House");
 	//m_farmerHouse->SetTag("House");

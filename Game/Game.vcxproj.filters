@@ -91,6 +91,9 @@
     <Filter Include="Scripts\ButtonTest\ToMainScene">
       <UniqueIdentifier>{23732248-aac7-4b1c-b4e1-3697417b3751}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\ButtonTest\XButton">
+      <UniqueIdentifier>{fa83c98a-31f2-47a1-8a3d-124a4a7cee42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -255,6 +258,12 @@
     <ClCompile Include="Tree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="XButton.cpp">
+      <Filter>Scripts\ButtonTest\XButton</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEffect.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -415,6 +424,12 @@
     </ClInclude>
     <ClInclude Include="Tree.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="XButton.h">
+      <Filter>Scripts\ButtonTest\XButton</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEffect.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

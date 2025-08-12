@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "TutorialEndTrigger.h"
 #include "Inventory.h"
+#include "Player.h"
 #include "GameManager.h"
 #include "ClientSceneManager.h"
 #include "MainScene.h"
@@ -31,6 +32,7 @@ void TutorialEndTrigger::OnTriggerEnter(Collider* other)
     if (other->GetOwner()->GetTag() != "Player" || m_inventory == nullptr)
         return;
 
+    other->GetOwner()->GetComponent<Player>()->SubMissonEffect();
     GameManager::Instance().ReceiveScore(m_inventory->SubMissonItem());
     m_transitionPending = true;
     m_elapsed = 0.f;
