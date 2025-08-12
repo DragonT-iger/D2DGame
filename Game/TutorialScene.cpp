@@ -28,6 +28,8 @@
 #include "TutorialHint.h"
 #include "TutorialHintTrigger.h"
 #include "TutorialEndTrigger.h"
+#include "PlayerShadow.h"
+#include "FarmerShadow.h"
 
 void TutorialScene::Awake()
 {
@@ -158,6 +160,15 @@ void TutorialScene::Awake()
 
 	SetPlayer(player); //<-- ���� ���� �˷��ְ�
 
+	p_shadow = Instantiate("Player_Shadow");
+	auto p_shadowTransForm = p_shadow->GetComponent<Transform>();
+	p_shadowTransForm->SetParent(player->GetComponent<Transform>());
+	p_shadowTransForm->SetPosition(Vector2{ 0,-30 });
+	p_shadowTransForm->SetScale(Vector2{ 0.75f,0.78f });
+	p_shadow->AddComponent<SpriteRenderer>()->SetOrderInLayer(-10000);
+	p_shadow->AddComponent<PlayerShadow>();
+
+
 	//m_farmerHouse = Instantiate("House");
 	//m_farmerHouse->SetTag("House");
 	//auto sr = m_farmerHouse->AddComponent<SpriteRenderer>();
@@ -275,7 +286,13 @@ void TutorialScene::Awake()
 	GameObject* farmer = Instantiate("Farmer");
 	Farmer* fm = farmer->AddComponent<Farmer>();
 
-
+	GameObject* farmer_shadow = Instantiate("farmer_Shadow");
+	auto f_shadowTransForm = farmer_shadow->GetComponent<Transform>();
+	f_shadowTransForm->SetParent(farmer->GetComponent<Transform>());
+	f_shadowTransForm->SetPosition(Vector2{ 0,-50 });
+	f_shadowTransForm->SetScale(Vector2{ 0.8f,0.8f });
+	farmer_shadow->AddComponent<SpriteRenderer>()->SetOrderInLayer(-10000);
+	farmer_shadow->AddComponent<FarmerShadow>();
 
 #pragma region SpawnManager,Inventory
 
