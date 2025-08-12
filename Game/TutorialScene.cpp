@@ -27,6 +27,7 @@
 #include "Timer.h"
 #include "TutorialHint.h"
 #include "TutorialHintTrigger.h"
+#include "TutorialEndTrigger.h"
 
 void TutorialScene::Awake()
 {
@@ -439,6 +440,7 @@ void TutorialScene::Awake()
 	SubMissionArea2->SetTag("SubMissionArea");
 
 	SubMissionArea1->AddComponent<SubMissionArea>();
+	SubMissionArea1->AddComponent<TutorialEndTrigger>();
 	SubMissionArea2->AddComponent<SubMissionArea>();
 
 	auto sub_box1 = SubMissionArea1->AddComponent<BoxCollider>();
