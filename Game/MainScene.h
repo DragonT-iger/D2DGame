@@ -109,5 +109,6 @@ class MainScene : public Scene
 
 #pragma endregion
 
+				GameObject* m_vignette = nullptr;
 };
 
