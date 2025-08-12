@@ -20,8 +20,8 @@ void Bush::Start()
 	auto bush_sprite = ResourceManager::Instance().LoadTexture("bush_1.png");
 	m_spriteRenderer->SetBitmap(bush_sprite);
 
-	m_boxCol->SetSize(Vector2{ 200,200 });
-	m_boxCol->SetOffset({ 0, -50 });
+	m_boxCol->SetSize(Vector2{ 100,20 });
+	m_boxCol->SetOffset({ 0, 80 });
 }
 
 void Bush::OnTriggerEnter(Collider* other)

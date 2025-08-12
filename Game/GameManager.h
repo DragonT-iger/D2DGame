@@ -1,6 +1,6 @@
 #pragma once
 
-constexpr float EndTime = 13;
+constexpr float EndTime = 183;
 constexpr float StartStopTime = 3.0f; //게임 시작시 정지 시간
 
 class Inventory;

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ì†ŒìŠ¤ íŒŒì¼">
+    <Filter Include="¼Ò½º ÆÄÀÏ">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="í—¤ë” íŒŒì¼">
+    <Filter Include="Çì´õ ÆÄÀÏ">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="ë¦¬ì†ŒìŠ¤ íŒŒì¼">
+    <Filter Include="¸®¼Ò½º ÆÄÀÏ">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
@@ -97,7 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
       <Filter>MainScene</Filter>
@@ -109,7 +109,7 @@
       <Filter>Untouchable</Filter>
     </ClCompile>
     <ClCompile Include="CinemachineCamera.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController_Sample.cpp">
       <Filter>SampleFile</Filter>
@@ -130,10 +130,10 @@
       <Filter>Scripts\SpawnManager</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectFindTest.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="Farmer.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>Scripts\Inventory</Filter>
@@ -151,10 +151,10 @@
       <Filter>Scripts\Items</Filter>
     </ClCompile>
     <ClCompile Include="FarmerZone.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="FarmerManager.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>Player</Filter>
@@ -166,10 +166,10 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="DTtestScene.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="YSort.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="ArtTestView.cpp">
       <Filter>TestScene</Filter>
@@ -184,13 +184,13 @@
       <Filter>Scripts\Timer</Filter>
     </ClCompile>
     <ClCompile Include="EndingScene.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="UI_Score.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="EndSceneManager.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="SettingButton.cpp">
       <Filter>Scripts\ButtonTest\Setting</Filter>
@@ -205,10 +205,10 @@
       <Filter>Scripts\ButtonTest\Setting\Check</Filter>
     </ClCompile>
     <ClCompile Include="AttackEffect.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="AttackPattern.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="Baby.cpp">
       <Filter>Player</Filter>
@@ -217,10 +217,10 @@
       <Filter>Scripts</Filter>
     </ClCompile>
     <ClCompile Include="ThrownCrop.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="OpacityDown.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="EscBtn.cpp">
       <Filter>Scripts\EscBtn</Filter>
@@ -235,7 +235,7 @@
       <Filter>TutorialScene</Filter>
     </ClCompile>
     <ClCompile Include="ClientSceneManager.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="CreditBtn.cpp">
       <Filter>Scripts\ButtonTest\Credit</Filter>
@@ -247,16 +247,16 @@
       <Filter>Scripts\ButtonTest\ToMainScene</Filter>
     </ClCompile>
     <ClCompile Include="TutorialHint.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="TutorialHintTrigger.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="TutorialEndTrigger.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="Tree.cpp">
-      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
     </ClCompile>
     <ClCompile Include="XButton.cpp">
       <Filter>Scripts\ButtonTest\XButton</Filter>
@@ -264,10 +264,16 @@
     <ClCompile Include="PlayerEffect.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerShadow.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="FarmerShadow.cpp">
+      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>MainScene</Filter>
@@ -279,7 +285,7 @@
       <Filter>SampleFile</Filter>
     </ClInclude>
     <ClInclude Include="CinemachineCamera.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="Crop.h">
       <Filter>Scripts\Items</Filter>
@@ -297,10 +303,10 @@
       <Filter>Scripts\SpawnManager</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectFindTest.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="Farmer.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>Scripts\Inventory</Filter>
@@ -318,10 +324,10 @@
       <Filter>Scripts\Items</Filter>
     </ClInclude>
     <ClInclude Include="FarmerZone.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="FarmerManager.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAnimator.h">
       <Filter>Player</Filter>
@@ -330,10 +336,10 @@
       <Filter>Scripts\Bush</Filter>
     </ClInclude>
     <ClInclude Include="DTtestScene.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="YSort.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="ArtTestView.h">
       <Filter>TestScene</Filter>
@@ -348,13 +354,13 @@
       <Filter>Scripts\Timer</Filter>
     </ClInclude>
     <ClInclude Include="EndingScene.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="UI_Score.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="EndSceneManager.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="SettingButton.h">
       <Filter>Scripts\ButtonTest\Setting</Filter>
@@ -369,10 +375,10 @@
       <Filter>Scripts\ButtonTest\Setting\Check</Filter>
     </ClInclude>
     <ClInclude Include="AttackEffect.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="AttackPattern.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="Baby.h">
       <Filter>Player</Filter>
@@ -381,10 +387,10 @@
       <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="ThrownCrop.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="OpacityDown.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="EscBtn.h">
       <Filter>Scripts\EscBtn</Filter>
@@ -399,7 +405,7 @@
       <Filter>TutorialScene</Filter>
     </ClInclude>
     <ClInclude Include="ClientSceneManager.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="CreditBtn.h">
       <Filter>Scripts\ButtonTest\Credit</Filter>
@@ -414,22 +420,28 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="TutorialHint.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="TutorialHintTrigger.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="TutorialEndTrigger.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="Tree.h">
-      <Filter>í—¤ë” íŒŒì¼</Filter>
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
     <ClInclude Include="XButton.h">
       <Filter>Scripts\ButtonTest\XButton</Filter>
     </ClInclude>
     <ClInclude Include="PlayerEffect.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShadow.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="FarmerShadow.h">
+      <Filter>Çì´õ ÆÄÀÏ</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

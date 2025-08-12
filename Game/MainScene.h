@@ -9,13 +9,11 @@ class MainScene : public Scene
 	GameObject*				gameManager = nullptr;
 
 	GameObject*				player		= nullptr;
-	Transform*				player_T	= nullptr;
-	SpriteRenderer*			player_S	= nullptr;
+	GameObject*				p_shadow	= nullptr;
 
 	GameObject*				playerEffect = nullptr;
 
 	GameObject*				crop		= nullptr;
-	GameObject*				message		= nullptr;
 
 	GameObject*				bush1 = nullptr;
 	GameObject*				bush2 = nullptr;
