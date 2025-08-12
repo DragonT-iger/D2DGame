@@ -386,11 +386,11 @@
     <ClInclude Include="QuitBtn.h">
       <Filter>Scripts\ButtonTest\Quit</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerSound.h">
-      <Filter>Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="SkipButton.h">
       <Filter>Scripts\ButtonTest\ToMainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSound.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
