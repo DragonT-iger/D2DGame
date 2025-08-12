@@ -331,6 +331,11 @@ void MainScene::Awake()
 	col->SetSize({ 470, 355 });
 #endif
 
+	m_count = Instantiate("count");
+	txt = m_count->AddComponent<Text>();
+	txt->SetText(L"3", {300, 300}, L"Maplestory");
+	txt->SetFontSize(100);
+	m_count->GetComponent<Transform>()->SetPosition({ 960, 540 });
 
 #pragma region UI
 
@@ -450,7 +455,6 @@ void MainScene::Awake()
 
 #pragma endregion
 
-	GameManager::Instance().Init(); //player??inventory ?°ê²°.
 #pragma region	ESC
 
 	m_Esc = Instantiate("ESC");
@@ -595,9 +599,16 @@ void MainScene::Awake()
 #pragma endregion
 
 	gameManager = Instantiate("GameManager");
-	gameManager->AddComponent<GameManager>();
+	auto gm = gameManager->AddComponent<GameManager>();
+	gm->RegisterCountText(m_count->GetComponent<Text>());
 	GameManager::Instance().Init();
 	SoundManager::Instance().BGM_Shot("2.mp3");
+
+	m_vignette = Instantiate("vignette");
+	auto vignetteImg = m_vignette->AddComponent<Image>();
+	vignetteImg->SetBitmap(ResourceManager::Instance().LoadTexture("Vignette_effect.png"), { 1920,1080 });
+	m_vignette->GetComponent<Transform>()->SetPosition({ 960, 540 });
+
 	Scene::Awake();
 }
 

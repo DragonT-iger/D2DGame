@@ -84,9 +84,9 @@ void PlayerController::Update(float deltaTime)
 				if (m_throwelapsedTime >= m_throwTime)
 				{
 					Crops type = m_inven->ThrowItem();
-					m_Player->m_pSound->DropCrop();
 					if (type != Crops::Nothing)
 					{
+						m_Player->m_pSound->DropCrop();
 						m_throwelapsedTime = 0;
 						SpawnThrownCrop(type);
 						ApplyThrowBoost(type);
