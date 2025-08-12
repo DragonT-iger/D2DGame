@@ -149,7 +149,12 @@ AttackIndicatorZone::~AttackIndicatorZone()
 						if (state != GameManager::GameState::Tutorial) {
 							player->SetHp(player->GetHp() - 1);
 						}
-						player->SetAction(Action::Hit);
+
+						if (player->GetHittable())
+						{
+							player->SetAction(Action::Hit);
+						}
+						
 					}
 				}
 			}

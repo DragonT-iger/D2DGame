@@ -45,9 +45,10 @@ void MainScene::Awake()
 	player->AddComponent<BoxCollider>();
 	player->AddComponent<Animator>();
 
-	player->AddComponent<Player>();
+	auto p_component = player->AddComponent<Player>();
 	player->AddComponent<PlayerAnimator>();
-	player->AddComponent<PlayerController>();
+	auto p_controller = player->AddComponent<PlayerController>();
+	
 	player->AddComponent<PlayerSound>();
 	player->AddComponent<YSort>()->SetStatic(false);
 	player->GetComponent<Transform>()->SetScale({ 0.35f, 0.35f });
@@ -68,7 +69,8 @@ void MainScene::Awake()
 	box->SetSize({ 300, 270 });
 	box->SetOffset({ 0, -160 });
 	
-	
+	p_component->SetActive(false); //GameManager에서 3초뒤 활성화
+	p_controller->SetActive(false); //GameManager에서 3초뒤 활성화
 //end player-----
 
 ////begin crop-----
@@ -561,6 +563,7 @@ void MainScene::Awake()
 #pragma endregion
 
 	gameManager = Instantiate("GameManager");
+	gameManager->AddComponent<GameManager>();
 	GameManager::Instance().Init();
 	SoundManager::Instance().BGM_Shot("2.mp3");
 	Scene::Awake();
