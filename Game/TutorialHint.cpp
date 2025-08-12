@@ -20,14 +20,22 @@ void TutorialHint::SetHintImages(const std::vector<std::string>& images, const V
 
 void TutorialHint::ShowHint(size_t index)
 {
+    size_t finalIndex = m_texts.empty() ? 0 : m_texts.size() - 1;
+    if (m_lastHintShown && index != finalIndex)
+        return;
+
     if (m_text && index < m_texts.size())
     {
-        m_text->SetText(m_texts[index], { 500, 500 }, L"Maplestory", D2D1::ColorF::Black);
+        m_text->SetText(m_texts[index], { 704.f, 404.f }, L"Maplestory", D2D1::ColorF::White);
     }
 
     if (m_image && index < m_imageNames.size())
     {
         auto bitmap = ResourceManager::Instance().LoadTexture(m_imageNames[index]);
         m_image->SetBitmap(bitmap, { m_imageSize.x, m_imageSize.y });
+
+
+        if (index == finalIndex)
+            m_lastHintShown = true;
     }
 }

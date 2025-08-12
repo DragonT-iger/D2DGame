@@ -45,7 +45,7 @@ void TutorialScene::Awake()
 	GameObject* firstArea = Instantiate("firstArea");
 	auto box1 = firstArea->AddComponent<BoxCollider>();
 	firstArea->SetTag("firstArea");
-	firstArea->GetComponent<Transform>()->SetPosition({ -3259.4f, 0.f });
+	firstArea->GetComponent<Transform>()->SetPosition({ -3290.4f, 0.f });
 	box1->SetSize({ 518.f, 2000.f });
 	firstArea->AddComponent<TutorialHintTrigger>(0);
 
@@ -100,19 +100,34 @@ void TutorialScene::Awake()
 	bg->SetOrderInLayer(10);
 
 	auto text = tutorialHint->AddComponent<Text>();
-	text->SetText(L"방향키로 이동하세요!", { 500, 500 }, L"Maplestory" ,D2D1::ColorF::Black);
-	text->SetFontSize(30);
-	text->SetOrderLayer(7);
+	text->SetText(L"방향키로 이동하세요!", { 300, 100 }, L"Maplestory" ,D2D1::ColorF::Black);
+	text->SetFontSize(25);
+	text->SetOrderLayer(100);
 
 
 
 	auto hint = tutorialHint->AddComponent<TutorialHint>();
 	hint->SetHintTexts({
-		L"Hint for Area 1",
-		L"Hint for Area 2",
-		L"Hint for Area 3",
-		L"Hint for Area 4",
-		L"Hint for Area 5",
+		L"방향키로 캐릭터를 이동합니다.\n\
+방향키를 눌러 자유롭게 움직여보세요.",
+		L"화면 하단의 포만도 게이지는 시간이 지나면 천천히 감소합니다.\n\
+포만도가 0이 되면 게임 오버이므로,\n\
+ 꾸준히 작물을 먹여 채워야 합니다.\n\
+Tip: 포만도는 아기 생존과 직결됩니다.",
+		L"Z키: 바닥의 작물을 습득합니다.        \n\
+작물을 많이 들면 무거워져서 이동 속도가 느려집니다.\n\
+X키: 다음 인벤토리를 선택합니다.\n\
+C키 : 선택된 인벤토리의 작물을 버립니다.\n\
+Tip : 무거워서 위험할 때는 과감히 버리고 도망치세요.\n\
+아이템을 버리면 속도가 잠시 증가합니다.",
+		L"안쪽 지역으로 갈수록 더 좋은 작물이 나옵니다.\n\
+하지만 그곳에는 농부가 순찰하고 있습니다.\n\
+농부의 시야를 피해 덤불 속으로 숨으면 경계를 피할 수 있습니다.\n\
+농부에게 공격을 당하거나 부딪히면 HP가 감소하고 전부 감소하면 게임 오버가 됩니다.\n\
+Tip: 은신처를 활용해 타이밍을 노리세요.",
+		L"맵의 좌/우 외곽 지역으로 돌아오면\n\
+점수를 획득하며 점수에 비례하여 포만도가 회복됩니다.\n\
+제한시간 동안 아기가 굶어죽지 않도록 최대한 많은 점수를 획득해주세요!",
 		L"Hint for Area 6",
 		L"Hint for Area 7"
 		});
@@ -126,7 +141,7 @@ void TutorialScene::Awake()
 		"tutorial_hint.png"
 		});
 
-	tutorialHint->GetComponent<Transform>()->SetPosition({ 300.0f, 300.0f });
+	tutorialHint->GetComponent<Transform>()->SetPosition({ 383.6f, 225.4f });
 	//tutorialHint->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
 
 	hint->ShowHint(2);
