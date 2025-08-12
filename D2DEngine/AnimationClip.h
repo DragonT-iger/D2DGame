@@ -48,7 +48,7 @@ public:
 	bool IsLooping() const { return isLoop; }	
 
 	std::string GetName() const { return m_name; }	
-	Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetBitmap() const { return m_sheet; }
+		Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetBitmap() const { return m_sheet; }
 	std::vector<FrameData>& GetFrames() { return m_frames; }
 
 private:
