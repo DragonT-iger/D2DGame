@@ -155,8 +155,10 @@ void Inventory::UpdateBabyProfile(size_t index)
 {
 	if (index != m_babyIndex)
 	{
-		m_babyProfile->SetBitmap(m_babyProfiles[index], { 80, 80 });
-		m_babyIndex = index;
+		if (!m_babyProfile) {
+			m_babyProfile->SetBitmap(m_babyProfiles[index], { 80, 80 });
+			m_babyIndex = index;
+		}
 	}
 }
 
@@ -164,8 +166,10 @@ void Inventory::UpdateProfile(size_t index)
 {
 	if (index != m_profileIndex)
 	{
-		m_profile->SetBitmap(m_profiles[index], { 80, 80 });
-		m_profileIndex = index;
+		if (!m_profile) {
+			m_profile->SetBitmap(m_profiles[index], { 80, 80 });
+			m_profileIndex = index;
+		}
 	}
 }
 
@@ -173,8 +177,10 @@ void Inventory::UpdateHungryImg(size_t index)
 {
 	if (index != m_hungryIndex)
 	{
-		m_hungry->SetBitmap(m_hungrys[index], { 65, 65 });
-		m_hungryIndex = index;
+		if (m_hungry) {
+			m_hungry->SetBitmap(m_hungrys[index], { 65, 65 });
+			m_hungryIndex = index;
+		}
 	}
 }
 
