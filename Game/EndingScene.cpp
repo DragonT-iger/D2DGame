@@ -49,7 +49,7 @@ void EndingScene::Awake()
 	
 	timetxt->SetText(time, { 600, 200 }, L"Maplestory");
 	timetxt->SetFontSize(70);
-	aliveTime->GetComponent<Transform>()->SetPosition({ 1180, 865 });
+	aliveTime->GetComponent<Transform>()->SetPosition({ 1100, 865 });
 	
 
 	m_restart = Instantiate("restart");
