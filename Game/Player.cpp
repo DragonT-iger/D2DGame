@@ -36,6 +36,14 @@ void Player::Start()
 
 void Player::Update(float deltaTime)
 {
+	/*if (m_isHittable == true)
+	{
+		std::cout << "hitable" << std::endl;
+	}
+	else
+	{
+		std::cout << "un hit" << std::endl;
+	}*/
 	//m_spd = 500.0f - m_Inven->GetWeight();	//버그 버전
 	m_elapsedTime += deltaTime;
 	m_invincible_Count += deltaTime;

@@ -50,7 +50,6 @@ private:
 	
 	Thought m_thoughtState = Thought::None;
 
-
 	//QuestSystem
 	Inventory* m_inven_ptr = nullptr;
 
@@ -59,7 +58,7 @@ private:
 	bool m_QuestInProgress = false;
 
 	bool m_QuestisTimeOut = false;
-	float m_QExeTime = 20.0f; //퀘스트 수정
+	float m_QExeTime = 10.0f; //퀘스트 수정
 
 	int temp_ep = 0;
 	int temp_pt = 0;
