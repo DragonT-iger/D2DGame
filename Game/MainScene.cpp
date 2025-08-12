@@ -23,6 +23,7 @@
 #include "SettingButton.h"
 #include "AcceptSetting.h"
 #include "QuitSetting.h"
+#include "Tree.h"
 
 void MainScene::Awake()
 {
@@ -185,6 +186,10 @@ void MainScene::Awake()
 	bush8->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
 	bush9->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
 	bush10->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });
+
+
+	GameObject* tree1 = Instantiate("Tree");
+	tree1->AddComponent<Tree>();
 
 #pragma endregion
 
