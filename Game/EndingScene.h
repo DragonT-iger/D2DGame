@@ -3,5 +3,8 @@ class EndingScene :public Scene
 {
 	void Awake() override;
 	//void Start() override;
+
+private:
+	GameObject* m_restart;
 };
 
