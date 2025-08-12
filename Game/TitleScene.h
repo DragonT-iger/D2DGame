@@ -14,6 +14,7 @@ private:
 	GameObject* m_buttonBG;
 
 	GameObject* m_Title;
+	GameObject* m_TitleLogo;
 
 	GameObject* m_settingWnd;
 	GameObject* m_settingText;

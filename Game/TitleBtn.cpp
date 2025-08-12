@@ -6,5 +6,8 @@
 void TitleBtn::Start()
 {
 	m_button = GetComponent<Button>();
-	m_button->AddEvent([]() {ClientSceneManager::Instance().LoadScene(std::make_unique<TitleScene>()); }, ButtonEvent::Pressed);
+	m_button->AddEvent([]() {
+		SoundManager::Instance().UI_Shot("2.mp3"); 
+		ClientSceneManager::Instance().LoadScene(std::make_unique<TitleScene>()); 
+		}, ButtonEvent::Pressed);
 }

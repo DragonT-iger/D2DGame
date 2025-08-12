@@ -88,6 +88,9 @@
     <Filter Include="Scripts\ButtonTest\Quit">
       <UniqueIdentifier>{799d4f2b-ec1a-43ea-84a8-04c2a46d1a0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\ButtonTest\ToMainScene">
+      <UniqueIdentifier>{23732248-aac7-4b1c-b4e1-3697417b3751}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -237,6 +240,9 @@
     <ClCompile Include="QuitBtn.cpp">
       <Filter>Scripts\ButtonTest\Quit</Filter>
     </ClCompile>
+    <ClCompile Include="SkipButton.cpp">
+      <Filter>Scripts\ButtonTest\ToMainScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -382,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="PlayerSound.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipButton.h">
+      <Filter>Scripts\ButtonTest\ToMainScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
