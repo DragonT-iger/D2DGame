@@ -69,7 +69,8 @@ private:
 
 	std::vector<GameObject*> m_hpUI;
 
-	float	m_fullness;
+	UINT	m_fullness;
+	UINT	m_maxFullness = 1500;
 
 	float m_elapsedTime = 0.f;
 

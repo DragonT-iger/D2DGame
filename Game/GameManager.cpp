@@ -51,7 +51,7 @@ void GameManager::SetFullScreen(bool isFull)
 void GameManager::LoadEndingScene(EndReason reason)
 {
 	m_endReason = reason;
-	ClientSceneManager::Instance().LoadScene(std::unique_ptr<EndingScene>());
+	ClientSceneManager::Instance().LoadScene(std::make_unique<EndingScene>());
 }
 
 int GameManager::ReceiveScore(const std::vector<SlotData>& data)
@@ -86,8 +86,7 @@ int GameManager::ReceiveScore(const std::vector<SlotData>& data)
 
 	totalscore += curScore;
 
-	return curScore / 5;
-
+	return curScore;
 }
 
 void GameManager::AddScore(int num)

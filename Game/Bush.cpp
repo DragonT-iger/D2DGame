@@ -27,13 +27,13 @@ void Bush::Start()
 void Bush::OnTriggerEnter(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player"){
-		m_spriteRenderer->SetOpacity(0.7f);
+		m_spriteRenderer->SetOpacity(0.5f);
 	}
 }
 
 void Bush::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player") {
-		m_spriteRenderer->SetOpacity(1);
+		m_spriteRenderer->SetOpacity(1.f);
 	}
 }

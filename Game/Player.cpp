@@ -18,7 +18,7 @@ void Player::Awake()
 	m_P_spriteRen = GetComponent<SpriteRenderer>();
 	//m_animtor = GetComponent<Animator>();
 
-	m_fullness = 1500.0f;
+	m_fullness = m_maxFullness;
 	m_elapsedTime = 0.0f;
 
 	m_hpUI.push_back(GameObject::Find("hp1"));
@@ -42,8 +42,25 @@ void Player::Update(float deltaTime)
 
 	if (0.1f <= m_elapsedTime)
 	{
-		m_fullness -= 3.0f;
-		m_elapsedTime = 0.0f;
+		if (m_fullness <= m_maxFullness && m_fullness >= (m_maxFullness / 3) * 2)
+		{
+			m_Inven->UpdateBabyProfile(0);
+			m_Inven->UpdateHungryImg(0);
+		}
+
+		m_fullness -= 3;
+		m_elapsedTime = 0;
+
+		if (m_fullness <= (m_maxFullness / 3) * 2 && m_fullness >= (m_maxFullness / 3))
+		{
+			m_Inven->UpdateBabyProfile(1);
+			m_Inven->UpdateHungryImg(1);
+		}
+		if (m_fullness <= (m_maxFullness / 3))
+		{
+			m_Inven->UpdateBabyProfile(2);
+			m_Inven->UpdateHungryImg(2);
+		}
 	}
 
 	if (invincibleTime < m_invincible_Count)
@@ -112,7 +129,6 @@ void Player::OnTriggerStay(Collider* other)
 		
 	}
 
-
 	/*if (m_hp > 0)
 	{
 		invincible_Count++;
@@ -136,7 +152,6 @@ void Player::OnTriggerExit(Collider* other)
 	{
 		visibilty = Visibilty::Visible;
 	}
-
 }
 
 void Player::SetHp(int hp)
@@ -166,8 +181,8 @@ void Player::SetHp(int hp)
 
 void Player::FeedBaby(float bop)
 {
-	if (m_fullness + bop >= 1500.f)
-		m_fullness = 1500.f;
+	if (m_fullness + bop >= m_maxFullness)
+		m_fullness = m_maxFullness;
 	else
 		m_fullness += bop;
 }
