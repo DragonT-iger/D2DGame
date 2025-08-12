@@ -23,7 +23,6 @@ void EndingScene::Awake()
 	std::wstring score = L"Score : " + std::to_wstring(gm->GetTotalScore());
 	txt->SetText(score, { 600, 200 }, L"Maplestory");
 	txt->SetFontSize(70);
-	totalScore->GetComponent<Transform>()->SetPosition({ 1172, 935 });
 
 
 
@@ -46,6 +45,7 @@ void EndingScene::Awake()
 	{
 		time = L"Time: " + std::to_wstring(second) + L"s";
 	}
+	totalScore->GetComponent<Transform>()->SetPosition({ 1100, 935 });
 	
 	timetxt->SetText(time, { 600, 200 }, L"Maplestory");
 	timetxt->SetFontSize(70);

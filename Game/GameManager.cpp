@@ -114,14 +114,25 @@ void GameManager::CountThree()
 {
 	if (m_GameState != GameState::Main) return;
 	//Á¤Áö
-	if (inGameTime > StartStopTime/* && m_player*/)
+	if (countThree > 2) return;
+		
+	if (countThree  != static_cast<int>(inGameTime) && m_text)
 	{
-		auto p_Component = m_player->GetComponent<Player>();
-		auto p_Controller = m_player->GetComponent<PlayerController>();
+		countThree = static_cast<int>(inGameTime);
+		if (countThree > 2)
+		{
+			m_text->GetOwner()->SetActive(false);
+			auto p_Component = m_player->GetComponent<Player>();
+			auto p_Controller = m_player->GetComponent<PlayerController>();
 
-		p_Component->SetActive(true);
-		p_Controller->SetActive(true);
-		return;
+			p_Component->SetActive(true);
+			p_Controller->SetActive(true);
+			return;
+		}
+		else
+		{
+			m_text->SetText(std::to_wstring(3 - countThree), { 300, 300 }, L"Maplestory");
+		}
 	}
 }
 

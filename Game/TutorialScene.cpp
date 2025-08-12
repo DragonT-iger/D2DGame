@@ -644,7 +644,7 @@ void TutorialScene::Awake()
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start.png"), ButtonEvent::Idle);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start_Select.png"), ButtonEvent::Highlight);
 
-	m_skipBtn->GetComponent<Transform>()->SetPosition({ 1760, 220 });
+	m_skipBtn->GetComponent<Transform>()->SetPosition({ 1760, 940 });
 
 	GameManager::Instance().Init(); //player?ž‘ inventory ?—°ê²?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
