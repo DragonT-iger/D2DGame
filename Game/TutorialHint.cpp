@@ -20,7 +20,6 @@ void TutorialHint::SetHintImages(const std::vector<std::string>& images, const V
 
 void TutorialHint::ShowHint(size_t index)
 {
-    std::cout << " " << std::endl;
     if (m_text && index < m_texts.size())
     {
         m_text->SetText(m_texts[index], { 500, 500 }, L"Maplestory", D2D1::ColorF::Black);
