@@ -50,6 +50,11 @@ void Player::Update(float deltaTime)
 
 		m_fullness -= 3;
 		m_elapsedTime = 0;
+		if (m_fullness <= 0)
+		{
+			if (GameManager::Instance().GetGameState() == GameManager::GameState::Tutorial)
+				m_fullness = 1;
+		}
 
 		if (m_fullness <= (m_maxFullness / 3) * 2 && m_fullness >= (m_maxFullness / 3))
 		{
