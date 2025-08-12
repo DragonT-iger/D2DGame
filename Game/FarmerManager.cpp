@@ -2,6 +2,11 @@
 #include "FarmerManager.h"
 #include "Farmer.h"
 
+FarmerManager::~FarmerManager()
+{
+    m_farmerWarningGroup->stop();
+}
+
 void FarmerManager::Awake()
 {
     std::vector<Vector2> positions = {
@@ -37,4 +42,9 @@ void FarmerManager::PlayWarningSound()
     {
         SoundManager::Instance().SFX_Shot("21.mp3", m_farmerWarningGroup);
     }
+}
+
+void FarmerManager::WarningSoundStop()
+{
+    m_farmerWarningGroup->stop();
 }

@@ -44,6 +44,7 @@ void Player::Update(float deltaTime)
 	{
 		if (m_fullness <= m_maxFullness && m_fullness >= (m_maxFullness / 3) * 2)
 		{
+			enterFullness30 = false;
 			m_Inven->UpdateBabyProfile(0);
 			m_Inven->UpdateHungryImg(0);
 		}
@@ -58,6 +59,7 @@ void Player::Update(float deltaTime)
 
 		if (m_fullness <= (m_maxFullness / 3) * 2 && m_fullness >= (m_maxFullness / 3))
 		{
+			enterFullness30 = false;
 			m_Inven->UpdateBabyProfile(1);
 			m_Inven->UpdateHungryImg(1);
 		}
@@ -65,6 +67,10 @@ void Player::Update(float deltaTime)
 		{
 			m_Inven->UpdateBabyProfile(2);
 			m_Inven->UpdateHungryImg(2);
+			if(!enterFullness30)
+				m_pSound->PlayHungry30();
+
+			enterFullness30 = true;
 		}
 	}
 
@@ -181,6 +187,11 @@ void Player::SetHp(int hp)
 		}
 	}
 
+}
+
+void Player::PlaySubmisson()
+{
+	m_pSound->PlaySubmission();
 }
 
 

@@ -53,6 +53,7 @@ void Inventory::SetMaxCount(std::array<size_t, 3> maxCounts)
 
 void Inventory::Update(float deltaTime)
 {
+#ifdef _DEBUG
 	if (Input.GetKeyPressed(Keycode::Q))
 	{
 		AddCrop(Eggplant, S);
@@ -91,6 +92,7 @@ void Inventory::Update(float deltaTime)
 			}
 		}
 	}
+#endif
 }
 
 

@@ -134,7 +134,6 @@ void Farmer::DoPatrol(float deltaTime)
 
 void Farmer::DoAlert(float deltaTime)
 {
-    m_farmerManager->PlayWarningSound();
 }
 
 void Farmer::DoChase(float deltaTime)
@@ -324,6 +323,17 @@ const char* Farmer::ToString(FarmerState s) const
     case FarmerState::Attack: return "Attack";
     default:                  return "Unknown";
     }
+}
+
+void Farmer::PlayChaseZoneSound()
+{
+    if (m_farmerManager)
+        m_farmerManager->PlayWarningSound();
+}
+
+void Farmer::StopSound()
+{
+    m_farmerManager->WarningSoundStop();
 }
 
 void Farmer::OnInspectorGUI()
