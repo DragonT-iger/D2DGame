@@ -60,13 +60,11 @@ void CinemachineCamera::Update(float deltaTime)
         m_currentZoom += (m_targetZoom - m_currentZoom) * (1.f - std::exp(-m_damping * deltaTime));
 
         // 둘 다 같은 비율이면 화면이 안 찌그러지므로 x,y 모두 적용
-        Vector2 newScale{ m_currentZoom, m_currentZoom };
-        m_transform->SetScale(newScale);
-
 
     }
 
-    
+    Vector2 newScale{ m_currentZoom, m_currentZoom };
+    m_transform->SetScale(newScale);
 
     if (m_player)
     {
