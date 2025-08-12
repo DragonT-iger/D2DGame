@@ -24,6 +24,7 @@
 #include "Farmer.h"
 #include "SpawnManager.h"
 #include "Timer.h"
+#include "TutorialHint.h"
 
 void TutorialScene::Awake()
 {
@@ -85,7 +86,7 @@ void TutorialScene::Awake()
 
 	GameObject* tutorialHint = Instantiate("TutorialHint");
 	auto bg = tutorialHint->AddComponent<Image>();
-	bg->SetBitmap(ResourceManager::Instance().LoadTexture("tutorial_hint.png"), { 300, 100 }); 
+	//bg->SetBitmap(ResourceManager::Instance().LoadTexture("tutorial_hint.png"), { 300, 100 }); 
 	bg->SetOrderInLayer(10);
 
 	auto text = tutorialHint->AddComponent<Text>();
@@ -93,8 +94,32 @@ void TutorialScene::Awake()
 	text->SetFontSize(30);
 	text->SetOrderLayer(7);
 
+
+
+	auto hint = tutorialHint->AddComponent<TutorialHint>();
+	hint->SetHintTexts({
+		L"Hint for Area 1",
+		L"Hint for Area 2",
+		L"Hint for Area 3",
+		L"Hint for Area 4",
+		L"Hint for Area 5",
+		L"Hint for Area 6",
+		L"Hint for Area 7"
+		});
+	hint->SetHintImages({
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png"
+		});
+
 	tutorialHint->GetComponent<Transform>()->SetPosition({ 300.0f, 300.0f });
 	//tutorialHint->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
+
+
 
 
 
@@ -115,6 +140,11 @@ void TutorialScene::Awake()
 	//player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
+
+
+	player->SetTag("Player"); //<<- �̰� ���ְ�
+
+	SetPlayer(player); //<-- ���� ���� �˷��ְ�
 
 	//m_farmerHouse = Instantiate("House");
 	//m_farmerHouse->SetTag("House");
@@ -225,9 +255,6 @@ void TutorialScene::Awake()
 	//Farmer
 
 	//m_player2 = Instantiate("Player2");
-	player->SetTag("Player"); //<<- �̰� ���ְ�
-
-	SetPlayer(player); //<-- ���� ���� �˷��ְ�
 
 
 	//m_farmerManager = Instantiate("FarmerManager");
