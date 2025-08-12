@@ -17,7 +17,6 @@ void EndingScene::Awake()
 	GameObject* endSceneManager = Instantiate("EndSceneManager");
 	endSceneManager->AddComponent<EndSceneManager>();
 
-
 	Scene::Awake();
 
 

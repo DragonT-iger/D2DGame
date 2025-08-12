@@ -48,26 +48,7 @@ public:
 	float GetFullness() { return m_fullness; }
 
 	int GetHp() { return m_hp; }
-	void SetHp(int hp) {
-		if (m_isHittable)
-		{
-			int minusHp = m_hp - hp;
-
-			m_hp = hp;
-
-			m_isHittable = false;
-			m_invincible_Count = 0;
-
-			if (m_hp > -1 && state != State::Starve)
-			{
-				for (int i = 0; i < minusHp; i++)
-				{
-					m_hpUI[hp + i]->SetActive(false);
-				}
-			}
-		}
-		
-	}
+	void SetHp(int hp);
 	bool GetHittable() { return m_isHittable; }
 
 
