@@ -48,7 +48,7 @@ void Player::Update(float deltaTime)
 	m_elapsedTime += deltaTime;
 	m_invincible_Count += deltaTime;
 
-	if (0.3f <= m_elapsedTime)
+	if (0.1f <= m_elapsedTime)
 	{
 		if (m_fullness <= m_maxFullness && m_fullness >= (m_maxFullness / 3) * 2)
 		{
@@ -57,7 +57,7 @@ void Player::Update(float deltaTime)
 			m_Inven->UpdateHungryImg(0);
 		}
 
-		m_fullness -= 3;
+		m_fullness -= 2.5;
 		m_elapsedTime = 0;
 		if (m_fullness <= 0)
 		{
