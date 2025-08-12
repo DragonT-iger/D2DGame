@@ -447,8 +447,8 @@ void MainScene::Awake()
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
 
 	m_EscBG->GetComponent<Transform>()->SetPosition({ 960, 540 });
-	m_TitleBtn->GetComponent<Transform>()->SetPosition({ 960, 500 });
-	m_SettingBtn->GetComponent<Transform>()->SetPosition({ 960, 600 });
+	m_TitleBtn->GetComponent<Transform>()->SetPosition({ 960, 440 });
+	m_SettingBtn->GetComponent<Transform>()->SetPosition({ 960, 630 });
 
 	m_EscBG->SetActive(false);
 	m_TitleBtn->SetActive(false);
