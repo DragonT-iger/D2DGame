@@ -562,7 +562,7 @@ void TutorialScene::Start()
 
     main_Cam = GetCamera();
     main_Cam->GetOwner()->GetComponent<CinemachineCamera>()->SetPlayer(player);
-
+	main_Cam->GetOwner()->GetComponent<CinemachineCamera>()->SetCameraZoom(0.75f);
 
 	Scene::Start();
 }
