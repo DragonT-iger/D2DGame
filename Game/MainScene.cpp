@@ -604,6 +604,11 @@ void MainScene::Awake()
 	GameManager::Instance().Init();
 	SoundManager::Instance().BGM_Shot("2.mp3");
 
+	m_vignette = Instantiate("vignette");
+	auto vignetteImg = m_vignette->AddComponent<Image>();
+	vignetteImg->SetBitmap(ResourceManager::Instance().LoadTexture("Vignette_effect.png"), { 1920,1080 });
+	m_vignette->GetComponent<Transform>()->SetPosition({ 960, 540 });
+
 	Scene::Awake();
 }
 

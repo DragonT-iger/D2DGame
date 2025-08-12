@@ -59,10 +59,7 @@ public:
 	EndReason GetEndReason() { return m_endReason; }
 	GameState GetGameState() { return  m_GameState; }
 	void SetGameState(GameState state) { m_GameState = state; }
-
-	
 	int GetAliveTime() { return (int)inGameTime; }
-
 
 	void ResetTotalScore() { totalscore = 0; }
 	void RegisterCountText(Text* text) { m_text = text; }

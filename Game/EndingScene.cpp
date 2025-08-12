@@ -46,15 +46,11 @@ void EndingScene::Awake()
 		time = L"Time: " + std::to_wstring(second) + L"s";
 	}
 	
+	
 	timetxt->SetText(time, { 600, 200 }, L"Maplestory");
 	timetxt->SetFontSize(70);
 	aliveTime->GetComponent<Transform>()->SetPosition({ 1180, 865 });
 	
-
-
-
-
-
 
 	m_restart = Instantiate("restart");
 	m_restart->AddComponent<Image>();

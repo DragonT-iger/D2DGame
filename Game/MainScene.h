@@ -109,7 +109,8 @@ class MainScene : public Scene
 
 #pragma endregion
 
-	GameObject* m_count;
+	GameObject* m_vignette = nullptr;
+	GameObject* m_count = nullptr;
 
 };
 
