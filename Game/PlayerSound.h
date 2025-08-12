@@ -22,6 +22,10 @@ public:
 
 	void PlayDead();
 
+	void PlaySubmission();
+
+	void PlayHungry30();
+
 private:
 	Player*												m_player;
 	std::vector<std::string>		m_walkSounds;

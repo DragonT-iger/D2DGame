@@ -51,6 +51,8 @@ public:
 	void SetHp(int hp);
 	bool GetHittable() { return m_isHittable; }
 
+	void PlaySubmisson();
+
 
 	void FeedBaby(float bop);
 
@@ -79,6 +81,8 @@ private:
 
 	float m_invincible_Count;
 	bool m_isHittable = true;
+
+	bool enterFullness30 = false;
 
 	std::array<size_t, 3> maxCount = { 100, 60, 15 };//감자, 가지, 호박 순
 

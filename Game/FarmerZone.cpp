@@ -12,7 +12,10 @@ void FarmerZone::Awake()
 void ChaseZone::OnTriggerEnter(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Player")
+	{
 		m_farmer->m_isAlreadyExitChaseZone = false;
+		m_farmer->PlayChaseZoneSound();
+	}
 }
 
 void ChaseZone::OnTriggerExit(Collider* other)
@@ -20,7 +23,7 @@ void ChaseZone::OnTriggerExit(Collider* other)
 	if (other->GetOwner()->GetTag() == "Player")
 	{
 		m_farmer->m_isAlreadyExitChaseZone = true; 
-
+		m_farmer->StopSound();
 		//if (m_farmer->GetFarmerState() != Farmer::FarmerState::Attack)
 		//	m_farmer->ChangeState(Farmer::FarmerState::Patrol);
 	}
@@ -83,6 +86,8 @@ void AlertZone::OnTriggerEnter(Collider* other)
 		}
 		m_farmer->m_hasPatrolTarget = false;
 		m_farmer->m_isAlreadyExitAlertZone = false;
+
+		SoundManager::Instance().BGM_Shot("3.mp3");
 	}
 }
 
@@ -95,6 +100,7 @@ void AlertZone::OnTriggerExit(Collider* other)
 			return;
 
 		m_farmer->ChangeState(Farmer::FarmerState::Patrol);
+		SoundManager::Instance().BGM_Shot("2.mp3");
 	}
 }
 

@@ -74,3 +74,13 @@ void PlayerSound::PlayDead()
 {
 	SoundManager::Instance().SFX_Shot("8.mp3");
 }
+
+void PlayerSound::PlaySubmission()
+{
+	SoundManager::Instance().SFX_Shot("19.mp3");
+}
+
+void PlayerSound::PlayHungry30()
+{
+	SoundManager::Instance().SFX_Shot("20.mp3");
+}

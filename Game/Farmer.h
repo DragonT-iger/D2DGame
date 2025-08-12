@@ -62,6 +62,10 @@ public:
     void  SetAttackAreaValue(float value) { m_attackAreaValue = value; }
 
 
+    void PlayChaseZoneSound();
+
+    void StopSound();
+
 private:
 	FarmerManager* m_farmerManager = nullptr;
     FarmerState m_farmerState = FarmerState::Patrol;

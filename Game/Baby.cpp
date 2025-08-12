@@ -85,6 +85,9 @@ void Baby::OnTriggerEnter(Collider* other)
 		int bob = GameManager::Instance().ReceiveScore(QuestDataCollector(m_inven_ptr->SubMissonItem()));
 		m_player->FeedBaby(bob / 5);
 
+		if (bob > 0)
+			m_player->PlaySubmisson();
+
 		if (m_QuestInProgress == true)
 		{
 			QuestExamine();

@@ -31,16 +31,19 @@ void EndSceneManager::Start()
 	case GameManager::EndReason::BabyStarved:
 		//m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BadEnding2.png"));
 		m_animator->ChangeState("starve");
+		SoundManager::Instance().BGM_Shot("6.mp3");
 		break;
 
 	case GameManager::EndReason::PlayerDead:
 		//m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BadEnding1.png"));
 		m_animator->ChangeState("killed");
+		SoundManager::Instance().BGM_Shot("5.mp3");
 		break;
 
 	case GameManager::EndReason::Happy:
 		//m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("HappyEnd.png"));
 		m_animator->ChangeState("happy");
+		SoundManager::Instance().BGM_Shot("4.mp3");
 		break;
 
 	default:
