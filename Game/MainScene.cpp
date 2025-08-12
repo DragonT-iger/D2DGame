@@ -36,9 +36,6 @@ void MainScene::Awake()
 	m_Timer = Instantiate("SceneTimer");
 	m_Timer->AddComponent<Timer>();
 
-
-
-
 //begin player-----
 	player = Instantiate("Player");
 	auto playerSR = player->AddComponent<SpriteRenderer>();
