@@ -25,6 +25,8 @@
 #include "Farmer.h"
 #include "SpawnManager.h"
 #include "Timer.h"
+#include "TutorialHint.h"
+#include "TutorialHintTrigger.h"
 
 void TutorialScene::Awake()
 {
@@ -37,6 +39,97 @@ void TutorialScene::Awake()
 //Timer
 	m_Timer = Instantiate("SceneTimer");
 	m_Timer->AddComponent<Timer>();
+
+
+	GameObject* firstArea = Instantiate("firstArea");
+	auto box1 = firstArea->AddComponent<BoxCollider>();
+	firstArea->SetTag("firstArea");
+	firstArea->GetComponent<Transform>()->SetPosition({ -3259.4f, 0.f });
+	box1->SetSize({ 518.f, 2000.f });
+	firstArea->AddComponent<TutorialHintTrigger>(0);
+
+	GameObject* secondArea = Instantiate("secondArea");
+	auto box2 = secondArea->AddComponent<BoxCollider>();
+	secondArea->SetTag("secondArea");
+	secondArea->GetComponent<Transform>()->SetPosition({ -2581.6f, 0.f });
+	box2->SetSize({ 775.f, 2000.f });
+	secondArea->AddComponent<TutorialHintTrigger>(1);
+
+	GameObject* thirdArea = Instantiate("thirdArea");
+	auto box3 = thirdArea->AddComponent<BoxCollider>();
+	thirdArea->SetTag("thirdArea");
+	thirdArea->GetComponent<Transform>()->SetPosition({ -1635.5f, 0.f });
+	box3->SetSize({ 1009.f, 2000.f });
+	thirdArea->AddComponent<TutorialHintTrigger>(2);
+
+	GameObject* fourthArea = Instantiate("fourthArea");
+	auto box4 = fourthArea->AddComponent<BoxCollider>();
+	fourthArea->SetTag("fourthArea");
+	fourthArea->GetComponent<Transform>()->SetPosition({ 0.f, 0.f });
+	box4->SetSize({ 2193.f, 2000.f });
+	fourthArea->AddComponent<TutorialHintTrigger>(3);
+
+	GameObject* fifthArea = Instantiate("fifthArea");
+	auto box5 = fifthArea->AddComponent<BoxCollider>();
+	fifthArea->SetTag("fifthArea");
+	fifthArea->GetComponent<Transform>()->SetPosition({ 1635.5f, 0.f });
+	box5->SetSize({ 1009.f, 2000.f });
+	fifthArea->AddComponent<TutorialHintTrigger>(4);
+
+	GameObject* sixthArea = Instantiate("sixthArea");
+	auto box6 = sixthArea->AddComponent<BoxCollider>();
+	sixthArea->SetTag("sixthArea");
+	sixthArea->GetComponent<Transform>()->SetPosition({ 2581.6f, 0.f });
+	box6->SetSize({ 775.f, 2000.f });
+	sixthArea->AddComponent<TutorialHintTrigger>(5);
+
+	GameObject* seventhArea = Instantiate("seventhArea");
+	auto box7 = seventhArea->AddComponent<BoxCollider>();
+	seventhArea->SetTag("seventhArea");
+	seventhArea->GetComponent<Transform>()->SetPosition({ 3259.4f, 0.f });
+	box7->SetSize({ 518.f, 2000.f });
+	seventhArea->AddComponent<TutorialHintTrigger>(6);
+
+
+
+
+	GameObject* tutorialHint = Instantiate("TutorialHint");
+	auto bg = tutorialHint->AddComponent<Image>();
+	//bg->SetBitmap(ResourceManager::Instance().LoadTexture("tutorial_hint.png"), { 300, 100 }); 
+	bg->SetOrderInLayer(10);
+
+	auto text = tutorialHint->AddComponent<Text>();
+	text->SetText(L"¹æÇâÅ°·Î ÀÌµ¿ÇÏ¼¼¿ä!", { 500, 500 }, L"Maplestory" ,D2D1::ColorF::Black);
+	text->SetFontSize(30);
+	text->SetOrderLayer(7);
+
+
+
+	auto hint = tutorialHint->AddComponent<TutorialHint>();
+	hint->SetHintTexts({
+		L"Hint for Area 1",
+		L"Hint for Area 2",
+		L"Hint for Area 3",
+		L"Hint for Area 4",
+		L"Hint for Area 5",
+		L"Hint for Area 6",
+		L"Hint for Area 7"
+		});
+	hint->SetHintImages({
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png",
+		"tutorial_hint.png"
+		});
+
+	tutorialHint->GetComponent<Transform>()->SetPosition({ 300.0f, 300.0f });
+	//tutorialHint->GetComponent<Transform>()->SetScale({ 0.5f, 0.5f });
+
+	hint->ShowHint(2);
+
 
 
 
@@ -58,6 +151,11 @@ void TutorialScene::Awake()
 	//player->AddComponent<Baby>();
 
 	playerSR->SetOrderInLayer(1);
+
+
+	player->SetTag("Player"); //<<- ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
+
+	SetPlayer(player); //<-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½Ö°ï¿½
 
 	//m_farmerHouse = Instantiate("House");
 	//m_farmerHouse->SetTag("House");
@@ -168,9 +266,6 @@ void TutorialScene::Awake()
 	//Farmer
 
 	//m_player2 = Instantiate("Player2");
-	player->SetTag("Player"); //<<- ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
-
-	SetPlayer(player); //<-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½Ö°ï¿½
 
 
 	//m_farmerManager = Instantiate("FarmerManager");

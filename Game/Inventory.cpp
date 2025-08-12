@@ -157,7 +157,7 @@ void Inventory::UpdateBabyProfile(size_t index)
 {
 	if (index != m_babyIndex)
 	{
-		if (!m_babyProfile) {
+		if (m_babyProfile) {
 			m_babyProfile->SetBitmap(m_babyProfiles[index], { 80, 80 });
 			m_babyIndex = index;
 		}
@@ -168,7 +168,7 @@ void Inventory::UpdateProfile(size_t index)
 {
 	if (index != m_profileIndex)
 	{
-		if (!m_profile) {
+		if (m_profile) {
 			m_profile->SetBitmap(m_profiles[index], { 80, 80 });
 			m_profileIndex = index;
 		}

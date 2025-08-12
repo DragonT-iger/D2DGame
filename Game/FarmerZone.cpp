@@ -147,21 +147,22 @@ AttackIndicatorZone::~AttackIndicatorZone()
 			if (playerObj)
 			{
 				auto player = playerObj->GetComponent<Player>();
-				if (player->GetVisible() != Visibilty::Hide) {
-					if (player)
-					{
-						GameManager::GameState state = GameManager::Instance().GetGameState();
-
-						if (state != GameManager::GameState::Tutorial) {
-							player->SetHp(player->GetHp() - 1);
-						}
-
-						if (player->GetHittable())
+				if (player)
+				{
+					if (player->GetVisible() != Visibilty::Hide)
 						{
-							player->SetAction(Action::Hit);
+							GameManager::GameState state = GameManager::Instance().GetGameState();
+
+							if (state != GameManager::GameState::Tutorial) {
+								player->SetHp(player->GetHp() - 1);
+							}
+
+							if (player->GetHittable())
+							{
+								player->SetAction(Action::Hit);
+							}
 						}
-						
-					}
+
 				}
 			}
 			m_farmer->m_hasDamagedPlayer = true;
