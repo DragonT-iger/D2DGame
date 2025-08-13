@@ -87,27 +87,23 @@ void PlayerAnimator::Update(float deltaTime)
 
 		if (m_Player->GetHittable() == false)
 		{
-			if (blinkTime < Timer)
+			if (blinkTime < Timer) //0.2 초 이상시 초기화
 			{
 				switch (curValue)
 				{
 				case 0:
-					std::cout << "1 진입" << std::endl;
+					//std::cout << "1 진입" << std::endl;
 					m_spriteRenderer->SetOpacity(0.1);
 					curValue = 1;
 					break;
 				case 1:
-					std::cout << "2 진입" << std::endl;
+					//std::cout << "2 진입" << std::endl;
 					m_spriteRenderer->SetOpacity(1);
 					curValue = 0;
 					break;
 				}
 				Timer = 0;
 			}
-		}
-		else
-		{
-			//m_spriteRenderer->SetOpacity(1);
 		}
 	}
 	else
@@ -116,9 +112,9 @@ void PlayerAnimator::Update(float deltaTime)
 	}
 }
 
-void PlayerAnimator::OnTriggerEnter(Collider* other)
+void PlayerAnimator::OnTriggerStay(Collider* other)
 {
-	if (other->GetOwner()->GetTag() == "Bush")
+	if (other->GetOwner()->GetTag() == "Bush" && m_Player->GetHittable() == true)
 	{
 		m_spriteRenderer->SetOpacity(0.3f);
 	}
