@@ -168,7 +168,10 @@ void SoundManager::UI_Shot(const std::string& fileName, FMOD::ChannelGroup* Chan
 
 	if (it != L_UI.end())
 	{
-		m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
+		if(ChannelGroup)
+			m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
+		else
+			m_coreSystem->playSound(it->second, m_uiGroup, false, &pChannel);
 	}
 }
 
