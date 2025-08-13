@@ -17,6 +17,7 @@ class MainScene : public Scene
 
 	GameObject*				crop		= nullptr;
 	GameObject*				message		= nullptr;
+
 	GameObject*				bush1 = nullptr;
 	GameObject*				bush2 = nullptr;
 	GameObject*				bush3 = nullptr;
@@ -76,7 +77,7 @@ class MainScene : public Scene
 
 	GameObject* m_background = nullptr;
 #ifdef _DEBUG
-	//ï¿½ï¿½ï¿½ï¿½×¿ï¿?
+	//ï¿½ï¿½ï¿½ï¿½×¿ï¿??
 	GameObject* m_areaBox1 = nullptr;
 	GameObject* m_areaBox2 = nullptr;
 	GameObject* m_areaBox3 = nullptr;

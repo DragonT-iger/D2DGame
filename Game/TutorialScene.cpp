@@ -29,8 +29,6 @@
 #include "TutorialHint.h"
 #include "TutorialHintTrigger.h"
 #include "TutorialEndTrigger.h"
-#include "PlayerShadow.h"
-#include "FarmerShadow.h"
 
 void TutorialScene::Awake()
 {
@@ -308,13 +306,7 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	GameObject* farmer = Instantiate("Farmer");
 	Farmer* fm = farmer->AddComponent<Farmer>();
 
-	GameObject* farmer_shadow = Instantiate("farmer_Shadow");
-	auto f_shadowTransForm = farmer_shadow->GetComponent<Transform>();
-	f_shadowTransForm->SetParent(farmer->GetComponent<Transform>());
-	f_shadowTransForm->SetPosition(Vector2{ 0,-50 });
-	f_shadowTransForm->SetScale(Vector2{ 0.8f,0.8f });
-	farmer_shadow->AddComponent<SpriteRenderer>()->SetOrderInLayer(-10000);
-	farmer_shadow->AddComponent<FarmerShadow>();
+
 
 #pragma region SpawnManager,Inventory
 
