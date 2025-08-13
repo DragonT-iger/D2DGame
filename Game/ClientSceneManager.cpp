@@ -16,6 +16,7 @@ void ClientSceneManager::LoadScene(std::unique_ptr<Scene> scene)
     if (targetIsTitle)
     {
         GameManager::Instance().ResetTotalScore();
+        GameManager::Instance().ResetInGameTime();
         GameManager::Instance().SetGameState(GameManager::GameState::Title);
     }
     else if (targetIsTutorial)

@@ -258,34 +258,40 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 
 #pragma region bush
 
-	//bush1 = Instantiate("Bush1");
+	//bush1 = Instantiate("Bush2");
 	//bush1->AddComponent<Bush>();
 	//bush1->AddComponent<SpriteRenderer>();
+	//bush1->AddComponent<Animator>();
 	//bush1->AddComponent<BoxCollider>();
 
 	bush2 = Instantiate("Bush2");
 	bush2->AddComponent<Bush>();
 	bush2->AddComponent<SpriteRenderer>();
+	bush2->AddComponent<Animator>();
 	bush2->AddComponent<BoxCollider>();
 
 	bush3 = Instantiate("Bush3");
 	bush3->AddComponent<Bush>();
 	bush3->AddComponent<SpriteRenderer>();
+	bush3->AddComponent<Animator>();
 	bush3->AddComponent<BoxCollider>();
 
 	bush4 = Instantiate("Bush4");
 	bush4->AddComponent<Bush>();
 	bush4->AddComponent<SpriteRenderer>();
+	bush4->AddComponent<Animator>();
 	bush4->AddComponent<BoxCollider>();
 
 	bush5 = Instantiate("Bush5");
 	bush5->AddComponent<Bush>();
 	bush5->AddComponent<SpriteRenderer>();
+	bush5->AddComponent<Animator>();
 	bush5->AddComponent<BoxCollider>();
 
 	bush6 = Instantiate("Bush6");
 	bush6->AddComponent<Bush>();
 	bush6->AddComponent<SpriteRenderer>();
+	bush6->AddComponent<Animator>();
 	bush6->AddComponent<BoxCollider>();
 
 	//bush1->GetComponent<Transform>()->SetPosition(Vector2{ -300, 200 });

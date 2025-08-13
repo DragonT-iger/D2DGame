@@ -18,7 +18,7 @@ void FarmerShadow::Update(float deltaTime)
 	
 	if (m_FarmerObj->GetComponent<SpriteRenderer>()->IsFlip())
 	{
-		std::cout << "farmer flip" << std::endl;
+		//std::cout << "farmer flip" << std::endl;
 		m_spriteRenderer->SetFlip(true);
 	}
 	else

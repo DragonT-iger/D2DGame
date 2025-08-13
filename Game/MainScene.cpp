@@ -136,51 +136,61 @@ void MainScene::Awake()
 	bush1 = Instantiate("Bush1");
 	bush1->AddComponent<Bush>();
 	bush1->AddComponent<SpriteRenderer>();
+	bush1->AddComponent<Animator>();
 	bush1->AddComponent<BoxCollider>();
 
 	bush2 = Instantiate("Bush2");
 	bush2->AddComponent<Bush>();
 	bush2->AddComponent<SpriteRenderer>();
+	bush2->AddComponent<Animator>();
 	bush2->AddComponent<BoxCollider>();
 
 	bush3 = Instantiate("Bush3");
 	bush3->AddComponent<Bush>();
 	bush3->AddComponent<SpriteRenderer>();
+	bush3->AddComponent<Animator>();
 	bush3->AddComponent<BoxCollider>();
 
 	bush4 = Instantiate("Bush4");
 	bush4->AddComponent<Bush>();
 	bush4->AddComponent<SpriteRenderer>();
+	bush4->AddComponent<Animator>();
 	bush4->AddComponent<BoxCollider>();
 
 	bush5 = Instantiate("Bush5");
 	bush5->AddComponent<Bush>();
 	bush5->AddComponent<SpriteRenderer>();
+	bush5->AddComponent<Animator>();
 	bush5->AddComponent<BoxCollider>();
 
 	bush6 = Instantiate("Bush6");
 	bush6->AddComponent<Bush>();
 	bush6->AddComponent<SpriteRenderer>();
+	bush6->AddComponent<Animator>();
 	bush6->AddComponent<BoxCollider>();
 
 	bush7 = Instantiate("Bush7");
 	bush7->AddComponent<Bush>();
 	bush7->AddComponent<SpriteRenderer>();
+	bush7->AddComponent<Animator>();
 	bush7->AddComponent<BoxCollider>();
 
 	bush8 = Instantiate("Bush8");
 	bush8->AddComponent<Bush>();
 	bush8->AddComponent<SpriteRenderer>();
+	bush8->AddComponent<Animator>();
 	bush8->AddComponent<BoxCollider>();
 
 	bush9 = Instantiate("Bush9");
 	bush9->AddComponent<Bush>();
 	bush9->AddComponent<SpriteRenderer>();
+	bush9->AddComponent<Animator>();
 	bush9->AddComponent<BoxCollider>();
 
 	bush10 = Instantiate("Bush10");
 	bush10->AddComponent<Bush>();
 	bush10->AddComponent<SpriteRenderer>();
+	bush10->AddComponent<Animator>();
 	bush10->AddComponent<BoxCollider>();
 
 
@@ -624,6 +634,7 @@ void MainScene::Awake()
 	m_vignette = Instantiate("vignette");
 	auto vignetteImg = m_vignette->AddComponent<Image>();
 	vignetteImg->SetBitmap(ResourceManager::Instance().LoadTexture("Vignette_effect.png"), { 1920,1080 });
+	vignetteImg->SetOrderInLayer(-1);
 	m_vignette->GetComponent<Transform>()->SetPosition({ 960, 540 });
 
 	Scene::Awake();

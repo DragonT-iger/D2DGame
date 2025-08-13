@@ -16,8 +16,6 @@ void EndingScene::Awake()
 	endSceneManager->AddComponent<EndSceneManager>();
 
 
-
-
 	GameObject* totalScore = Instantiate("Score");
 	auto txt = totalScore->AddComponent<Text>();
 	std::wstring score = L"Score : " + std::to_wstring(gm->GetTotalScore());
@@ -25,11 +23,16 @@ void EndingScene::Awake()
 	txt->SetFontSize(70);
 	totalScore->GetComponent<Transform>()->SetPosition({ 1100, 935 });
 
-
 	GameObject* aliveTime = Instantiate("AliveTime");
 	auto timetxt = aliveTime->AddComponent<Text>();
-	int minuate = gm->GetAliveTime() / 60;
-	int second = gm->GetAliveTime() % 60;
+	int minuate = (gm->GetAliveTime()-3) / 60;
+	int second = (gm->GetAliveTime()-3) % 60;
+
+	if (minuate < 0)
+		minuate = 0;
+	
+	if (second < 0)
+		second = 0;
 
 	std::wstring time;
 
