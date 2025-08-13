@@ -460,7 +460,7 @@
     </ClInclude>
     <ClInclude Include="ContinueButton.h">
       <Filter>Scripts\ButtonTest\Continue</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClInclude Include="SafeZone.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
