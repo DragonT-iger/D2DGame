@@ -25,6 +25,7 @@
 #include "AcceptSetting.h"
 #include "QuitSetting.h"
 #include "Tree.h"
+#include "PlayerShadow.h"
 
 void MainScene::Awake()
 {
@@ -55,6 +56,14 @@ void MainScene::Awake()
 
 	player->GetComponent<Transform>()->SetPosition({ 3560.0f , 0 });
 	player->AddComponent<Baby>();
+
+	p_shadow = Instantiate("Player_Shadow");
+	auto p_shadowTransForm = p_shadow->GetComponent<Transform>();
+	p_shadowTransForm->SetParent(player->GetComponent<Transform>());
+	p_shadowTransForm->SetPosition(Vector2{ 0,-30 });
+	p_shadowTransForm->SetScale(Vector2{ 0.75f,0.78f });
+	p_shadow->AddComponent<SpriteRenderer>()->SetOrderInLayer(-10000);
+	p_shadow->AddComponent<PlayerShadow>();
 
 	playerSR->SetOrderInLayer(1);
 

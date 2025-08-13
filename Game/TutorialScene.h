@@ -10,6 +10,7 @@ class TutorialScene : public Scene
 	Camera* main_Cam = nullptr;
 
 	GameObject* player = nullptr;
+	GameObject* p_shadow = nullptr;
 	Transform* player_T = nullptr;
 	SpriteRenderer* player_S = nullptr;
 
@@ -17,6 +18,7 @@ class TutorialScene : public Scene
 
 	GameObject* crop = nullptr;
 	GameObject* message = nullptr;
+
 
 	GameObject* bush1 = nullptr;
 	GameObject* bush2 = nullptr;
@@ -73,7 +75,7 @@ class TutorialScene : public Scene
 
 	GameObject* m_background = nullptr;
 #ifdef _DEBUG
-	//µð¹ö±×¿ë
+	//ï¿½ï¿½ï¿½ï¿½×¿ï¿?
 	GameObject* m_areaBox1 = nullptr;
 	GameObject* m_areaBox2 = nullptr;
 	GameObject* m_areaBox3 = nullptr;

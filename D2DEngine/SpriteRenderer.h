@@ -33,6 +33,10 @@ public:
 
 		m_renderInfo.opacity = opacity;
 	}
+	const float GetOpacity()
+	{
+		return m_renderInfo.opacity;
+	}
 
 	D2D1_SIZE_F GetSize();
 	void SetSize(float width, float height);

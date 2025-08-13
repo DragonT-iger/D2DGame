@@ -54,10 +54,12 @@ void PlayerController::Update(float deltaTime)
 		else
 			m_animator->SetSpeed(1.f);
 
+#ifdef _DEBUG
+
 		if (Input.GetKeyDown(Keycode::B)) { m_Player->action = Action::Hit; }
 		if (Input.GetKeyDown(Keycode::N)) { m_Player->state = State::Starve; return; }
 		if (Input.GetKeyDown(Keycode::M)) { m_Player->state = State::Killed; return; }
-
+#endif // _DEBUG
 		if (Input.GetKeyPressed(Keycode::X))
 		{
 			m_inven->ChangeSlot();

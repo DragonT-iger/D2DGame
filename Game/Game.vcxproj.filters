@@ -264,6 +264,12 @@
     <ClCompile Include="PlayerEffect.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerShadow.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="FarmerShadow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -430,6 +436,12 @@
     </ClInclude>
     <ClInclude Include="PlayerEffect.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShadow.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="FarmerShadow.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
