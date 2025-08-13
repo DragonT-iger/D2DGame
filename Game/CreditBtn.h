@@ -13,5 +13,6 @@ private:
 	Button* m_quit;
 	Button* m_button = nullptr;
 	GameObject* m_credit = nullptr;
+	GameObject* m_creditQuit = nullptr;
 };
 

@@ -8,6 +8,7 @@ void CreditButton::Awake()
 	m_setting = GameObject::Find("settingBtn")->GetComponent<Button>();
 	m_quit = GameObject::Find("quitBtn")->GetComponent<Button>();
 	m_credit = GameObject::Find("credit");
+	m_creditQuit = GameObject::Find("creditQuit");
 	m_credit->GetComponent<Transform>()->SetPosition({ 960, 540 });
 	m_credit->SetActive(false);
 }
@@ -16,6 +17,7 @@ void CreditButton::Start()
 {
 	m_button->AddEvent([this]() { 
 		if (!m_credit->IsActive()) m_credit->SetActive(true);
+		m_creditQuit->SetActive(true);
 		m_start->SetActive(false);
 		m_setting->SetActive(false);
 		m_button->SetActive(false);

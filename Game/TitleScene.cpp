@@ -4,6 +4,7 @@
 #include "AcceptSetting.h"
 #include "QuitSetting.h"
 #include "CreditBtn.h"
+#include "CreditQuit.h"
 #include "QuitBtn.h"
 #include "TitleScene.h"
 
@@ -148,6 +149,17 @@ void TitleScene::Awake()
 	Img = m_credit->AddComponent<Image>();
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Credit.png"), { 1920, 1080 });
 	Img->SetOrderInLayer(20);
+
+	m_creditQuit = Instantiate("creditQuit");
+	Img = m_creditQuit->AddComponent<Image>();
+	btn = m_creditQuit->AddComponent<Button>();
+	m_creditQuit->AddComponent<CreditQuitButton>();
+	Img->SetOrderInLayer(21);
+
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Btn_title.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Btn_title_Selected.png"), ButtonEvent::Highlight);
+
+	m_creditQuit->GetComponent<Transform>()->SetPosition({ 1700, 960 });
 
 	SoundManager::Instance().SetVolume_BGM(1.f);
 	SoundManager::Instance().SetVolume_SFX(1.f);

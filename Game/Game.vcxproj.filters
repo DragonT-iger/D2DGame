@@ -288,6 +288,9 @@
     <ClCompile Include="EndingTitleBtn.cpp">
       <Filter>Scripts\ButtonTest\TitleBtn</Filter>
     </ClCompile>
+    <ClCompile Include="CreditQuit.cpp">
+      <Filter>Scripts\ButtonTest\Credit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -475,6 +478,9 @@
     </ClInclude>
     <ClInclude Include="EndingTitleBtn.h">
       <Filter>Scripts\ButtonTest\TitleBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditQuit.h">
+      <Filter>Scripts\ButtonTest\Credit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
