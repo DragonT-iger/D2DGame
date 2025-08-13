@@ -26,7 +26,7 @@ void TutorialHint::ShowHint(size_t index)
 
     if (m_text && index < m_texts.size())
     {
-        m_text->SetText(m_texts[index], { 704.f, 404.f }, L"Maplestory", D2D1::ColorF::White);
+        //m_text->SetText(m_texts[index], { 704.f, 404.f }, L"Maplestory", D2D1::ColorF::White);
     }
 
     if (m_image && index < m_imageNames.size())

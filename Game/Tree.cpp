@@ -1,12 +1,16 @@
 #include "pch.h"
 #include "Tree.h"
 #include "YSort.h"
+#include "GameManager.h"
 
 void Tree::Awake()
 {
 	Transform* tr = GetOwner()->GetComponent<Transform>();
 	tr->SetPosition({ m_x, m_y });
-	tr->Translate({ 0 , 200 });
+
+	if (GameManager::Instance().GetGameState() != GameManager::GameState::Tutorial) {
+		tr->Translate({ 0 , 200 });
+	}
 
 	tr->SetScale({ 0.5f, 0.5f });
 	m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
