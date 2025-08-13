@@ -9,7 +9,7 @@ void Bush::Awake()
 	m_animator = GetComponent<Animator>();
 	GetOwner()->AddComponent<YSort>();
 
-	auto bush_swing = ResourceManager::Instance().LoadAnimationClip("bush.json", "bush_swing");
+	auto bush_swing = ResourceManager::Instance().LoadAnimationClip("bush_three_2.json", "three_bush_swing");
 	m_animator->AddClip("bush_swing", bush_swing, false);
 	m_animator->SetEntryState("bush_swing");
 
@@ -24,7 +24,7 @@ void Bush::Start()
 	auto bush_sprite = ResourceManager::Instance().LoadTexture("bush_1.png");
 	//m_spriteRenderer->SetBitmap(bush_sprite);
 
-	m_boxCol->SetSize(Vector2{ 100.f,36.f });
+	m_boxCol->SetSize(Vector2{ 500.0f,36.f });
 	m_boxCol->SetOffset({ 0, 30.f });
 }
 
