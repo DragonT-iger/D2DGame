@@ -73,57 +73,36 @@ void TitleScene::Awake()
 	m_checkBtn = Instantiate("checkBtn");
 
 	Img = m_settingWnd->AddComponent<Image>();
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 900, 700 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting_Panel_900x700.png"), { 900, 700 });
 	Img->SetOrderInLayer(3);
-
-	auto txt = m_settingText->AddComponent<Text>();
-	txt->SetText(L"¼³Á¤", { 200, 100 }, L"Maplestory", D2D1::ColorF::Black);
-	txt->SetFontSize(50);
-	txt->SetOrderLayer(4);
-
-	//bgm setting
-	txt = m_bgmText->AddComponent<Text>();
-	txt->SetText(L"BGM Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
-	txt->SetFontSize(30);
-	txt->SetOrderLayer(4);
 
 	Img = m_bgmSlider->AddComponent<Image>();
 	auto sb = m_bgmSlider->AddComponent<Slide_Bar>();
 	auto btn = m_bgmSlider->AddComponent<Button>();
-	m_bgmSlider->GetComponent<Transform>()->SetPosition({ 830, 340 });
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
+	m_bgmSlider->GetComponent<Transform>()->SetPosition({ 1021, 297 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("guage_fill_67x67.png"), { 382, 53 });
 	Img->SetOrderInLayer(4);
-	btn->SetSize({ 500,20 });
+	btn->SetSize({ 382, 70 });
 	sb->RegisterButton(btn);
 
 	//sfx setting
-	txt = m_sfxText->AddComponent<Text>();
-	txt->SetText(L"SFX Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
-	txt->SetFontSize(30);
-	txt->SetOrderLayer(4);
-
 	Img = m_sfxSlider->AddComponent<Image>();
 	sb = m_sfxSlider->AddComponent<Slide_Bar>();
 	btn = m_sfxSlider->AddComponent<Button>();
-	m_sfxSlider->GetComponent<Transform>()->SetPosition({ 830, 440 });
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
+	m_sfxSlider->GetComponent<Transform>()->SetPosition({ 1021, 429 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("guage_fill_67x67.png"), { 382, 53 });
 	Img->SetOrderInLayer(4);
-	btn->SetSize({ 500,20 });
+	btn->SetSize({ 382, 70 });
 	sb->RegisterButton(btn);
 
 	//ui setting
-	txt = m_uiText->AddComponent<Text>();
-	txt->SetText(L"UI Volume", { 200, 70 }, L"Maplestory", D2D1::ColorF::Black);
-	txt->SetFontSize(30);
-	txt->SetOrderLayer(4);
-
 	Img = m_uiSlider->AddComponent<Image>();
 	sb = m_uiSlider->AddComponent<Slide_Bar>();
 	btn = m_uiSlider->AddComponent<Button>();
-	m_uiSlider->GetComponent<Transform>()->SetPosition({ 830, 540 });
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("gaugebar_blue.png"), { 500, 20 });
+	m_uiSlider->GetComponent<Transform>()->SetPosition({ 1021, 555 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("guage_fill_67x67.png"), { 382, 53 });
 	Img->SetOrderInLayer(4);
-	btn->SetSize({ 500,20 });
+	btn->SetSize({ 382, 70 });
 	sb->RegisterButton(btn);
 
 	//button setting
@@ -131,25 +110,25 @@ void TitleScene::Awake()
 	btn = m_cancleBtn->AddComponent<Button>();
 	m_cancleBtn->AddComponent<QuitSettingBtn>();
 	Img->SetOrderInLayer(4);
-	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
-	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
-	btn->SetSize({ 160, 100 });
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Setting_Btn1_Title.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Setting_Btn1_Title_Selected.png"), ButtonEvent::Highlight);
+	btn->SetSize({ 200, 80 });
 
 	Img = m_checkBtn->AddComponent<Image>();
 	btn = m_checkBtn->AddComponent<Button>();
 	m_checkBtn->AddComponent<AcceptSettingBtn>();
 	Img->SetOrderInLayer(4);
-	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_basic100.png"), ButtonEvent::Idle);
-	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("button1_mouse_click.png"), ButtonEvent::Highlight);
-	btn->SetSize({ 160, 100 });
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Setting_Btn2_Title.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Setting_Btn2_Title_Selected.png"), ButtonEvent::Highlight);
+	btn->SetSize({ 200, 80 });
 
-	m_settingWnd->GetComponent<Transform>()->SetPosition({ 960, 435 });
+	m_settingWnd->GetComponent<Transform>()->SetPosition({ 960, 450 });
 	m_settingText->GetComponent<Transform>()->SetPosition({ 960, 170 });
 	m_bgmText->GetComponent<Transform>()->SetPosition({ 660, 300 });
 	m_sfxText->GetComponent<Transform>()->SetPosition({ 660, 400 });
 	m_uiText->GetComponent<Transform>()->SetPosition({ 660, 500 });
-	m_cancleBtn->GetComponent<Transform>()->SetPosition({ 860, 700 });
-	m_checkBtn->GetComponent<Transform>()->SetPosition({ 1060, 700 });
+	m_cancleBtn->GetComponent<Transform>()->SetPosition({ 820, 700 });
+	m_checkBtn->GetComponent<Transform>()->SetPosition({ 1100, 700 });
 
 	m_settingWnd->SetActive(false);
 	m_settingText->SetActive(false);

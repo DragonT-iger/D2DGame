@@ -94,6 +94,9 @@
     <Filter Include="Scripts\ButtonTest\XButton">
       <UniqueIdentifier>{fa83c98a-31f2-47a1-8a3d-124a4a7cee42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\ButtonTest\Continue">
+      <UniqueIdentifier>{a7651e0a-8aa1-4688-b3df-73d142bdf190}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleScene.cpp">
@@ -270,6 +273,12 @@
     <ClCompile Include="FarmerShadow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="SettingBtn_Ingame.cpp">
+      <Filter>Scripts\ButtonTest\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueButton.cpp">
+      <Filter>Scripts\ButtonTest\Continue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -442,6 +451,12 @@
     </ClInclude>
     <ClInclude Include="FarmerShadow.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingBtn_Ingame.h">
+      <Filter>Scripts\ButtonTest\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueButton.h">
+      <Filter>Scripts\ButtonTest\Continue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

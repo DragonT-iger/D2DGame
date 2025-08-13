@@ -20,6 +20,8 @@ void QuitSettingBtn::Awake()
 		m_startBtn = GameObject::Find("startBtn")->GetComponent<Button>();
 	if(GameObject::Find("TitleBtn"))
 		m_titleBtn = GameObject::Find("TitleBtn")->GetComponent<Button>();
+	if (GameObject::Find("ContinueBtn"))
+		m_continueBtn = GameObject::Find("ContinueBtn")->GetComponent<Button>();
 }
 
 void QuitSettingBtn::Start()
@@ -41,6 +43,8 @@ void QuitSettingBtn::Start()
 			m_startBtn->SetActive(true);
 		if (m_titleBtn)
 			m_titleBtn->SetActive(true);
+		if (m_continueBtn)
+			m_continueBtn->SetActive(true);
 		}, ButtonEvent::Pressed);
 }
 
@@ -62,4 +66,6 @@ void QuitSettingBtn::QuitSetting()
 		m_startBtn->SetActive(true);
 	if (m_titleBtn)
 		m_titleBtn->SetActive(true);
+	if (m_continueBtn)
+		m_continueBtn->SetActive(true);
 }

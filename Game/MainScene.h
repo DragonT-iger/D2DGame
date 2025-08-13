@@ -95,7 +95,9 @@ class MainScene : public Scene
 
 	GameObject* m_Esc = nullptr;
 		GameObject* m_EscBG = nullptr;
+		GameObject* m_EscBlurBG = nullptr;
 		
+			GameObject* m_ContinueBtn = nullptr;
 			GameObject* m_TitleBtn = nullptr;
 			GameObject* m_SettingBtn = nullptr;
 				GameObject* m_settingWnd = nullptr;

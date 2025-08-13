@@ -93,19 +93,21 @@ class TutorialScene : public Scene
 
 	GameObject* m_Esc = nullptr;
 	GameObject* m_EscBG = nullptr;
+	GameObject* m_EscBlurBG = nullptr;
 
-	GameObject* m_TitleBtn = nullptr;
-	GameObject* m_SettingBtn = nullptr;
-	GameObject* m_settingWnd = nullptr;
-	GameObject* m_settingText = nullptr;
-	GameObject* m_bgmText = nullptr;
-	GameObject* m_bgmSlider = nullptr;
-	GameObject* m_sfxText = nullptr;
-	GameObject* m_sfxSlider = nullptr;
-	GameObject* m_uiText = nullptr;
-	GameObject* m_uiSlider = nullptr;
-	GameObject* m_cancleBtn = nullptr;
-	GameObject* m_checkBtn = nullptr;
+		GameObject* m_ContinueBtn = nullptr;
+		GameObject* m_TitleBtn = nullptr;
+		GameObject* m_SettingBtn = nullptr;
+		GameObject* m_settingWnd = nullptr;
+		GameObject* m_settingText = nullptr;
+		GameObject* m_bgmText = nullptr;
+		GameObject* m_bgmSlider = nullptr;
+		GameObject* m_sfxText = nullptr;
+		GameObject* m_sfxSlider = nullptr;
+		GameObject* m_uiText = nullptr;
+		GameObject* m_uiSlider = nullptr;
+		GameObject* m_cancleBtn = nullptr;
+		GameObject* m_checkBtn = nullptr;
 
 
 #pragma endregion

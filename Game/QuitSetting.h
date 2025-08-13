@@ -22,6 +22,7 @@ private:
 
 	Button* m_startBtn;
 	Button* m_titleBtn;
+	Button* m_continueBtn;
 	Button* m_settingbutton;
 
 	Button* m_button;

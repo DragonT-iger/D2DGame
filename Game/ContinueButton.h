@@ -1,13 +1,14 @@
 #pragma once
 
-class EscBtn : public MonoBehaviour
+class ContinueButton : public MonoBehaviour
 {
 public:
 	void Awake() override;
 	void Start() override;
-	void Update(float deltaTime) override;
 
 private:
+	Button* m_button;
+
 	GameObject* m_EscBG;
 	GameObject* m_EscBlurBG;
 	GameObject* m_ContinueBtn;
@@ -16,4 +17,3 @@ private:
 
 	bool isActive = false;
 };
-

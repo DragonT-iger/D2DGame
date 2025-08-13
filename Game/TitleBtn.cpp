@@ -6,9 +6,9 @@
 void TitleBtn::Start()
 {
 	m_button = GetComponent<Button>();
-	m_button->AddEvent([this]() { m_button->SetSize({ 295, 135 }); }, ButtonEvent::Idle);
+	m_button->AddEvent([this]() { m_button->SetSize({ 280, 80 }); }, ButtonEvent::Idle);
 	m_button->AddEvent([this]() {
-		m_button->SetSize({ 305, 136 });
+		m_button->SetSize({ 280, 80 });
 		SoundManager::Instance().UI_Shot("1.mp3");
 		}, ButtonEvent::Highlight);
 	m_button->AddEvent([]() {
