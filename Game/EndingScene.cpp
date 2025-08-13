@@ -7,7 +7,7 @@
 
 void EndingScene::Awake()
 {
-
+	
 
 	GameObject* gameManager = Instantiate("GameManager");
 	auto gm = gameManager->AddComponent<GameManager>();
@@ -24,7 +24,7 @@ void EndingScene::Awake()
 	GameObject* totalScore = Instantiate("Score");
 	auto txt = totalScore->AddComponent<Text>();
 	std::wstring score = L"Score : " + std::to_wstring(gm->GetTotalScore());
-	txt->SetText(score, { 600, 200 }, L"Maplestory");
+	txt->SetText(score, { 600, 200 }, L"Hakgyoansim Tuho");
 	txt->SetFontSize(70);
 	totalScore->GetComponent<Transform>()->SetPosition({ 1100, 935 });
 
@@ -55,7 +55,7 @@ void EndingScene::Awake()
 	}
 	
 	
-	timetxt->SetText(time, { 600, 200 }, L"Maplestory");
+	timetxt->SetText(time, { 600, 200 }, L"Hakgyoansim Tuho");
 	timetxt->SetFontSize(70);
 	aliveTime->GetComponent<Transform>()->SetPosition({ 1100, 865 });
 	

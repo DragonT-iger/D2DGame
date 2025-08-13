@@ -44,7 +44,7 @@ void GameManager::Init()
 	if (m_text)
 	{
 		m_text->GetOwner()->SetActive(true);
-		m_text->SetText(L"3", { 300, 300 }, L"Maplestory");
+		m_text->SetText(L"3", { 300, 300 }, L"Hakgyoansim Tuho");
 	}
 }
 void GameManager::OnInspectorGUI()
@@ -146,7 +146,7 @@ void GameManager::CountThree()
 		}
 		else
 		{
-			m_text->SetText(std::to_wstring(3 - countThree), { 300, 300 }, L"Maplestory");
+			m_text->SetText(std::to_wstring(3 - countThree), { 300, 300 }, L"Hakgyoansim Tuho");
 		}
 	}
 }

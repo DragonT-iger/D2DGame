@@ -11,6 +11,7 @@ void TitleScene::Awake()
 {
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Light.ttf"), L"Maplestory");
 	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("Maplestory_Bold.ttf"), L"Maplestory");
+	D2DRenderer::Instance().RegisterFont(ResourceManager::Instance().GetFontPath("HakgyoansimTuhoR.ttf"), L"Hakgyoansim Tuho");
 
 #pragma region Button_Instantiate
 	m_startButton = Instantiate("startBtn");

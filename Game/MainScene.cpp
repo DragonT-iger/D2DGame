@@ -362,7 +362,7 @@ void MainScene::Awake()
 
 	m_count = Instantiate("count");
 	txt = m_count->AddComponent<Text>();
-	txt->SetText(L"3", {300, 300}, L"Maplestory");
+	txt->SetText(L"3", {300, 300}, L"Hakgyoansim Tuho");
 	txt->SetFontSize(100);
 	m_count->GetComponent<Transform>()->SetPosition({ 960, 540 });
 
