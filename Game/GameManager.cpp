@@ -26,6 +26,8 @@ void GameManager::Update(float deltaTime)
 		m_player->GetComponent<Player>()->SetDecreaseFull(3.f);
 	}
 		
+	
+
 	CountThree();
 	if(m_GameState == GameState::Main)
 	CheckHappyEnd();
@@ -34,8 +36,16 @@ void GameManager::Update(float deltaTime)
 void GameManager::Init()
 {
 	totalscore = 0;
+	inGameTime = 0.f;
+	countThree = 2;
 	m_player = SceneManager::Instance().GetActiveScene()->GetPlayer();
 	m_inventory = SceneManager::Instance().GetActiveScene()->FindGameObject("Inventory")->GetComponent<Inventory>();
+
+	if (m_text)
+	{
+		m_text->GetOwner()->SetActive(true);
+		m_text->SetText(L"3", { 300, 300 }, L"Maplestory");
+	}
 }
 void GameManager::OnInspectorGUI()
 {

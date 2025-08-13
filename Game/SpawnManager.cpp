@@ -203,6 +203,11 @@ GameObject* SpawnManager::CreateNewCrop(FarmRank rank)
 	obj->SetTag("crop");
 
 	auto sr = obj->AddComponent<SpriteRenderer>();
+
+	int r = Random::Instance().Range(0, 2);
+
+	sr->SetFlip(r);
+
 	auto box = obj->AddComponent<BoxCollider>();
 	auto crop = obj->AddComponent<Crop>();
 	auto ysort = obj->AddComponent<YSort>();

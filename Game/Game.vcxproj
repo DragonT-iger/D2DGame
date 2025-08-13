@@ -181,6 +181,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="QuitBtn.cpp" />
     <ClCompile Include="QuitSetting.cpp" />
     <ClCompile Include="SettingBtn_Ingame.cpp" />
+    <ClCompile Include="SafeZone.cpp" />
     <ClCompile Include="SettingButton.cpp" />
     <ClCompile Include="SkipButton.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
@@ -242,6 +243,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="QuitBtn.h" />
     <ClInclude Include="QuitSetting.h" />
     <ClInclude Include="SettingBtn_Ingame.h" />
+    <ClInclude Include="SafeZone.h" />
     <ClInclude Include="SettingButton.h" />
     <ClInclude Include="SkipButton.h" />
     <ClInclude Include="SpawnManager.h" />

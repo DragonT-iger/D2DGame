@@ -31,6 +31,9 @@
 #include "TutorialHint.h"
 #include "TutorialHintTrigger.h"
 #include "TutorialEndTrigger.h"
+#include "PlayerShadow.h"
+#include "SafeZone.h"
+#include "Tree.h"
 
 void TutorialScene::Awake()
 {
@@ -95,7 +98,14 @@ void TutorialScene::Awake()
 	seventhArea->AddComponent<TutorialHintTrigger>(6);
 
 
+	GameObject* tree1 = Instantiate("tree");
+	tree1->AddComponent<Tree>(1510.600f, -392.300f, 0);
 
+	GameObject* tree2 = Instantiate("tree");
+	tree2->AddComponent<Tree>(2025.300f, -256.100f, 0);
+
+	GameObject* tree3 = Instantiate("tree");
+	tree3->AddComponent<Tree>(-1929.400f, 332.500f, 0);
 
 	GameObject* tutorialHint = Instantiate("TutorialHint");
 	auto bg = tutorialHint->AddComponent<Image>();
@@ -103,7 +113,7 @@ void TutorialScene::Awake()
 	bg->SetOrderInLayer(10);
 
 	auto text = tutorialHint->AddComponent<Text>();
-	text->SetText(L"방향키로 이동하세요!", { 300, 100 }, L"Maplestory" ,D2D1::ColorF::Black);
+	text->SetText(L" ", { 1800, 100 }, L"Maplestory" ,D2D1::ColorF::Black);
 	text->SetFontSize(25);
 	text->SetOrderLayer(100);
 
@@ -135,13 +145,13 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 		L"Hint for Area 7"
 		});
 	hint->SetHintImages({
-		"tutorial_hint.png",
-		"tutorial_hint.png",
-		"tutorial_hint.png",
-		"tutorial_hint.png",
-		"tutorial_hint.png",
-		"tutorial_hint.png",
-		"tutorial_hint.png"
+		"tutorial_UI1.png",
+		"tutorial_UI2.png",
+		"tutorial_UI3.png",
+		"tutorial_UI4.png",
+		"tutorial_UI5.png",
+		"tutorial_UI5.png",
+		"tutorial_UI5.png"
 		});
 
 	tutorialHint->GetComponent<Transform>()->SetPosition({ 383.6f, 225.4f });
@@ -279,11 +289,11 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	bush6->AddComponent<BoxCollider>();
 
 	//bush1->GetComponent<Transform>()->SetPosition(Vector2{ -300, 200 });
-	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -400, 200 });
-	bush3->GetComponent<Transform>()->SetPosition(Vector2{ -200, 200 });
-	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, 200 });
-	bush5->GetComponent<Transform>()->SetPosition(Vector2{ 200, 200 });
-	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 400, 200 });
+	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -400, -200 });
+	bush3->GetComponent<Transform>()->SetPosition(Vector2{ -200, -200 });
+	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, -200 });
+	bush5->GetComponent<Transform>()->SetPosition(Vector2{ 200, -200 });
+	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 400, -200 });
 
 	//bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
@@ -518,10 +528,10 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	box = m_outRangeLeft->AddComponent<BoxCollider>();
 	box->SetSize({ 100 , 4320 });
 
-	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 300.000 });
-	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -300.000 });
-	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3580.000, 0 });
-	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3580.000, 0 });
+	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 624.200 });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -314.400 });
+	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3725.800, 0 });
+	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3725.800, 0 });
 
 #pragma endregion
 
