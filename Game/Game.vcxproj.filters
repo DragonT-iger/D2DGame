@@ -285,6 +285,9 @@
     <ClCompile Include="SafeBush.cpp">
       <Filter>Scripts\Bush</Filter>
     </ClCompile>
+    <ClCompile Include="EndingTitleBtn.cpp">
+      <Filter>Scripts\ButtonTest\TitleBtn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleScene.h">
@@ -469,6 +472,9 @@
     </ClInclude>
     <ClInclude Include="SafeBush.h">
       <Filter>Scripts\Bush</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingTitleBtn.h">
+      <Filter>Scripts\ButtonTest\TitleBtn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

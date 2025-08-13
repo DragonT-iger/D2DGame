@@ -7,6 +7,8 @@ void EndSceneManager::Awake()
 	m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
 
 	m_animator = GetOwner()->AddComponent<Animator>();
+
+	m_endingNumImage = GameObject::Find("EndingNum")->GetComponent<Image>();
 }
 
 void EndSceneManager::Start()
@@ -31,18 +33,21 @@ void EndSceneManager::Start()
 	case GameManager::EndReason::BabyStarved:
 		//m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BadEnding2.png"));
 		m_animator->ChangeState("starve");
+		m_endingNumImage->SetBitmap(ResourceManager::Instance().LoadTexture("Ending3_Bad.png"), { 505, 150 });
 		SoundManager::Instance().BGM_Shot("6.mp3");
 		break;
 
 	case GameManager::EndReason::PlayerDead:
 		//m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("BadEnding1.png"));
 		m_animator->ChangeState("killed");
+		m_endingNumImage->SetBitmap(ResourceManager::Instance().LoadTexture("Ending2_Bad.png"), { 505, 150 });
 		SoundManager::Instance().BGM_Shot("5.mp3");
 		break;
 
 	case GameManager::EndReason::Happy:
 		//m_spriteRenderer->SetBitmap(ResourceManager::Instance().LoadTexture("HappyEnd.png"));
 		m_animator->ChangeState("happy");
+		m_endingNumImage->SetBitmap(ResourceManager::Instance().LoadTexture("Ending1_Happy.png"), { 600, 160 });
 		SoundManager::Instance().BGM_Shot("4.mp3");
 		break;
 

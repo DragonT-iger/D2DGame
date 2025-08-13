@@ -6,5 +6,6 @@ class EndingScene :public Scene
 
 private:
 	GameObject* m_restart;
+	GameObject* m_endingNum;
 };
 
