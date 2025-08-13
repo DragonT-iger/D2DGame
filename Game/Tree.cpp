@@ -16,7 +16,7 @@ void Tree::Awake()
 	m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
 
 	YSort* ysort = GetOwner()->AddComponent<YSort>();
-	ysort->SetOffset(50);
+	ysort->SetOffset(-3);
 	m_boxCol = GetOwner()->AddComponent<BoxCollider>();
 
 
