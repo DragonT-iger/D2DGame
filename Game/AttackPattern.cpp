@@ -29,7 +29,7 @@ void AttackPattern::CreateIndicators(Farmer* owner, const Vector2& origin, float
         if (sr)
         {
             sr->SetOpacity(0.5f);
-            sr->SetBitmap(ResourceManager::Instance().LoadTexture("redCircle.png"));
+            sr->SetBitmap(ResourceManager::Instance().LoadTexture("attackRange.png"));
         }
 
         indicator->AddComponent<CircleCollider>();
