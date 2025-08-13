@@ -8,6 +8,9 @@ public:
 	void Update(float deltaTime) override;
 
 private:
+	Button* m_start;
+	Button* m_setting;
+	Button* m_quit;
 	Button* m_button = nullptr;
 	GameObject* m_credit = nullptr;
 };

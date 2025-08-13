@@ -166,7 +166,7 @@ void TitleScene::Awake()
 
 	m_credit = Instantiate("credit");
 	Img = m_credit->AddComponent<Image>();
-	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Setting.png"), { 800, 800 });
+	Img->SetBitmap(ResourceManager::Instance().LoadTexture("Credit.png"), { 1920, 1080 });
 	Img->SetOrderInLayer(20);
 
 	SoundManager::Instance().SetVolume_BGM(1.f);
