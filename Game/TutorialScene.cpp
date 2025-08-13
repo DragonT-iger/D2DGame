@@ -618,7 +618,7 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	Img = m_bgmSlider->AddComponent<Image>();
 	auto sb = m_bgmSlider->AddComponent<Slide_Bar>();
 	btn = m_bgmSlider->AddComponent<Button>();
-	m_bgmSlider->GetComponent<Transform>()->SetPosition({ 1021, 297 });
+	m_bgmSlider->GetComponent<Transform>()->SetPosition({ 1021, 387 });
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("guage_fill_67x67.png"), { 382, 53 });
 	Img->SetOrderInLayer(10007);
 	btn->SetSize({ 382, 70 });
@@ -628,7 +628,7 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	Img = m_sfxSlider->AddComponent<Image>();
 	sb = m_sfxSlider->AddComponent<Slide_Bar>();
 	btn = m_sfxSlider->AddComponent<Button>();
-	m_sfxSlider->GetComponent<Transform>()->SetPosition({ 1021, 429 });
+	m_sfxSlider->GetComponent<Transform>()->SetPosition({ 1021, 519 });
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("guage_fill_67x67.png"), { 382, 53 });
 	Img->SetOrderInLayer(10007);
 	btn->SetSize({ 382, 70 });
@@ -638,7 +638,7 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	Img = m_uiSlider->AddComponent<Image>();
 	sb = m_uiSlider->AddComponent<Slide_Bar>();
 	btn = m_uiSlider->AddComponent<Button>();
-	m_uiSlider->GetComponent<Transform>()->SetPosition({ 1021, 555 });
+	m_uiSlider->GetComponent<Transform>()->SetPosition({ 1021, 645 });
 	Img->SetBitmap(ResourceManager::Instance().LoadTexture("guage_fill_67x67.png"), { 382, 53 });
 	Img->SetOrderInLayer(10007);
 	btn->SetSize({ 382, 70 });
@@ -661,13 +661,13 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Setting_Btn2_Title_Selected.png"), ButtonEvent::Highlight);
 	btn->SetSize({ 200, 80 });
 
-	m_settingWnd->GetComponent<Transform>()->SetPosition({ 960, 450 });
+	m_settingWnd->GetComponent<Transform>()->SetPosition({ 960, 540 });
 	m_settingText->GetComponent<Transform>()->SetPosition({ 960, 170 });
 	m_bgmText->GetComponent<Transform>()->SetPosition({ 660, 300 });
 	m_sfxText->GetComponent<Transform>()->SetPosition({ 660, 400 });
 	m_uiText->GetComponent<Transform>()->SetPosition({ 660, 500 });
-	m_cancleBtn->GetComponent<Transform>()->SetPosition({ 860, 700 });
-	m_checkBtn->GetComponent<Transform>()->SetPosition({ 1060, 700 });
+	m_cancleBtn->GetComponent<Transform>()->SetPosition({ 820, 790 });
+	m_checkBtn->GetComponent<Transform>()->SetPosition({ 1100, 790 });
 
 	m_settingWnd->SetActive(false);
 	m_settingText->SetActive(false);
