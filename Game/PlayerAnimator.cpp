@@ -120,14 +120,19 @@ void PlayerAnimator::OnTriggerStay(Collider* other)
 	{
 		m_spriteRenderer->SetOpacity(0.3f);
 	}
+
+	if (other->GetOwner()->GetTag() == "safe_bush")
+		m_spriteRenderer->SetOpacity(0.3f);
 }
 
 void PlayerAnimator::OnTriggerExit(Collider* other)
 {
 	if (other->GetOwner()->GetTag() == "Bush")
 	{
-		m_spriteRenderer->SetOpacity(1);
+		m_spriteRenderer->SetOpacity(1.0f);
 	}
+	if (other->GetOwner()->GetTag() == "safe_bush")
+		m_spriteRenderer->SetOpacity(1.0f);
 }
 
 void PlayerAnimator::DeathAnime()

@@ -27,6 +27,7 @@
 #include "QuitSetting.h"
 #include "Tree.h"
 #include "PlayerShadow.h"
+#include "SafeZone.h"
 
 void MainScene::Awake()
 {
@@ -637,6 +638,56 @@ void MainScene::Awake()
 	vignetteImg->SetOrderInLayer(-1);
 	m_vignette->GetComponent<Transform>()->SetPosition({ 960, 540 });
 
+#pragma region safe Bush
+
+	for (int i = 0; i < 35; i++)
+	{
+		int x = -3250;
+		int y = 2132 - (i * 120);
+
+		s_bush = Instantiate("safe_bush1_" + std::to_string(i));
+		if (i % 2 == 0)
+		{
+			x -= 40;
+		}
+		//s_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 200,120 });
+		s_bush->AddComponent<SpriteRenderer>()->SetFlip(true);
+		s_bush->AddComponent<SafeZone>(x, y); //-60 ¾¿
+		s_bush->AddComponent<YSort>();
+		s_bush->SetTag("safe_bush");
+
+		if (i == 34)
+		{
+			s_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 100,4192 });
+			s_bush->GetComponent<BoxCollider>()->SetOffset(Vector2{ 0,2000 });
+		}
+	}
+
+	for (int i = 0; i < 35; i++)
+	{
+		int x = 3290;
+		int y = 2090 - (i * 120);
+
+		s_bush = Instantiate("safe_bush2_" + std::to_string(i));
+		if (i % 2 == 0)
+		{
+			x -= 40;
+		}
+		//s_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 200,120 });
+		s_bush->AddComponent<SpriteRenderer>()->SetFlip(false);
+		s_bush->AddComponent<SafeZone>(x, y); //-60 ¾¿
+		s_bush->AddComponent<YSort>();
+		s_bush->SetTag("safe_bush");
+
+		if (i == 34)
+		{
+			s_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 100,4192 });
+			s_bush->GetComponent<BoxCollider>()->SetOffset(Vector2{ 0,2000 });
+		}
+	}
+	
+
+#pragma endregion
 	Scene::Awake();
 }
 
