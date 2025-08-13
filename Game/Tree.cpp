@@ -16,7 +16,7 @@ void Tree::Awake()
 	m_spriteRenderer = GetOwner()->AddComponent<SpriteRenderer>();
 
 	YSort* ysort = GetOwner()->AddComponent<YSort>();
-	ysort->SetOffset(-3);
+	ysort->SetOffset(100);
 	m_boxCol = GetOwner()->AddComponent<BoxCollider>();
 
 
@@ -46,7 +46,15 @@ void Tree::Awake()
 
 	if (m_boxCol)
 	{
-		m_boxCol->SetSize(Vector2{ 100, 100 });
-		m_boxCol->SetOffset({ 5.000f, -231.000f });
+
+		if (m_tree == 2 || m_tree == 3) {
+		
+			m_boxCol->SetSize(Vector2{ 100, 100 });
+			m_boxCol->SetOffset({ 5.000f, -158.000f });
+		}
+		else {
+			m_boxCol->SetSize(Vector2{ 100, 100 });
+			m_boxCol->SetOffset({ 5.000f, -231.000f });
+		}
 	}
 }
