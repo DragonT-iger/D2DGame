@@ -94,6 +94,7 @@ void SoundManager::ConvertUISource(const std::unordered_map<std::string, std::fi
 
 
 
+
 void SoundManager::Update() //매 프레임 마다 필수 호출
 {
 	m_coreSystem->update();
@@ -133,7 +134,17 @@ void SoundManager::BGM_Shot(const std::string& fileName, FMOD::ChannelGroup* Cha
 
 	if (isBGMPlaying)
 	{
-		m_bgmGroup->stop();
+		FMOD::ChannelGroup* group = nullptr;
+		FMOD_RESULT r = m_bgmGroup->getGroup(0, &group);
+		group->isPlaying(&isBGMPlaying);
+		if (r == FMOD_OK && isBGMPlaying)
+		{
+			FadeOut(GetChannelFromGroup(group, 0), GetVolume_BGM(), 1.0f, true);
+		}
+		else
+		{
+			FadeOut(GetChannelFromGroup(m_bgmGroup, 0), GetVolume_BGM(), 1.0f, true);
+		}
 	}
 	//fade in,out 만들거여?
 
@@ -142,9 +153,15 @@ void SoundManager::BGM_Shot(const std::string& fileName, FMOD::ChannelGroup* Cha
 	if (it != L_BGM.end())
 	{
 		if (!ChannelGroup)
+		{
 			m_coreSystem->playSound(it->second, m_bgmGroup, false, &pChannel);
+			FadeIn(pChannel, GetVolume_BGM(), 1.0f);
+		}
 		else
+		{
 			m_coreSystem->playSound(it->second, ChannelGroup, false, &pChannel);
+			FadeIn(pChannel, GetVolume_BGM(), 1.0f);
+		}
 	}
 }
 
@@ -221,3 +238,75 @@ void SoundManager::SetVolume_UI(float volume)
 	m_Dirty_UI = false;
 }
 
+//float SoundManager::GetChannelVolumeFromGroup(FMOD::ChannelGroup* group, int channelIndex)
+//{
+//	if (!group) return 0.0f;
+//
+//	int numChannels = 0;
+//	group->getNumChannels(&numChannels);
+//
+//	if (channelIndex < 0 || channelIndex >= numChannels)
+//		return 0.0f;
+//
+//	FMOD::Channel* chan = nullptr;
+//	group->getChannel(channelIndex, &chan);
+//
+//	if (!chan) return 0.0f;
+//
+//	float volume = 0.0f;
+//	chan->getVolume(&volume);
+//	return volume;
+//}
+
+void SoundManager::FadeIn(FMOD::Channel* chan, float curVolume, float seconds)
+{
+	if (!chan) return;
+	chan->setPaused(true);
+
+	FMOD::System* sys = nullptr;
+	unsigned long long dspclock;
+	int rate;
+
+	chan->getSystemObject(&sys);
+	sys->getSoftwareFormat(&rate, 0, 0);
+	chan->getDSPClock(0, &dspclock);
+
+	chan->addFadePoint(dspclock, 0.0f);
+	chan->addFadePoint(dspclock + (unsigned long long)(rate * seconds), curVolume);
+
+	chan->setPaused(false);
+}
+
+void SoundManager::FadeOut(FMOD::Channel* chan, float curVolume, float seconds, bool stopAfter)
+{
+	if (!chan) return;
+
+	FMOD::System* sys = nullptr;
+	unsigned long long dspclock;
+	int rate;
+
+	chan->getSystemObject(&sys);
+	sys->getSoftwareFormat(&rate, 0, 0);
+	chan->getDSPClock(0, &dspclock);
+
+	chan->addFadePoint(dspclock, curVolume);
+	chan->addFadePoint(dspclock + (unsigned long long)(rate * seconds), 0.0f);
+
+	if (stopAfter)
+		chan->setDelay(0, dspclock + (unsigned long long)(rate * seconds), true);
+}
+
+FMOD::Channel* SoundManager::GetChannelFromGroup(FMOD::ChannelGroup* group, int index)
+{
+	if (!group) return nullptr;
+
+	int numChannels = 0;
+	group->getNumChannels(&numChannels);
+
+	if (index < 0 || index >= numChannels)
+		return nullptr;
+
+	FMOD::Channel* chan = nullptr;
+	group->getChannel(index, &chan);
+	return chan;
+}

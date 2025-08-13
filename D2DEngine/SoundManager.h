@@ -27,11 +27,28 @@ public:
 	float GetVolume_SFX() { return m_Volume_SFX; }
 	float GetVolume_UI() { return m_Volume_UI; }
 
+	bool BGM_IsPlaying() { 
+		bool isPlaying;
+		FMOD::Channel* channel;
+		FMOD_RESULT r = m_bgmGroup->getChannel(0, &channel);
+		if (r != FMOD_OK) return false;
+		channel->isPlaying(&isPlaying);
+
+		return isPlaying;
+	}
+
 	void SetDirty(); // dirty = true;
 
 	void ConvertBGMSource(const std::unordered_map<std::string, std::filesystem::path>& container);
 	void ConvertSFXSource(const std::unordered_map<std::string, std::filesystem::path>& container);
 	void ConvertUISource(const std::unordered_map<std::string, std::filesystem::path>& container);
+
+	void FadeIn(FMOD::Channel* chan, float curVolume, float seconds);
+	void FadeOut(FMOD::Channel* chan, float curVolume,float seconds, bool stopAfter = true);
+
+	//float GetChannelVolumeFromGroup(FMOD::ChannelGroup* group, int channelIndex);
+	
+	FMOD::Channel* GetChannelFromGroup(FMOD::ChannelGroup* group, int index);
 
 	FMOD::System* GetCoreSystem() { return m_coreSystem; }
 
