@@ -696,6 +696,29 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	GameManager::Instance().Init(); //player?옉 inventory ?뿰寃?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
 
+	for (int i = 0; i < 7; i++)
+	{
+		int x = 3340;
+		int y = 450 - (i * 120);
+
+		m_safe_bush = Instantiate("safe_bush1_" + std::to_string(i));
+		if (i % 2 == 0)
+		{
+			x += 25;
+		}
+		//s_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 200,120 });
+		m_safe_bush->AddComponent<SpriteRenderer>()->SetFlip(true);
+		m_safe_bush->AddComponent<SafeZone>(x, y); //-60 씩
+		m_safe_bush->AddComponent<YSort>();
+		m_safe_bush->SetTag("safe_bush");
+
+		if (i == 6)
+		{
+			m_safe_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 100,4192 });
+			m_safe_bush->GetComponent<BoxCollider>()->SetOffset(Vector2{ 0,2000 });
+		}
+	}
+
 	Scene::Awake();
 }
 

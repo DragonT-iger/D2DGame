@@ -114,5 +114,6 @@ class TutorialScene : public Scene
 
 	GameObject* m_skipBtn = nullptr;
 
+	GameObject* m_safe_bush = nullptr;
 };
 
