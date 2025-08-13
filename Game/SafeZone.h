@@ -2,19 +2,16 @@
 class SafeZone : public MonoBehaviour
 {
 
-
 public:
 	SafeZone(float x, float y) : m_x(x), m_y(y) {}
 
 	void Awake() override;
-
-
-
+	//void OnTriggerEnter(Collider* other) override;
+	//void OnTriggerExit(Collider* other) override;
 
 private:
 	float m_x = 0;
 	float m_y = 0;
-
 
 	SpriteRenderer* m_spriteRenderer = nullptr;
 };

@@ -534,8 +534,8 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	box = m_outRangeLeft->AddComponent<BoxCollider>();
 	box->SetSize({ 100 , 4320 });
 
-	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 624.200 });
-	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -314.400 });
+	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 559.600f });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -396.700f });
 	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3725.800, 0 });
 	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3725.800, 0 });
 
@@ -695,6 +695,29 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 
 	GameManager::Instance().Init(); //player?옉 inventory ?뿰寃?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
+
+	for (int i = 0; i < 7; i++)
+	{
+		int x = 3340;
+		int y = 450 - (i * 120);
+
+		m_safe_bush = Instantiate("safe_bush1_" + std::to_string(i));
+		if (i % 2 == 0)
+		{
+			x += 25;
+		}
+		//s_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 200,120 });
+		m_safe_bush->AddComponent<SpriteRenderer>()->SetFlip(true);
+		m_safe_bush->AddComponent<SafeZone>(x, y); //-60 씩
+		m_safe_bush->AddComponent<YSort>();
+		m_safe_bush->SetTag("safe_bush");
+
+		if (i == 6)
+		{
+			m_safe_bush->AddComponent<BoxCollider>()->SetSize(Vector2{ 100,4192 });
+			m_safe_bush->GetComponent<BoxCollider>()->SetOffset(Vector2{ 0,2000 });
+		}
+	}
 
 	Scene::Awake();
 }

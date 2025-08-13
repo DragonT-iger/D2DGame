@@ -117,5 +117,6 @@ class MainScene : public Scene
 	GameObject* m_vignette = nullptr;
 	GameObject* m_count = nullptr;
 
+	GameObject* s_bush = nullptr;
 };
 
