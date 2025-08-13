@@ -65,6 +65,8 @@ public:
 	void RegisterCountText(Text* text) { m_text = text; }
 	void ResetInGameTime() { inGameTime = 0; }
 	
+	static inline bool isInvicibleMode = false;
+
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;

@@ -64,7 +64,7 @@ void Player::Update(float deltaTime)
 		m_elapsedTime = 0;
 		if (m_fullness <= 0)
 		{
-			if (GameManager::Instance().GetGameState() == GameManager::GameState::Tutorial)
+			if (GameManager::Instance().GetGameState() == GameManager::GameState::Tutorial && !GameManager::Instance().isInvicibleMode)
 				m_fullness = 1;
 		}
 
@@ -104,7 +104,7 @@ void Player::Update(float deltaTime)
 	}
 	else if (m_fullness <= 0 && state != State::Starve && state != State::Killed)
 	{
-		if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState()) {
+		if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState() && !GameManager::Instance().isInvicibleMode) {
 			m_pSound->PlayDead();
 			m_pSound->PlayGameOver();
 			state = State::Starve;
@@ -125,7 +125,7 @@ void Player::Update(float deltaTime)
 		std::cout << "State: Starve" << std::endl;
 		if (m_P_animator->IsDeathAnimeFinished() && !m_pSound->PlayGameOver())
 		{
-			if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState()) {
+			if (GameManager::GameState::Tutorial != GameManager::Instance().GetGameState() && !GameManager::Instance().isInvicibleMode) {
 				GameManager::Instance().LoadEndingScene(GameManager::EndReason::BabyStarved);
 			}
 		}
@@ -184,14 +184,14 @@ void Player::SetHp(int hp)
 	{
 		int minusHp = m_hp - hp;
 
-		if(GameManager::Instance().GetGameState() != GameManager::GameState::Tutorial){
+		if(GameManager::Instance().GetGameState() != GameManager::GameState::Tutorial && !GameManager::Instance().isInvicibleMode){
 			m_hp = hp;
 		}
 
 		m_isHittable = false;
 		m_invincible_Count = 0;
 
-		if (m_hp > -1 && state != State::Starve && GameManager::Instance().GetGameState() != GameManager::GameState::Tutorial)
+		if (m_hp > -1 && state != State::Starve && GameManager::Instance().GetGameState() != GameManager::GameState::Tutorial &&!GameManager::Instance().isInvicibleMode)
 		{
 			for (int i = 0; i < minusHp; i++)
 			{

@@ -5,6 +5,7 @@
 #include "../Game/MainScene.h"
 #include "../Game/EndingScene.h"
 #include "../Game/TutorialScene.h"
+#include "../Game/GameManager.h"
 
 void EditorWindow::Draw(float deltaTime)
 {
@@ -23,6 +24,8 @@ void EditorWindow::DrawDebug() {
         Scene* curScene = SceneManager::Instance().GetActiveScene();
         curScene->SetGridOn(m_showGrid);
     }
+
+    ImGui::Checkbox("InvicibleMode", &GameManager::Instance().isInvicibleMode);
 
     //static bool fullscreen = false;
     //if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
