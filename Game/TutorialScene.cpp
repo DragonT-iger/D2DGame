@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "TutorialScene.h"
 #include "Player.h"
+#include "PlayerShadow.h"
 #include "PlayerAnimator.h"
 #include "PlayerController.h"
 #include "PlayerEffect.h"
