@@ -25,8 +25,8 @@ void EndingScene::Awake()
 
 	GameObject* aliveTime = Instantiate("AliveTime");
 	auto timetxt = aliveTime->AddComponent<Text>();
-	int minuate = gm->GetAliveTime() / 60;
-	int second = gm->GetAliveTime() % 60;
+	int minuate = (gm->GetAliveTime()-3) / 60;
+	int second = (gm->GetAliveTime()-3) % 60;
 
 	if (minuate < 0)
 		minuate = 0;

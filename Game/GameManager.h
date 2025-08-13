@@ -63,7 +63,7 @@ public:
 
 	void RegisterCountText(Text* text) { m_text = text; }
 	void ResetTotalScore() { totalscore = 0; }
-	void ResetInGameTime() { inGameTime = -3; }
+	void ResetInGameTime() { inGameTime = 0; }
 	
 private:
 	GameManager(const GameManager&) = delete;

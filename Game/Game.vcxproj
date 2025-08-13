@@ -178,6 +178,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="Pumpkin.cpp" />
     <ClCompile Include="QuitBtn.cpp" />
     <ClCompile Include="QuitSetting.cpp" />
+    <ClCompile Include="SafeBush.cpp" />
     <ClCompile Include="SettingButton.cpp" />
     <ClCompile Include="SkipButton.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
@@ -235,6 +236,7 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="Pumpkin.h" />
     <ClInclude Include="QuitBtn.h" />
     <ClInclude Include="QuitSetting.h" />
+    <ClInclude Include="SafeBush.h" />
     <ClInclude Include="SettingButton.h" />
     <ClInclude Include="SkipButton.h" />
     <ClInclude Include="SpawnManager.h" />
