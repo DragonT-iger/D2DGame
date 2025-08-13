@@ -40,5 +40,6 @@ void CreditButton::Update(float deltaTime)
 		m_setting->SetActive(true);
 		m_button->SetActive(true);
 		m_quit->SetActive(true);
+		m_creditQuit->SetActive(false);
 	}
 }
