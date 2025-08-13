@@ -534,8 +534,8 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	box = m_outRangeLeft->AddComponent<BoxCollider>();
 	box->SetSize({ 100 , 4320 });
 
-	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 624.200 });
-	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -314.400 });
+	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 559.600f });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -396.700f });
 	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3725.800, 0 });
 	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3725.800, 0 });
 
