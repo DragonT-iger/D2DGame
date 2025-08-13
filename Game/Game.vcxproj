@@ -158,7 +158,6 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="EscBtn.cpp" />
     <ClCompile Include="Farmer.cpp" />
     <ClCompile Include="FarmerManager.cpp" />
-    <ClCompile Include="FarmerShadow.cpp" />
     <ClCompile Include="FarmerZone.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -173,7 +172,6 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClCompile Include="PlayerAnimator.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerEffect.cpp" />
-    <ClCompile Include="PlayerShadow.cpp" />
     <ClCompile Include="PlayerSound.cpp" />
     <ClCompile Include="Potato.cpp" />
     <ClCompile Include="Pumpkin.cpp" />
@@ -218,7 +216,6 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="EscBtn.h" />
     <ClInclude Include="Farmer.h" />
     <ClInclude Include="FarmerManager.h" />
-    <ClInclude Include="FarmerShadow.h" />
     <ClInclude Include="FarmerZone.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Game.h" />
@@ -232,7 +229,6 @@ xcopy /Y "$(SolutionDir)..\ThirdParty\fmod\api\core\lib\x64\*.lib" "$(OutDir)"</
     <ClInclude Include="PlayerAnimator.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerEffect.h" />
-    <ClInclude Include="PlayerShadow.h" />
     <ClInclude Include="PlayerSound.h" />
     <ClInclude Include="Potato.h" />
     <ClInclude Include="Pumpkin.h" />

@@ -10,11 +10,13 @@ class TutorialScene : public Scene
 	Camera* main_Cam = nullptr;
 
 	GameObject* player = nullptr;
-	GameObject* p_shadow = nullptr;
+	Transform* player_T = nullptr;
+	SpriteRenderer* player_S = nullptr;
 
 	GameObject* playerEffect = nullptr;
 
 	GameObject* crop = nullptr;
+	GameObject* message = nullptr;
 
 	GameObject* bush1 = nullptr;
 	GameObject* bush2 = nullptr;
