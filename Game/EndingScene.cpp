@@ -3,7 +3,7 @@
 #include "GameManager.h"
 #include "EndSceneManager.h"
 #include "CinemachineCamera.h"
-#include "TitleBtn.h"
+#include "EndingTitleBtn.h"
 
 void EndingScene::Awake()
 {
@@ -15,6 +15,11 @@ void EndingScene::Awake()
 	GameObject* endSceneManager = Instantiate("EndSceneManager");
 	endSceneManager->AddComponent<EndSceneManager>();
 
+	m_endingNum = Instantiate("EndingNum");
+	auto img = m_endingNum->AddComponent<Image>();
+	img->SetOrderInLayer(10);
+
+	m_endingNum->GetComponent<Transform>()->SetPosition({ 400, 110 });
 
 	GameObject* totalScore = Instantiate("Score");
 	auto txt = totalScore->AddComponent<Text>();
@@ -58,10 +63,10 @@ void EndingScene::Awake()
 	m_restart = Instantiate("restart");
 	m_restart->AddComponent<Image>();
 	auto btn = m_restart->AddComponent<Button>();
-	m_restart->AddComponent<TitleBtn>();
+	m_restart->AddComponent<EndingTitleBtn>();
 	
-	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn5_Exit.png"), ButtonEvent::Idle);
-	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn5_Exit_Select.png"), ButtonEvent::Highlight);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Btn_title.png"), ButtonEvent::Idle);
+	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("Btn_title_Selected.png"), ButtonEvent::Highlight);
 
 	m_restart->GetComponent<Transform>()->SetPosition({ 1700, 960 });
 	

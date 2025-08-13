@@ -9,5 +9,6 @@ class EndSceneManager : public MonoBehaviour
 public:
 	SpriteRenderer* m_spriteRenderer = nullptr;
 	Animator* m_animator = nullptr;
+	Image* m_endingNumImage = nullptr;
 };
 
