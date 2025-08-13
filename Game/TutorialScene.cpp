@@ -288,11 +288,11 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	bush6->AddComponent<BoxCollider>();
 
 	//bush1->GetComponent<Transform>()->SetPosition(Vector2{ -300, 200 });
-	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -400, 200 });
-	bush3->GetComponent<Transform>()->SetPosition(Vector2{ -200, 200 });
-	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, 200 });
-	bush5->GetComponent<Transform>()->SetPosition(Vector2{ 200, 200 });
-	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 400, 200 });
+	bush2->GetComponent<Transform>()->SetPosition(Vector2{ -400, -200 });
+	bush3->GetComponent<Transform>()->SetPosition(Vector2{ -200, -200 });
+	bush4->GetComponent<Transform>()->SetPosition(Vector2{ 0, -200 });
+	bush5->GetComponent<Transform>()->SetPosition(Vector2{ 200, -200 });
+	bush6->GetComponent<Transform>()->SetPosition(Vector2{ 400, -200 });
 
 	//bush1->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
 	bush2->GetComponent<Transform>()->SetScale(Vector2{ 0.35, 0.35 });;
@@ -527,10 +527,10 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	box = m_outRangeLeft->AddComponent<BoxCollider>();
 	box->SetSize({ 100 , 4320 });
 
-	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 300.000 });
-	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -300.000 });
-	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3580.000, 0 });
-	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3580.000, 0 });
+	m_outRangeUp->GetComponent<Transform>()->SetPosition({ 0, 624.200 });
+	m_outRangeDown->GetComponent<Transform>()->SetPosition({ 0, -314.400 });
+	m_outRangeRight->GetComponent<Transform>()->SetPosition({ 3725.800, 0 });
+	m_outRangeLeft->GetComponent<Transform>()->SetPosition({ -3725.800, 0 });
 
 #pragma endregion
 
