@@ -63,7 +63,7 @@ void EndingScene::Awake()
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn5_Exit.png"), ButtonEvent::Idle);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn5_Exit_Select.png"), ButtonEvent::Highlight);
 
-	m_restart->GetComponent<Transform>()->SetPosition({ 1760, 995 });
+	m_restart->GetComponent<Transform>()->SetPosition({ 1700, 960 });
 	
 	Scene::Awake();
 }

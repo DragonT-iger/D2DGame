@@ -691,7 +691,7 @@ Tip: 은신처를 활용해 타이밍을 노리세요.",
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start.png"), ButtonEvent::Idle);
 	btn->AddEventSprite(ResourceManager::Instance().LoadTexture("TitleBtn2_Start_Select.png"), ButtonEvent::Highlight);
 
-	m_skipBtn->GetComponent<Transform>()->SetPosition({ 1760, 940 });
+	m_skipBtn->GetComponent<Transform>()->SetPosition({ 1715, 940 });
 
 	GameManager::Instance().Init(); //player?옉 inventory ?뿰寃?.
 	SoundManager::Instance().BGM_Shot("2.mp3");
