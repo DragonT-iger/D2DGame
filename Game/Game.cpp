@@ -69,7 +69,7 @@ void Game::Run()
             bool keyboardMsg = (msg.message == WM_KEYDOWN || msg.message == WM_KEYUP);
             bool mouseMsg = (msg.message >= WM_MOUSEFIRST && msg.message <= WM_MOUSELAST);
 
-            if ((keyboardMsg || !io.WantCaptureKeyboard) ||
+            if ((keyboardMsg && (!io.WantCaptureKeyboard || msg.message == WM_KEYUP)) ||
                 (mouseMsg && !io.WantCaptureMouse))
             {
                 InputManager::Instance().OnHandleMessage(msg);
