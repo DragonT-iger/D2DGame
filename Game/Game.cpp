@@ -63,11 +63,24 @@ void Game::Run()
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
+
+            const ImGuiIO& io = ImGui::GetIO();
+
+            bool keyboardMsg = (msg.message == WM_KEYDOWN || msg.message == WM_KEYUP);
+            bool mouseMsg = (msg.message >= WM_MOUSEFIRST && msg.message <= WM_MOUSELAST);
+
+            if ((keyboardMsg || !io.WantCaptureKeyboard) ||
+                (mouseMsg && !io.WantCaptureMouse))
+            {
+                InputManager::Instance().OnHandleMessage(msg);
+            }
         }
         else
         {
             m_timer->Tick();
             LifeCycle(m_timer->DeltaTime()); 
+
+
         }
     }
 }
@@ -140,7 +153,6 @@ bool Game::OnWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
         return true; // ImGui가 메시지를 처리했으면 true 반환
     }
-    InputManager::Instance().OnHandleMessage({ hwnd, msg , wParam, lParam, 0 , {0, 0} });
 
     return false;
 }
